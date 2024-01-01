@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="common">
+    <h1>
+        <th:block th:text="${status}"></th:block>
+        <th:block th:if="${method != null}" th:text="${method}"></th:block>
+        <th:block th:text="${path}"></th:block>
+    </h1>
+    <div th:text="${message}"></div>
+</th:block>
+</html>
