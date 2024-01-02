@@ -3,8 +3,10 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, minimum-scale=0.5, maximum-scale=3.0">
+    <meta name="viewport" content="width=device-width, user-scalable=yes,
+        initial-scale=1, minimum-scale=0.5, maximum-scale=3.0">
     <title th:if="${pageTitle != null}" th:text="${pageTitle}"></title>
+
     <link rel="stylesheet" type="text/css" th:href="@{/common/css/style.css}">
     <link rel="stylesheet" type="text/css"
           th:each="cssFile : ${addCommonCss}"
@@ -28,10 +30,11 @@
     <th:block layout:fragment="addScript"></th:block>
 </head>
 <body>
-<header th:replace="~{mobile/outlines/header::common}"></header>
+    <header th:replace="~{mobile/outlines/header::common}"></header>
 
-<main layout:fragment="content"></main>
+    <main layout:fragment="content"></main>
 
-<footer th:replace="~{mobile/outlines/footer::common}"></footer>
+    <footer th:replace="~{mobile/outlines/footer::common}"></footer>
+
 </body>
 </html>
