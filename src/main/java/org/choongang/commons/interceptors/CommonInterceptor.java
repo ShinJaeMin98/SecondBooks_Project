@@ -20,8 +20,7 @@ public class CommonInterceptor implements HandlerInterceptor {
     /**
      * PC, 모바일 수동 변경 처리
      *
-     *  ?device=pc -> PC 뷰
-     *  ?device=mobile -> Mobile 뷰
+     *  // device - PC : PC 뷰, Mobile : Mobile 뷰
      * @param request
      */
     private void checkDevice(HttpServletRequest request) {
