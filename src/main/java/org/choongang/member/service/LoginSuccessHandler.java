@@ -13,12 +13,14 @@ import org.springframework.util.StringUtils;
 import java.io.IOException;
 
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
-
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+                                        Authentication authentication) throws IOException, ServletException {
+
         HttpSession session = request.getSession();
         MemberUtil.clearLoginData(session);
 
+        /* 회원 정보 조회 편의 구현 */
         MemberInfo memberInfo = (MemberInfo) authentication.getPrincipal();
         Member member = memberInfo.getMember();
         session.setAttribute("member", member);
@@ -27,5 +29,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         redirectURL = StringUtils.hasText(redirectURL) ? redirectURL : "/";
 
         response.sendRedirect(request.getContextPath() + redirectURL);
+
     }
 }

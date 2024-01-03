@@ -2,7 +2,50 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{mobile/layouts/main}">
+
 <main layout:fragment="content">
-    <h1>가입하기(Mobile)</h1>
+    <h1 th:text="#{회원가입}"></h1>
+    <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off"
+          th:object="${requestJoin}">
+        <div class="error global" th:each="err : ${#fields.globalErrors()}"
+             th:text="${err}"></div>
+
+
+        <input type="text" name="email" th:field="*{email}" th:placeholder="#{이메일}">
+        <div class="error" th:each="err : ${#fields.errors('email')}"
+             th:text="${err}"></div>
+
+
+        <input type="text" name="userId" th:field="*{userId}" th:placeholder="#{아이디}">
+        <div class="error" th:each="err : ${#fields.errors('userId')}"
+             th:text="${err}"></div>
+
+
+        <input type="password" name="password" th:field="*{password}" th:placeholder="#{비밀번호}">
+        <div class="error" th:each="err : ${#fields.errors('password')}"
+             th:text="${err}"></div>
+
+
+        <input type="password" name="confirmPassword" th:field="*{confirmPassword}" th:placeholder="#{비밀번호_확인}">
+        <div class="error" th:each="err : ${#fields.errors('confirmPassword')}"
+             th:text="${err}"></div>
+
+
+        <input type="text" name="name" th:field="*{name}" th:placeholder="#{회원명}">
+        <div class="error" th:each="err : ${#fields.errors('name')}"
+             th:text="${err}"></div>
+
+
+        <div th:text="#{회원가입_약관}"></div>
+        <div class="terms">약관,,,</div>
+        <div class="terms_agree">
+            <input type="checkbox" name="agree" value="true" id="agree" th:field="*{agree}">
+            <label for="agree" th:text="#{회원가입_약관에_동의합니다.}"></label>
+
+            <div class="error" th:each="err : ${#fields.errors('agree')}"
+                 th:text="${err}"></div>
+        </div>
+        <button type="submit" th:text="#{가입하기}"></button>
+    </form>
 </main>
 </html>
