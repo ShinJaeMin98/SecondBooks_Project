@@ -10,7 +10,7 @@ import org.springframework.validation.Validator;
 
 @Component
 @RequiredArgsConstructor
-public class JoinValidtor implements Validator, PasswordValidator {
+public class JoinValidator implements Validator, PasswordValidator {
 
     private final MemberRepository memberRepository;
 
@@ -23,9 +23,7 @@ public class JoinValidtor implements Validator, PasswordValidator {
     public void validate(Object target, Errors errors) {
         /**
          * 1. 이메일, 아이디 중복 여부 체크
-         * 2. 비밀번호 복잡성 체크 - 대소문자 1개 각각 포함,
-         *      숫자 1개 이상 포함
-         *      특수문자도 1개 이상 포함
+         * 2. 비밀번호 복잡성 체크 - 대소문자 1개 각각 포함, 숫자 1개 이상 포함, 특수문자도 1개 이상 포함
          * 3. 비밀번호, 비밀번호 확인 일치 여부 체크
          */
 
@@ -40,23 +38,19 @@ public class JoinValidtor implements Validator, PasswordValidator {
             errors.rejectValue("email", "Duplicated");
         }
 
-        if (StringUtils.hasText(userId) && memberRepository.existsUserId(userId)) {
+        if (StringUtils.hasText(userId) && memberRepository.existsByUserId(userId)) {
             errors.rejectValue("userId", "Duplicated");
         }
 
-        //   2. 비밀번호 복잡성 체크 - 대소문자 1개 각각 포함,
-        //      숫자 1개 이상 포함
-        //      특수문자도 1개 이상 포함
-        if(StringUtils.hasText(password) &&
-                (!alphaCheck(password, true) || !numberCheck(password)
-                    || !specialCharsCheck(password))) {
+        // 2. 비밀번호 복잡성 체크 - 대소문자 1개 각각 포함, 숫자 1개 이상 포함, 특수문자도 1개 이상 포함
+        if (StringUtils.hasText(password) &&
+                (!alphaCheck(password, true) || !numberCheck(password) || !specialCharsCheck(password))) {
             errors.rejectValue("password", "Complexity");
         }
 
-
         // 3. 비밀번호, 비밀번호 확인 일치 여부 체크
         if (StringUtils.hasText(password) && StringUtils.hasText(confirmPassword)
-            && !password.equals(confirmPassword)) {
+                && !password.equals(confirmPassword)) {
             errors.rejectValue("confirmPassword", "Mismatch.password");
         }
     }

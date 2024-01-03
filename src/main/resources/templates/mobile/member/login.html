@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mobile/layouts/main}">
+<main layout:fragment="content">
+    <h1 th:text="#{로그인}"></h1>
+    <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off">
+
+        <input type="hidden" name="redirectURL"
+               th:if="${param.redirectURL != null}" th:value="${param.redirectURL}">
+
+
+        <input type="text" name="username" th:value="${session.username}" th:placeholder="#{아이디}">
+        <div class="error" th:if="${session.NotBlank_username != null}" th:text="${session.NotBlank_username}"></div>
+
+
+        <input type="password" name="password" th:placeholder="#{비밀번호}">
+        <div class="error" th:if="${session.NotBlank_password != null}" th:text="${session.NotBlank_password}"></div>
+
+        <button type="submit" th:text="#{로그인}"></button>
+
+        <div class="error" th:if="${session.Global_error != null}" th:text="${session.Global_error}"></div>
+    </form>
+</main>
+</html>
