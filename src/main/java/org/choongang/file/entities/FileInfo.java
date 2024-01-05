@@ -1,6 +1,7 @@
 package org.choongang.file.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor @AllArgsConstructor
 @Table(indexes = {
         @Index(name="idx_fInfo_gid", columnList = "gid"),
         @Index(name="idx_fInfo_gid_loc", columnList = "gid,location")
