@@ -2,6 +2,7 @@ package org.choongang.file.service;
 
 import lombok.RequiredArgsConstructor;
 import org.choongang.commons.Utils;
+import org.choongang.commons.exceptions.UnAuthorizedException;
 import org.choongang.file.entities.FileInfo;
 import org.choongang.file.repositories.FileInfoRepository;
 import org.choongang.member.MemberUtil;
@@ -11,6 +12,8 @@ import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.util.List;
+
+import static org.springframework.data.jpa.domain.AbstractAuditable_.createdBy;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +26,7 @@ public class FileDeleteService {
     public void delete(Long seq){
         FileInfo data = infoService.get(seq);
 
+        // 파일 삭제 권한 체크
         Member member = memberUtil.getMember();
         String createBy = data.getCreatedBy();
         if(!memberUtil.isLogin() || (!memberUtil.isAdmin() && StringUtils.hasText(createBy)
