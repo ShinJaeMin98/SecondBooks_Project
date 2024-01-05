@@ -1,6 +1,7 @@
 package org.choongang.file.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,13 +13,14 @@ import java.util.UUID;
 @Data
 @Entity
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor @AllArgsConstructor
 @Table(indexes = {
         @Index(name="idx_fInfo_gid", columnList = "gid"),
         @Index(name="idx_fInfo_gid_loc", columnList = "gid,location")
 })
 public class FileInfo extends BaseMember {
 
+    // 파일 등록 번호, 서버에 업로드하는 파일명 기준
     @Id @GeneratedValue
     private Long seq;
 
@@ -37,15 +39,19 @@ public class FileInfo extends BaseMember {
     @Column(length = 65)
     private String fileType;
 
+    // 서버에 실제 올라간 경로
     @Transient
     private String filePath;
 
+    // 브라우저 주소창에 입력해서 접근할 수 있는 경로
     @Transient
     private String fileUrl;
 
+    // 썸네일 이미지 경로
     @Transient
     private List<String> thumbsPath;
 
+    // 브라우저 주소창에 입력해서 접근할 수 있는 경로
     @Transient
     private List<String> thumbsUrl;
 
