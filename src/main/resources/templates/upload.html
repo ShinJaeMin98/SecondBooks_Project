@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<form method="post" th:action="@{/api/file}" enctype="multipart/form-data">
+    <input type="hidden" name="gid" value="testgid">
+    <input type="hidden" name="location" value="testlocation">
+    <!--<input type="hidden" name="imageOnly" value="true">-->
+    <input type="file" name="file" multiple>
+    <button type="submit">업로드</button>
+</form>
+</html>
