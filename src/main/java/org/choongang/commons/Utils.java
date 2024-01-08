@@ -10,6 +10,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 @Component
@@ -29,6 +30,8 @@ public class Utils {
         validationsBundle = ResourceBundle.getBundle("messages.validations");
         errorsBundle = ResourceBundle.getBundle("messages.errors");
     }
+
+
 
     public boolean isMobile() {
         // 모바일 수동 전환 모드 체크
@@ -76,20 +79,27 @@ public class Utils {
      * @return
      */
     public String nl2br(String str) {
+        str = Objects.requireNonNullElse(str, "");
+
         str = str.replaceAll("\\n", "<br>")
                 .replaceAll("\\r", "");
 
         return str;
     }
 
+    /**
+     * 썸네일 이미지 사이즈 설정
+     *
+     * @return
+     */
     public List<int[]> getThumbSize() {
         BasicConfig config = (BasicConfig)request.getAttribute("siteConfig");
-        String thumbSize = config.getThumbSize();
+        String thumbSize = config.getThumbSize(); // \r\n
         String[] thumbsSize = thumbSize.split("\\n");
 
         List<int[]> data = Arrays.stream(thumbsSize)
                 .filter(StringUtils::hasText)
-                .map(s -> s.replaceAll("\\s", ""))
+                .map(s -> s.replaceAll("\\s+", ""))
                 .map(this::toConvert).toList();
 
 

@@ -12,12 +12,14 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/file")
+@RequestMapping("/api/file")
 @RequiredArgsConstructor
 public class ApiFileController implements ExceptionRestProcessor {
 
     private final FileUploadService uploadService;
     private final FileDeleteService deleteService;
+
+
 
     @PostMapping
     public JSONData<List<FileInfo>> upload(@RequestParam("file") MultipartFile[] files,
@@ -32,7 +34,7 @@ public class ApiFileController implements ExceptionRestProcessor {
 
     @GetMapping("/{seq}")
     public void delete(@PathVariable("seq") Long seq) {
+
         deleteService.delete(seq);
     }
-
 }
