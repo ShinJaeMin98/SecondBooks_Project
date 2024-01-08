@@ -2,6 +2,7 @@ package org.choongang.admin.config.controllers;
 
 import lombok.Data;
 
+
 @Data
 public class BasicConfig {
     private String siteTitle = "";
@@ -9,5 +10,7 @@ public class BasicConfig {
     private String siteKeywords = "";
     private int cssJsVersion = 1;
     private String joinTerms = "";
-    private String thumbSize= "";
+    private String thumbSize= "" ;
+
+
 }

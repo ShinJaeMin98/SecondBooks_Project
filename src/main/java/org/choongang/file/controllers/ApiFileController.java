@@ -19,6 +19,8 @@ public class ApiFileController implements ExceptionRestProcessor {
     private final FileUploadService uploadService;
     private final FileDeleteService deleteService;
 
+
+
     @PostMapping
     public JSONData<List<FileInfo>> upload(@RequestParam("file") MultipartFile[] files,
                                            @RequestParam(name="gid", required = false) String gid,
