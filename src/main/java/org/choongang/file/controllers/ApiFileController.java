@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/file")
+@RequestMapping("/api/file")
 @RequiredArgsConstructor
 public class ApiFileController implements ExceptionRestProcessor {
 
@@ -32,7 +32,7 @@ public class ApiFileController implements ExceptionRestProcessor {
 
     @GetMapping("/{seq}")
     public void delete(@PathVariable("seq") Long seq) {
+
         deleteService.delete(seq);
     }
-
 }
