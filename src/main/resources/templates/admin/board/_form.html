@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="form">
+    <input type="hidden" name="gid" value="testgid">
+
     <h2>기본 설정</h2>
     <table class="table_cols mb30">
         <tr>
-            <th>사용여부</th>
+            <th width="180">사용여부</th>
             <td>
                 <input type="radio" name="active" value="true" id="active_true">
                 <label for="active_true">사용</label>
@@ -132,7 +134,7 @@
     <h2>게시판 분류</h2>
     <table class="table_cols mb30">
         <tr>
-            <th>분류</th>
+            <th width="180">분류</th>
             <td>
                 <textarea name="category" placeholder="여러 분류는 줄개행하여 입력"></textarea>
             </td>
@@ -142,7 +144,7 @@
     <h2>권한 설정</h2>
     <table class="table_cols mb30">
         <tr>
-            <th>글목록</th>
+            <th width="180">글목록</th>
             <td>
                 <input type="radio" name="listAccessType" value="ALL" id="listAccessType_ALL">
                 <label for="listAccessType_ALL">비회원+회원+관리자</label>
@@ -211,9 +213,14 @@
     <h2>게시판 상단</h2>
     <table class="table_cols mb30">
         <tr>
-            <th>내용</th>
+            <th width="180">내용</th>
             <td>
                 <textarea id="html_top" name="htmlTop"></textarea>
+
+                <button type="button" class="upload_files"
+                        data-location="html_top" data-image-only="true"
+                >이미지 추가</button>
+                <div class="uploaded_files" id="uploaded_files_html_top"></div>
             </td>
         </tr>
     </table>
@@ -221,12 +228,18 @@
     <h2>게시판 하단</h2>
     <table class="table_cols">
         <tr>
-            <th>내용</th>
+            <th width="180">내용</th>
             <td>
                 <textarea id="html_bottom" name="htmlBottom"></textarea>
+
+                <button type="button" class="upload_files"
+                        data-location="html_bottom" data-image-only="true"
+                >이미지 추가</button>
+                <div class="uploaded_files" id="uploaded_files_html_bottom"></div>
             </td>
         </tr>
     </table>
 
+    <script th:replace="~{common/_file_tpl::editor_tpl}"></script>
 </th:block>
 </html>

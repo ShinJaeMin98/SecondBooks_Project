@@ -1,4 +1,4 @@
- package org.choongang.admin.board;
+package org.choongang.admin.board;
 
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
@@ -101,6 +101,8 @@ public class BoardController implements ExceptionProcessor {
 
         if (mode.equals("add") || mode.equals("edit")) { // 게시판 등록 또는 수정
             addCommonScript.add("ckeditor5/ckeditor");
+            addCommonScript.add("fileManager");
+
             addScript.add("board/form");
         }
 
