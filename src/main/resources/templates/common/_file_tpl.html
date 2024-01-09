@@ -8,4 +8,24 @@
         <div class="inner" style="background:url('[imageUrl]') no-repeat center center; background-size: cover;"></div>
     </div>
 </script>
+
+<script type="text/html" id="attach_tpl" th:fragment="attach_tpl">
+    <span class="file_tpl_box" id="file_[seq]">
+        <a th:href="@{/file/download/[seq]}">[fileName]</a>
+        <a th:href="@{/file/delete/[seq]}" onclick="return confirm('정말 삭제하시겠습니까?');" class="remove" target="ifrmProcess">
+            <i class="xi-close"></i>
+        </a>
+    </span>
+</script>
+
+<script type="text/html" id="editor_tpl" th:fragment="editor_tpl">
+    <span class="file_tpl_box" id="file_[seq]">
+        <a th:href="@{/file/download/[seq]}">[fileName]</a>
+        <i class="xi-upload insert_image" data-url="[imageUrl]"></i>
+        <a th:href="@{/file/delete/[seq]}" onclick="return confirm('정말 삭제하시겠습니까?');" class="remove" target="ifrmProcess">
+            <i class="xi-close"></i>
+        </a>
+    </span>
+</script>
+
 </html>
