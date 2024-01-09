@@ -12,6 +12,7 @@
         <th:block th:if="${siteConfig.siteTitle != null}" th:text="${siteConfig.siteTitle}"></th:block>
     </title>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <link rel="stylesheet" type="text/css" th:href="@{/common/css/style.css?v={v}(v=${siteConfig.cssJsVersion})}">
     <link rel="stylesheet" type="text/css"
           th:each="cssFile : ${addCommonCss}"
@@ -40,5 +41,6 @@
 <main layout:fragment="content"></main>
 
 <footer th:replace="~{front/outlines/footer::common}"></footer>
+<iframe name="ifrmProcess" class="dn"></iframe>
 </body>
 </html>

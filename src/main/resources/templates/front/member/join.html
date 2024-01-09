@@ -52,8 +52,9 @@
         <dl>
             <dt th:text="#{프로필_이미지}"></dt>
             <dd>
+                <div id="profile_image"></div>
                 <button type="button" class="upload_files"
-                        th:text="#{이미지_업로드}"></button>
+                        th:text="#{이미지_업로드}" data-image-only="true" data-single-file="true"></button>
             </dd>
         </dl>
 
@@ -68,6 +69,7 @@
         <button type="submit" th:text="#{가입하기}"></button>
     </form>
 
+    <script th:replace="~{common/_file_tpl::image1_tpl}"></script>
 
 </main>
 </html>
