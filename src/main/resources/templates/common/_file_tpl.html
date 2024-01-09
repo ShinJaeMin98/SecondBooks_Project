@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script type="text/html" id="image1_tpl" th:fragment="image1_tpl">
+    <div class="image1_tpl_box" id="file_[seq]">
+        <a th:href="@{/file/delete/[seq]}" onclick="return confirm('정말 삭제하시겠습니까?');" class="remove" target="ifrmProcess">
+            <i class="xi-close"></i>
+        </a>
+        <div class="inner" style="background:url('[imageUrl]') no-repeat center center; background-size: cover;"></div>
+    </div>
+</script>
+</html>

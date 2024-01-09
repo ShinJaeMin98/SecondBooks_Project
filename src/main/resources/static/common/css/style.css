@@ -1,2 +1,9 @@
 /* 여백 공통 */
 .mb30 { margin-bottom: 30px; }
+
+.dn { display: none !important; }
+
+.image1_tpl_box { border: 1px solid #222; position: relative; width: 250px; }
+.image1_tpl_box > .inner { width: 100%; height: 250px; }
+.image1_tpl_box .remove { position: absolute; top: 0; right: 0; display: block; width: 15px; height: 15px; background: #222; text-align: center; line-height: 15px; cursor: pointer; }
+.image1_tpl_box .remove > i { color: #fff; font-size: 1rem; }
