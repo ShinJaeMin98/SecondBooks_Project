@@ -31,8 +31,6 @@ public class Utils {
         errorsBundle = ResourceBundle.getBundle("messages.errors");
     }
 
-
-
     public boolean isMobile() {
         // 모바일 수동 전환 모드 체크
         String device = (String)session.getAttribute("device");

@@ -9,9 +9,8 @@ import lombok.Data;
 @Data
 @Entity
 public class Configs {
-
     @Id
-    @Column(length = 60)
+    @Column(length=60)
     private String code;
 
     @Lob
