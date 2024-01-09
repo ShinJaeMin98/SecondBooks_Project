@@ -8,6 +8,5 @@ import java.util.List;
 
 public interface FileInfoRepository extends JpaRepository<FileInfo, Long>, QuerydslPredicateExecutor<FileInfo> {
     List<FileInfo> findByGid(String gid);
-
     List<FileInfo> findByGidAndLocation(String gid, String location);
 }

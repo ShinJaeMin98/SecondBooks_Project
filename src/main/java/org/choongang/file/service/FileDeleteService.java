@@ -13,8 +13,6 @@ import org.springframework.util.StringUtils;
 import java.io.File;
 import java.util.List;
 
-import static org.springframework.data.jpa.domain.AbstractAuditable_.createdBy;
-
 @Service
 @RequiredArgsConstructor
 public class FileDeleteService {
@@ -23,31 +21,29 @@ public class FileDeleteService {
     private final MemberUtil memberUtil;
     private final FileInfoRepository repository;
 
-    public void delete(Long seq){
+    public void delete(Long seq) {
         FileInfo data = infoService.get(seq);
 
         // 파일 삭제 권한 체크
         Member member = memberUtil.getMember();
-        String createBy = data.getCreatedBy();
-        if(!memberUtil.isLogin() || (!memberUtil.isAdmin() && StringUtils.hasText(createBy)
-            && !createdBy.equals(member.getUserId()))){
+        String createdBy = data.getCreatedBy();
+        if (!memberUtil.isLogin() || (!memberUtil.isAdmin() && StringUtils.hasText(createdBy)
+                && !createdBy.equals(member.getUserId()))) {
             throw new UnAuthorizedException(Utils.getMessage("Not.your.file", "errors"));
         }
 
         File file = new File(data.getFilePath());
-        if(file.exists()) file.delete();
+        if (file.exists()) file.delete();
 
         List<String> thumbsPath = data.getThumbsPath();
-        if(thumbsPath != null){
-            for(String path : thumbsPath){
+        if (thumbsPath != null) {
+            for (String path : thumbsPath) {
                 File thumbFile = new File(path);
-                if(thumbFile.exists()) thumbFile.delete();
+                if (thumbFile.exists()) thumbFile.delete();
             }
         }
 
         repository.delete(data);
         repository.flush();
-
     }
-
 }
