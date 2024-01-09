@@ -12,16 +12,19 @@ public class MemberUtil {
 
     private final HttpSession session;
 
-    public boolean isAdmin(){
-        if(isLogin()){
+    public boolean isAdmin() {
+
+        if (isLogin()) {
             return getMember().getAuthorities()
                     .stream().map(Authorities::getAuthority)
                     .anyMatch(a -> a == Authority.ADMIN || a == Authority.MANAGER);
         }
+
         return false;
     }
 
     public boolean isLogin() {
+
         return getMember() != null;
     }
 

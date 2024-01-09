@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.choongang.member.entities.Authorities;
 import org.choongang.member.entities.Member;
 import org.choongang.member.repositories.MemberRepository;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,15 +21,16 @@ public class MemberInfoService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Member member = memberRepository.findByEmail(username)
-                .orElseGet(() -> memberRepository.findByUserId(username)
+        Member member = memberRepository.findByEmail(username) // 이메일 조회
+                .orElseGet(() -> memberRepository.findByUserId(username) // 아이디로 조회
                         .orElseThrow(() -> new UsernameNotFoundException(username)));
 
         List<SimpleGrantedAuthority> authorities = null;
         List<Authorities> tmp = member.getAuthorities();
         if (tmp != null) {
             authorities = tmp.stream()
-                    .map(s -> new SimpleGrantedAuthority(s.getAuthority().name())).toList();
+                    .map(s -> new SimpleGrantedAuthority(s.getAuthority().name()))
+                    .toList();
         }
 
         return MemberInfo.builder()
