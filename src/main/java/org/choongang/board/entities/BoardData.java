@@ -9,12 +9,9 @@ import org.choongang.commons.entities.BaseMember;
 @Data
 @Entity
 public class BoardData extends BaseMember {
-
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     private Long seq;
 
     private String subject;
     private String content;
-
 }

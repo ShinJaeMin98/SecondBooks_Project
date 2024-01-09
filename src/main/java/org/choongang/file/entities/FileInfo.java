@@ -19,43 +19,35 @@ import java.util.UUID;
         @Index(name="idx_fInfo_gid_loc", columnList = "gid,location")
 })
 public class FileInfo extends BaseMember {
-
-    // 파일 등록 번호, 서버에 업로드하는 파일명 기준
     @Id @GeneratedValue
-    private Long seq;
+    private Long seq; // 파일 등록 번호, 서버에 업로드하는 파일명 기준
 
-    @Column(length = 65, nullable = false)
-    private String gid= UUID.randomUUID().toString();
+    @Column(length=65, nullable = false)
+    private String gid = UUID.randomUUID().toString();
 
-    @Column(length = 65)
+    @Column(length=65)
     private String location;
 
-    @Column(length = 80)
+    @Column(length=80)
     private String fileName;
 
-    @Column(length = 30)
+    @Column(length=30)
     private String extension;
 
-    @Column(length = 65)
+    @Column(length=65)
     private String fileType;
 
-    // 서버에 실제 올라간 경로
     @Transient
-    private String filePath;
+    private String filePath; // 서버에 실제 올라간 경로
 
-    // 브라우저 주소창에 입력해서 접근할 수 있는 경로
     @Transient
-    private String fileUrl;
+    private String fileUrl; // 브라우저 주소창에 입력해서 접근할 수 있는 경로
 
-    // 썸네일 이미지 경로
     @Transient
-    private List<String> thumbsPath;
+    private List<String> thumbsPath; // 썸네일 이미지 경로
 
-    // 브라우저 주소창에 입력해서 접근할 수 있는 경로
     @Transient
-    private List<String> thumbsUrl;
+    private List<String> thumbsUrl; // 브라우저 주소창에 입력해서 접근할 수 있는 경로
 
     private boolean done;
-
-
 }

@@ -49,8 +49,6 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'com.h2database:h2'
 
-
-
 }
 
 tasks.named('test') {

@@ -8,5 +8,4 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class FileProperties {
     private String path;
     private String url;
-
 }

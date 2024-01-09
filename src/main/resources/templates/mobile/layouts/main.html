@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{mobile/layouts/main}">
-<main layout:fragment="content">
-    <h1 th:text="#{회원가입}"></h1>
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, minimum-scale=0.5, maximum-scale=3.0">
+    <meta th:if="${siteConfig.siteDescription != null}" name="description" th:content="${siteConfig.siteDescription}">
+    <meta th:if="${siteConfig.siteKeywords != null}" name="keywords" th:content="${siteConfig.siteKeywords}">
+    <title>
+        <th:block th:if="${pageTitle != null}" th:text="${pageTitle + ' - '}"></th:block>
+        <th:block th:if="${siteConfig.siteTitle != null}" th:text="${siteConfig.siteTitle}"></th:block>
+    </title>
 
-    <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}">
-        <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+    <link rel="stylesheet" type="text/css" th:href="@{/common/css/style.css?v={v}(v=${siteConfig.cssJsVersion})}">
+    <link rel="stylesheet" type="text/css"
+          th:each="cssFile : ${addCommonCss}"
+          th:href="@{/common/css/{file}.css?v={v}(file=${cssFile}, v=${siteConfig.cssJsVersion})}">
 
-        <input type="text" name="email" th:field="*{email}" th:placeholder="#{이메일}">
-        <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
+    <link rel="stylesheet" type="text/css" th:href="@{/mobile/css/style.css?v={v}(v=${siteConfig.cssJsVersion})}">
+    <link rel="stylesheet" type="text/css"
+          th:each="cssFile : ${addCss}"
+          th:href="@{/mobile/css/{file}.css?v={v}(file=${cssFile}, v=${siteConfig.cssJsVersion})}">
 
-        <input type="text" name="userId" th:field="*{userId}" th:placeholder="#{아이디}">
-        <div class="error" th:each="err : ${#fields.errors('userId')}" th:text="${err}"></div>
+    <th:block layout:fragment="addCss"></th:block>
 
-        <input type="password" name="password" th:field="*{password}" th:placeholder="#{비밀번호}">
-        <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
+    <script th:src="@{/common/js/common.js?v={v}(v=${siteConfig.cssJsVersion})}"></script>
+    <script th:each="jsFile : ${addCommonScript}"
+            th:src="@{/common/js/{file}.js?v={v}(file=${jsFile}, v=${siteConfig.cssJsVersion})}"></script>
 
-        <input type="password" name="confirmPassword" th:field="*{confirmPassword}" th:placeholder="#{비밀번호_확인}">
-        <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
+    <script th:src="@{/mobile/js/common.js?v={v}(v=${siteConfig.cssJsVersion})}"></script>
+    <script th:each="jsFile : ${addScript}"
+            th:src="@{/mobile/js/{file}.js?v={v}(file=${jsFile}, v=${siteConfig.cssJsVersion})}"></script>
 
-        <input type="text" name="name" th:field="*{name}" th:placeholder="#{회원명}">
-        <div class="error" th:each="err : ${#fields.errors('name')}" th:text="${err}"></div>
+    <th:block layout:fragment="addScript"></th:block>
+</head>
+<body>
+<header th:replace="~{mobile/outlines/header::common}"></header>
 
+<main layout:fragment="content"></main>
 
-        <div th:text="#{회원가입_약관}"></div>
-        <div class="terms" th:utext="${@utils.nl2br(siteConfig.joinTerms)}"></div>
-        <div class="terms_agree">
-            <input type="checkbox" name="agree" value="true" id="agree" th:field="*{agree}">
-            <label for="agree" th:text="#{회원가입_약관에_동의합니다.}"></label>
-
-            <div class="error" th:each="err : ${#fields.errors('agree')}" th:text="${err}"></div>
-        </div>
-        <button type="submit" th:text="#{가입하기}"></button>
-    </form>
-</main>
+<footer th:replace="~{mobile/outlines/footer::common}"></footer>
+</body>
 </html>

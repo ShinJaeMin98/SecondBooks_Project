@@ -14,9 +14,7 @@ import java.io.IOException;
 
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                        Authentication authentication) throws IOException, ServletException {
-
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         HttpSession session = request.getSession();
         MemberUtil.clearLoginData(session);
 
@@ -29,6 +27,5 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         redirectURL = StringUtils.hasText(redirectURL) ? redirectURL : "/";
 
         response.sendRedirect(request.getContextPath() + redirectURL);
-
     }
 }
