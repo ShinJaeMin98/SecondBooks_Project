@@ -95,7 +95,7 @@ public class MemberInfoService implements UserDetailsService {
 
         /* 페이징 처리 S */
         int total = (int)memberRepository.count(andBuilder); // 총 레코드 갯수
-        //int total = 12345;
+
         Pagination pagination = new Pagination(page, total, 10, limit, request);
         /* 페이징 처리 E */
 
