@@ -8,7 +8,21 @@
     <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}">
         <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 
-        <input type="text" name="email" th:field="*{email}" th:placeholder="#{이메일}">
+        <div>
+            <input type="text" name="email" th:field="*{email}" th:placeholder="#{이메일}" th:readonly="${session.EmailAuthVerified != null && session.EmailAuthVerified}">
+            <button th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}" type="button" id="email_verify" th:text="#{인증코드전송}"></button>
+        </div>
+        <div class="auth_box">
+            <th:block th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}">
+                <input type="text" id="auth_num" th:placeholder="#{인증코드_입력}">
+                <span id="auth_count">03:00</span>
+                <button type="button" id="email_confirm" th:text="#{확인}" disabled></button>
+                <button type="button" id="email_re_verify" th:text="#{재전송}" disabled></button>
+            </th:block>
+            <th:block th:unless="${session.EmailAuthVerified == null || !session.EmailAuthVerified}">
+                <span class='confirmed' th:text="#{확인된_이메일_입니다.}"></span>
+            </th:block>
+        </div>
         <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
 
         <input type="text" name="userId" th:field="*{userId}" th:placeholder="#{아이디}">
