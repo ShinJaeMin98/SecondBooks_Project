@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
+    <h1>sale</h1>
+    <h1>로그인 정보</h1>
+    <h2>[[${session.member.userId}]]</h2>
+    <form method="post" th:action="@{/sale/upload}" autocomplete="off" enctype="multipart/form-data">
+        <input type="hidden" name="userId" th:value="${session.member.userId}">
+
+        <h2>판매</h2>
+        <table>
+            <tr>
+                <th width="180">title</th>
+                <td>
+                    <input type="text" name="title" placeholder="제목">
+                </td>
+            </tr>
+            <tr>
+                <th>details</th>
+                <td>
+                    <textarea name="details"  placeholder="상세 설명" rows="10" cols="22"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th>sale type</th>
+                <td>
+                    <input type="radio" name="saleType" value="sale" /> sale
+                    <input type="radio" name="saleType" value="donation" /> donation
+                </td>
+            </tr>
+            <tr>
+                <th>price</th>
+                <td>
+                    <input type="number" name="price" placeholder="가격">
+                </td>
+            </tr>
+            <tr>
+                <th>image</th>
+                <td>
+                    <input type="hidden" name="gid" value="testgid">
+                    <input type="hidden" name="location" value="testlocation">
+                    <input type="hidden" name="imageOnly" value="true">
+                    <input type="file" name="file" multiple>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <select name="postingType">
+                        <option value="sale">팔아요</option>
+                        <option value="request">구해요</option>
+                    </select>
+                </th>
+                <th>
+                    <input type="submit" ></input>
+                    <input type="reset" ></input>
+                </th>
+            </tr>
+        </table>
+
+    </form>
+</main>
+</html>

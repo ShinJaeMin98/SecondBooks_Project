@@ -27,7 +27,7 @@ spring:
         use_sql_comments: true
         dialect: org.hibernate.dialect.OracleDialect
     hibernate:
-      ddlAuto: create
+      ddlAuto: update
 
   # 타임리프 설정
   thymeleaf:
