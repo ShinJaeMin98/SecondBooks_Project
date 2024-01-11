@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<aside th:fragment="menus">
+    <a th:href="@{/products}" th:classappend="${menuCode} == 'products' ? 'on'">
+        <i class="xi-book"></i> 책방
+    </a>
+    <a th:href="@{/boards}" th:classappend="${menuCode} == 'boards' ? 'on'">
+        <i class="xi-forum"></i> 게시판
+    </a>
+    <a th:href="@{/questions}" th:classappend="${menuCode} == 'questions' ? 'on'">
+        <i class="xi-help"></i> Q&A
+    </a>
+    <a th:href="@{/myPage}" th:classappend="${menuCode} == 'myPage' ? 'on'">
+        <i class="xi-user"></i> 마이페이지
+    </a>
+</aside>
+</html>
