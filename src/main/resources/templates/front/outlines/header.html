@@ -14,7 +14,7 @@
             ></th:block>
 
         <span th:text="${#messages.msg('LOGIN_MSG', session.member.name, session.member.userId)}"></span>
-        <a th:href="@{/mypage}" th:text="#{마이페이지}"></a>
+        <a th:href="@{/myPage}" th:text="#{마이페이지}"></a>
         <a th:href="@{/member/logout}" th:text="#{로그아웃}"></a>
 
         <a sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')" th:href="@{/admin}" th:text="#{사이트_관리}"></a>
