@@ -12,7 +12,7 @@ public class BoardSearch {
     private String bName;
     private boolean active;
 
-    private String sopt;
-    private String skey;
+    private String sopt; // 검색옵션
+    private String skey; // 검색 키워드
 
 }
