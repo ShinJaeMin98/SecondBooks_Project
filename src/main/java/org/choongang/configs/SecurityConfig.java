@@ -41,7 +41,7 @@ public class SecurityConfig {
         // ROLE_ADMIN -> hasAuthority('ROLE_ADMIN')
         // hasRole('ADMIN')
         http.authorizeHttpRequests(c -> {
-            c.requestMatchers("/mypage/**").authenticated() // 회원 전용
+            c.requestMatchers("/myPage/**").authenticated() // 회원 전용
                     //.requestMatchers("/admin/**").hasAnyAuthority("ADMIN", "MANAGER")
                     .anyRequest().permitAll(); // 그외 모든 페이지는 모두 접근 가능
 
