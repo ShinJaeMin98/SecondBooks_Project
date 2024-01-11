@@ -4,5 +4,14 @@
       layout:decorate="~{front/layouts/main}">
 <section layout:fragment="content">
     <h1>프로필</h1>
+    <th:block th:if="${session.member.profileImage != null}"
+              th:utext="${@utils.printThumb(session.member.profileImage.seq, 80, 80, 'profile_image')}">
+        ></th:block> 회원사진
+    <br>
+    <span th:text="${session.member.userId}"></span> 회원ID
+    <br>
+    <span th:text="${session.member.Email}"></span> 회원이메일
+    <br>
+    <span th:text="${session.member.name}"></span> 회원명
 </section>
 </html>

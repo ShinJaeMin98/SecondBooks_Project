@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header th:fragment="common">
-    <h1>헤더</h1>
     <th:block sec:authorize="isAnonymous()"> <!-- 미 로그인 상태 -->
         <a th:href="@{/member/join}" th:text="#{회원가입}"></a>
         <a th:href="@{/member/login}" th:text="#{로그인}"></a>
