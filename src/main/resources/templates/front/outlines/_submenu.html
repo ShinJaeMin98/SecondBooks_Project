@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<nav class="submenus" th:fragment="submenus" th:if="${subMenus != null && !subMenus.isEmpty()}">
+    <a th:each="menu : ${subMenus}" th:object="${menu}"
+       th:href="@{{url}(url=*{url})}" th:text="*{name}"
+       th:classappend="${subMenuCode == menu.code} ? 'on'"></a>
+</nav>
+</html>

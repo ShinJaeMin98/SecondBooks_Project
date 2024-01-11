@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+* { font-family: 'Noto Sans KR', sans-serif; color: #000; box-sizing: border-box; outline: none; }
+html { font-size: 13px; }
+body { margin: 0; }
+a { text-decoration: none; }
+ul, ol { list-style: none; margin: 0; padding: 0; }
+dl, dt, dd { margin: 0; padding: 0; }
+img { border: 0; }
+
+/* 헤더 영역 S */
+header { display: flex; justify-content: space-between; height: 80px; align-items: center; background: #fff; }
+header > section:first-of-type { width: 208px; text-align: center; }
+header > section:last-of-type { flex-grow: 1; padding-right: 20px; text-align: right; }
+header .btn_area a { display: inline-block; width: 90px; height: 28px; border: 1px solid #596b99; color: #596b99; border-radius: 5px; line-height: 26px; text-align: center; font-weight: 500; }
+header .btn_area a:last-of-type { background: #596b99; color: #fff; }
+
+/* 헤더 영역 E */
+
+/* 내용 영역  S */
+main { background: #f1f3fa; min-height: 1000px; display: flex; }
+main > aside { width: 208px; background: #596b99; }
+main > section { flex-grow: 1; padding: 50px; }
+
+main > aside > a { display: block; height: 71px; color: #dddee4; font-size: 1.385rem; text-align: center; line-height: 70px; position: relative; }
+main > aside > a + a { border-top: 1px solid #61729e; }
+main > aside > a i { color: #dddee4; font-size: 1.385rem; }
+main > aside > a.on, main > aside > a:hover { background: #3c4e7a; font-weight: 500; }
+main > aside > a.on:after, main > aside > a:hover:after { content: ''; display: block; width: 8px; height: 100%; right: 0; top: 0; background: #00d0d7; position: absolute; }
+
+nav.submenus { box-shadow: 1px 1px 5px #cdced5; height: 60px; background: #fff; border-radius: 5px; margin-bottom: 50px; display: flex; align-items: center; }
+nav.submenus a { height: 60px; line-height: 60px; padding: 0 40px; font-size: 1.385rem; color: #222; }
+nav.submenus a.on { background: #596b99; color: #fff; font-weight: 500; }
+
+/* 내용 영역 E */
+
+/* 제목 공통 S */
+h1 { margin: 0; padding: 0 0 20px 10px; line-height: 1; font-size: 2rem; border-bottom: 2px solid #222; margin-bottom: 30px; }
+h2 { margin: 0 0 10px 0; font-size: 1.385rem; line-height: 1; }
+/* 제목 공통 E */
+
+/* 테이블 공통 S */
+.table_cols { border-spacing: 0; width: 100%; border-top: 2px solid #222; background: #fff; }
+.table_cols th, .table_cols td { padding: 10px; border-bottom: 1px solid #d5d5d5; }
+.table_cols th { background: #ccc; font-weight: normal; }
+/* 테이블 공통 E */
+
+/* 입력 공통 S */
+input[type='text'],
+input[type='number'],
+input[type='email'],
+input[type='password'] { border: 1px solid #d5d5d5; height: 35px; padding: 0 10px; width: 100%; }
+textarea { border: 1px solid #d5d5d5; min-height: 200px; padding: 10px; resize: none; width: 100%; }
+select { border: 1px solid #d5d5d5; height: 35px; }
+/* 입력 공통 E */
+
+/* 버튼 공통 S */
+.submit_btns { text-align: center; margin: 30px 0; }
+.submit_btns .btn { display: inline-block; min-width: 200px; height: 45px; padding: 0 15px; border: 1px solid #222; background: #fff; font-size: 1.4rem; font-weight: 500; color: #222; border-radius: 3px; cursor: pointer; line-height: 43px; }
+.submit_btns .btn:last-of-type { background: #222; color: #fff; }
+
+.sbtn { border: 1px solid #222; color: #222; background: #fff; display: inline-block; padding: 7px 20px; border-radius: 3px; cursor: pointer; line-height: 1; }
+.sbtn:hover, .sbtn.on { background: #596b99; color: #fff; border-color: #596b99; }
+.sbtn i { color: #222; font-size: 1.1rem; vertical-align: middle; line-height: 1; }
+.sbtn:hover i, .sbtn.on i { color: #fff; }
+
+.mbtn { }
+.lbtn { }
+
+/* 버튼 공통 E */
+
+/* 메세지 공통 S */
+.message_box { box-shadow: 1px 1px 5px #596b99; padding: 15px; border-radius: 5px; font-size: 1.385rem; font-weight: 500; text-align: center; background: #fff; margin-bottom: 30px; color: #596b99; }
+
+.error { box-shadow: 1px 1px 5px #596b99; padding: 7px 15px; border-radius: 5px; font-size: 0.95rem; color: #596b99; font-weight: 500; margin: 5px 0; }
+.error.global { padding: 10px 15px; font-size: 1.15rem; margin: 0 0 5px; }
+/* 메세지 공통 E */
+
+/* 페이징 공통 S */
+.pagination { text-align: center; margin: 30px 0; }
+.pagination .page { border: 1px solid #596b99; color: #596b99; display: inline-block; padding: 5px 10px; border-radius: 3px; background: #fff; }
+.pagination .page.on { background: #596b99; color: #fff; }
+.pagination .page + .page { margin-left: 3px; }
+/* 페이징 공통 E */
