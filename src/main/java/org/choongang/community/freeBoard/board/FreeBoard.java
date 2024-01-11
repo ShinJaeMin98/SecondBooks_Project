@@ -1,32 +1,30 @@
 package org.choongang.community.freeBoard.board;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.choongang.community.freeBoard.comment.Comment;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
-@Getter
-@Setter
+@Data
 @Entity
 public class FreeBoard {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
-    @Column(length = 200)
+    @Column
     private String subject;
 
-    @Column(columnDefinition = "TEXT")
+    @Column
     private String content;
 
-    private LocalDateTime createDate;
 
-    @OneToMany(mappedBy = "freeBoard", cascade = CascadeType.REMOVE)
-    private List<Comment> commentList;
+
+
 
 
 
