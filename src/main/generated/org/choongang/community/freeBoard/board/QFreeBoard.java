@@ -7,7 +7,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
-import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -20,11 +19,7 @@ public class QFreeBoard extends EntityPathBase<FreeBoard> {
 
     public static final QFreeBoard freeBoard = new QFreeBoard("freeBoard");
 
-    public final ListPath<org.choongang.community.freeBoard.comment.Comment, org.choongang.community.freeBoard.comment.QComment> commentList = this.<org.choongang.community.freeBoard.comment.Comment, org.choongang.community.freeBoard.comment.QComment>createList("commentList", org.choongang.community.freeBoard.comment.Comment.class, org.choongang.community.freeBoard.comment.QComment.class, PathInits.DIRECT2);
-
     public final StringPath content = createString("content");
-
-    public final DateTimePath<java.time.LocalDateTime> createDate = createDateTime("createDate", java.time.LocalDateTime.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
