@@ -233,7 +233,11 @@
                     <i class="xi-image"></i>
                     이미지 추가
                 </button>
-                <div class="uploaded_files" id="uploaded_files_html_top"></div>
+                <div class="uploaded_files" id="uploaded_files_html_top">
+                    <th:block th:each="item : *{htmlTopImages}">
+                        <span th:replace="~{common/_editor_file::item}"></span>
+                    </th:block>
+                </div>
             </td>
         </tr>
     </table>
@@ -251,7 +255,11 @@
                     <i class="xi-image"></i>
                     이미지 추가
                 </button>
-                <div class="uploaded_files" id="uploaded_files_html_bottom"></div>
+                <div class="uploaded_files" id="uploaded_files_html_bottom">
+                    <th:block th:each="item : *{htmlBottomImages}">
+                        <span th:replace="~{common/_editor_file::item}"></span>
+                    </th:block>
+                </div>
             </td>
         </tr>
     </table>

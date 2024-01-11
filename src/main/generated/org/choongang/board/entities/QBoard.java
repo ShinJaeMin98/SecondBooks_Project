@@ -27,11 +27,25 @@ public class QBoard extends EntityPathBase<Board> {
 
     public final StringPath bName = createString("bName");
 
+    public final StringPath category = createString("category");
+
+    public final EnumPath<org.choongang.member.Authority> commentAccessType = createEnum("commentAccessType", org.choongang.member.Authority.class);
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
     //inherited
     public final StringPath createdBy = _super.createdBy;
+
+    public final StringPath gid = createString("gid");
+
+    public final StringPath htmlBottom = createString("htmlBottom");
+
+    public final StringPath htmlTop = createString("htmlTop");
+
+    public final EnumPath<org.choongang.member.Authority> listAccessType = createEnum("listAccessType", org.choongang.member.Authority.class);
+
+    public final StringPath locationAfterWriting = createString("locationAfterWriting");
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modifiedAt = _super.modifiedAt;
@@ -39,7 +53,29 @@ public class QBoard extends EntityPathBase<Board> {
     //inherited
     public final StringPath modifiedBy = _super.modifiedBy;
 
+    public final NumberPath<Integer> pageCountMobile = createNumber("pageCountMobile", Integer.class);
+
+    public final NumberPath<Integer> pageCountPc = createNumber("pageCountPc", Integer.class);
+
+    public final EnumPath<org.choongang.member.Authority> replyAccessType = createEnum("replyAccessType", org.choongang.member.Authority.class);
+
     public final NumberPath<Integer> rowsPerPage = createNumber("rowsPerPage", Integer.class);
+
+    public final StringPath skin = createString("skin");
+
+    public final BooleanPath useComment = createBoolean("useComment");
+
+    public final BooleanPath useEditor = createBoolean("useEditor");
+
+    public final BooleanPath useReply = createBoolean("useReply");
+
+    public final BooleanPath useUploadFile = createBoolean("useUploadFile");
+
+    public final BooleanPath useUploadImage = createBoolean("useUploadImage");
+
+    public final EnumPath<org.choongang.member.Authority> viewAccessType = createEnum("viewAccessType", org.choongang.member.Authority.class);
+
+    public final EnumPath<org.choongang.member.Authority> writeAccessType = createEnum("writeAccessType", org.choongang.member.Authority.class);
 
     public QBoard(String variable) {
         super(Board.class, forVariable(variable));
