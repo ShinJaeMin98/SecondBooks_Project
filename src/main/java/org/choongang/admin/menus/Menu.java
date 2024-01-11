@@ -20,6 +20,11 @@ public class Menu {
                 new MenuDetail("add", "게시판등록", "/admin/board/add"),
                 new MenuDetail("posts", "게시글관리", "/admin/board/posts")
         ));
+
+        menus.put("qna", Arrays.asList(
+                new MenuDetail("list", "질의응답목록", "/admin/qna"),
+                new MenuDetail("faq", "FAQ관리", "/admin/qna/faq")
+        ));
     }
 
     public static List<MenuDetail> getMenus(String code) {
