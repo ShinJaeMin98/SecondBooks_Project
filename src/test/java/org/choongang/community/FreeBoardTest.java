@@ -1,4 +1,4 @@
-/*package org.choongang.community;
+package org.choongang.community;
 
 import org.choongang.community.freeBoard.board.FreeBoard;
 import org.choongang.community.freeBoard.board.FreeBoardRepository;
@@ -31,4 +31,3 @@ public class FreeBoardTest {
 
 
 }
-*/
