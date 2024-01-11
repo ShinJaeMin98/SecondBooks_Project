@@ -8,10 +8,10 @@ import org.choongang.file.service.FileInfoService;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @Component
 @RequiredArgsConstructor
@@ -136,5 +136,30 @@ public class Utils {
      */
     public static int onlyPositiveNumber(int num, int replace) {
         return num < 1 ? replace : num;
+    }
+
+    /**
+     * 알파벳, 숫자, 특수문자 조합 랜덤 문자열 생성
+     *
+     * @return
+     */
+    public String randomChars() {
+        return randomChars(8);
+    }
+
+    public String randomChars(int length) {
+        // 알파벳 생성
+        Stream<String> alphas = IntStream.concat(IntStream.rangeClosed((int)'a', (int)'z'), IntStream.rangeClosed((int)'A', (int)'Z')).mapToObj(s -> String.valueOf((char)s));
+
+        // 숫자 생성
+        Stream<String> nums = IntStream.range(0, 10).mapToObj(String::valueOf);
+
+        // 특수문자 생성
+        Stream<String> specials = Stream.of("~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "-", "=", "[", "{", "}", "]", ";", ":");
+
+        List<String> chars = Stream.concat(Stream.concat(alphas, nums), specials).collect(Collectors.toCollection(ArrayList::new));
+        Collections.shuffle(chars);
+
+        return chars.stream().limit(length).collect(Collectors.joining());
     }
 }

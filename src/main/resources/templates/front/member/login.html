@@ -22,8 +22,10 @@
             </dd>
         </dl>
         <button type="submit" th:text="#{로그인}"></button>
-
         <div class="error" th:if="${session.Global_error != null}" th:text="${session.Global_error}"></div>
+
+        <a th:href="@{/member/find_pw}" th:text="#{비밀번호_찾기}"></a>
+
     </form>
 </main>
 </html>
