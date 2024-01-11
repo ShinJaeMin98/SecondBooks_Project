@@ -1,10 +1,17 @@
 package org.choongang.admin.board.controllers;
 
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import org.choongang.file.entities.FileInfo;
 
+import java.util.List;
 import java.util.UUID;
 
+/**
+ * 2024.1.11
+ * 최종 수정 : changhui98
+ */
 @Data
 public class RequestBoardConfig {
 
@@ -54,4 +61,10 @@ public class RequestBoardConfig {
 
     private String htmlTop; // 게시판 상단 HTML
     private String htmlBottom; // 게시판 하단 HTML
+
+    @Transient
+    private List<FileInfo> htmlTopImages;
+
+    @Transient
+    private List<FileInfo> htmlBottomImages;
 }
