@@ -30,6 +30,7 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.3.0'
 	implementation 'net.coobird:thumbnailator:0.4.20'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc11:23.3.0.23.09'
 	implementation 'com.oracle.database.nls:orai18n:23.3.0.23.09'
@@ -47,7 +48,12 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	runtimeOnly 'com.h2database:h2'
 	testRuntimeOnly 'com.h2database:h2'
+
+	// Junit
+	testImplementation 'org.junit.jupiter:junit-jupiter'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 }
 

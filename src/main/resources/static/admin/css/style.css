@@ -57,7 +57,27 @@ select { border: 1px solid #d5d5d5; height: 35px; }
 .submit_btns { text-align: center; margin: 30px 0; }
 .submit_btns .btn { display: inline-block; min-width: 200px; height: 45px; padding: 0 15px; border: 1px solid #222; background: #fff; font-size: 1.4rem; font-weight: 500; color: #222; border-radius: 3px; cursor: pointer; line-height: 43px; }
 .submit_btns .btn:last-of-type { background: #222; color: #fff; }
+
+.sbtn { border: 1px solid #222; color: #222; background: #fff; display: inline-block; padding: 7px 20px; border-radius: 3px; cursor: pointer; line-height: 1; }
+.sbtn:hover, .sbtn.on { background: #596b99; color: #fff; border-color: #596b99; }
+.sbtn i { color: #222; font-size: 1.1rem; vertical-align: middle; line-height: 1; }
+.sbtn:hover i, .sbtn.on i { color: #fff; }
+
+.mbtn { }
+.lbtn { }
+
 /* 버튼 공통 E */
 
-/* 메세지 공통 */
+/* 메세지 공통 S */
 .message_box { box-shadow: 1px 1px 5px #596b99; padding: 15px; border-radius: 5px; font-size: 1.385rem; font-weight: 500; text-align: center; background: #fff; margin-bottom: 30px; color: #596b99; }
+
+.error { box-shadow: 1px 1px 5px #596b99; padding: 7px 15px; border-radius: 5px; font-size: 0.95rem; color: #596b99; font-weight: 500; margin: 5px 0; }
+.error.global { padding: 10px 15px; font-size: 1.15rem; margin: 0 0 5px; }
+/* 메세지 공통 E */
+
+/* 페이징 공통 S */
+.pagination { text-align: center; margin: 30px 0; }
+.pagination .page { border: 1px solid #596b99; color: #596b99; display: inline-block; padding: 5px 10px; border-radius: 3px; background: #fff; }
+.pagination .page.on { background: #596b99; color: #fff; }
+.pagination .page + .page { margin-left: 3px; }
+/* 페이징 공통 E */
