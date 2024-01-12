@@ -59,8 +59,8 @@ public class JoinValidator implements Validator, PasswordValidator {
         }
 
         // 4. 이메일 인증 필수 여부 체크
-        boolean isVerified = (boolean) session.getAttribute("EmailAuthVerified");
-        if (!isVerified) {  // 이메일 인증이 안된 경우
+        boolean isVerified = (Boolean)session.getAttribute("EmailAuthVerified");
+        if (!isVerified) { // 이메일 인증이 안된 경우
             errors.rejectValue("email", "Required.verified");
         }
     }

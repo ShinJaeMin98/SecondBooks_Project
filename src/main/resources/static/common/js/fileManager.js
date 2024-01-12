@@ -18,6 +18,9 @@ commonLib.fileManager = {
                 throw new Error("업로드할 파일을 선택하세요.");
             }
 
+            if (singleFile) { // 단일 파일 업로드 -> 첫번째 업로드 파일로 한정
+                files = [files[0]];
+            }
 
             // gid
             const gidEl = document.querySelector("[name='gid']");
@@ -75,6 +78,24 @@ commonLib.fileManager = {
             alert(err.message);
             console.error(err);
         }
+    },
+    /**
+    * 파일 삭제
+    *
+    * @param seq : 파일 등록 번호
+    */
+    delete(seq) {
+        const { ajxLoad } = commonLib;
+
+        ajaxLoad('DELETE', `/api/file/${seq}`)
+            .then(res => {
+                if (res.success) {
+                    if (typeof parent.callbackFileDelete == 'function') {
+                        parent.callbackFileDelete(res.data);
+                    }
+                }
+            })
+            .catch(err => console.error(err));
     }
 };
 
@@ -111,4 +132,22 @@ window.addEventListener("DOMContentLoaded", function() {
             fileEl.click();
         });
     }
+
+    /* 드래그 앤 드롭 파일 업로드 처리 S */
+    const dragndropUploads = document.getElementsByClassName("dragndrop_uploads");
+    for (const el of dragndropUploads) {
+        el.addEventListener("dragover", function(e) {
+            e.preventDefault(); // 기본 동작 차단
+        });
+
+        el.addEventListener("drop", function(e) {
+            e.preventDefault(); // 기본 동작 차단
+
+            const dataset = this.dataset;
+            const files = e.dataTransfer.files;
+
+            commonLib.fileManager.upload(files, dataset.location, dataset.imageOnly, dataset.singleFile);
+        });
+    }
+    /* 드래그 앤 드롭 파일 업로드 처리 E */
 });
