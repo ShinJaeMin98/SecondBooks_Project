@@ -77,6 +77,22 @@ public class BoardConfigInfoService {
 
         board.setHtmlTopImages(htmlTopImages);
         board.setHtmlBottomImages(htmlBottomImages);
+
+        List<FileInfo> logo1 = fileInfoService.getListDone(gid, "logo1");
+        List<FileInfo> logo2 = fileInfoService.getListDone(gid, "logo2");
+        List<FileInfo> logo3 = fileInfoService.getListDone(gid, "logo3");
+
+        if (logo1 != null && !logo1.isEmpty()) {
+            board.setLogo1(logo1.get(0));
+        }
+
+        if (logo2 != null && !logo2.isEmpty()) {
+            board.setLogo2(logo2.get(0));
+        }
+
+        if (logo3 != null && !logo3.isEmpty()) {
+            board.setLogo3(logo3.get(0));
+        }
     }
 
     /**

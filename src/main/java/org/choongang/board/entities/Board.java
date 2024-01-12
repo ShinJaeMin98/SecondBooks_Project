@@ -88,4 +88,13 @@ public class Board extends BaseMember {
 
     @Transient
     private List<FileInfo> htmlBottomImages; // 게시판 하단 Bottom 이미지
+
+    @Transient
+    private FileInfo logo1; // 로고 이미지 1
+
+    @Transient
+    private FileInfo logo2; // 로고 이미지 2
+
+    @Transient
+    private FileInfo logo3; // 로고 이미지 3
 }

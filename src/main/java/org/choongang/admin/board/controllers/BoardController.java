@@ -4,9 +4,12 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
+import org.choongang.board.entities.Board;
 import org.choongang.board.service.config.BoardConfigInfoService;
 import org.choongang.board.service.config.BoardConfigSaveService;
 import org.choongang.commons.ExceptionProcessor;
+import org.choongang.commons.ListData;
+import org.choongang.commons.Pagination;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -45,9 +48,16 @@ public class BoardController implements ExceptionProcessor {
      * @return
      */
     @GetMapping
-    public String list(Model model) {
+    public String list(@ModelAttribute BoardSearch search, Model model) {
         commonProcess("list", model);
 
+        ListData<Board> data = configInfoService.getList(search);
+
+        List<Board> items = data.getItems();
+        Pagination pagination = data.getPagination();
+
+        model.addAttribute("items", items);
+        model.addAttribute("pagination", pagination);
         return "admin/board/list";
     }
 

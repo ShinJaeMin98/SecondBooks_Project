@@ -85,9 +85,9 @@ commonLib.fileManager = {
     * @param seq : 파일 등록 번호
     */
     delete(seq) {
-        const { ajxLoad } = commonLib;
+        const { ajaxLoad } = commonLib;
 
-        ajaxLoad('DELETE', `/api/file/${seq}`)
+        ajaxLoad('DELETE', `/api/file/${seq}`, null, "json")
             .then(res => {
                 if (res.success) {
                     if (typeof parent.callbackFileDelete == 'function') {
