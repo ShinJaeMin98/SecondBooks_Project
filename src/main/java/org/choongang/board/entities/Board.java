@@ -12,22 +12,18 @@ import org.choongang.member.Authority;
 import java.util.List;
 import java.util.UUID;
 
-/**
- *  2024.1.11
- *  최종 수정 : changhui98
- */
 @Entity
 @Data @Builder
 @NoArgsConstructor @AllArgsConstructor
 public class Board extends BaseMember {
     @Id
-    @Column(length = 30)
+    @Column(length=30)
     private String bid; // 게시판 아이디
 
-    @Column(length = 65, nullable = false)
+    @Column(length=65, nullable = false)
     private String gid = UUID.randomUUID().toString();
 
-    @Column(length = 60, nullable = false)
+    @Column(length=60, nullable = false)
     private String bName; // 게시판 이름
 
     private boolean active; // 사용 여부
@@ -48,33 +44,33 @@ public class Board extends BaseMember {
 
     private boolean useUploadFile; // 파일 첨부 사용 여부
 
-    @Column(length = 10, nullable = false)
+    @Column(length=10, nullable = false)
     private String locationAfterWriting = "list"; // 글 작성 후 이동 위치
 
-    @Column(length = 10, nullable = false)
+    @Column(length=10, nullable = false)
     private String skin = "default"; // 스킨
 
     @Lob
     private String category; // 게시판 분류
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 20, nullable = false)
+    @Column(length=20, nullable = false)
     private Authority listAccessType = Authority.ALL; // 권한 설정 - 글목록
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 20, nullable = false)
+    @Column(length=20, nullable = false)
     private Authority viewAccessType = Authority.ALL; // 권한 설정 - 글보기
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 20, nullable = false)
+    @Column(length=20, nullable = false)
     private Authority writeAccessType = Authority.ALL; // 권한 설정 - 글쓰기
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 20, nullable = false)
+    @Column(length=20, nullable = false)
     private Authority replyAccessType = Authority.ALL; // 권한 설정 - 답글
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 20, nullable = false)
+    @Column(length=20, nullable = false)
     private Authority commentAccessType = Authority.ALL; // 권한 설정 - 댓글
 
     @Lob

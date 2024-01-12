@@ -224,22 +224,29 @@
         <tr>
             <th>로고1</th>
             <td>
-                <div class="dragndrop_box dragndrop_uploads" id="logo1_box" data-location="logo1" data-image-only="true" data-single-file="true"></div>
+                <div th:if="*{logo1 == null}" class="dragndrop_box dragndrop_uploads logo1_box" data-location="logo1" data-image-only="true" data-single-file="true"></div>
+
+                <div th:if="*{logo1 != null}" class="dragndrop_box dragndrop_uploads logo1_box uploaded" data-location="logo1" data-image-only="true" data-single-file="true" th:id="*{'file_' + logo1.seq}" th:style="*{@utils.backgroundStyle(logo1)}" th:data-file-id="*{logo1.seq}"></div>
             </td>
         </tr>
         <tr>
             <th>로고2</th>
             <td>
-                <div class="dragndrop_box dragndrop_uploads" id="logo2_box" data-location="logo2" data-image-only="true" data-single-file="true"></div>
+                <div th:if="*{logo2 == null}" class="dragndrop_box dragndrop_uploads logo2_box" data-location="logo2" data-image-only="true" data-single-file="true"></div>
+
+                <div th:if="*{logo2 != null}" class="dragndrop_box dragndrop_uploads logo2_box uploaded" data-location="logo2" data-image-only="true" data-single-file="true" th:id="*{'file_' + logo2.seq}" th:style="*{@utils.backgroundStyle(logo2)}" th:data-file-id="*{logo2.seq}"></div>
             </td>
         </tr>
         <tr>
             <th>로고3</th>
             <td>
-                <div class="dragndrop_box dragndrop_uploads" id="logo3_box" data-location="logo3" data-image-only="true" data-single-file="true"></div>
+                <div th:if="*{logo3 == null}" class="dragndrop_box dragndrop_uploads logo3_box" data-location="logo3" data-image-only="true" data-single-file="true"></div>
+
+                <div th:if="*{logo3 != null}" class="dragndrop_box dragndrop_uploads logo3_box uploaded" data-location="logo3" data-image-only="true" data-single-file="true" th:id="*{'file_' + logo3.seq}" th:style="*{@utils.backgroundStyle(logo3)}" th:data-file-id="*{logo3.seq}"></div>
             </td>
         </tr>
     </table>
+
     <h2>게시판 상단</h2>
     <table class="table_cols mb30">
         <tr>

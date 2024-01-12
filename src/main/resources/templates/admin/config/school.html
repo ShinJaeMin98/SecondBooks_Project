@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layouts/main}">
+
+<section layout:fragment="content">
+    <div th:replace="~{admin/commons/_message::message}"></div>
+    <h1>학교설정</h1>
+
+    <form name="frmSave" method="post" th:action="@{/admin/config/school}" autocomplete="off" th:object="${schoolConfig}">
+        <table class="table_cols">
+            <tr>
+                <th width="180">학교목록</th>
+                <td>
+                    <textarea name="schools" th:field="*{schools}" placeholder="예) 학교명_학교 도메인 주소,  학교1_school1.ac.kr, 여러줄 입력시 줄개행"></textarea>
+                </td>
+            </tr>
+        </table>
+        <div class="submit_btns">
+            <button type="reset" class="btn">다시입력</button>
+            <button type="submit" class="btn">저장하기</button>
+        </div>
+    </form>
+</section>
+</html>
