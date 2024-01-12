@@ -1,5 +1,6 @@
 package org.choongang.member.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.choongang.commons.validators.PasswordValidator;
 import org.choongang.member.repositories.MemberRepository;
@@ -14,6 +15,8 @@ public class JoinValidator implements Validator, PasswordValidator {
 
     private final MemberRepository memberRepository;
 
+    private final HttpSession session;
+
     @Override
     public boolean supports(Class<?> clazz) {
         return clazz.isAssignableFrom(RequestJoin.class);
@@ -25,6 +28,7 @@ public class JoinValidator implements Validator, PasswordValidator {
          * 1. 이메일, 아이디 중복 여부 체크
          * 2. 비밀번호 복잡성 체크 - 대소문자 1개 각각 포함, 숫자 1개 이상 포함, 특수문자도 1개 이상 포함
          * 3. 비밀번호, 비밀번호 확인 일치 여부 체크
+         * 4. 이메일 인증 필수 여부 체크
          */
 
         RequestJoin form = (RequestJoin)target;
@@ -52,6 +56,12 @@ public class JoinValidator implements Validator, PasswordValidator {
         if (StringUtils.hasText(password) && StringUtils.hasText(confirmPassword)
                 && !password.equals(confirmPassword)) {
             errors.rejectValue("confirmPassword", "Mismatch.password");
+        }
+
+        // 4. 이메일 인증 필수 여부 체크
+        boolean isVerified = (boolean) session.getAttribute("EmailAuthVerified");
+        if (!isVerified) {  // 이메일 인증이 안된 경우
+            errors.rejectValue("email", "Required.verified");
         }
     }
 }
