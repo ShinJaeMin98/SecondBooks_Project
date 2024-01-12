@@ -29,6 +29,7 @@ window.addEventListener("DOMContentLoaded", function() {
 *
 */
 function callbackFileUpload(files) {
+console.log(files);
     if (!files || files.length == 0) {
         return;
     }
@@ -39,6 +40,15 @@ function callbackFileUpload(files) {
     const targetBottom = document.getElementById("uploaded_files_html_bottom");
 
     for (const file of files) {
+        /* 드래그 앤 드롭 파일 처리 S */
+        if (file.location.indexOf("logo") != -1) { // location 값에 logo가 포함되어 있으면
+
+            dragAndDropProcess(file);
+
+            continue;
+        }
+        /* 드래그 앤 드롭 파일 처리 E */
+
        const editor = file.location == 'html_bottom' ? editor2 : editor1;
        const target = file.location == 'html_bottom' ? targetBottom : targetTop;
 
@@ -62,8 +72,57 @@ function callbackFileUpload(files) {
 
        /* 템플릿 데이터 치환 E */
     }
+
+    /**
+    * 드래그 앤 드롭 파일 업로드 처리
+    *
+    */
+    function dragAndDropProcess(file) {
+        const logoBox = document.getElementById(`${file.location}_box`);
+
+        const imageUrl = file.thumbsUrl.length > 0 ? file.thumbsUrl.pop() : file.fileUrl;
+
+        logoBox.style.backgroundImage = `url('${imageUrl}')`;
+        logoBox.style.backgroundRepeat = 'no-repeat';
+        logoBox.style.backgroundPosition = 'center center';
+        logoBox.style.backgroundSize = 'cover';
+
+        logoBox.dataset.fileId = file.seq;
+
+        if (!logoBox.classList.contains('uploaded')) { // 파일이 업로드된 상태가 아닌 경우, 업로드 상태로 변경
+            logoBox.classList.add('uploaded');
+        }
+
+
+        /* 더블 클릭시 파일 삭제 처리 S */
+        logoBox.addEventListener("dblclick", function() {
+            if (!confirm('정말 삭제하겠습니까?')) {
+                return;
+            }
+
+            const { fileManager } = commonLib;
+
+            const seq = this.dataset.fileId;
+            fileManager.delete(seq);
+
+        });
+        /* 더블 클릭시 파일 삭제 처리 E */
+    }
 }
 
+/**
+* 에디터에 이미지 추가
+*
+*/
 function insertImage(editor, source){
     editor.execute('insertImage', {source});
+}
+
+/**
+* 파일 삭제 후 후속 처리
+*
+* @param seq : 파일 등록 번호
+*/
+function callbackFileDelete(seq) {
+
 }

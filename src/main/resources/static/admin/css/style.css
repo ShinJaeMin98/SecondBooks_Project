@@ -102,5 +102,5 @@ select { border: 1px solid #d5d5d5; height: 35px; }
 }
 
 .dragndrop_box { width: 300px; min-height: 300px; border: 2px solid #596b99; cursor:pointer; position: relative; }
-.dragndrop_box:after { content: '업로드할 파일을 드래그 하세요.'; display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; line-height: 100%; text-align: center; text-shadow: 2px 2px 5px #555; color: #596b99; font-weight: 500; font-size: 1.15rem; }
+.dragndrop_box:not(.uploaded):after { content: '업로드할 파일을 드래그 하세요.'; display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; line-height: 100%; text-align: center; text-shadow: 2px 2px 5px #555; color: #596b99; font-weight: 500; font-size: 1.15rem; }
 /* 파일 공통 E */

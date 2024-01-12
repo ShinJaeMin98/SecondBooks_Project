@@ -78,6 +78,24 @@ commonLib.fileManager = {
             alert(err.message);
             console.error(err);
         }
+    },
+    /**
+    * 파일 삭제
+    *
+    * @param seq : 파일 등록 번호
+    */
+    delete(seq) {
+        const { ajxLoad } = commonLib;
+
+        ajaxLoad('DELETE', `/api/file/${seq}`)
+            .then(res => {
+                if (res.success) {
+                    if (typeof parent.callbackFileDelete == 'function') {
+                        parent.callbackFileDelete(res.data);
+                    }
+                }
+            })
+            .catch(err => console.error(err));
     }
 };
 
@@ -125,7 +143,10 @@ window.addEventListener("DOMContentLoaded", function() {
         el.addEventListener("drop", function(e) {
             e.preventDefault(); // 기본 동작 차단
 
-            console.log(e.dataTransfer.files);
+            const dataset = this.dataset;
+            const files = e.dataTransfer.files;
+
+            commonLib.fileManager.upload(files, dataset.location, dataset.imageOnly, dataset.singleFile);
         });
     }
     /* 드래그 앤 드롭 파일 업로드 처리 E */
