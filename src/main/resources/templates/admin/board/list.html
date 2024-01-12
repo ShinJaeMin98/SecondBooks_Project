@@ -3,6 +3,80 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
+    <h1>게시판 목록</h1>
+    <h2>게시판 조회</h2>
 
+    <form name="frmSearch" method="get" th:action="@{/admin/board}" autocomplete="off" th:object="${boardSearch}">
+        <table class="table_cols">
+            <tr>
+                <th>키워드</th>
+                <td>
+                    <select name="sopt" th:field="*{sopt}">
+                        <option value="ALL">통합검색</option>
+                        <option value="bid">게시판 ID</option>
+                        <option value="bName">게시판명</option>
+                    </select>
+                    <input type="text" name="skey" th:field="*{skey}">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <h2>게시판 목록</h2>
+    <form name="frmList" method="post" th:action="@{/admin/board}" target="ifrmProcess" autocomplete="off">
+        <input type="hidden" name="_method" value="PATCH">
+
+        <table class="table_rows">
+            <thead>
+            <tr>
+                <th width="40">
+                    <input type="checkbox" class="checkall" data-target-name="chk" id="checkall">
+                    <label for="checkall"></label>
+                </th>
+                <th width="150">게시판 ID</th>
+                <th width="250">게시판 이름</th>
+                <th width="250">사용여부</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${items == null || items.isEmpty()}">
+                <td colspan="5" class="no_data">조회된 게시판이 없습니다.</td>
+            </tr>
+            <tr th:unless="${items == null || items.isEmpty()}" th:each="item, status : ${items}" th:object="${item}">
+                <td align="center">
+                    <input type="hidden" th:name="${'bid_' + status.index}" th:value="*{bid}">
+                    <input type="checkbox" name="chk" th:value="${status.index}" th:id="${'chk_' + status.index}">
+                    <label th:for="${'chk_' + status.index}"></label>
+                </td>
+                <td th:text="*{bid}" align="center"></td>
+                <td th:text="*{bName}" align="center"></td>
+                <td align="center">
+                    <input type="radio" th:name="${'active_' + status.index}" value="true" th:checked="*{active}" th:id="${'active_true_' + status.index}">
+                    <label th:for="${'active_true_' + status.index}">사용</label>
+
+                    <input type="radio" th:name="${'active_' + status.index}" value="false" th:checked="*{!active}" th:id="${'active_false_' + status.index}">
+                    <label th:for="${'active_false_' + status.index}">사용</label>
+                </td>
+                <td>
+                    <a th:href="@{/admin/board/edit/{bid}(bid=*{bid})}" class="sbtn">
+                        <i class="xi-pen"></i> 수정하기
+                    </a>
+                    <a th:href="@{/board/list/{bid}(bid=*{bid})}" class="sbtn on" target="_blank">
+                        <i class="xi-list"></i> 미리보기
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="table_actions">
+            <button type="button" class="sbtn form_action" data-mode="delete" data-form-name="frmList">선택 게시판 삭제</button>
+            <button type="button" class="sbtn on form_action" data-mode="edit" data-form-name="frmList">선택 게시판 수정</button>
+        </div>
+    </form>
+
+
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
 </section>
 </html>

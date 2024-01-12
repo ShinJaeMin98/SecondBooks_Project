@@ -62,9 +62,11 @@ public class RequestBoardConfig {
     private String htmlTop; // 게시판 상단 HTML
     private String htmlBottom; // 게시판 하단 HTML
 
-    @Transient
     private List<FileInfo> htmlTopImages;
 
-    @Transient
     private List<FileInfo> htmlBottomImages;
+
+    private FileInfo logo1; // 로고 이미지 1
+    private FileInfo logo2; // 로고 이미지 2
+    private FileInfo logo3; // 로고 이미지 3
 }
