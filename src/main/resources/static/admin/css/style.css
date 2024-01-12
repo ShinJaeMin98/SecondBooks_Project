@@ -91,23 +91,10 @@ select { border: 1px solid #d5d5d5; height: 35px; }
 /* 페이징 공통 E */
 
 /* 파일 공통 S */
-.file_tpl_box {
-    display: inline-block;
-    padding: 7px 10px;
-    border: 1px solid #222;
-    border-radius: 3px;
-    margin: 5px 2px 0 0;
-    background: #fff;
-}
+.file_tpl_box { display: inline-block; padding: 7px 10px; border: 1px solid #222; border-radius: 3px; margin: 5px 2px 0 0; background: #fff; }
 
-.file_tpl_box a:not(.remove) {
-    text-decoration: underline;
-}
-
-.file_tpl_box i {
-    padding: 0 5px;
-    cursor: pointer;
-}
+.file_tpl_box a:not(.remove) { text-decoration: underline; }
+.file_tpl_box i { padding: 0 5px; cursor: pointer; }
 
 .dragndrop_box { width: 300px; min-height: 300px; border: 2px solid #596b99; cursor: pointer; position: relative; }
 .dragndrop_box:not(.uploaded):after { content: '업로드할 파일을 드래그 하세요.'; display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; line-height: 300px; text-align: center; text-shadow: 2px 2px 5px #555; color: #596b99; font-weight: 500; font-size: 1.15rem; }

@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/config")
+@RequestMapping("/admin/config/school")
 @RequiredArgsConstructor
-public class BasicConfigController implements ExceptionProcessor {
+public class SchoolConfigController implements ExceptionProcessor {
 
-    private final ConfigSaveService saveService;
     private final ConfigInfoService infoService;
+    private final ConfigSaveService saveService;
 
     @ModelAttribute("menuCode")
     public String getMenuCode() {
@@ -35,31 +35,32 @@ public class BasicConfigController implements ExceptionProcessor {
 
     @ModelAttribute("subMenuCode")
     public String getSubMenuCode() {
-        return "basic";
+
+        return "school";
     }
 
     @ModelAttribute("pageTitle")
     public String getPageTitle() {
-        return "기본설정";
+        return "학교설정";
     }
 
     @GetMapping
     public String index(Model model) {
 
-        BasicConfig config = infoService.get("basic", BasicConfig.class).orElseGet(BasicConfig::new);
+        SchoolConfig config = infoService.get("school_config", SchoolConfig.class).orElseGet(SchoolConfig::new);
 
-        model.addAttribute("basicConfig", config);
+        model.addAttribute("schoolConfig", config);
 
-        return "admin/config/basic";
+        return "admin/config/school";
     }
 
     @PostMapping
-    public String save(BasicConfig config, Model model) {
+    public String save(SchoolConfig config, Model model) {
 
-        saveService.save("basic", config);
+        saveService.save("school_config", config);
 
-        model.addAttribute("message", "저장되었습니다.");
+        model.addAttribute("message", "저장 되었습니다.");
 
-        return "admin/config/basic";
+        return "admin/config/school";
     }
 }

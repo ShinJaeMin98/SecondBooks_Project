@@ -22,6 +22,7 @@ commonLib.fileManager = {
                 files = [files[0]];
             }
 
+
             // gid
             const gidEl = document.querySelector("[name='gid']");
             if (!gidEl || !gidEl.value.trim()) {
@@ -147,6 +148,7 @@ window.addEventListener("DOMContentLoaded", function() {
             const files = e.dataTransfer.files;
 
             commonLib.fileManager.upload(files, dataset.location, dataset.imageOnly, dataset.singleFile);
+
         });
     }
     /* 드래그 앤 드롭 파일 업로드 처리 E */

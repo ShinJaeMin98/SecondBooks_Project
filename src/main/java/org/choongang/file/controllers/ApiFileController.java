@@ -31,7 +31,7 @@ public class ApiFileController implements ExceptionRestProcessor {
         return new JSONData<>(uploadedFiles);
     }
 
-    @GetMapping("/{seq}")
+    @DeleteMapping("/{seq}")
     public JSONData<Long> delete(@PathVariable("seq") Long seq) {
 
         deleteService.delete(seq);
