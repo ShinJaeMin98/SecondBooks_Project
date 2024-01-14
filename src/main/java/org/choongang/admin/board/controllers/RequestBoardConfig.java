@@ -20,6 +20,8 @@ public class RequestBoardConfig {
     @NotBlank
     private String bName; // 게시판 이름
 
+    private String schoolDomain; // 학교 이메일 도메인
+
     private boolean active; // 사용 여부
 
     private int rowsPerPage = 20; // 1페이지 게시글 수

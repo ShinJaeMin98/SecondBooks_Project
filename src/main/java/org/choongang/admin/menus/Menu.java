@@ -21,6 +21,12 @@ public class Menu {
                 new MenuDetail("authority", "회원권한", "/admin/member/authority")
         ));
 
+        menus.put("school", Arrays.asList(
+                new MenuDetail("list", "학교 목록", "/admin/school"),
+                new MenuDetail("add", "학교 정보 등록", "/admin/school/add")
+        ));
+
+
         menus.put("board", Arrays.asList(
                 new MenuDetail("list", "게시판목록", "/admin/board"),
                 new MenuDetail("add", "게시판등록", "/admin/board/add"),

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layouts/main}">
+<section layout:fragment="content">
+    <h1>학교 정보 등록</h1>
+    <form name="frmSave" method="post" th:action="@{/admin/school/save}" autocomplete="off">
+        <input type="hidden" name="mode" value="add">
+
+        <th:block th:replace="~{admin/school/_form::form}"></th:block>
+
+        <div class="submit_btns">
+            <button type="reset" class="btn">다시입력</button>
+            <button type="submit" class="btn">등록하기</button>
+        </div>
+    </form>
+</section>
+</html>
