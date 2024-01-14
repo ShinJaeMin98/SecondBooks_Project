@@ -20,9 +20,7 @@ public class BoardConfigValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors){
-        /*
-            게시판 아이디 중복 체크
-         */
+        /* 게시판 아이디 중복 체크 */
         RequestBoardConfig form = (RequestBoardConfig) target;
 
         String bid = form.getBid();

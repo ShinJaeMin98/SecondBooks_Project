@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="form" th:object="${requestSchool}">
+    <input type="hidden" name="gid" th:field="*{gid}">
+
+    <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+
+    <h2>기본 정보</h2>
+    <table class="table_cols mb30">
+        <tr>
+            <th width="180">학교 선택</th>
+            <td>
+                <select name="domain" th:field="*{domain}">
+                    <option th:each="school : ${schools}" th:value="${school[1]}" th:text="${school[0]}"></option>
+                </select>
+                <div class="error" th:each="err : ${#fields.errors('domain')}" th:text="${err}"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>메뉴 위치</th>
+            <td>
+                <input type="radio" name="menuLocation" value="LEFT" id="menuLocation_LEFT" th:field="*{menuLocation}">
+                <label for="menuLocation_LEFT">왼쪽</label>
+                <input type="radio" name="menuLocation" value="RIGHT" id="menuLocation_RIGHT" th:field="*{menuLocation}">
+                <label for="menuLocation_RIGHT">오른쪽</label>
+                <input type="radio" name="menuLocation" value="TOP" id="menuLocation_TOP" th:field="*{menuLocation}">
+                <label for="menuLocation_TOP">상단</label>
+            </td>
+        </tr>
+    </table>
+
+    <h2>배너 설정</h2>
+    <table class="table_cols mb30">
+        <tr>
+            <th width="180">상단 배너</th>
+            <td>
+                <div class="dragndrop_box dragndrop_uploads banner_top w_full" data-location="banner_top" data-image-only="true" data-single-file="true"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>하단 배너</th>
+            <td>
+                <div class="dragndrop_box dragndrop_uploads banner_bottom w_full" data-location="banner_top" data-image-only="true" data-single-file="true"></div>
+            </td>
+        </tr>
+    </table>
+</th:block>
+</html>

@@ -10,3 +10,6 @@
 
 /* 위지윅 에디터 공통 */
 .ck-editor__editable { min-height: 300px; }
+
+/* 너비 공통 */
+.w_full { width: 100% !important; }
