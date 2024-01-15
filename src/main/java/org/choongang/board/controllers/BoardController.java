@@ -1,28 +1,33 @@
 package org.choongang.board.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.board.entities.Board;
-import org.choongang.board.entities.BoardData;
-import org.choongang.board.repositories.BoardDataRepository;
 import org.choongang.board.service.config.BoardConfigInfoService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.choongang.member.MemberUtil;
+import org.choongang.member.entities.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/board")
 @RequiredArgsConstructor
 public class BoardController implements ExceptionProcessor {
 
-    private BoardConfigInfoService configInfoService;
-
+    private final BoardConfigInfoService configInfoService;
+    private final MemberUtil memberUtil;
     private final Utils utils;
 
     private Board board; // 게시판 설정
-
 
     /**
      * 게시판 목록
@@ -39,6 +44,7 @@ public class BoardController implements ExceptionProcessor {
 
     /**
      * 게시글 보기
+     *
      * @param seq : 게시글 번호
      * @param model
      * @return
@@ -52,25 +58,33 @@ public class BoardController implements ExceptionProcessor {
 
     /**
      * 게시글 작성
+     *
      * @param bid
      * @param model
      * @return
      */
     @GetMapping("/write/{bid}")
-    public String write(@PathVariable("bid") String bid, Model model) {
+    public String write(@PathVariable("bid") String bid,
+                        @ModelAttribute RequestBoard form, Model model) {
         commonProcess(bid, "write", model);
+
+        if (memberUtil.isLogin()) {
+            Member member = memberUtil.getMember();
+            form.setPoster(member.getName());
+        }
 
         return utils.tpl("board/write");
     }
 
     /**
      * 게시글 수정
+     *
      * @param seq
      * @param model
      * @return
      */
     @GetMapping("/update/{seq}")
-    public String update(@PathVariable ("seq") Long seq, Model model) {
+    public String update(@PathVariable("seq") Long seq, Model model) {
         commonProcess(seq, "update", model);
 
         return utils.tpl("board/update");
@@ -78,13 +92,27 @@ public class BoardController implements ExceptionProcessor {
 
     /**
      * 게시글 등록, 수정
+     *
      * @param model
      * @return
      */
     @PostMapping("/save")
-    public String save(Model model) {
+    public String save(@Valid RequestBoard form, Errors errors, Model model) {
+        String bid = form.getBid();
+        String mode = form.getMode();
+        commonProcess(bid, mode, model);
 
-        return null;
+        if (errors.hasErrors()) {
+            return utils.tpl("board/" + mode);
+        }
+
+
+        Long seq = 0L; // 임시
+
+        String redirectURL = "redirect:/board/";
+        redirectURL += board.getLocationAfterWriting() == "view" ? "view/" + seq : "list/" + form.getBid();
+
+        return redirectURL;
     }
 
     /**
@@ -95,18 +123,57 @@ public class BoardController implements ExceptionProcessor {
      * @param model
      */
     private void commonProcess(String bid, String mode, Model model) {
+
+        mode = StringUtils.hasText(mode) ? mode : "list";
+
+        List<String> addCommonScript = new ArrayList<>();
+        List<String> addScript = new ArrayList<>();
+
+        List<String> addCommonCss = new ArrayList<>();
+        List<String> addCss = new ArrayList<>();
+
         /* 게시판 설정 처리 S */
-        if(board == null) {
-            board = configInfoService.get(bid);
-        }
+        board = configInfoService.get(bid);
+
+        // 스킨별 css, js 추가
+        String skin = board.getSkin();
+        addCss.add("board/skin_" + skin);
+        addScript.add("board/skin_" + skin);
 
         model.addAttribute("board", board);
         /* 게시판 설정 처리 E */
+
+        String pageTitle = board.getBName(); // 게시판명이 기본 타이틀
+
+        if (mode.equals("write") || mode.equals("update")) { // 쓰기 또는 수정
+            if (board.isUseEditor()) { // 에디터 사용하는 경우
+                addCommonScript.add("ckeditor5/ckeditor");
+            }
+
+            // 이미지 또는 파일 첨부를 사용하는 경우
+            if (board.isUseUploadImage() || board.isUseUploadFile()) {
+                addCommonScript.add("fileManager");
+            }
+
+            addScript.add("board/form");
+
+            pageTitle += " ";
+            pageTitle += mode.equals("update") ?  Utils.getMessage("글수정", "commons") :  Utils.getMessage("글쓰기", "commons");
+        }
+
+
+
+        model.addAttribute("addCommonCss", addCommonCss);
+        model.addAttribute("addCss", addCss);
+        model.addAttribute("addCommonScript", addCommonScript);
+        model.addAttribute("addScript", addScript);
+        model.addAttribute("pageTitle", pageTitle);
     }
 
     /**
-     *  게시판의 공통 처리 - 게시글 보기, 게시글 수정 - 게시글 번호가 있는 경우
+     * 게시판 공통 처리 : 게시글 보기, 게시글 수정 - 게시글 번호가 있는 경우
      *      - 게시글 조회 -> 게시판 설정
+     *
      * @param seq
      * @param mode
      * @param model

@@ -20,10 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 2024.1.11
- * 최종 수정 : changhui98
- */
 @Controller("adminBoardController")
 @RequestMapping("/admin/board")
 @RequiredArgsConstructor
@@ -32,6 +28,7 @@ public class BoardController implements ExceptionProcessor {
     private final BoardConfigSaveService configSaveService;
     private final BoardConfigInfoService configInfoService;
     private final BoardConfigDeleteService configDeleteService;
+
     private final BoardConfigValidator configValidator;
 
     @ModelAttribute("menuCode")
@@ -60,6 +57,7 @@ public class BoardController implements ExceptionProcessor {
 
         model.addAttribute("items", items);
         model.addAttribute("pagination", pagination);
+
         return "admin/board/list";
     }
 
@@ -89,7 +87,6 @@ public class BoardController implements ExceptionProcessor {
         return "common/_execute_script";
     }
 
-
     /**
      * 게시판 등록
      *
@@ -102,7 +99,8 @@ public class BoardController implements ExceptionProcessor {
         return "admin/board/add";
     }
 
-    public String edit(@PathVariable("bid") String bid, Model model){
+    @GetMapping("/edit/{bid}")
+    public String edit(@PathVariable("bid") String bid, Model model) {
         commonProcess("edit", model);
 
         RequestBoardConfig form = configInfoService.getForm(bid);
@@ -126,10 +124,12 @@ public class BoardController implements ExceptionProcessor {
         configValidator.validate(config, errors);
 
         if (errors.hasErrors()) {
+            errors.getAllErrors().stream().forEach(System.out::println);
             return "admin/board/" + mode;
         }
 
         configSaveService.save(config);
+
 
         return "redirect:/admin/board";
     }
