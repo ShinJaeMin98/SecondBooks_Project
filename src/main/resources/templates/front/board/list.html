@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{front/layouts/main">
+      layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
     <th:block th:if="${board.skins != null || board.skins == 'default'}"
               th:replace="~{front/board/skins/default/list::default}"></th:block>
-
 </main>
 </html>
