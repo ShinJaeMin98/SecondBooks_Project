@@ -3,6 +3,24 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
+    <th:block th:if="${board.skin == null || board.skin == 'default'}">
+        <th:block th:replace="~{front/board/skins/default/write::default}"></th:block>
+    </th:block>
 
+    <th:block th:if="${board.skin == 'gallery'}">
+        <th:block th:replace="~{front/board/skins/gallery/write::gallery}"></th:block>
+    </th:block>
+
+    <th:block th:if="${board.skin == 'qna'}">
+        <th:block th:replace="~{front/board/skins/qna/write::qna}"></th:block>
+    </th:block>
+
+    <th:block th:if="${board.skin == 'review'}">
+        <th:block th:replace="~{front/board/skins/review/write::review}"></th:block>
+    </th:block>
+
+    <th:block th:if="${board.skin == 'blog'}">
+        <th:block th:replace="~{front/board/skins/blog/write::blog}"></th:block>
+    </th:block>
 </main>
 </html>
