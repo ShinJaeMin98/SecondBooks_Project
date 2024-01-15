@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<span th:fragment="item" th:if="${item != null}" th:object="${item}" class="file_tpl_box" th:id="*{'file_' + seq}">
+        <a th:href="@{/file/download/{seq}(seq=*{seq})}" th:text="*{fileName}"></a>
+        <i class="xi-upload insert_image" th:data-url="*{fileUrl}"></i>
+        <a th:href="@{/file/delete/{seq}(seq=*{seq})}" onclick="return confirm('정말 삭제하시겠습니까?');" class="remove" target="ifrmProcess">
+            <i class="xi-close"></i>
+        </a>
+    </span>
+</html>
