@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="form">
+    <input type="hidden" name="bid" th:value="${board.bid}">
+    <input type="hidden" name="gid">
+
+    <dl>
+        <dt th:text="#{작성자}"></dt>
+        <dd>
+            <input type="text" name="poster">
+        </dd>
+    </dl>
+    <dl>
+        <dt th:text="#{비밀번호}"></dt>
+        <dd>
+            <input type="checkbox" name="notice" id="notice">
+            <label for="notice" th:text="#{공지글}"></label>
+            <input type="password" name="guestPw" th:placeholder="#{글수정_삭제_비밀번호_입력}">
+        </dd>
+    </dl>
+
+    <dl>
+        <dt th:text="${제목}"></dt>
+        <dd>
+            <input type="text" name="subject">
+        </dd>
+    </dl>
+
+    <dl>
+        <dt th:text="#{내용}"></dt>
+        <dd>
+            <textarea name="content" id="content"></textarea>
+            <button type="button" class="upload_files" data-location="editor" data-image-only="true" th:text="#{이미지_추가}"></button>
+            <div class="uploaded_files" id="editor_files"></div>
+        </dd>
+    </dl>
+    <dl>
+        <dt th:text="#{파일첨부}"></dt>
+        <dd>
+            <button type="button" class="upload_files" data-location="attach" th:text="#{업로드}"></button>
+        </dd>
+    </dl>
+</th:block>
+</html>
