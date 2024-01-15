@@ -60,7 +60,7 @@ public class SchoolController implements ExceptionProcessor {
         commonProcess(mode, model);
 
         if (errors.hasErrors()) {
-            return "admin/school/" + mode;
+            return "admin/school/" + mode ;
         }
 
         return "redirect:/admin/school";
