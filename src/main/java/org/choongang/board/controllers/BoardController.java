@@ -1,17 +1,18 @@
 package org.choongang.board.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.board.entities.Board;
 import org.choongang.board.service.config.BoardConfigInfoService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
+import org.choongang.member.MemberUtil;
+import org.choongang.member.entities.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.List;
 public class BoardController implements ExceptionProcessor {
 
     private final BoardConfigInfoService configInfoService;
-
+    private final MemberUtil memberUtil;
     private final Utils utils;
 
     private Board board; // 게시판 설정
@@ -62,8 +63,14 @@ public class BoardController implements ExceptionProcessor {
      * @return
      */
     @GetMapping("/write/{bid}")
-    public String write(@PathVariable("bid") String bid, Model model) {
+    public String write(@PathVariable("bid") String bid,
+                        @ModelAttribute RequestBoard form, Model model) {
         commonProcess(bid, "write", model);
+
+        if (memberUtil.isLogin()) {
+            Member member = memberUtil.getMember();
+            form.setPoster(member.getName());
+        }
 
         return utils.tpl("board/write");
     }
@@ -89,9 +96,22 @@ public class BoardController implements ExceptionProcessor {
      * @return
      */
     @PostMapping("/save")
-    public String save(Model model) {
+    public String save(@Valid RequestBoard form, Errors errors, Model model) {
+        String bid = form.getBid();
+        String mode = form.getMode();
+        commonProcess(bid, mode, model);
 
-        return null;
+        if (errors.hasErrors()) {
+            return utils.tpl("board/" + mode);
+        }
+
+
+        Long seq = 0L; // 임시
+
+        String redirectURL = "redirect:/board/";
+        redirectURL += board.getLocationAfterWriting() == "view" ? "view/" + seq : "list/" + form.getBid();
+
+        return redirectURL;
     }
 
     /**
