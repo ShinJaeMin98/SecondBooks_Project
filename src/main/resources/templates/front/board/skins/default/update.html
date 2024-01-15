@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="default">
+    <h1 th:text="${board.bName}"></h1>
 
+    <form name="frmSave" method="post" th:action="@{/board/save}" autocomplete="off">
+        <input type="hidden" name="mode" value="update">
+
+        <th:block th:replace="~{front/board/skins/default/_form::form}"></th:block>
+
+        <div class="submit_btns">
+            <button type="reset" th:text="#{다시입력}"></button>
+            <button type="submit" th:text="#{수정하기}"></button>
+        </div>
+    </form>
 </th:block>
 </html>
