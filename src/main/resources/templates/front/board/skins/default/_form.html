@@ -47,7 +47,12 @@
 
             <th:block th:if="${board.useEditor && board.useUploadImage}">
                 <button type="button" class="upload_files" data-location="editor" data-image-only="true" th:text="#{이미지_추가}"></button>
-                <div class="uploaded_files" id="editor_files"></div>
+                <div class="uploaded_files" id="editor_files">
+                    <th:block th:if="*{editorFiles != null && !editorFiles.isEmpty()}"
+                              th:each="item : *{editorFiles}">
+                            <th:block th:replace="~{common/_editor_file::item}"></th:block>
+                    </th:block>
+                </div>
             </th:block>
         </dd>
     </dl>
@@ -55,7 +60,12 @@
         <dt th:text="#{파일첨부}"></dt>
         <dd>
             <button type="button" class="upload_files" data-location="attach" th:text="#{파일선택}"></button>
-            <div class="uploaded_files" id="attach_files"></div>
+            <div class="uploaded_files" id="attach_files">
+                <th:block th:if="*{attachFiles != null && !attachFiles.isEmpty()}"
+                          th:each="item : *{attachFiles}">
+                    <th:block th:replace="~{common/_attach_file::item}"></th:block>
+                </th:block>
+            </div>
         </dd>
     </dl>
     <script th:replace="~{common/_file_tpl::attach_tpl}"></script>
