@@ -176,4 +176,25 @@ public class Utils {
 
         return style;
     }
+
+
+    /**
+     * 요청 데이터 단일 조회 편의 함수
+     *
+     * @param name
+     * @return
+     */
+    public String getParam(String name) {
+        return request.getParameter(name);
+    }
+
+    /**
+     * 요청 데이터 복수 갯수 조회 편의 함수
+     *
+     * @param name
+     * @return
+     */
+    public String[] getParams(String name) {
+        return request.getParameterValues(name);
+    }
 }
