@@ -3,6 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
+
     <th:block th:if="${board.skin == null || board.skin == 'default'}">
         <th:block th:replace="~{front/board/skins/default/view::default}"></th:block>
     </th:block>
@@ -22,5 +23,6 @@
     <th:block th:if="${board.skin == 'blog'}">
         <th:block th:replace="~{front/board/skins/blog/view::blog}"></th:block>
     </th:block>
+
 </main>
 </html>
