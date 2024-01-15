@@ -5,21 +5,25 @@
 <section layout:fragment="content">
     <h1>게시판 목록</h1>
     <h2>게시판 조회</h2>
-
     <form name="frmSearch" method="get" th:action="@{/admin/board}" autocomplete="off" th:object="${boardSearch}">
-        <table class="table_cols">
+        <table class="table_cols mb30">
             <tr>
                 <th>키워드</th>
                 <td>
-                    <select name="sopt" th:field="*{sopt}">
-                        <option value="ALL">통합검색</option>
-                        <option value="bid">게시판 ID</option>
-                        <option value="bName">게시판명</option>
-                    </select>
-                    <input type="text" name="skey" th:field="*{skey}">
+                    <div class="input_grp">
+                        <select name="sopt" th:field="*{sopt}">
+                            <option value="ALL">통합검색</option>
+                            <option value="bid">게시판 ID</option>
+                            <option value="bName">게시판명</option>
+                        </select>
+                        <input type="text" name="skey" th:field="*{skey}">
+                    </div>
                 </td>
             </tr>
         </table>
+        <div class="search_btn">
+            <button type="submit" class="btn">검색하기</button>
+        </div>
     </form>
 
     <h2>게시판 목록</h2>
@@ -56,7 +60,7 @@
                     <label th:for="${'active_true_' + status.index}">사용</label>
 
                     <input type="radio" th:name="${'active_' + status.index}" value="false" th:checked="*{!active}" th:id="${'active_false_' + status.index}">
-                    <label th:for="${'active_false_' + status.index}">사용</label>
+                    <label th:for="${'active_false_' + status.index}">미사용</label>
                 </td>
                 <td>
                     <a th:href="@{/admin/board/edit/{bid}(bid=*{bid})}" class="sbtn">
