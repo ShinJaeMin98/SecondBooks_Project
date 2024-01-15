@@ -48,10 +48,10 @@ public class SchoolController implements ExceptionProcessor {
     }
 
     @GetMapping("/add")
-    public String add(@ModelAttribute String mode, Model model) {
+    public String add( Model model, RequestSchool requestSchool) {
+        String mode = requestSchool.getMode();
         commonProcess(mode, model);
-
-        return "admin/school/" + mode;
+        return "admin/school/"+mode;
     }
 
     @PostMapping("/save")
