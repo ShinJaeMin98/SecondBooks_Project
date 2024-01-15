@@ -3,19 +3,24 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
-    <th:block th:if="${board.skins != null || board.skin == 'default'}"
-              th:replace="~{front/board/skins/default/list::default}"></th:block>
+    <th:block th:if="${board.skin == null || board.skin == 'default'}">
+              <th:block th:replace="~{front/board/skins/default/list::default}"></th:block>
+    </th:block>
 
-    <th:block th:if="${board.skins == 'gallery'}"
-              th:replace="~{front/board/skins/gallery/list::gallery}"></th:block>
+    <th:block th:if="${board.skin == 'gallery'}">
+              <th:block th:replace="~{front/board/skins/gallery/list::gallery}"></th:block>
+    </th:block>
 
-    <th:block th:if="${board.skins == 'qna'}"
-              th:replace="~{front/board/skins/qna/list::qna}"></th:block>
+    <th:block th:if="${board.skin == 'qna'}">
+        <th:block th:replace="~{front/board/skins/qna/list::qna}"></th:block>
+    </th:block>
 
-    <th:block th:if="${board.skins == 'review'}"
-              th:replace="~{front/board/skins/review/list::review}"></th:block>
+    <th:block th:if="${board.skin == 'review'}">
+        <th:block th:replace="~{front/board/skins/review/list::review}"></th:block>
+    </th:block>
 
-    <th:block th:if="${board.skins == 'blog'}"
-              th:replace="~{front/board/skins/blog/list::blog}"></th:block>
+    <th:block th:if="${board.skin == 'blog'}">
+        <th:block th:replace="~{front/board/skins/blog/list::blog}"></th:block>
+    </th:block>
 </main>
 </html>
