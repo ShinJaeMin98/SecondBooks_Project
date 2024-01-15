@@ -1,10 +1,12 @@
 package org.choongang.admin.member.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.choongang.admin.board.controllers.RequestBoardConfig;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.ListData;
+import org.choongang.commons.Utils;
 import org.choongang.member.controllers.MemberSearch;
 import org.choongang.member.entities.Member;
 import org.choongang.member.service.MemberInfoService;
@@ -47,9 +49,20 @@ public class MemberController implements ExceptionProcessor {
         return "admin/member/list";
     }
 
+    @GetMapping("/authority")
+    public String authority(Model model) {
+        commonProcess("authority", model);
+
+        return "admin/member/authority";
+    }
+
     private void commonProcess(String mode, Model model) {
         mode = Objects.requireNonNullElse(mode, "list");
         String pageTitle = "회원 목록";
+
+        if(mode.equals("authority")) { // 회원권한
+            pageTitle = "회원 권한";
+        }
 
         model.addAttribute("subMenuCode", mode);
         model.addAttribute("pageTitle", pageTitle);
