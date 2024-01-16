@@ -14,7 +14,7 @@ public class RequestSchool {
 
     @NotBlank
     private String domain;
-
+   // private String schoolName;
     private Location menuLocation = Location.LEFT;
 
 }
