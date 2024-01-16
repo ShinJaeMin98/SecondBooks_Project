@@ -1,8 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="default" th:object="${boardData}">
-    <div class="board_view">
-        <div th:class="subject" th:text="*{subject}"></div>
+    <div class="board_view layout_width">
+        <div class="subject" th:text="*{subject}"></div>
+        <div class="post_info">
+            <div class="left">
+                <span>
+                    <th:block th:text="#{작성자}"></th:block> :
+                    <th:block th:text="*{poster}"></th:block>
+                    <th:block th:if="*{member != null}" th:text="*{'(' + member.email + ')'}"></th:block>
+                </span>
+                <span>
+                    <th:block th:text=#{조회수}></th:block> :
+                    <th:block th:text="*{viewCount >= 1000 ? #numbers.formatInteger(viewCount, 3, 'COMMA') : viewCount}"></th:block>
+                </span>
+            </div>
+
+            <div class="right">
+                <span>
+                    IP : <th:block th:text="*{ip}"></th:block>
+                </span>
+                <span>
+                    <th:block th:text="#{작성일시}"></th:block> :
+                    <th:block th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm')}"></th:block>
+                </span>
+            </div>
+        </div>
+        <!--// post_info -->
+        <div class="content" th:utext="*{content}"></div>
+
+        <ul th:if="*{attachFiles != null && !attachFiles.isEmpty}" class="downloads">
+            <li th:each="file : *{attachFiles}" th:object="${file}">
+                <i class="xi-download"></i>
+                <a th:href="@{/file/download/{seq}(seq=*{seq})}" th:text="*{fileName}"></a>
+            </li>
+        </ul>
+
     </div>
     <!--// board_view -->
 </th:block>
