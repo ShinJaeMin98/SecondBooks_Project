@@ -2,11 +2,17 @@ package org.choongang.admin.school.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.choongang.admin.board.controllers.BoardSearch;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
 import org.choongang.admin.school.service.SchoolSaveService;
+import org.choongang.admin.school.service.SchoolSearchService;
+import org.choongang.board.entities.Board;
 import org.choongang.commons.ExceptionProcessor;
+import org.choongang.commons.ListData;
+import org.choongang.commons.Pagination;
 import org.choongang.school.SchoolUtil;
+import org.choongang.school.entities.School;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -26,7 +32,7 @@ public class SchoolController implements ExceptionProcessor {
 
     private final SchoolUtil schoolUtil;
     private final SchoolSaveService saveService;
-
+    private final SchoolSearchService searchService;
 
     @ModelAttribute("menuCode")
     public String getMenuCode() {
@@ -44,11 +50,15 @@ public class SchoolController implements ExceptionProcessor {
     }
 
     @GetMapping
-    public String list(Model model) {
+    public String list(@ModelAttribute SchoolSearch search , Model model) {
         commonProcess("list", model);
-
+        List<School> items = searchService.getList();
+        model.addAttribute("items", items);
         return "admin/school/list";
     }
+
+
+
 
     @GetMapping("/add")
     public String add(@ModelAttribute String mode, Model model , RequestSchool form) {

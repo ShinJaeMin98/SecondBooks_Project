@@ -3,6 +3,67 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
-    <h1>학교목록</h1>
+    <h1>학교 목록</h1>
+    <h2>학교 조회</h2>
+    <form name="frmSearch" method="get" th:action="@{/admin/board}" autocomplete="off" >
+        <table class="table_cols mb30">
+            <tr>
+                <th>키워드</th>
+                <td>
+                    <div class="input_grp">
+                        <select name="sopt" >
+                            <option value="ALL">통합검색</option>
+                            <option value="bid">학교명</option>
+                            <option value="bName">도에밍</option>
+                        </select>
+                        <input type="text" name="skey" >
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="search_btn">
+            <button type="submit" class="btn">검색하기</button>
+        </div>
+    </form>
+
+    <h2>학교 목록</h2>
+    <form name="frmList" method="post" th:action="@{/admin/school}" target="ifrmProcess" autocomplete="off">
+        <input type="hidden" name="_method" value="PATCH">
+
+        <table class="table_rows">
+            <thead>
+            <tr>
+                <th width="40">
+                    <input type="checkbox" class="checkall" data-target-name="chk" id="checkall">
+                    <label for="checkall"></label>
+                </th>
+                <th width="150">학교명</th>
+                <th width="250">도메인</th>
+                <th width="250">로고위치</th>
+            </tr>
+            </thead>
+                <div th:each="item, status : ${items}" th:object="${item}">
+                    <tr>
+                        <td><input type="checkbox" name="chk" ></td>
+                    <td th:text="*{schoolName}"></td>
+                    <td th:text="*{domain}"></td>
+                        <td th:text="*{menuLocation}"></td>
+                     </tr>
+                </div>
+
+
+
+
+
+        </table>
+
+        <div class="table_actions">
+            <button type="button" class="sbtn form_action" data-mode="delete" data-form-name="frmList">선택 학교 삭제</button>
+            <button type="button" class="sbtn on form_action" data-mode="edit" data-form-name="frmList">선택 학교 수정</button>
+        </div>
+    </form>
+
+
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
 </section>
 </html>
