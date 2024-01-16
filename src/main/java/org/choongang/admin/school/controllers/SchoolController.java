@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
+import org.choongang.admin.school.service.SchoolSaveService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.school.SchoolUtil;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,8 @@ import java.util.List;
 public class SchoolController implements ExceptionProcessor {
 
     private final SchoolUtil schoolUtil;
+    private final SchoolSaveService saveService;
+
 
     @ModelAttribute("menuCode")
     public String getMenuCode() {
@@ -48,7 +51,9 @@ public class SchoolController implements ExceptionProcessor {
     }
 
     @GetMapping("/add")
-    public String add(@ModelAttribute String mode, Model model) {
+    public String add(@ModelAttribute String mode, Model model , RequestSchool form) {
+        mode = form.getMode();
+
         commonProcess(mode, model);
 
         return "admin/school/" + mode;
@@ -62,7 +67,7 @@ public class SchoolController implements ExceptionProcessor {
         if (errors.hasErrors()) {
             return "admin/school/" + mode;
         }
-
+        saveService.save(form);
         return "redirect:/admin/school";
     }
 
