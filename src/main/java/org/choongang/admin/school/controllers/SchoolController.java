@@ -15,7 +15,6 @@ import org.choongang.commons.ListData;
 import org.choongang.commons.Pagination;
 import org.choongang.school.SchoolUtil;
 import org.choongang.school.entities.School;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -32,10 +31,8 @@ public class SchoolController implements ExceptionProcessor {
 
     private final SchoolUtil schoolUtil;
     private final SchoolSaveService saveService;
-
     private final SchoolSearchService searchService;
     private final SchoolDeleteService deleteService;
-
 
     @ModelAttribute("menuCode")
     public String getMenuCode() {
@@ -64,13 +61,12 @@ public class SchoolController implements ExceptionProcessor {
 
 
     @GetMapping("/add")
-
     public String add(@ModelAttribute String mode, Model model , RequestSchool form) {
         mode = form.getMode();
 
-
         commonProcess(mode, model);
-        return "admin/school/"+mode;
+
+        return "admin/school/" + mode;
     }
 
     @PostMapping("/save")
@@ -79,7 +75,7 @@ public class SchoolController implements ExceptionProcessor {
         commonProcess(mode, model);
 
         if (errors.hasErrors()) {
-            return "admin/school/" + mode ;
+            return "admin/school/" + mode;
         }
         saveService.save(form);
         return "redirect:/admin/school";
@@ -91,12 +87,10 @@ public class SchoolController implements ExceptionProcessor {
         commonProcess("list", model);
         System.out.println("========================school Num:"+num);
 
-
         deleteService.delete(num);
 
         List<School> items = searchService.getList();
         model.addAttribute("items", items);
-
         return "redirect:/admin/school";
     }
 

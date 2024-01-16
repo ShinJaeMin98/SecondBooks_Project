@@ -4,7 +4,6 @@
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
     <h1>학교 목록</h1>
-
     <h2>학교 조회</h2>
     <form name="frmSearch" method="get" th:action="@{/admin/board}" autocomplete="off" >
         <table class="table_cols mb30">
@@ -44,22 +43,22 @@
                 <th width="250">수정/삭제</th>
             </tr>
             </thead>
-                <div th:each="item, status : ${items}" th:object="${item}">
-                    <tr>
-                        <td><input type="checkbox" name="chk" ></td>
-                        <td th:text="*{schoolName}"></td>
-                        <td th:text="*{domain}"></td>
-                        <td th:text="*{menuLocation}"></td>
-                        <td><a th:href="@{/admin/school/edit/{num}(num=*{num})}" class="sbtn">
-                            <i class="xi-pen"></i> 수정하기
+            <div th:each="item, status : ${items}" th:object="${item}">
+                <tr>
+                    <td><input type="checkbox" name="chk" ></td>
+                    <td th:text="*{schoolName}"></td>
+                    <td th:text="*{domain}"></td>
+                    <td th:text="*{menuLocation}"></td>
+                    <td><a th:href="@{/admin/school/edit/{num}(num=*{num})}" class="sbtn">
+                        <i class="xi-pen"></i> 수정하기
+                    </a>
+                        <a th:href="@{/admin/school/delete/{num}(num=*{num})}" class="sbtn on" target="_blank">
+                            <i class="xi-list"></i> 삭제하기
                         </a>
-                            <a th:href="@{/admin/school/delete/{num}(num=*{num})}" class="sbtn on" target="_blank">
-                                <i class="xi-list"></i> 삭제하기
-                            </a>
 
-                        </td>
-                     </tr>
-                </div>
+                    </td>
+                </tr>
+            </div>
 
 
 
@@ -75,7 +74,5 @@
 
 
     <th:block th:replace="~{common/_pagination::pagination}"></th:block>
-
 </section>
 </html>
-
