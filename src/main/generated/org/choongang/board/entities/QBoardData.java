@@ -26,6 +26,8 @@ public class QBoardData extends EntityPathBase<BoardData> {
 
     public final QBoard board;
 
+    public final StringPath category = createString("category");
+
     public final StringPath content = createString("content");
 
     //inherited
@@ -50,11 +52,11 @@ public class QBoardData extends EntityPathBase<BoardData> {
 
     public final BooleanPath notice = createBoolean("notice");
 
-    public final NumberPath<Integer> num1 = createNumber("num1", Integer.class);
+    public final NumberPath<Long> num1 = createNumber("num1", Long.class);
 
-    public final NumberPath<Integer> num2 = createNumber("num2", Integer.class);
+    public final NumberPath<Long> num2 = createNumber("num2", Long.class);
 
-    public final NumberPath<Integer> num3 = createNumber("num3", Integer.class);
+    public final NumberPath<Long> num3 = createNumber("num3", Long.class);
 
     public final StringPath poster = createString("poster");
 

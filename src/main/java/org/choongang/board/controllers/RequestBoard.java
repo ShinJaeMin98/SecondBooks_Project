@@ -28,6 +28,22 @@ public class RequestBoard {
     @NotBlank
     private String content; // 글 내용
 
+    // 추가필드 - 정수
+    private Long num1;
+    private Long num2;
+    private Long num3;
+
+    // 추가필드 - 한줄 텍스트
+    private String text1;
+    private String text2;
+    private String text3;
+
+    // 추가필드 - 여러줄 텍스트
+    private String longText1;
+    private String longText2;
+    private String longText3;
+
+
     private List<FileInfo> editorFiles; // 에디터 파일 목록
     private List<FileInfo> attachFiles; // 첨부 파일 목록
 }
