@@ -4,6 +4,7 @@
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
     <h1>학교 목록</h1>
+
     <h2>학교 조회</h2>
     <form name="frmSearch" method="get" th:action="@{/admin/board}" autocomplete="off" >
         <table class="table_cols mb30">
@@ -74,5 +75,7 @@
 
 
     <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+
 </section>
 </html>
+

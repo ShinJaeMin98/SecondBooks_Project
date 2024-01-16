@@ -1,5 +1,6 @@
 package org.choongang.school.entities;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,9 +23,5 @@ public class School extends BaseMember {
     private String domain;
     @Column(length = 10 , nullable = false)
     private Location menuLocation;
-
-
-
-
 
 }

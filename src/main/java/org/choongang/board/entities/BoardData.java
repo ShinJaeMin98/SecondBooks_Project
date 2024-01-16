@@ -6,8 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.choongang.commons.entities.Base;
+import org.choongang.file.entities.FileInfo;
 import org.choongang.member.entities.Member;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -33,6 +35,9 @@ public class BoardData extends Base {
     @Column(length = 65, nullable = false)
     private String gid = UUID.randomUUID().toString();
 
+    @Column(length = 60)
+    private String category; // 분류
+
     @Column(length = 40, nullable = false)
     private String poster;  // 작성자
 
@@ -54,9 +59,9 @@ public class BoardData extends Base {
 
     private String ua;  // User-Agent : 브라우저 정보
 
-    private int num1;   // 추가 필드 : 정수
-    private int num2;   // 추가 필드 : 정수
-    private int num3;   // 추가 필드 : 정수
+    private Long num1;   // 추가 필드 : 정수
+    private Long num2;   // 추가 필드 : 정수
+    private Long num3;   // 추가 필드 : 정수
 
     @Column(length = 100)
     private String text1;   // 추가 필드 : 한 줄 텍스트
@@ -76,4 +81,9 @@ public class BoardData extends Base {
     @Lob
     private String longText3;   // 추가 필드 : 여러줄 텍스트
 
+    @Transient
+    private List<FileInfo> editorFiles; // 에디터 첨부 파일
+
+    @Transient
+    private List<FileInfo> attachFiles; // 첨부 파일
 }

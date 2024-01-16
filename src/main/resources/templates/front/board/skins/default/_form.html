@@ -9,7 +9,13 @@
     <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 
     <dl th:if="${!#strings.isEmpty(board.category)}">
-
+        <dt th:text="#{분류}"></dt>
+        <dd>
+            <th:block th:each="c, status : ${board.categories}">
+                <input type="radio" name="category" th:value="${c}" th:id="${'category_' + status.index}" th:field="*{category}">
+                <label th:for="${'category_' + status.index}" th:text="${c}"></label>
+            </th:block>
+        </dd>
     </dl>
     <dl>
         <dt th:text="#{작성자}"></dt>
