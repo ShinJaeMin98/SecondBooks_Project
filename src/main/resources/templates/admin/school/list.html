@@ -40,14 +40,22 @@
                 <th width="150">학교명</th>
                 <th width="250">도메인</th>
                 <th width="250">로고위치</th>
+                <th width="250">수정/삭제</th>
             </tr>
             </thead>
                 <div th:each="item, status : ${items}" th:object="${item}">
                     <tr>
                         <td><input type="checkbox" name="chk" ></td>
-                    <td th:text="*{schoolName}"></td>
-                    <td th:text="*{domain}"></td>
+                        <td th:text="*{schoolName}"></td>
+                        <td th:text="*{domain}"></td>
                         <td th:text="*{menuLocation}"></td>
+                        <td><a  class="sbtn">
+                            <i class="xi-pen"></i> 수정하기
+                        </a>
+                            <a  class="sbtn on" target="_blank">
+                                <i class="xi-list"></i> 삭제하기
+                            </a>
+                        </td>
                      </tr>
                 </div>
 
