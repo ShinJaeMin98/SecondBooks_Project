@@ -99,6 +99,9 @@ public class BoardController implements ExceptionProcessor {
     public String update(@PathVariable("seq") Long seq, Model model) {
         commonProcess(seq, "update", model);
 
+        RequestBoard form = boardInfoService.getForm(boardData);
+        model.addAttribute("requestBoard", form);
+
         return utils.tpl("board/update");
     }
 

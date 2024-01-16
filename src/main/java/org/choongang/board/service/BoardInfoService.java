@@ -9,7 +9,9 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Request;
 import org.choongang.board.controllers.BoardDataSearch;
+import org.choongang.board.controllers.RequestBoard;
 import org.choongang.board.entities.Board;
 import org.choongang.board.entities.BoardData;
 import org.choongang.board.entities.QBoardData;
@@ -20,6 +22,7 @@ import org.choongang.commons.Pagination;
 import org.choongang.commons.Utils;
 import org.choongang.file.entities.FileInfo;
 import org.choongang.file.service.FileInfoService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -49,6 +52,27 @@ public class BoardInfoService {
         addBoardData(boardData);
 
         return boardData;
+    }
+
+    /**
+     * BoardData -> RequestBoard
+     *
+     * @param data : 게시글 데이터(BoardData), 게시글 번호(Long)
+     * @return
+     */
+    public RequestBoard getForm(Object data) {
+        BoardData boardData = null;
+        if(data instanceof BoardData) {
+            boardData = (BoardData) data;
+        } else {
+            Long seq = (Long) data;
+            boardData = get(seq);
+        }
+
+        RequestBoard form = new ModelMapper().map(boardData, RequestBoard.class);
+        form.setMode("update");
+        form.setBid(boardData.getBoard().getBid());
+        return form;
     }
 
 
@@ -118,6 +142,13 @@ public class BoardInfoService {
         String userId = search.getUserId();
         if (StringUtils.hasText(userId)) {
             andBuilder.and(boardData.member.userId.eq(userId));
+        }
+        
+        // 게시글 분류 조회
+        String category = search.getCategory();
+        if (StringUtils.hasText(category)) {
+            category = category.trim();
+            andBuilder.and(boardData.category.eq(category));
         }
 
         /* 검색 조건 처리 E */
