@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="form" th:object="${requestSchool}">
     <input type="hidden" name="gid" th:field="*{gid}">
-
+    <input type="hidden" name="num" th:field="*{num}">
     <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 
     <h2>기본 정보</h2>
@@ -11,7 +11,7 @@
             <th width="180">학교 선택</th>
             <td>
                 <select name="domain" th:field="*{domain}">
-                    <option th:each="school : ${schools}" th:value="${school[1]}" th:text="${school[0]}"></option>
+                    <option th:each="school : ${schools}" th:value="${school[1]}" th:text="${school[0]}" th:field="*{domain}"></option>
                 </select>
                 <div class="error" th:each="err : ${#fields.errors('domain')}" th:text="${err}"></div>
             </td>

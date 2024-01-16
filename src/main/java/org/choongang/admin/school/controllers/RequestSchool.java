@@ -9,7 +9,7 @@ import java.util.UUID;
 @Data
 public class RequestSchool {
     private String mode = "add";
-
+    private Long num = -1L;
     private String gid = UUID.randomUUID().toString();
 
     @NotBlank

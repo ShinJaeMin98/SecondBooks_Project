@@ -43,13 +43,17 @@
                 <th width="250">수정/삭제</th>
             </tr>
             </thead>
+            <tbody>
+            <tr th:if="${items == null || items.isEmpty()}">
+                <td colspan="5" class="no_data">등록된 학교가 없습니다.</td>
+            </tr>
             <div th:each="item, status : ${items}" th:object="${item}">
                 <tr>
-                    <td><input type="checkbox" name="chk" ></td>
-                    <td th:text="*{schoolName}"></td>
-                    <td th:text="*{domain}"></td>
-                    <td th:text="*{menuLocation}"></td>
-                    <td><a th:href="@{/admin/school/edit/{num}(num=*{num})}" class="sbtn">
+                    <td align="center"><input type="checkbox" name="chk" ></td>
+                    <td th:text="*{schoolName}" align="center"></td>
+                    <td th:text="*{domain}" align="center"></td>
+                    <td th:text="*{menuLocation}" align="center"></td>
+                    <td align="center"><a th:href="@{/admin/school/edit/{num}(num=*{num})}" class="sbtn">
                         <i class="xi-pen"></i> 수정하기
                     </a>
                         <a th:href="@{/admin/school/delete/{num}(num=*{num})}" class="sbtn on" target="_blank">
@@ -63,7 +67,7 @@
 
 
 
-
+</tbody>
         </table>
 
         <div class="table_actions">

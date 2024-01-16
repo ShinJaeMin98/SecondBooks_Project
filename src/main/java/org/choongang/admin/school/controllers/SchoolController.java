@@ -7,6 +7,7 @@ import org.choongang.admin.board.controllers.RequestBoardConfig;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
 import org.choongang.admin.school.service.SchoolDeleteService;
+import org.choongang.admin.school.service.SchoolEditService;
 import org.choongang.admin.school.service.SchoolSaveService;
 import org.choongang.admin.school.service.SchoolSearchService;
 import org.choongang.board.entities.Board;
@@ -21,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +35,7 @@ public class SchoolController implements ExceptionProcessor {
     private final SchoolSaveService saveService;
     private final SchoolSearchService searchService;
     private final SchoolDeleteService deleteService;
+    private final SchoolEditService editService;
 
     @ModelAttribute("menuCode")
     public String getMenuCode() {
@@ -58,8 +61,6 @@ public class SchoolController implements ExceptionProcessor {
     }
 
 
-
-
     @GetMapping("/add")
     public String add(@ModelAttribute String mode, Model model , RequestSchool form) {
         mode = form.getMode();
@@ -82,7 +83,7 @@ public class SchoolController implements ExceptionProcessor {
     }
 
     @GetMapping("/delete/{num}")
-    public String edit(@PathVariable("num") Long num, Model model,@ModelAttribute SchoolSearch search) {
+    public String delete(@PathVariable("num") Long num, Model model,@ModelAttribute SchoolSearch search) {
         commonProcess("edit", model);
         commonProcess("list", model);
         System.out.println("========================school Num:"+num);
@@ -93,6 +94,43 @@ public class SchoolController implements ExceptionProcessor {
         model.addAttribute("items", items);
         return "redirect:/admin/school";
     }
+
+    @GetMapping("/edit/{num}")
+    public String edit(@PathVariable("num") Long num, Model model,@ModelAttribute SchoolSearch search) {
+        commonProcess("edit", model);
+        commonProcess("list", model);
+
+        School school = searchService.findSchoolByNum(num);
+
+
+        RequestSchool requestSchool = new RequestSchool();
+        requestSchool.setDomain(school.getDomain());
+        requestSchool.setGid(school.getGid());
+        requestSchool.setMenuLocation(school.getMenuLocation());
+        requestSchool.setNum(school.getNum());
+        model.addAttribute("requestSchool" , requestSchool);
+        model.addAttribute("num" , num);
+        List<School> items = searchService.getList();
+        model.addAttribute("items", items);
+
+
+        return "admin/school/edit";
+    }
+
+    @PostMapping("/edit")
+    public String edit2(Model model,@ModelAttribute SchoolSearch search , RequestSchool form) {
+        commonProcess("edit", model);
+        commonProcess("list", model);
+
+       editService.edit(form.getNum() , form);
+
+        List<School> items = searchService.getList();
+        model.addAttribute("items", items);
+
+        return "admin/school/list";
+    }
+
+
 
 
 

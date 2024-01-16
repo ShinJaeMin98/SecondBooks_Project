@@ -14,6 +14,8 @@ import java.util.List;
 public class SchoolUtil {
     private final ConfigInfoService configInfoService;
 
+
+
     public List<String[]> getSchools() {
         SchoolConfig config = configInfoService.get("school_config", SchoolConfig.class)
                 .orElseGet(SchoolConfig::new);
