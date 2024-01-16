@@ -3,6 +3,7 @@ package org.choongang.admin.school.controllers;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.admin.board.controllers.BoardSearch;
+import org.choongang.admin.board.controllers.RequestBoardConfig;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
 import org.choongang.admin.school.service.SchoolSaveService;
@@ -17,10 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +78,17 @@ public class SchoolController implements ExceptionProcessor {
         saveService.save(form);
         return "redirect:/admin/school";
     }
+
+    @GetMapping("/delete/{num}")
+    public void edit(@PathVariable("num") Long num, Model model) {
+        commonProcess("edit", model);
+
+        System.out.println("========================school Num:"+num);
+
+
+    }
+
+
 
     private void commonProcess(String mode, Model model) {
         mode = StringUtils.hasText(mode) ? mode : "list";

@@ -49,12 +49,13 @@
                         <td th:text="*{schoolName}"></td>
                         <td th:text="*{domain}"></td>
                         <td th:text="*{menuLocation}"></td>
-                        <td><a  class="sbtn">
+                        <td><a th:href="@{/admin/school/edit/{num}(num=*{num})}" class="sbtn">
                             <i class="xi-pen"></i> 수정하기
                         </a>
-                            <a  class="sbtn on" target="_blank">
+                            <a th:href="@{/admin/school/delete/{num}(num=*{num})}" class="sbtn on" target="_blank">
                                 <i class="xi-list"></i> 삭제하기
                             </a>
+
                         </td>
                      </tr>
                 </div>
