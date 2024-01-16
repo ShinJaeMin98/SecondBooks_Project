@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="default">
-
+<th:block th:fragment="default" th:object="${boardData}">
+    <div class="board_view">
+        <div th:class="subject" th:text="*{subject}"></div>
+    </div>
+    <!--// board_view -->
 </th:block>
 </html>
