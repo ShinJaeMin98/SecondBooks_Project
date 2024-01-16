@@ -14,3 +14,13 @@
 .board_btns { text-align: right; }
 .board_btns .btn { display: inline-block; border: 1px solid #222; height: 27px; line-height: 25px; padding: 0 20px; border-radius: 3px; cursor: pointer; transition: all 0.5s; margin-left: 3px; }
 .board_btns .btn:hover { background: #222; color: #fff; }
+
+/* 게시판 목록 */
+.board_list .items > .item { border-bottom: 1px solid #d5d5d5; display: flex; align-items: center; }
+.board_list .items > .item:first-of-type { border-top: 1px solid #d5d5d5; }
+
+.board_list .items > .item:nth-of-type(2n) { background: #f8f8f8; }
+
+.board_list .items .post_info { width: 360px; text-align: right; padding: 10px; }
+.board_list .items .post_info span + span { margin-left: 15px;}
+.board_list .items .subject { flex-grow: 1; padding: 10px; }
