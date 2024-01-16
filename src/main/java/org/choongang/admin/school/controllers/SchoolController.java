@@ -6,6 +6,7 @@ import org.choongang.admin.board.controllers.BoardSearch;
 import org.choongang.admin.board.controllers.RequestBoardConfig;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
+import org.choongang.admin.school.service.SchoolDeleteService;
 import org.choongang.admin.school.service.SchoolSaveService;
 import org.choongang.admin.school.service.SchoolSearchService;
 import org.choongang.board.entities.Board;
@@ -31,6 +32,7 @@ public class SchoolController implements ExceptionProcessor {
     private final SchoolUtil schoolUtil;
     private final SchoolSaveService saveService;
     private final SchoolSearchService searchService;
+    private final SchoolDeleteService deleteService;
 
     @ModelAttribute("menuCode")
     public String getMenuCode() {
@@ -80,12 +82,16 @@ public class SchoolController implements ExceptionProcessor {
     }
 
     @GetMapping("/delete/{num}")
-    public void edit(@PathVariable("num") Long num, Model model) {
+    public String edit(@PathVariable("num") Long num, Model model,@ModelAttribute SchoolSearch search) {
         commonProcess("edit", model);
-
+        commonProcess("list", model);
         System.out.println("========================school Num:"+num);
 
+        deleteService.delete(num);
 
+        List<School> items = searchService.getList();
+        model.addAttribute("items", items);
+        return "redirect:/admin/school";
     }
 
 
