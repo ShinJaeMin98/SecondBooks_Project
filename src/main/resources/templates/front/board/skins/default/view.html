@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="default" th:object="${boardData}">
     <div class="board_view layout_width">
-
+        <h1 th:replace="~{/front/board/skins/default/_board_title::title}"></h1>
         <div class="subject">
            <span th:if="*{!#strings.isEmpty(category)}" class="category" th:text="*{'[' + category + ']'}"></span>
             <th:block th:text="*{subject}"></th:block>

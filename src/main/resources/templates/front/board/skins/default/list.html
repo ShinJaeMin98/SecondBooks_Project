@@ -1,6 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="default">
-    기본 스킨 목록
+    <div class="board_list layout_width">
+        <h1 th:replace="~{/front/board/skins/default/_board_title::title}"></h1>
+
+        <ul class="items">
+            <li th:if="${items == null || items.isEmpty()}" class="no_data"
+                th:text="#{조회된_게시글이_없습니다.}"></li>
+
+            <li th:unless="${items == null || items.isEmpty()}"
+                th:each="item : ${items}" th:object="${item}" class="item">
+                <a th:href="@{/board/view/{seq}(seq=*{seq})}" class="subject">
+                    <span class="notice" th:if="*{notice}">
+                        [<th:block th:text="#{공지}"></th:block>]
+                    </span>
+                    <span class='category' th:if="*{category}" th:text="*{'[' + category + ']'}"></span>
+                    <th:block th:text="*{subject}"></th:block>
+                </a>
+
+                <div class="post_info">
+                    <span class="poster">
+                        <th:block th:text="*{poster}"></th:block>
+                        <th:block th:if="*{member != null}"
+                                  th:text="*{'(' + member.userId + ')'}"></th:block>
+                    </span>
+                    <span class="view_count">
+                        조회수 :
+                        <th:block th:text="*{viewCount >= 1000 ? #numbers.formatInteger(viewCount, 3, 'COMMA') : viewCount}"></th:block>
+                    </span>
+
+                    <span class="post_date"
+                          th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm')}"></span>
+                </div>
+                <!--// post_info -->
+            </li>
+        </ul>
+
+        <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+    </div>
+    <!--// board_list -->
 </th:block>
 </html>
