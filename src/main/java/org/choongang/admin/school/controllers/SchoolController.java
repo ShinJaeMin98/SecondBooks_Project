@@ -2,20 +2,25 @@ package org.choongang.admin.school.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.choongang.admin.board.controllers.BoardSearch;
+import org.choongang.admin.board.controllers.RequestBoardConfig;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
+import org.choongang.admin.school.service.SchoolDeleteService;
+import org.choongang.admin.school.service.SchoolSaveService;
+import org.choongang.admin.school.service.SchoolSearchService;
+import org.choongang.board.entities.Board;
 import org.choongang.commons.ExceptionProcessor;
+import org.choongang.commons.ListData;
+import org.choongang.commons.Pagination;
 import org.choongang.school.SchoolUtil;
 import org.choongang.school.entities.School;
-import org.choongang.school.service.SchoolSaveService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +32,10 @@ public class SchoolController implements ExceptionProcessor {
 
     private final SchoolUtil schoolUtil;
     private final SchoolSaveService saveService;
+
+    private final SchoolSearchService searchService;
+    private final SchoolDeleteService deleteService;
+
 
     @ModelAttribute("menuCode")
     public String getMenuCode() {
@@ -44,15 +53,22 @@ public class SchoolController implements ExceptionProcessor {
     }
 
     @GetMapping
-    public String list(Model model) {
+    public String list(@ModelAttribute SchoolSearch search , Model model) {
         commonProcess("list", model);
-
+        List<School> items = searchService.getList();
+        model.addAttribute("items", items);
         return "admin/school/list";
     }
 
+
+
+
     @GetMapping("/add")
-    public String add( Model model, RequestSchool requestSchool) {
-        String mode = requestSchool.getMode();
+
+    public String add(@ModelAttribute String mode, Model model , RequestSchool form) {
+        mode = form.getMode();
+
+
         commonProcess(mode, model);
         return "admin/school/"+mode;
     }
@@ -65,13 +81,26 @@ public class SchoolController implements ExceptionProcessor {
         if (errors.hasErrors()) {
             return "admin/school/" + mode ;
         }
-
-
-
-        //saveService.save();
-        System.out.println(form+"============================");
+        saveService.save(form);
         return "redirect:/admin/school";
     }
+
+    @GetMapping("/delete/{num}")
+    public String edit(@PathVariable("num") Long num, Model model,@ModelAttribute SchoolSearch search) {
+        commonProcess("edit", model);
+        commonProcess("list", model);
+        System.out.println("========================school Num:"+num);
+
+
+        deleteService.delete(num);
+
+        List<School> items = searchService.getList();
+        model.addAttribute("items", items);
+
+        return "redirect:/admin/school";
+    }
+
+
 
     private void commonProcess(String mode, Model model) {
         mode = StringUtils.hasText(mode) ? mode : "list";

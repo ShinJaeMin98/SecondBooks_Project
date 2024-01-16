@@ -1,29 +1,27 @@
 package org.choongang.school.entities;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.choongang.commons.constants.Location;
-import org.choongang.file.entities.FileInfo;
+import org.choongang.commons.entities.BaseMember;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class School {
+public class School extends BaseMember {
 
-    @Id
-    @GeneratedValue
-    private Long seq;
-
-    @Column(length = 30 , nullable = false)
-    private String domain;
-    @Column(length = 30, nullable = false)
-    private String schoolName;
-    @Column(length = 50, nullable = false)
+    @Id @GeneratedValue
+    private Long num ;
+    @Column(length = 80 , nullable = false)
     private String gid;
-    @Column(length = 10, nullable = false)
-    private Location menuLocation;  //commons.constants
+    @Column(length = 50 , nullable = false)
+    private String schoolName;
+    @Column(length = 50 , nullable = false)
+    private String domain;
+    @Column(length = 10 , nullable = false)
+    private Location menuLocation;
 
 }
