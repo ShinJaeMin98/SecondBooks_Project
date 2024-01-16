@@ -6,8 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.choongang.commons.entities.Base;
+import org.choongang.file.entities.FileInfo;
 import org.choongang.member.entities.Member;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -79,4 +81,9 @@ public class BoardData extends Base {
     @Lob
     private String longText3;   // 추가 필드 : 여러줄 텍스트
 
+    @Transient
+    private List<FileInfo> editorFiles; // 에디터 첨부 파일
+
+    @Transient
+    private List<FileInfo> attachFiles; // 첨부 파일
 }
