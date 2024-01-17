@@ -13,16 +13,15 @@
             <dt th:text="#{이메일}"></dt>
             <dd>
                 <div>
-                    <input type="text" name="femail" th:field="*{email}" th:readonly="${session.EmailAuthVerified != null && session.EmailAuthVerified}">
-
-
+                    <input type="text" name="email" th:field="*{email}" th:readonly="${session.EmailAuthVerified != null && session.EmailAuthVerified}">
                     <select name="domain">
-                                <option th:each="school : ${schools}" th:value="${school.num}" th:text="${school.domain}"></option>
+                                <option th:each="school : ${schools}" th:value="${school.num}" th:text="${school.domain}">
+                                </option>
                     </select>
-
-
                     <button th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}" type="button" id="email_verify" th:text="#{인증코드전송}"></button>
                 </div>
+
+
                 <div class="auth_box">
                     <th:block th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}">
                         <input type="text" id="auth_num" th:placeholder="#{인증코드_입력}">

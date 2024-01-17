@@ -13,14 +13,11 @@ public class RequestJoin {
 
     private String gid = UUID.randomUUID().toString();
 
-    @NotBlank
-    private String femail;
+    @NotBlank @Email
+    private String email;
 
     @NotBlank
     private String domain;
-
-    @Email
-    private String email;
 
     @NotBlank
     @Size(min=6)
