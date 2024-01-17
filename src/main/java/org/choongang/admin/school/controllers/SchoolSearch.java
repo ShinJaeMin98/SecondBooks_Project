@@ -8,8 +8,8 @@ public class SchoolSearch {
     private int page =1;
     private int limit = 20;
 
-    private String bid;
-    private String bName;
+    private Long num;
+    private String sName;
     private boolean active;
 
     private String sopt; // 검색옵션

@@ -14,6 +14,7 @@ public class RequestSchool {
 
     @NotBlank
     private String domain;
+    private String comment;
 
     private Location menuLocation = Location.LEFT;
 

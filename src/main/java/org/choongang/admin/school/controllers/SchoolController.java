@@ -7,7 +7,6 @@ import org.choongang.admin.board.controllers.RequestBoardConfig;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
 import org.choongang.admin.school.service.SchoolDeleteService;
-import org.choongang.admin.school.service.SchoolEditService;
 import org.choongang.admin.school.service.SchoolSaveService;
 import org.choongang.admin.school.service.SchoolSearchService;
 import org.choongang.board.entities.Board;
@@ -35,7 +34,6 @@ public class SchoolController implements ExceptionProcessor {
     private final SchoolSaveService saveService;
     private final SchoolSearchService searchService;
     private final SchoolDeleteService deleteService;
-    private final SchoolEditService editService;
 
     @ModelAttribute("menuCode")
     public String getMenuCode() {
@@ -102,7 +100,6 @@ public class SchoolController implements ExceptionProcessor {
 
         School school = searchService.findSchoolByNum(num);
 
-
         RequestSchool requestSchool = new RequestSchool();
         requestSchool.setDomain(school.getDomain());
         requestSchool.setGid(school.getGid());
@@ -113,7 +110,6 @@ public class SchoolController implements ExceptionProcessor {
         List<School> items = searchService.getList();
         model.addAttribute("items", items);
 
-
         return "admin/school/edit";
     }
 
@@ -121,14 +117,15 @@ public class SchoolController implements ExceptionProcessor {
     public String edit2(Model model,@ModelAttribute SchoolSearch search , RequestSchool form) {
         commonProcess("edit", model);
         commonProcess("list", model);
-
-       editService.edit(form.getNum() , form);
+        System.out.println(form.getMode()+"666666666666666666666666666");
+        saveService.save(form);
 
         List<School> items = searchService.getList();
         model.addAttribute("items", items);
 
         return "admin/school/list";
     }
+
 
 
 
