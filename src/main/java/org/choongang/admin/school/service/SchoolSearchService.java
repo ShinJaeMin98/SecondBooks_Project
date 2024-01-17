@@ -21,5 +21,17 @@ public class SchoolSearchService {
         return list;
     }
 
+    public List<School> getSearchList(){
+        List<School> list = null;
+        return list;
+    }
+
+    public School findSchoolByNum(Long num){
+
+        School school = repository.getById(num);
+
+        return school;
+    }
+
 
 }

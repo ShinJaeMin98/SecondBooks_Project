@@ -2,17 +2,12 @@ package org.choongang.admin.school.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.choongang.admin.board.controllers.BoardSearch;
-import org.choongang.admin.board.controllers.RequestBoardConfig;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
 import org.choongang.admin.school.service.SchoolDeleteService;
 import org.choongang.admin.school.service.SchoolSaveService;
 import org.choongang.admin.school.service.SchoolSearchService;
-import org.choongang.board.entities.Board;
 import org.choongang.commons.ExceptionProcessor;
-import org.choongang.commons.ListData;
-import org.choongang.commons.Pagination;
 import org.choongang.school.SchoolUtil;
 import org.choongang.school.entities.School;
 import org.springframework.stereotype.Controller;
@@ -52,7 +47,13 @@ public class SchoolController implements ExceptionProcessor {
     @GetMapping
     public String list(@ModelAttribute SchoolSearch search , Model model) {
         commonProcess("list", model);
-        List<School> items = searchService.getList();
+            List<School> items = null;
+        if(search.getSkey() == null || search.getSkey().equals("")){//검색어 없을 경우
+            items = searchService.getList();
+        } else {//검색어 있을 경우
+            items = searchService.getSearchList();
+        }
+
         model.addAttribute("items", items);
         return "admin/school/list";
     }
@@ -82,7 +83,7 @@ public class SchoolController implements ExceptionProcessor {
     }
 
     @GetMapping("/delete/{num}")
-    public String edit(@PathVariable("num") Long num, Model model,@ModelAttribute SchoolSearch search) {
+    public String delete(@PathVariable("num") Long num, Model model,@ModelAttribute SchoolSearch search) {
         commonProcess("edit", model);
         commonProcess("list", model);
         System.out.println("========================school Num:"+num);
@@ -93,6 +94,63 @@ public class SchoolController implements ExceptionProcessor {
         model.addAttribute("items", items);
         return "redirect:/admin/school";
     }
+
+    @GetMapping("/edit/{num}")
+    public String edit(@PathVariable("num") Long num, Model model,@ModelAttribute SchoolSearch search) {
+        commonProcess("edit", model);
+        commonProcess("list", model);
+
+        System.out.println(num+"[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[");
+
+        School school = searchService.findSchoolByNum(num);
+
+        RequestSchool requestSchool = new RequestSchool();
+        requestSchool.setDomain(school.getDomain());
+        requestSchool.setGid(school.getGid());
+        requestSchool.setMenuLocation(school.getMenuLocation());
+        requestSchool.setNum(school.getNum());
+
+
+        model.addAttribute("requestSchool" , requestSchool);
+        model.addAttribute("num" , num);
+
+        /*List<School> items = searchService.getList();
+        model.addAttribute("items", items);*/
+
+        return "admin/school/edit";
+    }
+
+    @PostMapping("/edit")
+    public String edit2(Model model,@ModelAttribute SchoolSearch search , RequestSchool form) {
+        commonProcess("edit", model);
+        commonProcess("list", model);
+        System.out.println(form.getMode()+"666666666666666666666666666");
+        saveService.save(form);
+
+        List<School> items = searchService.getList();
+        model.addAttribute("items", items);
+
+
+        return "redirect:/admin/school";
+    }
+    @DeleteMapping
+    public String deleteList(@RequestParam("chk") List<Long> chks, Model model) {
+        commonProcess("list", model);
+
+        System.out.println(chks+"dddddddddddddddddddddddddddddddddd");
+        deleteService.deleteChks(chks);
+        //model.addAttribute("script", "parent.location.reload();");
+
+        List<School> items = searchService.getList();
+        model.addAttribute("items", items);
+
+        System.out.println(items);
+
+        model.addAttribute("script", "parent.location.reload();");
+        return "common/_execute_script";
+    }
+
+
 
 
 
