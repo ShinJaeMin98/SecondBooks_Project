@@ -102,7 +102,7 @@ public class BoardConfigInfoService {
      * @param search
      * @return
      */
-    public ListData<Board> getList(BoardSearch search) {
+    public ListData<Board> getList(BoardSearch search, boolean isAll) {
         int page = Utils.onlyPositiveNumber(search.getPage(), 1);
         int limit = Utils.onlyPositiveNumber(search.getLimit(), 20);
 
@@ -119,6 +119,10 @@ public class BoardConfigInfoService {
 
         if (StringUtils.hasText(bid)) { // 게시판 ID
             andBuilder.and(board.bid.contains(bid.trim()));
+        }
+
+        if (!isAll) {   // 노출 상태인 게시판만 조회
+            andBuilder.and(board.active.eq(true));
         }
 
         if (StringUtils.hasText(bName)) { // 게시판 명
@@ -152,5 +156,28 @@ public class BoardConfigInfoService {
         Pagination pagination = new Pagination(page, (int)data.getTotalElements(), limit, 10, request);
 
         return new ListData<>(data.getContent(), pagination);
+    }
+
+    /**
+     * 노출 상태인 게시판 목록
+     *
+     * @param search
+     * @return
+     */
+    public ListData<Board> getList(BoardSearch search) {
+        return getList(search, false);
+    }
+
+    /**
+     *  노출 가능한 모든 게시판 목록
+     *
+     * @return
+     */
+    public List<Board> getList() {
+        QBoard board = QBoard.board;
+
+        List<Board> items = (List<Board>) boardRepository.findAll(board.active.eq(true), Sort.by(desc("listOrder"), desc("createdAt")));
+
+        return items;
     }
 }
