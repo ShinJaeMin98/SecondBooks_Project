@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content" class="layout_width">
+    <h1 th:text="#{최신_게시글}"></h1>
+
+    <ul class="board_latest">
+        <li th:each="b : ${boardMenus}">
+            <h2>
+                <a th:href="@{/board/list/{bid}(bid=${b.bid})}" th:text="${b.bName}"></a>
+            </h2>
+            <ul class="items">
+                <li th:each="item : ${@boardInfoService.getLatest(b.bid)}" th:object="${item}" class="item">
+                    <a th:href="@{/board/view/{seq}(seq=*{seq})}">
+                        <th:block th:if="*{notice}">
+                            [<th:block th:text="#{공지}"></th:block>]
+                        </th:block>
+                        <th:block th:text="*{subject}"></th:block>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li th:each="b : ${boardMenus}">
+            <h2>
+                <a th:href="@{/board/list/{bid}(bid=${b.bid})}" th:text="${b.bName}"></a>
+            </h2>
+            <ul class="items">
+                <li th:each="item : ${@boardInfoService.getLatest(b.bid)}" th:object="${item}" class="item">
+                    <a th:href="@{/board/view/{seq}(seq=*{seq})}">
+                        <th:block th:if="*{notice}">
+                            [<th:block th:text="#{공지}"></th:block>]
+                        </th:block>
+                        <th:block th:text="*{subject}"></th:block>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li th:each="b : ${boardMenus}">
+            <h2>
+                <a th:href="@{/board/list/{bid}(bid=${b.bid})}" th:text="${b.bName}"></a>
+            </h2>
+            <ul class="items">
+                <li th:each="item : ${@boardInfoService.getLatest(b.bid)}" th:object="${item}" class="item">
+                    <a th:href="@{/board/view/{seq}(seq=*{seq})}">
+                        <th:block th:if="*{notice}">
+                            [<th:block th:text="#{공지}"></th:block>]
+                        </th:block>
+                        <th:block th:text="*{subject}"></th:block>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li th:each="b : ${boardMenus}">
+            <h2>
+                <a th:href="@{/board/list/{bid}(bid=${b.bid})}" th:text="${b.bName}"></a>
+            </h2>
+            <ul class="items">
+                <li th:each="item : ${@boardInfoService.getLatest(b.bid)}" th:object="${item}" class="item">
+                    <a th:href="@{/board/view/{seq}(seq=*{seq})}">
+                        <th:block th:if="*{notice}">
+                            [<th:block th:text="#{공지}"></th:block>]
+                        </th:block>
+                        <th:block th:text="*{subject}"></th:block>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li th:each="b : ${boardMenus}">
+            <h2>
+                <a th:href="@{/board/list/{bid}(bid=${b.bid})}" th:text="${b.bName}"></a>
+            </h2>
+            <ul class="items">
+                <li th:each="item : ${@boardInfoService.getLatest(b.bid)}" th:object="${item}" class="item">
+                    <a th:href="@{/board/view/{seq}(seq=*{seq})}">
+                        <th:block th:if="*{notice}">
+                            [<th:block th:text="#{공지}"></th:block>]
+                        </th:block>
+                        <th:block th:text="*{subject}"></th:block>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li th:each="b : ${boardMenus}">
+            <h2>
+                <a th:href="@{/board/list/{bid}(bid=${b.bid})}" th:text="${b.bName}"></a>
+            </h2>
+            <ul class="items">
+                <li th:each="item : ${@boardInfoService.getLatest(b.bid)}" th:object="${item}" class="item">
+                    <a th:href="@{/board/view/{seq}(seq=*{seq})}">
+                        <th:block th:if="*{notice}">
+                            [<th:block th:text="#{공지}"></th:block>]
+                        </th:block>
+                        <th:block th:text="*{subject}"></th:block>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li th:each="b : ${boardMenus}">
+            <h2>
+                <a th:href="@{/board/list/{bid}(bid=${b.bid})}" th:text="${b.bName}"></a>
+            </h2>
+            <ul class="items">
+                <li th:each="item : ${@boardInfoService.getLatest(b.bid)}" th:object="${item}" class="item">
+                    <a th:href="@{/board/view/{seq}(seq=*{seq})}">
+                        <th:block th:if="*{notice}">
+                            [<th:block th:text="#{공지}"></th:block>]
+                        </th:block>
+                        <th:block th:text="*{subject}"></th:block>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li th:each="b : ${boardMenus}">
+            <h2>
+                <a th:href="@{/board/list/{bid}(bid=${b.bid})}" th:text="${b.bName}"></a>
+            </h2>
+            <ul class="items">
+                <li th:each="item : ${@boardInfoService.getLatest(b.bid)}" th:object="${item}" class="item">
+                    <a th:href="@{/board/view/{seq}(seq=*{seq})}">
+                        <th:block th:if="*{notice}">
+                            [<th:block th:text="#{공지}"></th:block>]
+                        </th:block>
+                        <th:block th:text="*{subject}"></th:block>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</main>
+</html>

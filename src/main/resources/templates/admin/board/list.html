@@ -40,12 +40,13 @@
                 <th width="150">게시판 ID</th>
                 <th width="250">게시판 이름</th>
                 <th width="250">사용여부</th>
+                <th width="120">진열가중치</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
             <tr th:if="${items == null || items.isEmpty()}">
-                <td colspan="5" class="no_data">조회된 게시판이 없습니다.</td>
+                <td colspan="6" class="no_data">조회된 게시판이 없습니다.</td>
             </tr>
             <tr th:unless="${items == null || items.isEmpty()}" th:each="item, status : ${items}" th:object="${item}">
                 <td align="center">
@@ -61,6 +62,9 @@
 
                     <input type="radio" th:name="${'active_' + status.index}" value="false" th:checked="*{!active}" th:id="${'active_false_' + status.index}">
                     <label th:for="${'active_false_' + status.index}">미사용</label>
+                </td>
+                <td>
+                    <input type="number" th:name="${'listOrder_' + status.index}" th:value="*{listOrder}">
                 </td>
                 <td>
                     <a th:href="@{/admin/board/edit/{bid}(bid=*{bid})}" class="sbtn">

@@ -21,11 +21,11 @@ class ProjectApplicationTests {
 
 	@Test @Disabled
 	void contextLoads() {
-		Member member = memberRepository.findByUserId("user01").orElse(null);
+		Member member = memberRepository.findByUserId("user02").orElse(null);
 
 		Authorities authorities = new Authorities();
 		authorities.setMember(member);
-		authorities.setAuthority(Authority.MANAGER);
+		authorities.setAuthority(Authority.ADMIN);
 
 		authoritiesRepository.saveAndFlush(authorities);
 	}
