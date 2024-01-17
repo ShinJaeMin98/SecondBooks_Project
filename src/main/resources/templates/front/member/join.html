@@ -14,6 +14,13 @@
             <dd>
                 <div>
                     <input type="text" name="email" th:field="*{email}" th:readonly="${session.EmailAuthVerified != null && session.EmailAuthVerified}">
+<!--
+
+                    <select name="domain">
+                                <option th:each="school : ${schools}" th:value="${school.num}" th:text="${school.domain}"></option>
+                    </select>
+-->
+
                     <button th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}" type="button" id="email_verify" th:text="#{인증코드전송}"></button>
                 </div>
                 <div class="auth_box">
@@ -63,6 +70,7 @@
                 <div class="error" th:each="err : ${#fields.errors('name')}" th:text="${err}"></div>
             </dd>
         </dl>
+
 
         <dl>
             <dt th:text="#{프로필_이미지}"></dt>

@@ -16,6 +16,10 @@ public class RequestJoin {
     @NotBlank @Email
     private String email;
 
+/*    private String domain;
+
+    private String realEmail = email + domain;*/
+
     @NotBlank
     @Size(min=6)
     private String userId;
