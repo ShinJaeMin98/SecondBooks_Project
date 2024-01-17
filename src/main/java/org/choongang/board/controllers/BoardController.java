@@ -2,8 +2,10 @@ package org.choongang.board.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.choongang.admin.board.controllers.BoardSearch;
 import org.choongang.board.entities.Board;
 import org.choongang.board.entities.BoardData;
+import org.choongang.board.service.BoardDeleteService;
 import org.choongang.board.service.BoardInfoService;
 import org.choongang.board.service.BoardSaveService;
 import org.choongang.board.service.config.BoardConfigInfoService;
@@ -11,6 +13,7 @@ import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.ListData;
 import org.choongang.commons.Utils;
 import org.choongang.file.entities.FileInfo;
+import org.choongang.file.service.FileDeleteService;
 import org.choongang.file.service.FileInfoService;
 import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
@@ -35,6 +38,7 @@ public class BoardController implements ExceptionProcessor {
     private final BoardFormValidator boardFormValidator;
     private final BoardSaveService boardSaveService;
     private final BoardInfoService boardInfoService;
+    private final BoardDeleteService boardDeleteService;
 
     private final MemberUtil memberUtil;
     private final Utils utils;
@@ -68,10 +72,19 @@ public class BoardController implements ExceptionProcessor {
      * @return
      */
     @GetMapping("/view/{seq}")
-    public String view(@PathVariable("seq") Long seq, Model model) {
+    public String view(@PathVariable("seq") Long seq, @ModelAttribute BoardDataSearch search, Model model) {
         boardInfoService.updateViewCount(seq); // 조회수 업데이트
 
         commonProcess(seq, "view", model);
+
+        // 게시글 보기 하단 목록 노출 S
+        if (board.isShowListBelowView()) {
+            ListData<BoardData> data = boardInfoService.getList(board.getBid(), search);
+
+            model.addAttribute("items", data.getItems());
+            model.addAttribute("pagination", data.getPagination());
+        }
+        // 게시글 보기 하단 목록 노출 E
 
         return utils.tpl("board/view");
     }
@@ -146,6 +159,14 @@ public class BoardController implements ExceptionProcessor {
         redirectURL += board.getLocationAfterWriting().equals("view")  ? "view/" + boardData.getSeq() : "list/" + form.getBid();
 
         return redirectURL;
+    }
+
+    @GetMapping("delete/{seq}")
+    public String delete(@PathVariable("seq") Long seq, Model model) {
+        commonProcess(seq, "delete", model);
+        boardDeleteService.delete(seq);
+
+        return "redirect:/board/list/" + board.getBid();
     }
 
     /**

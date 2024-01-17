@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <th:block th:fragment="items">
+
+        <th:block th:if="${board.skin == null || board.skin == 'default'}">
+            <th:block th:replace="~{front/board/skins/default/_list_items::default}"></th:block>
+        </th:block>
+
+        <th:block th:if="${board.skin == 'gallery'}">
+            <th:block th:replace="~{front/board/skins/gallery/_list_items::gallery}"></th:block>
+        </th:block>
+
+        <th:block th:if="${board.skin == 'qna'}">
+            <th:block th:replace="~{front/board/skins/qna/_list_items::qna}"></th:block>
+        </th:block>
+
+        <th:block th:if="${board.skin == 'review'}">
+            <th:block th:replace="~{front/board/skins/review/_list_items::review}"></th:block>
+        </th:block>
+
+        <th:block th:if="${board.skin == 'blog'}">
+            <th:block th:replace="~{front/board/skins/blog/_list_items::blog}"></th:block>
+        </th:block>
+
+    </th:block>
+</main>
+</html>
