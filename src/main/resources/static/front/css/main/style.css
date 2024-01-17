@@ -5,4 +5,7 @@
 .board_latest h2 { line-height: 1; margin: 0; padding: 10px; font-weight: normal; border-bottom: 1px solid #d5d5d5; background: #f8f8f8; font-size: 1.15rem; }
 
 .board_latest a:hover { text-decoration: underline; }
-.board_latest .items > li { height: 30px; text-overflow: ellipsis; white-spacing: nowrap; overflow: hidden; }
+.board_latest .items > li { height: 30px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
+.board_latest .items > li a { text-overflow: ellipsis; white-spacing: nowrap; overflow: hidden;
+                        display: block; height: 35px; width: calc(100% - 1px); line-height: 35px; padding: 0 10px; }
+.board_latest .items > li + li { border-top: 1px dashed #d5d5d5; }
