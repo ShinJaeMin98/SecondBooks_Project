@@ -60,18 +60,12 @@ public class SchoolController implements ExceptionProcessor {
         return "admin/school/list";
     }
 
-
-
-
     @GetMapping("/add")
     public String add(@ModelAttribute String mode, Model model , RequestSchool form) {
         mode = form.getMode();
 
         commonProcess(mode, model);
-
-
-
-        return "admin/school/" + mode;
+         return "admin/school/" + mode;
     }
 
     @PostMapping("/save")
@@ -93,7 +87,6 @@ public class SchoolController implements ExceptionProcessor {
     public String delete(@PathVariable("num") Long num, Model model,@ModelAttribute SchoolSearch search) {
         commonProcess("edit", model);
         commonProcess("list", model);
-        System.out.println("========================school Num:"+num);
 
         deleteService.delete(num);
 
@@ -107,8 +100,6 @@ public class SchoolController implements ExceptionProcessor {
         commonProcess("edit", model);
         commonProcess("list", model);
 
-        System.out.println(num+"[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[");
-
         School school = searchService.findSchoolByNum(num);
 
         RequestSchool requestSchool = new RequestSchool();
@@ -117,12 +108,8 @@ public class SchoolController implements ExceptionProcessor {
         requestSchool.setMenuLocation(school.getMenuLocation());
         requestSchool.setNum(school.getNum());
 
-
         model.addAttribute("requestSchool" , requestSchool);
         model.addAttribute("num" , num);
-
-        /*List<School> items = searchService.getList();
-        model.addAttribute("items", items);*/
 
         return "admin/school/edit";
     }
@@ -131,27 +118,22 @@ public class SchoolController implements ExceptionProcessor {
     public String edit2(Model model,@ModelAttribute SchoolSearch search , RequestSchool form) {
         commonProcess("edit", model);
         commonProcess("list", model);
-        System.out.println(form.getMode()+"666666666666666666666666666");
+
         saveService.save(form);
 
         List<School> items = searchService.getList();
         model.addAttribute("items", items);
 
-
-        return "redirect:/admin/school";
+         return "redirect:/admin/school";
     }
     @DeleteMapping
     public String deleteList(@RequestParam("chk") List<Long> chks, Model model) {
         commonProcess("list", model);
 
-        System.out.println(chks+"dddddddddddddddddddddddddddddddddd");
         deleteService.deleteChks(chks);
-        //model.addAttribute("script", "parent.location.reload();");
 
         List<School> items = searchService.getList();
         model.addAttribute("items", items);
-
-        System.out.println(items);
 
         model.addAttribute("script", "parent.location.reload();");
         return "common/_execute_script";
