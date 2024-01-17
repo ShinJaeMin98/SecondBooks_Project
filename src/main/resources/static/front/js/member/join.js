@@ -7,9 +7,9 @@ window.addEventListener("DOMContentLoaded", function() {
     if (emailVerifyEl) {
         emailVerifyEl.addEventListener("click", function() {
             const { ajaxLoad, sendEmailVerify } = commonLib;
-            const email = frmJoin.email.value.trim();
-
-
+            frmJoin.email.value = '';
+            frmJoin.email.value = frmJoin.univId.value.trim() + "@" + frmJoin.domain.value.trim();
+            const email = frmJoin.email.value;
             if (!email) {
                 alert('이메일을 입력하세요.');
                 frmJoin.email.focus();
