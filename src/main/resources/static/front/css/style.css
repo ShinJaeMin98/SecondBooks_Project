@@ -7,6 +7,10 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 dl, dt, dd { margin: 0; padding: 0; }
 img { border: 0; }
 
+dl { display: flex; }
+dt { width: 180px; }
+dd { flex-grow: 1; }
+
 .layout_width { max-width: 1300px; min-width: 1000px; margin: 0 auto; }
 
 /* 페이징 공통 S */
@@ -23,6 +27,7 @@ header .site_top a { margin-left: 15px; }
 header .site_top a:hover { text-decoration: underline; }
 
 header .logo_search > div { display: flex; align-items: center; justify-content: space-between; height: 100px; }
+header .logo_search .search { display: flex; }
 
 header nav { background: #596b99 }
 header nav > .inner a { display: inline-block; height: 45px; line-height: 45px; padding: 0 25px; min-width: 120px; text-align: center; color: #fff; font-size: 1.35rem; }
@@ -32,6 +37,6 @@ header nav > .inner a:hover { background: #222; }
 /* 입력 항목 공통 S */
 input[type='text'],
 input[type='password'],
-input[type='email'] { width: 100%; height: 40px; padding: 0 10px; border: 1px solid #d5d5d5; }
-
+input[type='email'] { width: 100%; height: 40px; padding: 0 10px; border: 1px solid #d5d5d5; border-radius: 3px; }
+select { height: 40px; border: 1px solid #d5d5d5; border-radius: 3px; }
 /* 입력 항목 공통 E */
