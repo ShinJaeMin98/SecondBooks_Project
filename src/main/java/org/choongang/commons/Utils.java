@@ -210,4 +210,15 @@ public class Utils {
 
         return Objects.hash(ip, ua);
     }
+
+    /**
+     *  삭제 버튼 클릭시 "정말 삭제하시겠습니까?" confirm 대화상자 출력
+     *
+     * @return
+     */
+    public String confirmDelete() {
+        String message = Utils.getMessage("Confirm.delete.message", "commons");
+
+        return String.format("return confirm('%s');", message);
+    }
 }
