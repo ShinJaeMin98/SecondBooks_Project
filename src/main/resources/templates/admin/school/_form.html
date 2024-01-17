@@ -6,9 +6,15 @@
     <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 
     <h2>기본 정보</h2>
+    <div th:if="${msg != null}">
+        <hr>
+        <h2 style="color:red">이미 등록된 학교입니다.</h2>
+        <hr>
+    </div>
     <table class="table_cols mb30">
         <tr>
             <th width="180">학교 선택</th>
+
             <td>
                 <select name="domain" th:field="*{domain}">
                     <option th:each="school : ${schools}" th:value="${school[1]}" th:text="${school[0]}" th:field="*{domain}"></option>

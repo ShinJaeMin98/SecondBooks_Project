@@ -7,6 +7,7 @@ import org.choongang.admin.menus.MenuDetail;
 import org.choongang.admin.school.service.SchoolDeleteService;
 import org.choongang.admin.school.service.SchoolSaveService;
 import org.choongang.admin.school.service.SchoolSearchService;
+import org.choongang.admin.school.service.SchoolVerifyService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.school.SchoolUtil;
 import org.choongang.school.entities.School;
@@ -28,6 +29,7 @@ public class SchoolController implements ExceptionProcessor {
     private final SchoolSaveService saveService;
     private final SchoolSearchService searchService;
     private final SchoolDeleteService deleteService;
+    private final SchoolVerifyService verifyService;
 
     @ModelAttribute("menuCode")
     public String getMenuCode() {
@@ -67,6 +69,8 @@ public class SchoolController implements ExceptionProcessor {
 
         commonProcess(mode, model);
 
+
+
         return "admin/school/" + mode;
     }
 
@@ -75,10 +79,13 @@ public class SchoolController implements ExceptionProcessor {
         String mode = form.getMode();
         commonProcess(mode, model);
 
-        if (errors.hasErrors()) {
+        if (!verifyService.doubleCheck(form.getDomain())) {
+            model.addAttribute("msg" , "이미 등록된 학교입니다.");
             return "admin/school/" + mode;
         }
+
         saveService.save(form);
+
         return "redirect:/admin/school";
     }
 
