@@ -4024,3 +4024,41 @@ INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("영남대학교 경영행정대학�
 
 INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("한국에너지공과대학교 대학원","kentech.ac.kr");
 
+O SCHOOLS (NAME,DOMAIN ) VALUES ("가톨릭대학교 보건의료경영대학원","");
+
+INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("서강대학교 미디어커뮤니케이션대학원","gscom.sogang.ac.kr");
+
+INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("서강대학교 메타버스전문대학원","gsm.sogang.ac.kr");
+
+INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("전북대학교 식물방역대학원","");
+
+INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("전북대학교 공공정책대학원","gspa.jbnu.ac.kr");
+
+INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("이화여자대학교 데이터사이언스대학원","gsds.ewha.ac.kr");
+
+INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("성신여자대학교 AI세무・회계대학원","www.sungshin.ac.kr/tax/index.do");
+
+INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("한서대학교 항공융합대학원","www.hanseo.ac.kr");
+
+INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("한국전통문화대학교 미래문화유산대학원","");
+
+INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("동국대학교 미래융합대학원","");
+
+INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("한국폴리텍 VII 대학 진주캠퍼스","jinju.kopo.ac.kr");
+
+INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("연세대학교(미래) 보건과학대학원","");
+
+INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("경북대학교 식물방역대학원","");
+
+INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("경북대학교 데이터사이언스대학원","data.knu.ac.kr");
+
+INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("백석대학교 일반대학원","");
+
+INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("을지대학교 보건복지대학원","www.eulji.ac.kr");
+
+INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("한국폴리텍 VII 대학 동부산캠퍼스","www.kopo.ac.kr/dongbusan");
+
+INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("영남대학교 경영행정대학원","");
+
+INSERT INTO SCHOOLS (NAME,DOMAIN ) VALUES ("한국에너지공과대학교 대학원","kentech.ac.kr");
+
