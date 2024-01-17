@@ -164,6 +164,7 @@ public class BoardController implements ExceptionProcessor {
     @GetMapping("delete/{seq}")
     public String delete(@PathVariable("seq") Long seq, Model model) {
         commonProcess(seq, "delete", model);
+
         boardDeleteService.delete(seq);
 
         return "redirect:/board/list/" + board.getBid();

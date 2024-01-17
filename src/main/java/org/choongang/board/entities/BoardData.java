@@ -86,4 +86,19 @@ public class BoardData extends Base {
 
     @Transient
     private List<FileInfo> attachFiles; // 첨부 파일
+
+    @Transient
+    private boolean editable;   // 수정 가능 여부
+
+    @Transient
+    private boolean deletable;  // 삭제 가능 여부
+
+    @Transient
+    private boolean mine;   // 게시자 소유자
+
+    @Transient
+    private boolean showEditButton; // 수정 버튼 노출 여부
+
+    @Transient
+    private boolean showDeleteButton; // 삭제 버튼 노출 여부
 }
