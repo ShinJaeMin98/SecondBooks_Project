@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<nav th:if="${boardMenus}" th:fragment="menus">
+    <div class="inner layout_width">
+        <a th:each="menu : ${boardMenus}" th:object="${menu}" th:href="@{/board/list/{bid}(bid=*{bid})}" th:text="*{bName}"></a>
+    </div>
+</nav>
+</html>

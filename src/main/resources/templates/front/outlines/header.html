@@ -18,6 +18,7 @@
 
         <a sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')" th:href="@{/admin}" th:text="#{사이트_관리}"></a>
     </th:block>
+    <nav th:replace="~{front/outlines/_main_menu::menus}"></nav>
     <hr>
 </header>
 </html>

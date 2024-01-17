@@ -38,6 +38,12 @@
             </td>
         </tr>
         <tr>
+            <th>진열가중치</th>
+            <td>
+                <input type="number" name="listOrder" th:field="*{listOrder}">
+            </td>
+        </tr>
+        <tr>
             <th>1페이지 게시글 수</th>
             <td>
                 <input type="number" name="rowsPerPage" min="1" th:field="*{rowsPerPage}">
@@ -169,7 +175,7 @@
                 <input type="radio" name="listAccessType" value="ALL" id="listAccessType_ALL" th:field="*{listAccessType}">
                 <label for="listAccessType_ALL">비회원+회원+관리자</label>
 
-                <input type="radio" name="listAccessType" value="MEMBER" id="listAccessType_MEMBER" th:field="*{listAccessType}">
+                <input type="radio" name="listAccessType" value="USER" id="listAccessType_MEMBER" th:field="*{listAccessType}">
                 <label for="listAccessType_MEMBER">회원+관리자</label>
 
                 <input type="radio" name="listAccessType" value="ADMIN" id="listAccessType_ADMIN" th:field="*{listAccessType}">
@@ -182,7 +188,7 @@
                 <input type="radio" name="viewAccessType" value="ALL" id="viewAccessType_ALL" th:field="*{viewAccessType}">
                 <label for="viewAccessType_ALL">비회원+회원+관리자</label>
 
-                <input type="radio" name="viewAccessType" value="MEMBER" id="viewAccessType_MEMBER" th:field="*{viewAccessType}">
+                <input type="radio" name="viewAccessType" value="USER" id="viewAccessType_MEMBER" th:field="*{viewAccessType}">
                 <label for="viewAccessType_MEMBER">회원+관리자</label>
 
                 <input type="radio" name="viewAccessType" value="ADMIN" id="viewAccessType_ADMIN" th:field="*{viewAccessType}">
@@ -195,7 +201,7 @@
                 <input type="radio" name="writeAccessType" value="ALL" id="writeAccessType_ALL" th:field="*{writeAccessType}">
                 <label for="writeAccessType_ALL">비회원+회원+관리자</label>
 
-                <input type="radio" name="writeAccessType" value="MEMBER" id="writeAccessType_MEMBER" th:field="*{writeAccessType}">
+                <input type="radio" name="writeAccessType" value="USER" id="writeAccessType_MEMBER" th:field="*{writeAccessType}">
                 <label for="writeAccessType_MEMBER">회원+관리자</label>
 
                 <input type="radio" name="writeAccessType" value="ADMIN" id="writeAccessType_ADMIN" th:field="*{writeAccessType}">
@@ -208,7 +214,7 @@
                 <input type="radio" name="replyAccessType" value="ALL" id="replyAccessType_ALL" th:field="*{replyAccessType}">
                 <label for="replyAccessType_ALL">비회원+회원+관리자</label>
 
-                <input type="radio" name="replyAccessType" value="MEMBER" id="replyAccessType_MEMBER" th:field="*{replyAccessType}">
+                <input type="radio" name="replyAccessType" value="USER" id="replyAccessType_MEMBER" th:field="*{replyAccessType}">
                 <label for="replyAccessType_MEMBER">회원+관리자</label>
 
                 <input type="radio" name="replyAccessType" value="ADMIN" id="replyAccessType_ADMIN" th:field="*{replyAccessType}">
@@ -221,7 +227,7 @@
                 <input type="radio" name="commentAccessType" value="ALL" id="commentAccessType_ALL" th:field="*{commentAccessType}">
                 <label for="commentAccessType_ALL">비회원+회원+관리자</label>
 
-                <input type="radio" name="commentAccessType" value="MEMBER" id="commentAccessType_MEMBER" th:field="*{commentAccessType}">
+                <input type="radio" name="commentAccessType" value="USER" id="commentAccessType_MEMBER" th:field="*{commentAccessType}">
                 <label for="commentAccessType_MEMBER">회원+관리자</label>
 
                 <input type="radio" name="commentAccessType" value="ADMIN" id="commentAccessType_ADMIN" th:field="*{commentAccessType}">

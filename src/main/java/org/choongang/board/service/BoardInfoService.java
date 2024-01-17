@@ -184,6 +184,26 @@ public class BoardInfoService {
     }
 
     /**
+     * 최신 게시글
+     *
+     * @param bid : 게시판 아이디
+     * @param limit : 조회할 갯수
+     * @return
+     */
+    public List<BoardData> getLatest(String bid, int limit) {
+        BoardDataSearch search = new BoardDataSearch();
+        search.setLimit(limit);
+
+        ListData<BoardData> data = getList(bid, search);
+
+        return data.getItems();
+    }
+
+    public List<BoardData> getLatest(String bid) {
+        return getLatest(bid, 10);
+    }
+
+    /**
      * 게시글 추가 정보 처리
      *
      * @param boardData
