@@ -50,6 +50,8 @@ public class Board extends BaseMember {
     @Column(length=10, nullable = false)
     private String locationAfterWriting = "list"; // 글 작성 후 이동 위치
 
+    private boolean showListBelowView;  // 글 보기 하단 게시글 목록 노출 여부
+
     @Column(length=10, nullable = false)
     private String skin = "default"; // 스킨
 

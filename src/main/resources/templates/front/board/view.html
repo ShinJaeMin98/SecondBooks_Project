@@ -24,5 +24,9 @@
         <th:block th:replace="~{front/board/skins/blog/view::blog}"></th:block>
     </th:block>
 
+    <th:block th:if="${board.showListBelowView}">
+        <th:block th:replace="~{front/board/_list_items::items}"></th:block>
+    </th:block>
+
 </main>
 </html>

@@ -61,6 +61,8 @@ public class QBoard extends EntityPathBase<Board> {
 
     public final NumberPath<Integer> rowsPerPage = createNumber("rowsPerPage", Integer.class);
 
+    public final BooleanPath showListBelowView = createBoolean("showListBelowView");
+
     public final StringPath skin = createString("skin");
 
     public final BooleanPath useComment = createBoolean("useComment");

@@ -121,6 +121,18 @@
         </tr>
 
         <tr>
+            <th>글보기 하단 목록 노출</th>
+            <td>
+                <input type="radio" name="showListBelowView" value="true" id="showListBelowView_true" th:field="*{showListBelowView}">
+                <label for="showListBelowView_true">노출</label>
+
+                <input type="radio" name="showListBelowView" value="false" id="showListBelowView_false" th:field="*{showListBelowView}">
+                <label for="showListBelowView_false">미노출</label>
+            </td>
+
+        </tr>
+
+        <tr>
             <th>스킨</th>
             <td>
                 <input type="radio" name="skin" value="default" id="skin_default" th:field="*{skin}">
