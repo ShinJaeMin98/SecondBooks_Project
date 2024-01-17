@@ -14,6 +14,7 @@ public class BoardDeleteService {
     private final BoardDataRepository boardDataRepository;
     private final BoardInfoService boardInfoService;
     private final FileDeleteService fileDeleteService;
+    private final BoardAuthService boardAuthService;
 
     /**
      *  게시글 삭제
@@ -21,6 +22,10 @@ public class BoardDeleteService {
      * @param seq
      */
     public void delete(Long seq) {
+
+        // 삭제 권한 체크
+        boardAuthService.check("delete", seq);
+
         BoardData data = boardInfoService.get(seq);
 
         String gid = data.getGid();
