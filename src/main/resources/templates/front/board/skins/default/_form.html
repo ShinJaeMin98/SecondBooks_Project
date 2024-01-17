@@ -3,6 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <th:block th:fragment="form" th:object="${requestBoard}">
+    <input th:if="*{mode == 'update' && seq != null}" type="hidden" name="seq" th:field="*{seq}">
     <input type="hidden" name="bid" th:field="*{bid}">
     <input type="hidden" name="gid" th:field="*{gid}">
 

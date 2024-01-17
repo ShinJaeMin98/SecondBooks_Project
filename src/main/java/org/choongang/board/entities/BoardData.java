@@ -25,7 +25,7 @@ public class BoardData extends Base {
     private Long seq;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "boardSeq")
+    @JoinColumn(name = "bid")
     private Board board;
 
     @ManyToOne(fetch = FetchType.LAZY)

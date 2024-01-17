@@ -8,6 +8,7 @@ import org.choongang.board.service.BoardInfoService;
 import org.choongang.board.service.BoardSaveService;
 import org.choongang.board.service.config.BoardConfigInfoService;
 import org.choongang.commons.ExceptionProcessor;
+import org.choongang.commons.ListData;
 import org.choongang.commons.Utils;
 import org.choongang.file.entities.FileInfo;
 import org.choongang.file.service.FileInfoService;
@@ -48,8 +49,13 @@ public class BoardController implements ExceptionProcessor {
      * @return
      */
     @GetMapping("/list/{bid}")
-    public String list(@PathVariable("bid") String bid, Model model) {
+    public String list(@PathVariable("bid") String bid, @ModelAttribute BoardDataSearch search, Model model) {
         commonProcess(bid, "list", model);
+
+        ListData<BoardData> data = boardInfoService.getList(bid, search);
+
+        model.addAttribute("items", data.getItems());
+        model.addAttribute("pagination", data.getPagination());
 
         return utils.tpl("board/list");
     }
@@ -63,6 +69,8 @@ public class BoardController implements ExceptionProcessor {
      */
     @GetMapping("/view/{seq}")
     public String view(@PathVariable("seq") Long seq, Model model) {
+        boardInfoService.updateViewCount(seq); // 조회수 업데이트
+
         commonProcess(seq, "view", model);
 
         return utils.tpl("board/view");
@@ -98,6 +106,9 @@ public class BoardController implements ExceptionProcessor {
     @GetMapping("/update/{seq}")
     public String update(@PathVariable("seq") Long seq, Model model) {
         commonProcess(seq, "update", model);
+
+        RequestBoard form = boardInfoService.getForm(boardData);
+        model.addAttribute("requestBoard", form);
 
         return utils.tpl("board/update");
     }

@@ -13,3 +13,8 @@
 
 /* 너비 공통 */
 .w_full { width: 100% !important; }
+
+/* 플렉스 공통 */
+.flex { display: flex; }
+.flex.sb { justify-content: space-between; }
+.flex.aic { align-items: center; }
