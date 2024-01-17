@@ -2,17 +2,12 @@ package org.choongang.admin.school.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.choongang.admin.board.controllers.BoardSearch;
-import org.choongang.admin.board.controllers.RequestBoardConfig;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
 import org.choongang.admin.school.service.SchoolDeleteService;
 import org.choongang.admin.school.service.SchoolSaveService;
 import org.choongang.admin.school.service.SchoolSearchService;
-import org.choongang.board.entities.Board;
 import org.choongang.commons.ExceptionProcessor;
-import org.choongang.commons.ListData;
-import org.choongang.commons.Pagination;
 import org.choongang.school.SchoolUtil;
 import org.choongang.school.entities.School;
 import org.springframework.stereotype.Controller;
@@ -21,7 +16,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,7 +131,7 @@ public class SchoolController implements ExceptionProcessor {
         model.addAttribute("items", items);
 
 
-        return "admin/school/list";
+        return "redirect:/admin/school";
     }
     @DeleteMapping
     public String deleteList(@RequestParam("chk") List<Long> chks, Model model) {
