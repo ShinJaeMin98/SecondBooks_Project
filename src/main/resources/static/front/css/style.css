@@ -15,3 +15,23 @@ img { border: 0; }
 .pagination .page.on { background: #596b99; color: #fff; }
 .pagination .page + .page { margin-left: 3px; }
 /* 페이징 공통 E */
+
+/* 헤더 공통 S */
+header .site_top { background: #f8f8f8; border-bottom: 1px solid #d5d5d5; }
+header .site_top > div { text-align: right; height: 30px; line-height: 30px; }
+header .site_top a { margin-left: 15px; }
+header .site_top a:hover { text-decoration: underline; }
+
+header .logo_search > div { display: flex; align-items: center; justify-content: space-between; height: 100px; }
+
+header nav { background: #596b99 }
+header nav > .inner a { display: inline-block; height: 45px; line-height: 45px; padding: 0 25px; min-width: 120px; text-align: center; color: #fff; font-size: 1.35rem; }
+header nav > .inner a:hover { background: #222; }
+/* 헤더 공통 E */
+
+/* 입력 항목 공통 S */
+input[type='text'],
+input[type='password'],
+input[type='email'] { width: 100%; height: 40px; padding: 0 10px; border: 1px solid #d5d5d5; }
+
+/* 입력 항목 공통 E */
