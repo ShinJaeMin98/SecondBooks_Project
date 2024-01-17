@@ -14,12 +14,12 @@
             <dd>
                 <div>
                     <input type="text" name="email" th:field="*{email}" th:readonly="${session.EmailAuthVerified != null && session.EmailAuthVerified}">
-<!--
+
 
                     <select name="domain">
                                 <option th:each="school : ${schools}" th:value="${school.num}" th:text="${school.domain}"></option>
                     </select>
--->
+
 
                     <button th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}" type="button" id="email_verify" th:text="#{인증코드전송}"></button>
                 </div>
