@@ -53,10 +53,18 @@ public class SchoolController implements ExceptionProcessor {
     @GetMapping
     public String list(@ModelAttribute SchoolSearch search , Model model) {
         commonProcess("list", model);
-        List<School> items = searchService.getList();
+            List<School> items = null;
+        if(search.getSkey() == null || search.getSkey().equals("")){//검색어 없을 경우
+            items = searchService.getList();
+        } else {//검색어 있을 경우
+            items = searchService.getSearchList();
+        }
+
         model.addAttribute("items", items);
         return "admin/school/list";
     }
+
+
 
 
     @GetMapping("/add")
@@ -98,6 +106,8 @@ public class SchoolController implements ExceptionProcessor {
         commonProcess("edit", model);
         commonProcess("list", model);
 
+        System.out.println(num+"[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[");
+
         School school = searchService.findSchoolByNum(num);
 
         RequestSchool requestSchool = new RequestSchool();
@@ -105,10 +115,13 @@ public class SchoolController implements ExceptionProcessor {
         requestSchool.setGid(school.getGid());
         requestSchool.setMenuLocation(school.getMenuLocation());
         requestSchool.setNum(school.getNum());
+
+
         model.addAttribute("requestSchool" , requestSchool);
         model.addAttribute("num" , num);
-        List<School> items = searchService.getList();
-        model.addAttribute("items", items);
+
+        /*List<School> items = searchService.getList();
+        model.addAttribute("items", items);*/
 
         return "admin/school/edit";
     }
@@ -123,9 +136,24 @@ public class SchoolController implements ExceptionProcessor {
         List<School> items = searchService.getList();
         model.addAttribute("items", items);
 
+
         return "admin/school/list";
     }
+    @DeleteMapping
+    public String deleteList(@RequestParam("chk") List<Long> chks, Model model) {
+        commonProcess("list", model);
 
+        System.out.println(chks+"dddddddddddddddddddddddddddddddddd");
+        deleteService.deleteChks(chks);
+       // model.addAttribute("script", "parent.location.reload();");
+
+        List<School> items = searchService.getList();
+        model.addAttribute("items", items);
+
+        System.out.println(items);
+
+        return "admin/school/list";
+    }
 
 
 

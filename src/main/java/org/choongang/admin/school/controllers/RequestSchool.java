@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.choongang.commons.constants.Location;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -17,5 +19,7 @@ public class RequestSchool {
     private String comment;
 
     private Location menuLocation = Location.LEFT;
+
+    //private List<String> chk = new ArrayList<>();
 
 }

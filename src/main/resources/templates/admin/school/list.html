@@ -5,18 +5,18 @@
 <section layout:fragment="content">
     <h1>학교 목록</h1>
     <h2>학교 조회</h2>
-    <form name="frmSearch" method="get" th:action="@{/admin/school}" autocomplete="off" >
+    <form name="frmSearch" method="get" th:action="@{/admin/school}" autocomplete="off" th:object="${schoolSearch}">
         <table class="table_cols mb30">
             <tr>
                 <th>키워드</th>
                 <td>
                     <div class="input_grp">
                         <select name="sopt" >
-                            <option value="ALL">통합검색</option>
-                            <option value="bid">학교명</option>
-                            <option value="bName">도에밍</option>
+                            <option value="ALL" th:field="*{sopt}">통합검색</option>
+                            <option value="sName" th:field="*{sopt}">학교명</option>
+                            <option value="domain" th:field="*{sopt}">도메인</option>
                         </select>
-                        <input type="text" name="skey" >
+                        <input type="text" name="skey" th:field="*{skey}">
                     </div>
                 </td>
             </tr>
@@ -40,6 +40,7 @@
                 <th width="150">학교명</th>
                 <th width="250">도메인</th>
                 <th width="250">로고위치</th>
+                <th width="250">(이용자 수)학교번호</th>
                 <th width="250">수정/삭제</th>
             </tr>
             </thead>
@@ -49,10 +50,13 @@
             </tr>
             <div th:each="item, status : ${items}" th:object="${item}">
                 <tr>
-                    <td align="center"><input type="checkbox" name="chk" ></td>
+                    <td align="center">
+                        <input type="checkbox" name="chk" th:value="*{num}">
+                    </td>
                     <td th:text="*{schoolName}" align="center"></td>
                     <td th:text="*{domain}" align="center"></td>
                     <td th:text="*{menuLocation}" align="center"></td>
+                    <td align="center" th:text="*{num}"></td>
                     <td align="center"><a th:href="@{/admin/school/edit/{num}(num=*{num})}" class="sbtn">
                         <i class="xi-pen"></i> 수정하기
                     </a>
@@ -64,15 +68,11 @@
                 </tr>
             </div>
 
-
-
-
-</tbody>
+            </tbody>
         </table>
-
         <div class="table_actions">
-            <button type="button" class="sbtn form_action" data-mode="delete" data-form-name="frmList">선택 학교 삭제</button>
-            <button type="button" class="sbtn on form_action" data-mode="edit" data-form-name="frmList">선택 학교 수정</button>
+            <button type="submit" class="sbtn form_action" data-mode="delete" data-form-name="frmList">선택 학교 삭제</button>
+            <!--<button type="button" class="sbtn on form_action" data-mode="edit" data-form-name="frmList">선택 학교 수정</button>-->
         </div>
     </form>
 

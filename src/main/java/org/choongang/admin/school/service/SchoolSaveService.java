@@ -17,7 +17,8 @@ public class SchoolSaveService {
 
     public void save(RequestSchool form){
 
-        if(form.getNum() == null || form.getNum()==-1L || form.getMode().equals("add")){
+        //추가일 경우
+        if(form.getNum()==-1L || form.getMode().equals("add")){
             School school = new School();
 
             String schoolName = util.getSchoolName(form.getDomain());
@@ -27,15 +28,19 @@ public class SchoolSaveService {
             school.setDomain(form.getDomain());
             school.setMenuLocation(form.getMenuLocation());
 
-            System.out.println(school+"===============================");
+            //System.out.println(school+"=================저장==============");
             repository.saveAndFlush(school);
         }
-        else {
+        else {  //수정일 경우
             School school = searchService.findSchoolByNum(form.getNum());
 
-            school.setDomain(form.getDomain());
+            String domain = form.getDomain();
+
+            school.setDomain(domain);
             school.setMenuLocation(form.getMenuLocation());
-            school.setSchoolName(util.getSchoolName(form.getDomain()));
+            school.setSchoolName(util.getSchoolName(domain));
+            repository.saveAndFlush(school);
+            //System.out.println(school+"=================수정==============");
         }
 
     }
