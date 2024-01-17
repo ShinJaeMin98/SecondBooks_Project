@@ -33,9 +33,10 @@ public class MemberController implements ExceptionProcessor {
     public String join(@ModelAttribute RequestJoin form, Model model ) {
         commonProcess("join", model);
 
+        //회원가입 시 이메일 선택 옵션값
         List<School> schools = schoolSearchService.getList();
-        System.out.println(schools+"ddddddddddddddddddddddddddddddddddd");
         model.addAttribute("schools", schools);
+
         // 이메일 인증 여부 false로 초기화
         model.addAttribute("EmailAuthVerified", false);
 
@@ -46,7 +47,10 @@ public class MemberController implements ExceptionProcessor {
     public String joinPs(@Valid RequestJoin form, Errors errors,Model model, SessionStatus sessionStatus) {
         commonProcess("join", model);
 
+        form.setEmail(form.getFemail()+form.getDomain());
+
         joinService.process(form, errors);
+
 
         if (errors.hasErrors()) {
             return utils.tpl("member/join");
