@@ -145,14 +145,15 @@ public class SchoolController implements ExceptionProcessor {
 
         System.out.println(chks+"dddddddddddddddddddddddddddddddddd");
         deleteService.deleteChks(chks);
-       // model.addAttribute("script", "parent.location.reload();");
+        //model.addAttribute("script", "parent.location.reload();");
 
         List<School> items = searchService.getList();
         model.addAttribute("items", items);
 
         System.out.println(items);
 
-        return "admin/school/list";
+        model.addAttribute("script", "parent.location.reload();");
+        return "common/_execute_script";
     }
 
 
