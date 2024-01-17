@@ -2,6 +2,8 @@ package org.choongang.admin.board.controllers;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class BoardSearch {
 
@@ -9,6 +11,7 @@ public class BoardSearch {
     private int limit = 20;
 
     private String bid;
+    private List<String> bids;  // 여러개 조회
     private String bName;
     private boolean active;
 
