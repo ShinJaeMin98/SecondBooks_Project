@@ -98,8 +98,8 @@ public class SchoolController implements ExceptionProcessor {
         String domain = form.getDomain();
         String schoolName = schoolUtil.getSchoolName(domain);
         //이미 등록된 학교일 경우
-        if (!verifyService.doubleCheck(schoolName)) {
-            model.addAttribute("msg" , "이미 등록된 학교입니다.");
+        if (verifyService.doubleCheck(schoolName)) {
+            model.addAttribute("msg", "이미 등록된 학교입니다.");
             return "admin/school/" + mode;
         }
         //학교 등록
