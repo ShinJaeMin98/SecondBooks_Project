@@ -39,11 +39,7 @@
 <header th:replace="~{front/outlines/header::common}"></header>
 
 <main>
-    <aside th:replace="~{front/outlines/_side::menus}"></aside>
-    <section>
-        <nav th:replace="~{front/outlines/_submenu::submenus}"></nav>
-        <section layout:fragment="content"></section>
-    </section>
+    <section layout:fragment="content"></section>
 </main>
 
 <footer th:replace="~{front/outlines/footer::common}"></footer>
