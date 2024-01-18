@@ -8,9 +8,9 @@ public class SchoolSearch {
     private int page =1;
     private int limit = 20;
 
-    private Long num=-1L;
+/*    private Long num=-1L;
     private String sName;
-    private boolean active;
+    private boolean active;*/
 
     private String sopt="ALL"; // 검색옵션
     private String skey; // 검색 키워드

@@ -4,7 +4,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.choongang.admin.board.controllers.BoardSearch;
 import org.choongang.board.entities.Board;
 import org.choongang.board.entities.BoardData;
 import org.choongang.board.service.*;
@@ -13,7 +12,6 @@ import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.ListData;
 import org.choongang.commons.Utils;
 import org.choongang.file.entities.FileInfo;
-import org.choongang.file.service.FileDeleteService;
 import org.choongang.file.service.FileInfoService;
 import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
@@ -48,7 +46,7 @@ public class BoardController implements ExceptionProcessor {
     private BoardData boardData; // 게시글
 
     /**
-     * 게시판 목록
+     * 게시글 목록
      * @param bid : 게시판 아이디
      * @param model
      * @return

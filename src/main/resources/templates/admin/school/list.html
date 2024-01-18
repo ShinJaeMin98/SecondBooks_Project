@@ -5,6 +5,7 @@
 <section layout:fragment="content">
     <h1>학교 목록</h1>
     <h2>학교 조회</h2>
+    <!--=======================================검색SSS===============================================-->
     <form name="frmSearch" method="get" th:action="@{/admin/school}" autocomplete="off" th:object="${schoolSearch}">
         <table class="table_cols mb30">
             <tr>
@@ -25,6 +26,7 @@
             <button type="submit" class="btn">검색하기</button>
         </div>
     </form>
+    <!--=======================================검색EEE===============================================-->
 
     <h2>학교 목록</h2>
     <form name="frmList" method="post" th:action="@{/admin/school}" target="ifrmProcess" autocomplete="off">
@@ -78,7 +80,7 @@
         </div>
     </form>
 
-
     <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+
 </section>
 </html>
