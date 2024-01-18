@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
-<main layout:fragment="content" class="layout_width">
+<main layout:fragment="content">
     <h1 th:text="#{회원가입}"></h1>
 
     <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}">
@@ -18,7 +18,7 @@
                 <div>
                     <input type="text" name="univId" id="univId">@
                     <select name="domain" id="domain">
-                                <option th:each="school : ${schools}" th:value="${school.domain}" th:text="${school.domain}">
+                                <option th:each="school : ${schools}" th:value="${school.domain}" th:text="${school.domain}" th:field="*{sNum}">
                                 </option>
                     </select>
                     <button th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}" type="button" id="email_verify" th:text="#{인증코드전송}"></button>

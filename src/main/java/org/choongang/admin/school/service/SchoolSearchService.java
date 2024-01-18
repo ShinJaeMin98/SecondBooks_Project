@@ -33,5 +33,11 @@ public class SchoolSearchService {
         return school;
     }
 
+    public School findSchoolByDomain(String domain){
+
+        School school = repository.findByDomain(domain);
+
+        return school;
+    }
 
 }
