@@ -1,9 +1,97 @@
+
+
+
+
+
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/layouts/main}">
+[[${items}]]
+
 <section layout:fragment="content">
+    <h1>회원 목록</h1>
+    <h2>회원 조회</h2>
+    <!--=======================================검색SSS===============================================-->
+    <form name="frmSearch" method="get" th:action="@{/admin/member}" autocomplete="off" th:object="${memberSearch}">
+        <table class="table_cols mb30">
+            <tr>
+                <th>키워드</th>
+                <td>
+                    <div class="input_grp">
+                        <select name="sopt" >
+                            <option value="ALL" th:field="*{sopt}">통합검색</option>
+                            <option value="name" th:field="*{sopt}">회원명</option>
+                            <option value="userId" th:field="*{sopt}">아이디</option>
+                            <option value="schoolName" th:field="*{sopt}">학교</option>
+                            <option value="authority" th:field="*{sopt}">권한</option>
+                        </select>
+                        <input type="text" name="skey" th:field="*{skey}">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="search_btn">
+            <button type="submit" class="btn">검색하기</button>
+        </div>
+    </form>
+    <!--=======================================검색EEE===============================================-->
+    <h2>학교 목록</h2>
+    <form name="frmList" method="post" th:action="@{/admin/school}" target="ifrmProcess" autocomplete="off">
+        <input type="hidden" name="_method" value="PATCH">
+
+        <table class="table_rows">
+            <thead>
+            <tr>
+                <th width="40">
+                    <input type="checkbox" class="checkall" data-target-name="chk" id="checkall">
+                    <label for="checkall"></label>
+                </th>
+                <th width="150">아이디</th>
+                <th width="250">이름</th>
+                <th width="250">학교</th>
+                <th width="250">이메일</th>
+                <th width="250">찜목록</th>
+                <th width="250">수정/삭제</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${items == null || items.isEmpty()}">
+                <td colspan="5" class="no_data">등록된 회원이 없습니다.</td>
+            </tr>
+            <div th:each="item, status : ${items}" th:object="${item}">
+                <tr>
+                    <td align="center">
+                        <input type="checkbox" name="chk" th:value="*{seq}">
+                    </td>
+                    <td th:text="*{userId}" align="center"></td>
+                    <td align="center" th:text="*{name}"></td>
+                    <td th:text="*{school.schoolName}" align="center"></td><!--오류나면 이 부분-->
+                    <td th:text="*{email}" align="center"></td>
+                    <td align="center" >???</td>
+                    <td align="center"><a th:href="@{/admin/member/{seq}(seq=*{seq})}" class="sbtn">
+                        <i class="xi-pen"></i> 수정하기
+                    </a>
+                        <a th:href="@{/admin/member/delete/{seq}(seq=*{seq})}" class="sbtn on" target="_blank">
+                            <i class="xi-list"></i> 삭제하기
+                        </a>
+
+                    </td>
+                </tr>
+            </div>
+
+            </tbody>
+        </table>
+        <div class="table_actions">
+            <button type="submit" class="sbtn form_action" data-mode="delete" data-form-name="frmList">선택 회원 삭제</button>
+            <!--<button type="button" class="sbtn on form_action" data-mode="edit" data-form-name="frmList">선택 학교 수정</button>-->
+        </div>
+    </form>
+
 
     <th:block th:replace="~{common/_pagination::pagination}"></th:block>
 </section>
+
+
 </html>

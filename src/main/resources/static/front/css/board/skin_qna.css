@@ -1,0 +1,34 @@
+.board_view .subject { border: 1px solid #222; padding: 10px 15px; border-radius: 3px; font-size: 1.35rem; font-weight: 500; margin-bottom: 10px; }
+.board_view .content { border: 1px solid #222; padding: 15px; border-radius: 3px; margin-bottom: 10px; min-height: 350px; }
+
+.board_view .post_info { display: flex; justify-content: space-between; align-items: center; border: 1px solid #222; padding: 7px 15px; border-radius: 3px; margin-bottom: 10px; }
+.board_view .post_info .left span { margin-right: 20px; }
+.board_view .post_info .right span { margin-left: 20px; }
+
+.board_view .downloads { margin-bottom: 10px; }
+.board_view .downloads li { border-bottom: 1px solid #222; background: #f8f8f8; padding: 7px 15px; }
+.board_view .downloads li a:hover { text-decoration: underline; }
+.board_view .downloads li:first-of-type { border-top: 1px solid #222; }
+
+/* 게시판 버튼 공통 */
+.board_btns { text-align: right; }
+.board_btns .btn { display: inline-block; border: 1px solid #222; height: 27px; line-height: 25px; padding: 0 20px; border-radius: 3px; cursor: pointer; transition: all 0.5s; margin-left: 3px; }
+.board_btns .btn:hover { background: #222; color: #fff; }
+
+/* 게시판 목록 */
+.board_list .items > .item { border-bottom: 1px solid #d5d5d5; display: flex; align-items: center; }
+.board_list .items > .item:first-of-type { border-top: 1px solid #d5d5d5; }
+
+.board_list .items > .item:nth-of-type(2n) { background: #f8f8f8; }
+
+.board_list .items .post_info { width: 360px; text-align: right; padding: 10px; }
+.board_list .items .post_info span + span { margin-left: 15px;}
+.board_list .items .subject { flex-grow: 1; padding: 10px; }
+.board_list .write_btn { background: #596b99; color: #fff; height: 35px; line-height: 35px; cursor: pointer; padding: 0 30px; border-radius: 3px; }
+.board_list .no_data { padding: 50px 0; text-align: center; border-top: 1px solid #d5d5d5; border-bottom: 1px solid #d5d5d5}
+
+.board_list .list_search { padding: 10px; border-bottom: 1px solid #d5d5d5;}
+.board_list .list_search > form { display: flex; }
+.board_list .list_search > form > * + * { margin-left: 5px; }
+.board_list .list_search button { width: 180px; }
+.board_list .total { text-align: right; margin: 10px 10px 5px; }

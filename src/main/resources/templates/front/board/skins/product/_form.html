@@ -14,7 +14,7 @@
         <dd>
             <th:block th:each="c, status : ${board.categories}">
                 <input type="radio" name="category" th:value="${c}" th:id="${'category_' + status.index}" th:field="*{category}">
-                <label th:for="${'category_' + status.index}" th:text="${c}"></label>
+                <label th:for="${'category_' + status.index}" th:text="${c}" onclick="checkSell()"></label>
             </th:block>
         </dd>
     </dl>
@@ -42,6 +42,15 @@
             <input type="text" name="subject" th:field="*{subject}">
 
             <div class="error" th:each="err : ${#fields.errors('subject')}" th:text="${err}"></div>
+        </dd>
+    </dl>
+    <dl>
+        <dt th:text="#{가격}"></dt>
+        <dd>
+            <th:block>
+                <input type="number" name="price" id="price" th:field="*{num1}">
+                <label for="price" th:text="#{원}"></label>
+            </th:block>
         </dd>
     </dl>
 

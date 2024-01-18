@@ -10,6 +10,7 @@ img { border: 0; }
 dl { display: flex; }
 dt { width: 180px; }
 dd { flex-grow: 1; }
+img { margin-left: auto; }
 
 .layout_width { max-width: 1300px; min-width: 1000px; margin: 0 auto; }
 
@@ -22,7 +23,7 @@ dd { flex-grow: 1; }
 
 /* 헤더 공통 S */
 header .site_top { background: #f8f8f8; border-bottom: 1px solid #d5d5d5; }
-header .site_top > div { text-align: right; height: 30px; line-height: 30px; }
+header .site_top > div { text-align: right; height: 50px; line-height: 50px; align-items: center; }
 header .site_top a { margin-left: 15px; }
 header .site_top a:hover { text-decoration: underline; }
 
