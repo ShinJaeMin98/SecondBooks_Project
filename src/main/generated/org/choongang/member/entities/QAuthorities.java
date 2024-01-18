@@ -46,7 +46,7 @@ public class QAuthorities extends EntityPathBase<Authorities> {
 
     public QAuthorities(Class<? extends Authorities> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.member = inits.isInitialized("member") ? new QMember(forProperty("member")) : null;
+        this.member = inits.isInitialized("member") ? new QMember(forProperty("member"), inits.get("member")) : null;
     }
 
 }

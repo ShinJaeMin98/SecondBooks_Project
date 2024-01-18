@@ -46,7 +46,7 @@ public class BoardSaveService {
             data.setIp(request.getRemoteAddr());
             data.setUa(request.getHeader("User-Agent"));
             data.setMember(memberUtil.getMember());
-
+            data.setNum1(form.getNum1());
             Board board = boardRepository.findById(form.getBid()).orElse(null);
             data.setBoard(board);
         }
