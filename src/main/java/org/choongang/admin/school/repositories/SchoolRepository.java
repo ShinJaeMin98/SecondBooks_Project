@@ -9,4 +9,5 @@ public interface SchoolRepository extends JpaRepository<School, Long> {
 
         List<School> findByDomain(String domain);
 
+        List<School> findBySchoolName(String name);
 }

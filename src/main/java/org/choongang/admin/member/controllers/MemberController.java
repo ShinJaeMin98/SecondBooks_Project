@@ -43,6 +43,8 @@ public class MemberController implements ExceptionProcessor {
 
         ListData<Member> data = infoService.getList(search);
 
+        ListData<Member> items = infoService.getList(search);
+
         model.addAttribute("items", data.getItems()); // 목록
         model.addAttribute("pagination", data.getPagination()); // 페이징
 
@@ -68,3 +70,5 @@ public class MemberController implements ExceptionProcessor {
         model.addAttribute("pageTitle", pageTitle);
     }
 }
+
+

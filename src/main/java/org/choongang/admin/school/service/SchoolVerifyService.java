@@ -13,9 +13,9 @@ public class SchoolVerifyService {
 
     private final SchoolRepository repository;
 
-    public boolean doubleCheck(String domain){
+    public boolean doubleCheck(String name){
 
-        List<School> schools = repository.findByDomain(domain);
+        List<School> schools = repository.findBySchoolName(name);
 
         if(schools.size() == 0){    //등록 가능하면 t
             System.out.println("등록되지 않은 학교 입니다.");
