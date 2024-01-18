@@ -8,20 +8,16 @@
         <th:block th:replace="~{front/board/skins/default/update::default}"></th:block>
     </th:block>
 
-    <th:block th:if="${board.skin == 'gallery'}">
-        <th:block th:replace="~{front/board/skins/gallery/update::gallery}"></th:block>
+    <th:block th:if="${board.skin == 'product'}">
+        <th:block th:replace="~{front/board/skins/product/update::product}"></th:block>
+    </th:block>
+
+    <th:block th:if="${board.skin == 'community'}">
+        <th:block th:replace="~{front/board/skins/community/update::community}"></th:block>
     </th:block>
 
     <th:block th:if="${board.skin == 'qna'}">
         <th:block th:replace="~{front/board/skins/qna/update::qna}"></th:block>
-    </th:block>
-
-    <th:block th:if="${board.skin == 'review'}">
-        <th:block th:replace="~{front/board/skins/review/update::review}"></th:block>
-    </th:block>
-
-    <th:block th:if="${board.skin == 'blog'}">
-        <th:block th:replace="~{front/board/skins/blog/update::blog}"></th:block>
     </th:block>
 
 </main>
