@@ -18,7 +18,7 @@
                 <div>
                     <input type="text" name="univId" id="univId">@
                     <select name="domain" id="domain">
-                                <option th:each="school : ${schools}" th:value="${school.domain}" th:text="${school.domain}">
+                                <option th:each="school : ${schools}" th:value="${school.domain}" th:text="${school.domain}" th:field="*{sNum}">
                                 </option>
                     </select>
                     <button th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}" type="button" id="email_verify" th:text="#{인증코드전송}"></button>

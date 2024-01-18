@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 import org.choongang.commons.entities.Base;
 import org.choongang.file.entities.FileInfo;
+import org.choongang.school.entities.School;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,11 @@ public class Member extends Base {
 
     @Column(length=40, nullable = false)
     private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sNum")
+    private School school;
+
 
     @ToString.Exclude
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)

@@ -2,22 +2,44 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header th:fragment="common">
-    <th:block sec:authorize="isAnonymous()"> <!-- 미 로그인 상태 -->
-        <a th:href="@{/member/join}" th:text="#{회원가입}"></a>
-        <a th:href="@{/member/login}" th:text="#{로그인}"></a>
-    </th:block>
-    <th:block sec:authorize="isAuthenticated()"> <!-- 로그인 상태 -->
+    <div class="site_top">
+        <div class="layout_width">
+            <th:block sec:authorize="isAnonymous()"> <!-- 미 로그인 상태 -->
+                <a th:href="@{/member/join}" th:text="#{회원가입}"></a>
+                <a th:href="@{/member/login}" th:text="#{로그인}"></a>
+            </th:block>
+            <th:block sec:authorize="isAuthenticated()"> <!-- 로그인 상태 -->
 
-        <th:block th:if="${session.member.profileImage != null}"
-                  th:utext="${@utils.printThumb(session.member.profileImage.seq, 80, 80, 'profile_image')}">
-            ></th:block>
+                <th:block th:if="${session.member.profileImage != null}"
+                          th:utext="${@utils.printThumb(session.member.profileImage.seq, 80, 80, 'profile_image')}">
+                    ></th:block>
 
-        <span th:text="${#messages.msg('LOGIN_MSG', session.member.name, session.member.userId)}"></span>
-        <a th:href="@{/myPage}" th:text="#{마이페이지}"></a>
-        <a th:href="@{/member/logout}" th:text="#{로그아웃}"></a>
+                <span th:text="${#messages.msg('LOGIN_MSG', session.member.name, session.member.userId)}"></span>
+                <a th:href="@{/myPage}" th:text="#{마이페이지}"></a>
+                <a th:href="@{/member/logout}" th:text="#{로그아웃}"></a>
 
-        <a sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')" th:href="@{/admin}" th:text="#{사이트_관리}"></a>
-    </th:block>
+                <a sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')" th:href="@{/admin}" th:text="#{사이트_관리}"></a>
+            </th:block>
+        </div>
+    </div>
+    <!-- site top -->
+
+    <div class="logo_search">
+        <div class="layout_width">
+            <a th:href="@{/}" class="logo">
+                <img th:src="@{/common/image/SecondBooks_logo.jpg}" height="90">
+            </a>
+            <form name="frmSearch" class="search" th:action="@{/board/search}" autocomplete="off">
+                <input type="text" name="skey" th:value="${param.skey}" th:placeholder="#{검색어를_입력하세요.}">
+                <button type="submit" class="search_btn">
+                    <i class="xi-search"></i>
+                </button>
+            </form>
+        </div>
+        <!-- layout_width -->
+    </div>
+    <!-- logo_search -->
+
     <nav th:replace="~{front/outlines/_main_menu::menus}"></nav>
     <hr>
 </header>
