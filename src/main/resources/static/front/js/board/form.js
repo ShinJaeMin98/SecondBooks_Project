@@ -75,3 +75,12 @@ function callbackFileDelete(seq) {
     const fileBox = document.getElementById(`file_${seq}`);
     fileBox.parentElement.removeChild(fileBox);
 }
+
+const checkSell = function() {
+  if (frmSave.category[0].checked) {
+      frmSave.price.disabled=false;
+  } else {
+    frmSave.price.value='';
+      frmSave.price.disabled=true;
+  }
+}
