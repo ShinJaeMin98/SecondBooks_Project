@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.choongang.commons.constants.Location;
+import org.choongang.file.entities.FileInfo;
 import org.choongang.school.entities.School;
 
 import java.util.UUID;
@@ -20,6 +21,9 @@ public class RequestSchool {
     private String comment;
 
     private Location menuLocation = Location.LEFT;
+
+    private FileInfo banner_top;
+    private FileInfo banner_bottom;
 
     //private List<String> chk = new ArrayList<>();
 

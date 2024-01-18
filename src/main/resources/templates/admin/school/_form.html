@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="form" th:object="${requestSchool}">
-    <input type="hidden" name="gid" th:field="*{gid}">
+    <input type="hidden" name="gid" th:value="*{gid}">
     <input type="hidden" name="num" th:field="*{num}">
     <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 
@@ -48,15 +48,20 @@
         <tr>
             <th width="180">상단 배너</th>
             <td>
-                <div class="dragndrop_box dragndrop_uploads banner_top w_full" data-location="banner_top" data-image-only="true" data-single-file="true"></div>
+                <div th:if="*{banner_top == null}" class="dragndrop_box dragndrop_uploads banner_top_box w_full" data-location="banner_top" data-image-only="true" data-single-file="true"></div>
+
+                <div th:if="*{banner_top != null}" class="dragndrop_box dragndrop_uploads banner_top_box w_full uploaded" data-location="banner_top" data-image-only="true" data-single-file="true" th:id="*{'file_' + banner_top.seq}" th:style="*{@utils.backgroundStyle(banner_top)}" th:data-file-id="*{banner_top.seq}"></div>
             </td>
         </tr>
         <tr>
             <th>하단 배너</th>
             <td>
-                <div class="dragndrop_box dragndrop_uploads banner_bottom w_full" data-location="banner_top" data-image-only="true" data-single-file="true"></div>
+                <div th:if="*{banner_bottom == null}" class="dragndrop_box dragndrop_uploads banner_bottom_box w_full" data-location="banner_bottom" data-image-only="true" data-single-file="true"></div>
+
+                <div th:if="*{banner_bottom != null}" class="dragndrop_box dragndrop_uploads banner_bottom_box w_full uploaded" data-location="banner_bottom" data-image-only="true" data-single-file="true" th:id="*{'file_' + banner_bottom.seq}" th:style="*{@utils.backgroundStyle(banner_bottom)}" th:data-file-id="*{banner_bottom.seq}"></div>
             </td>
         </tr>
     </table>
+    <script th:replace="~{common/_file_tpl::editor_tpl}"></script>
 </th:block>
 </html>
