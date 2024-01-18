@@ -13,4 +13,6 @@ public interface BoardDataRepository extends JpaRepository<BoardData, Long>,
     @Query("SELECT DISTINCT b.board.bid FROM BoardData b WHERE b.member.userId=:userId")
     List<String> getUserBoards(@Param("userId") String userId);
 
+
+//    List<String> findBoardDataBySNum(Long sNum);
 }

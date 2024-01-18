@@ -3,6 +3,7 @@ package org.choongang.board.controllers;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.choongang.file.entities.FileInfo;
+import org.choongang.school.entities.School;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,7 +14,7 @@ public class RequestBoard {
     private Long seq; // 게시글 번호
     private String bid; // 게시판 ID
     private String gid = UUID.randomUUID().toString();
-
+    
     private String category; // 게시판 분류
 
     @NotBlank
@@ -29,8 +30,8 @@ public class RequestBoard {
     private String content; // 글 내용
 
     // 추가필드 - 정수
-    private Long num1;
-    private Long num2;
+    private Long num1;  // 가격
+    private Long num2;  
     private Long num3;
 
     // 추가필드 - 한줄 텍스트
