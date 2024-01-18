@@ -20,11 +20,14 @@
                 <li th:unless="${items == null || items.isEmpty()}"
                     th:each="item : ${items}" th:object="${item}" class="item">
                     <a th:href="@{/board/view/{seq}(seq=*{seq})}" class="subject">
-                    <span class="notice" th:if="*{notice}">
-                        [<th:block th:text="#{공지}"></th:block>]
-                    </span>
+                        <span class="notice" th:if="*{notice}">
+                            [<th:block th:text="#{공지}"></th:block>]
+                        </span>
                         <span class='category' th:if="*{category}" th:text="*{'[' + category + ']'}"></span>
+                        <th:block th:if="*{gid != null}"
+                                  th:utext="*{@utils.printThumb(seq, 80, 80, 'editor_files')}"></th:block>
                         <th:block th:text="*{subject}"></th:block>
+                        <th:block th:text="*{num1}"></th:block>
                     </a>
 
                     <div class="post_info">

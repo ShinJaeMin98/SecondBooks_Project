@@ -103,6 +103,7 @@ public class BoardController implements ExceptionProcessor {
         if (memberUtil.isLogin()) {
             Member member = memberUtil.getMember();
             form.setPoster(member.getName());
+            model.addAttribute(member);
         }
 
         return utils.tpl("board/write");
