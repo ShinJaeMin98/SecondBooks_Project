@@ -44,6 +44,15 @@
             <div class="error" th:each="err : ${#fields.errors('subject')}" th:text="${err}"></div>
         </dd>
     </dl>
+    <dl>
+        <dt th:text="#{가격}"></dt>
+        <dd>
+            <th:block>
+                <input type="number" name="price" id="price" th:field="*{num1}">
+                <label for="price" th:text="#{원}"></label>
+            </th:block>
+        </dd>
+    </dl>
 
     <dl>
         <dt th:text="#{내용}"></dt>
@@ -57,7 +66,7 @@
                 <div class="uploaded_files" id="editor_files">
                     <th:block th:if="*{editorFiles != null && !editorFiles.isEmpty()}"
                               th:each="item : *{editorFiles}">
-                            <th:block th:replace="~{common/_editor_file::item}"></th:block>
+                        <th:block th:replace="~{common/_editor_file::item}"></th:block>
                     </th:block>
                 </div>
             </th:block>

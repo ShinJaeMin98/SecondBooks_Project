@@ -1,0 +1,6 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<h1 th:fragment="title">
+    <a th:href="@{/board/list/{bid}(bid=${board.bid})}" th:text="${board.bName}"></a>
+</h1>
+</html>

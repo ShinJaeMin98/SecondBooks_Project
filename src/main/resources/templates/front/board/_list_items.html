@@ -6,20 +6,16 @@
             <th:block th:replace="~{front/board/skins/default/_list_items::default}"></th:block>
         </th:block>
 
-        <th:block th:if="${board.skin == 'gallery'}">
-            <th:block th:replace="~{front/board/skins/gallery/_list_items::gallery}"></th:block>
+        <th:block th:if="${board.skin == 'product'}">
+            <th:block th:replace="~{front/board/skins/product/_list_items::product}"></th:block>
+        </th:block>
+
+        <th:block th:if="${board.skin == 'community'}">
+            <th:block th:replace="~{front/board/skins/community/_list_items::community}"></th:block>
         </th:block>
 
         <th:block th:if="${board.skin == 'qna'}">
             <th:block th:replace="~{front/board/skins/qna/_list_items::qna}"></th:block>
-        </th:block>
-
-        <th:block th:if="${board.skin == 'review'}">
-            <th:block th:replace="~{front/board/skins/review/_list_items::review}"></th:block>
-        </th:block>
-
-        <th:block th:if="${board.skin == 'blog'}">
-            <th:block th:replace="~{front/board/skins/blog/_list_items::blog}"></th:block>
         </th:block>
 
     </th:block>
