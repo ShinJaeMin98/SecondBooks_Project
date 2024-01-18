@@ -1,12 +1,10 @@
 package org.choongang.admin.member.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.choongang.admin.board.controllers.RequestBoardConfig;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.ListData;
-import org.choongang.commons.Utils;
 import org.choongang.member.controllers.MemberSearch;
 import org.choongang.member.entities.Member;
 import org.choongang.member.service.MemberInfoService;
