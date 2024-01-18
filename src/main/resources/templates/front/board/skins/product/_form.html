@@ -14,7 +14,7 @@
         <dd>
             <th:block th:each="c, status : ${board.categories}">
                 <input type="radio" name="category" th:value="${c}" th:id="${'category_' + status.index}" th:field="*{category}">
-                <label th:for="${'category_' + status.index}" th:text="${c}"></label>
+                <label th:for="${'category_' + status.index}" th:text="${c}" onclick="checkSell()"></label>
             </th:block>
         </dd>
     </dl>
@@ -57,7 +57,7 @@
                 <div class="uploaded_files" id="editor_files">
                     <th:block th:if="*{editorFiles != null && !editorFiles.isEmpty()}"
                               th:each="item : *{editorFiles}">
-                        <th:block th:replace="~{common/_editor_file::item}"></th:block>
+                            <th:block th:replace="~{common/_editor_file::item}"></th:block>
                     </th:block>
                 </div>
             </th:block>
