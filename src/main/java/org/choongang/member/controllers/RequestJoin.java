@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.choongang.school.entities.School;
 
 import java.util.UUID;
 
@@ -18,6 +19,8 @@ public class RequestJoin {
 
     @NotBlank
     private String domain;
+
+    private School sNum;
 
     @NotBlank
     @Size(min=6)

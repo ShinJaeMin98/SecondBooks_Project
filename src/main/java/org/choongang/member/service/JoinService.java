@@ -1,6 +1,7 @@
 package org.choongang.member.service;
 
 import lombok.RequiredArgsConstructor;
+import org.choongang.admin.school.service.SchoolSearchService;
 import org.choongang.file.service.FileUploadService;
 import org.choongang.member.Authority;
 import org.choongang.member.controllers.JoinValidator;
@@ -24,6 +25,7 @@ public class JoinService {
     private final JoinValidator validator;
     private final PasswordEncoder encoder;
     private final FileUploadService uploadService;
+    private final SchoolSearchService schoolSearchService;
 
     public void process(RequestJoin form, Errors errors) {
         validator.validate(form, errors);
@@ -37,6 +39,7 @@ public class JoinService {
         //Member member = new ModelMapper().map(form, Member.class);
         Member member = new Member();
         member.setEmail(form.getEmail());
+        member.setSchool(schoolSearchService.findSchoolByDomain(form.getDomain()));
         member.setName(form.getName());
         member.setPassword(hash);
         member.setUserId(form.getUserId());
