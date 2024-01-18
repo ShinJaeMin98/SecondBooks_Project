@@ -10,6 +10,7 @@ img { border: 0; }
 dl { display: flex; }
 dt { width: 180px; }
 dd { flex-grow: 1; }
+img { margin-left: auto; }
 
 .layout_width { max-width: 1300px; min-width: 1000px; margin: 0 auto; }
 

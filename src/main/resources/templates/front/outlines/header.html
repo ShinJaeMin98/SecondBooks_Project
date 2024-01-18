@@ -9,7 +9,7 @@
                 <a th:href="@{/member/login}" th:text="#{로그인}"></a>
             </th:block>
             <th:block sec:authorize="isAuthenticated()"> <!-- 로그인 상태 -->
-
+                <div class="flex" >
                     <th:block th:if="${session.member.profileImage != null}"
                               th:utext="${@utils.printThumb(session.member.profileImage.seq, 50, 50, 'profile_image')}">
                         ></th:block>
@@ -19,7 +19,7 @@
                     <a th:href="@{/member/logout}" th:text="#{로그아웃}"></a>
 
                     <a sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')" th:href="@{/admin}" th:text="#{사이트_관리}"></a>
-
+                </div>
             </th:block>
         </div>
     </div>
