@@ -202,4 +202,13 @@ public class BoardConfigInfoService {
 
         return items;
     }
+
+//    public List<Board> getSchoolBoardsInfo(Long sNum) {
+//        List<String> bids = boardDataRepository.findBoardDataBySNum(sNum);
+//
+//        QBoard board = QBoard.board;
+//        List<Board> items = (List<Board>)boardRepository.findAll(board.bid.in(bids), Sort.by(desc("createdAt")));
+//
+//        return items;
+//    }
 }

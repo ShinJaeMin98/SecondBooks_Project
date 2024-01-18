@@ -1,7 +1,9 @@
 package org.choongang.board.service;
 
+import groovy.transform.Final;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.choongang.admin.school.service.SchoolSearchService;
 import org.choongang.board.controllers.RequestBoard;
 import org.choongang.board.entities.Board;
 import org.choongang.board.entities.BoardData;
@@ -23,6 +25,7 @@ public class BoardSaveService {
     private final FileUploadService fileUploadService;
     private final MemberUtil memberUtil;
     private final HttpServletRequest request;
+    private final SchoolSearchService schoolSearchService;
 
     private final PasswordEncoder encoder;
 
@@ -47,6 +50,7 @@ public class BoardSaveService {
             data.setUa(request.getHeader("User-Agent"));
             data.setMember(memberUtil.getMember());
             data.setNum1(form.getNum1());
+            data.setSchool(memberUtil.getMember().getSchool());
             Board board = boardRepository.findById(form.getBid()).orElse(null);
             data.setBoard(board);
         }

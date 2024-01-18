@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.choongang.commons.entities.Base;
 import org.choongang.file.entities.FileInfo;
 import org.choongang.member.entities.Member;
+import org.choongang.school.entities.School;
 
 import java.util.List;
 import java.util.UUID;
@@ -31,6 +32,10 @@ public class BoardData extends Base {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberSeq")
     private Member member;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sNum")
+    private School school;
 
     @Column(length = 65, nullable = false)
     private String gid = UUID.randomUUID().toString();
