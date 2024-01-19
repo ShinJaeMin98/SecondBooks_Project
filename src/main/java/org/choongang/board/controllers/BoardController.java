@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.choongang.board.controllers.comment.RequestComment;
 import org.choongang.board.entities.Board;
 import org.choongang.board.entities.BoardData;
 import org.choongang.board.service.*;
@@ -84,6 +85,17 @@ public class BoardController implements ExceptionProcessor {
             model.addAttribute("pagination", data.getPagination());
         }
         // 게시글 보기 하단 목록 노출 E
+
+        //댓글 커맨드 객체 처리
+        RequestComment requestComment = new RequestComment();
+        //로그인일경우 작성자는 아이디로
+        if(memberUtil.isLogin()){
+            requestComment.setCommenter(memberUtil.getMember().getUserId());
+        }
+
+        model.addAttribute("requestComment" , requestComment);
+
+
 
         return utils.tpl("board/view");
     }

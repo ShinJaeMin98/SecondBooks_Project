@@ -59,6 +59,9 @@ public class BoardData extends Base {
 
     private int viewCount;  // 조회수
 
+    private int commentCount;   //댓글 수
+
+
     @Column(length = 20)
     private String ip;  // IP 주소
 
@@ -106,4 +109,8 @@ public class BoardData extends Base {
 
     @Transient
     private boolean showDeleteButton; // 삭제 버튼 노출 여부
+
+    @Transient
+    private List<CommentData> comments; //댓글 목록
+
 }

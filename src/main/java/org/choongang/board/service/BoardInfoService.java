@@ -16,6 +16,7 @@ import org.choongang.board.controllers.RequestBoard;
 import org.choongang.board.entities.*;
 import org.choongang.board.repositories.BoardDataRepository;
 import org.choongang.board.repositories.BoardViewRepository;
+import org.choongang.board.service.comment.CommentInfoService;
 import org.choongang.board.service.config.BoardConfigInfoService;
 import org.choongang.commons.ListData;
 import org.choongang.commons.Pagination;
@@ -47,6 +48,10 @@ public class BoardInfoService {
     private final MemberUtil memberUtil;
     private final Utils utils;
 
+    private final CommentInfoService commentInfoService;
+
+
+
     /**
      * 게시글 조회
      *
@@ -57,6 +62,9 @@ public class BoardInfoService {
         BoardData boardData = boardDataRepository.findById(seq).orElseThrow(BoardDataNotFoundException::new);
 
         addBoardData(boardData);
+
+        List<CommentData> comments = commentInfoService.getList(seq);
+        boardData.setComments(comments);
 
         return boardData;
     }
