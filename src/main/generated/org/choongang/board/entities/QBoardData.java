@@ -60,6 +60,8 @@ public class QBoardData extends EntityPathBase<BoardData> {
 
     public final StringPath poster = createString("poster");
 
+    public final org.choongang.school.entities.QSchool school;
+
     public final NumberPath<Long> seq = createNumber("seq", Long.class);
 
     public final StringPath subject = createString("subject");
@@ -94,6 +96,7 @@ public class QBoardData extends EntityPathBase<BoardData> {
         super(type, metadata, inits);
         this.board = inits.isInitialized("board") ? new QBoard(forProperty("board")) : null;
         this.member = inits.isInitialized("member") ? new org.choongang.member.entities.QMember(forProperty("member"), inits.get("member")) : null;
+        this.school = inits.isInitialized("school") ? new org.choongang.school.entities.QSchool(forProperty("school")) : null;
     }
 
 }
