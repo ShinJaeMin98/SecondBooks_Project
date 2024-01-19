@@ -10,6 +10,8 @@ public class RequestComment {
 
     private Long seq;   //댓글 등록 번호
 
+    private Long BoardDataSeq;  //댓글이 달려있는 게시글 번호
+
     @NotBlank
     private String commenter;  //작성자
 
