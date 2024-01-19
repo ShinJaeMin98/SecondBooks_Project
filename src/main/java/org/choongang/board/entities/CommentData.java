@@ -45,7 +45,7 @@ public class CommentData extends Base {
     @Column(length = 20)
     private String ip; //작성자  ip주소
 
-    @Column(length = 100)
+    @Column(length = 120)
     private String ua;  //작성자 user-Agent 정보 (브라우저 정보?)
 
 

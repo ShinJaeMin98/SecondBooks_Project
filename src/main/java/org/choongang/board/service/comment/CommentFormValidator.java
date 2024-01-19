@@ -38,7 +38,7 @@ public class CommentFormValidator implements Validator, PasswordValidator {
                 errors.rejectValue("guestPw" , "Size");
             }
             if(!alphaCheck(guestPw, true) || !numberCheck(guestPw)){
-                errors.rejectValue("geustPw" , "Complexity");
+                errors.rejectValue("guestPw" , "Complexity");
             }
 
 
