@@ -109,4 +109,8 @@ public class BoardData extends Base {
 
     @Transient
     private boolean showDeleteButton; // 삭제 버튼 노출 여부
+
+    @Transient
+    private List<CommentData> comments; //댓글 목록
+
 }

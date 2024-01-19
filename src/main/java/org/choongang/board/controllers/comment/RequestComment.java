@@ -8,17 +8,17 @@ public class RequestComment {
 
     private String mode = "add";
 
-    private Long seq;   //댓글 등록 번호
+    private Long seq=-1L;   //댓글 등록 번호
 
-    private Long BoardDataSeq;  //댓글이 달려있는 게시글 번호
-
-    @NotBlank
-    private String commenter;  //작성자
+    private Long BoardDataSeq=-1L;  //댓글이 달려있는 게시글 번호
 
     @NotBlank
-    private String content; //댓글 내용
+    private String commenter="";  //작성자
 
-    private String guestPw; //비회원 비번
+    @NotBlank
+    private String content=""; //댓글 내용
+
+    private String guestPw=""; //비회원 비번
 
 
 }
