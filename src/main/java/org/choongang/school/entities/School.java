@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.choongang.commons.constants.Location;
 import org.choongang.commons.entities.BaseMember;
+import org.choongang.member.entities.Member;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,8 +23,11 @@ public class School extends BaseMember {
     private String domain;
     @Column(length = 10 , nullable = false)
     private Location menuLocation;
-/*    @Lob
-    private String comment;*/
+    @Lob
+    private String content;
+
+    @OneToMany(mappedBy = "school", fetch = FetchType.LAZY)
+    List<Member> members = new ArrayList<>();
 
 
 
