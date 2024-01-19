@@ -2,6 +2,7 @@ package org.choongang.school.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 import org.choongang.commons.constants.Location;
 import org.choongang.commons.entities.BaseMember;
 import org.choongang.member.entities.Member;
@@ -26,6 +27,7 @@ public class School extends BaseMember {
     @Lob
     private String content;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "school", fetch = FetchType.LAZY)
     List<Member> members = new ArrayList<>();
 

@@ -34,7 +34,7 @@ public class MemberController implements ExceptionProcessor {
         commonProcess("join", model);
 
         //회원가입 시 이메일 선택 옵션값
-        List<School> schools = schoolSearchService.getList();
+        List<School> schools = schoolSearchService.getAllList();
         model.addAttribute("schools", schools);
         System.out.println(schools);
 
