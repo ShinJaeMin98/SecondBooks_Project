@@ -3,12 +3,10 @@ package org.choongang.board.controllers.comment;
 import lombok.RequiredArgsConstructor;
 import org.choongang.board.entities.CommentData;
 import org.choongang.board.service.comment.CommentInfoService;
+import org.choongang.board.service.comment.CommentSaveService;
 import org.choongang.commons.ExceptionRestProcessor;
 import org.choongang.commons.rests.JSONData;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/comment")
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiCommentController implements ExceptionRestProcessor {
 
     private final CommentInfoService commentInfoService;
+    private final CommentSaveService commentSaveService;
 
     @GetMapping("/{seq}")
     public JSONData<CommentData> getComment(@PathVariable("seq") Long seq) {
@@ -25,4 +24,12 @@ public class ApiCommentController implements ExceptionRestProcessor {
         return new JSONData<>(data);
     }
 
+    @PatchMapping
+    public JSONData<Object> editComment(RequestComment form) {
+
+        form.setMode("edit");
+        commentSaveService.save(form);
+
+        return new JSONData<>();
+    }
 }
