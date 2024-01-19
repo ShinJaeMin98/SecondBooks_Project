@@ -214,6 +214,7 @@ public class BoardInfoService {
         return getLatest(bid, 10);
     }
 
+
     /**
      * 게시글 추가 정보 처리
      *

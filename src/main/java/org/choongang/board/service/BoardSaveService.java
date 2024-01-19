@@ -1,6 +1,5 @@
 package org.choongang.board.service;
 
-import groovy.transform.Final;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.choongang.admin.school.service.SchoolSearchService;
