@@ -10,7 +10,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Request;
 import org.choongang.board.controllers.BoardDataSearch;
 import org.choongang.board.controllers.RequestBoard;
 import org.choongang.board.entities.*;
@@ -29,7 +28,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -112,6 +110,11 @@ public class BoardInfoService {
 
 
         andBuilder.and(boardData.board.bid.eq(bid)); // 게시판 ID
+        andBuilder.and(boardData.board.bid.eq(bid)); // 게시판 ID
+        if(memberUtil.isLogin()){ // 로그인 회원의 학교 게시물만 조회
+            Long sNum = memberUtil.getMember().getSchool().getNum();
+            andBuilder.and(boardData.member.school.num.eq(sNum));
+        }
 
         /* 검색 조건 처리 S */
 

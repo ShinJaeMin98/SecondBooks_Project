@@ -50,7 +50,9 @@ public class BoardSaveService {
             data.setUa(request.getHeader("User-Agent"));
             data.setMember(memberUtil.getMember());
             data.setNum1(form.getNum1());
-            data.setSchool(memberUtil.getMember().getSchool());
+            if (memberUtil.getMember() != null) { // 회원 작성시 학교 정보 추가
+                data.setSchool(memberUtil.getMember().getSchool());
+            }
             Board board = boardRepository.findById(form.getBid()).orElse(null);
             data.setBoard(board);
         }
