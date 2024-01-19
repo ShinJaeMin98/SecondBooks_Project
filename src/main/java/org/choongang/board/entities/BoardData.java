@@ -59,6 +59,9 @@ public class BoardData extends Base {
 
     private int viewCount;  // 조회수
 
+    private int commentCount;   //댓글 수
+
+
     @Column(length = 20)
     private String ip;  // IP 주소
 

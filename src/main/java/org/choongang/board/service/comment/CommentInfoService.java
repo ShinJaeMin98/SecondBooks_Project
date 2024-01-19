@@ -3,8 +3,10 @@ package org.choongang.board.service.comment;
 import com.querydsl.core.BooleanBuilder;
 import lombok.RequiredArgsConstructor;
 import org.choongang.board.controllers.comment.RequestComment;
+import org.choongang.board.entities.BoardData;
 import org.choongang.board.entities.CommentData;
 import org.choongang.board.entities.QCommentData;
+import org.choongang.board.repositories.BoardDataRepository;
 import org.choongang.board.repositories.CommentDataRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Sort;
@@ -20,6 +22,8 @@ import static org.springframework.data.domain.Sort.Order.desc;
 public class CommentInfoService {
 
     private final CommentDataRepository commentDataRepository;
+    private final BoardDataRepository boardDataRepository;
+    
 
     /**
      * 댓글 단일 조회
@@ -61,5 +65,28 @@ public class CommentInfoService {
         return items;
     }
 
+    /**
+     * 댓글 수 업데이트
+     * @param boardDataSeq
+     */
+    public void updateCommentCount(Long boardDataSeq){
+        
+        
+
+        BoardData data = boardDataRepository.findById(boardDataSeq).orElse(null);
+        
+        if(data == null){
+            return;
+        }
+        int total = commentDataRepository.getTotal(boardDataSeq);
+        
+        //총 댓글 수 정보 수
+        data.setCommentCount(total);
+        //플러쉬
+        boardDataRepository.flush();
+        
+        
+    }
+    
 
 }

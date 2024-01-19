@@ -23,6 +23,8 @@ public class CommentSaveService {
     private final MemberUtil memberUtil;
     private final PasswordEncoder encoder;
     private final HttpServletRequest request;
+    private final CommentInfoService commentInfoService;
+
 
     public void save(RequestComment form) {
 
@@ -61,6 +63,9 @@ public class CommentSaveService {
         data.setContent(form.getContent());
 
         commentDataRepository.saveAndFlush(data);
+
+        commentInfoService.updateCommentCount(form.getBoardDataSeq());
+
 
 
     }

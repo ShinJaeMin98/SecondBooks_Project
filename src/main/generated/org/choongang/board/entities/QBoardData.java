@@ -28,6 +28,8 @@ public class QBoardData extends EntityPathBase<BoardData> {
 
     public final StringPath category = createString("category");
 
+    public final NumberPath<Integer> commentCount = createNumber("commentCount", Integer.class);
+
     public final StringPath content = createString("content");
 
     //inherited

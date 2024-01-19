@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="comment" th:if="${board.useComment}"><!--댓글기능 활성화 일대만 보여줌-->
+   댓글
+
+   <form name="frmComment" th:method="post" th:action="@{/comment/save}" target="ifrmProcess" autocomplete="off">
+
+
+
+   </form>
+
+
+</th:block>
+</html>
