@@ -1,9 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block th:fragment="comment" th:if="${board.useComment}"><!--댓글기능 활성화 일대만 보여줌-->
    댓글
 
    <form name="frmComment" th:method="post" th:action="@{/comment/save}" target="ifrmProcess" autocomplete="off">
+      <div class="commenter_info">
+         <input type="text" name="commenter" th:placeholder="#{작성자}">
+         <input sec:authorize="isAnonymous()" type="password" name="guestPw"
+                th:placheholder="#{비밀번호}">
+      </div>
+      <div class="comment_content">
+         <textarea name="content" th:placeholder="#{댓글을_입력하세요}"></textarea>
+         <button type="submit" th:text="#{작성하기}"></button>
+      </div>
 
 
 

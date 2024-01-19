@@ -32,3 +32,7 @@
 .board_list .list_search > form > * + * { margin-left: 5px; }
 .board_list .list_search button { width: 180px; }
 .board_list .total { text-align: right; margin: 10px 10px 5px; }
+
+
+/* 댓글 */
+.comment_content { display: flex;  }
