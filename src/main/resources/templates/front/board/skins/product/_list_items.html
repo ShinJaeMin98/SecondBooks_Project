@@ -27,7 +27,8 @@
                         <th:block th:if="*{gid != null}"
                                   th:utext="*{@utils.printThumb(seq, 80, 80, 'editor_files')}"></th:block>
                         <th:block th:text="*{subject}"></th:block>
-                        <th:block th:text="*{num1}"></th:block>
+                        <th:block th:if="*{num1 != null}" th:text="*{num1 >= 1000 ? #numbers.formatInteger(num1, 3, 'COMMA') + ' 원' : num1 + ' 원'}"></th:block>
+                        <!--<th:block th:text="*{seq}"></th:block>-->
                     </a>
 
                     <div class="post_info">
