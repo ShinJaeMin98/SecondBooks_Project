@@ -21,8 +21,8 @@ public class SchoolSearchService {
         return list;
     }
 
-    public List<School> getSearchList(){
-        List<School> list = null;
+    public List<School> getAllList(){
+        List<School> list = repository.findAll();
         return list;
     }
 

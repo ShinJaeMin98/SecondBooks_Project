@@ -61,7 +61,7 @@ public class SchoolController implements ExceptionProcessor {
         if(search.getSkey() == null || search.getSkey().equals("")){//검색어 없을 경우
             items = searchService.getList();
         } else {//검색어 있을 경우
-            items = searchService.getSearchList();
+            items = searchService.getList();
         }
 
         model.addAttribute("items", items);
