@@ -46,6 +46,7 @@
 .comment_items > li + li { margin-top: 10px; }
 .comment_items .comment_top { display: flex; justify-content: space-between; height: 35px; align-items: center; border-bottom: 1px solid #222; margin-bottom: 10px; padding: 0 10px; }
 .comment_items .comment { padding: 10px; background: #f8f8f8; border-radius: 3px; margin-bottom: 10px; }
+.comment_items .comment textarea { width: 100%; height: 150px; border: 1px solid #d5d5d5; padding: 10px; border-radius: 3px; resize: none; }
 
 .comment_items .btns { text-align: right; }
 .comment_items button, .comment_items .btns a { border: 1px solid #596b99; background: #fff; height: 35px; padding: 0 15px; color: #596b99; cursor: pointer; transition: all 0.5s; border-radius: 3px; display: inline-block; line-height: 33px; }
