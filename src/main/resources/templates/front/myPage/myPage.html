@@ -2,7 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
-<main layout:fragment="content">
-    마이페이지
-</main>
+<section layout:fragment="content">
+    <h1>마이페이지</h1>
+    <form name="frmList" method="post" th:action="@{/admin/school}" target="ifrmProcess" autocomplete="off">
+        <h2>내정보</h2>
+        <table class="table_cols mb30">
+            <tr>
+                <th width="180">아이디</th>
+                <td th:text="*{userId}" align="center"></td>
+            </tr>
+            <tr>
+                <th>이름</th>
+                <td align="center" th:text="*{name}"></td>
+            </tr>
+            <tr>
+                <th>학교</th>
+                <td th:text="*{schoolName}" align="center"></td>
+            </tr>
+            <tr>
+                <th>이메일</th>
+                <td th:text="*{email}" align="center"></td>
+            </tr>
+            <tr>
+                <th>찜목록</th>
+                <td align="center" >???</td>
+            </tr>
+
+        </table>
+    </form>
+
+
+
+</section>
+
 </html>

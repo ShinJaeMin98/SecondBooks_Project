@@ -13,6 +13,7 @@ dd { flex-grow: 1; }
 img { margin-left: auto; }
 
 .layout_width { max-width: 1300px; min-width: 1000px; margin: 0 auto; }
+.layout_width_m { max-width: 700px; min-width: 300px; margin: 0 auto; }
 
 /* 페이징 공통 S */
 .pagination { text-align: center; margin: 30px 0; }

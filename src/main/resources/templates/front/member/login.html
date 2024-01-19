@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
-<main layout:fragment="content" class="layout_width">
+<main layout:fragment="content" class="layout_width_m">
     <h1 th:text="#{로그인}"></h1>
     <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off">
         <input type="hidden" name="redirectURL"

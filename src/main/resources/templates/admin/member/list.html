@@ -37,7 +37,7 @@
         </div>
     </form>
     <!--=======================================검색EEE===============================================-->
-    <h2>학교 목록</h2>
+    <h2>회원 목록</h2>
     <form name="frmList" method="post" th:action="@{/admin/school}" target="ifrmProcess" autocomplete="off">
         <input type="hidden" name="_method" value="PATCH">
 
@@ -74,7 +74,7 @@
                         <i class="xi-pen"></i> 수정하기
                     </a>
                         <a th:href="@{/admin/member/delete/{seq}(seq=*{seq})}" class="sbtn on" target="_blank">
-                            <i class="xi-list"></i> 삭제하기
+                            <i class="xi-trash-o"></i> 삭제하기
                         </a>
 
                     </td>
