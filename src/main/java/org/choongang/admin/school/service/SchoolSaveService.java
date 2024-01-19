@@ -26,6 +26,7 @@ public class SchoolSaveService {
             school.setGid(form.getGid());
             school.setSchoolName(schoolName);
             school.setDomain(form.getDomain());
+            school.setContent(form.getComment());
             school.setMenuLocation(form.getMenuLocation());
 
             //System.out.println(school+"=================저장==============");
@@ -39,6 +40,7 @@ public class SchoolSaveService {
             school.setDomain(domain);
             school.setMenuLocation(form.getMenuLocation());
             school.setSchoolName(util.getSchoolName(domain));
+            school.setContent(form.getComment());
             repository.saveAndFlush(school);
             //System.out.println(school+"=================수정==============");
         }
