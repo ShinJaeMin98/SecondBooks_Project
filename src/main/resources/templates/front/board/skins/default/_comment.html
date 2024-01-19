@@ -20,8 +20,8 @@
                 <!--// comment_top -->
                 <div class="comment" th:utext="*{@utils.nl2br(content)}"></div>
                 <div class="btns">
-                    <button type="button" class="delete_comment" th:text="#{삭제}" onclick="return confirm('정말 삭제하겠습니까?');"></button>
-                    <button type="button" class="edit_comment" th:text="#{수정}"></button>
+                    <a th:href="@{/comment/delete/{seq}(seq=*{seq})}" class="delete_comment" th:text="#{삭제}" onclick="return confirm('정말 삭제하겠습니까?');"></a>
+                    <button type="button" class="edit_comment" th:data-seq="*{seq}" th:text="#{수정}"></button>
                 </div>
             </li>
         </ul>

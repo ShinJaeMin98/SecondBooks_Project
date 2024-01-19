@@ -1,4 +1,4 @@
-package org.choongang.board.service.comment;
+package org.choongang.board.controllers.comment;
 
 
 import lombok.RequiredArgsConstructor;
