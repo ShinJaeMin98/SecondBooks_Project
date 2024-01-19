@@ -7,14 +7,14 @@
           target="ifrmProcess" autocomplete="off" th:object="${requestComment}">
         <input type="hidden" name="mode" th:field="*{mode}">
         <input  type="hidden" name="boardDataSeq" value="1">
-        <!--<input th:if="${boardData != null}" type="hidden" name="boardDataSeq" th:value="*{boardData.Seq}">-->
+        <input th:if="${boardData != null}" type="hidden" name="boardDataSeq" th:value="${boardData.seq}">
         <input th:if="*{mode == 'edit' && seq != null}" type="hidden" name="seq" th:field="*{seq}">
-
+        <!-- 값 안넘어옴 -->
 
         <div class="commenter_info">
             <input type="text" name="commenter" th:placeholder="#{작성자}" th:field="*{commenter}">
-            <!--<input sec:authorize="isAnonymous()" type="password" name="guestPw"
-                   th:placeholder="#{비밀번호}">-->
+            <<input sec:authorize="isAnonymous()" type="password" name="guestPw"
+                   th:placeholder="#{비밀번호}">
         </div>
         <div class="comment_content">
             <textarea name="content" th:placeholder="#{댓글을_입력하세요}" th:field="*{content}"></textarea>

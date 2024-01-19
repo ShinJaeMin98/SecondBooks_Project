@@ -66,7 +66,6 @@ public class BoardInfoService {
         List<CommentData> comments = commentInfoService.getList(seq);
         boardData.setComments(comments);
 
-
         return boardData;
     }
 

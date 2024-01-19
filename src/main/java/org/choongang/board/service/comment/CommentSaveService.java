@@ -26,7 +26,7 @@ public class CommentSaveService {
     private final CommentInfoService commentInfoService;
 
 
-    public void save(RequestComment form) {
+    public CommentData save(RequestComment form) {
 
         String mode = form.getMode();
         Long seq = form.getSeq();//댓글 번호(수정시 사용)
@@ -66,7 +66,6 @@ public class CommentSaveService {
 
         commentInfoService.updateCommentCount(form.getBoardDataSeq());
 
-
-
+        return data;
     }
 }
