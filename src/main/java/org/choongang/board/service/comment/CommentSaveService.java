@@ -59,7 +59,10 @@ public class CommentSaveService {
             data.setGuestPw(encoder.encode(guestPw));
         }
 
-        data.setCommenter(form.getCommenter());
+        String commenter = form.getCommenter();
+        if (StringUtils.hasText(commenter)) {
+            data.setCommenter(commenter);
+        }
         data.setContent(form.getContent());
 
         commentDataRepository.saveAndFlush(data);

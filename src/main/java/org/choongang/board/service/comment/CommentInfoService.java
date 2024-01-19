@@ -8,6 +8,7 @@ import org.choongang.board.entities.CommentData;
 import org.choongang.board.entities.QCommentData;
 import org.choongang.board.repositories.BoardDataRepository;
 import org.choongang.board.repositories.CommentDataRepository;
+import org.choongang.member.MemberUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class CommentInfoService {
 
     private final CommentDataRepository commentDataRepository;
     private final BoardDataRepository boardDataRepository;
+    private final MemberUtil memberUtil;
     
 
     /**
@@ -32,6 +34,8 @@ public class CommentInfoService {
      */
     public CommentData get(Long seq){
         CommentData data = commentDataRepository.findById(seq).orElseThrow(CommentNotFoundException::new);
+
+        addCommentInfo(data);
 
         return data;
 
@@ -62,7 +66,21 @@ public class CommentInfoService {
 
         List<CommentData> items = (List<CommentData>)commentDataRepository.findAll(andBuilder, Sort.by(desc("listOrder") , asc("createdAt")));
 
+        items.forEach(this::addCommentInfo);
+
         return items;
+    }
+
+    /**
+     * 댓글 추가 정보 처리
+     * @param data
+     */
+    private void addCommentInfo(CommentData data) {
+        boolean editable = false, deletable = false;
+
+        if (memberUtil.isAdmin()) { // 관리자는 댓글 수정, 삭제 제한 없음
+            editable = deletable = true;
+        }
     }
 
     /**
