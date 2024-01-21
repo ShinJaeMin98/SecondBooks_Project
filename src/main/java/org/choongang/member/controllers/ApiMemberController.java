@@ -4,10 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.choongang.commons.ExceptionRestProcessor;
 import org.choongang.commons.rests.JSONData;
 import org.choongang.member.repositories.MemberRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.choongang.member.service.follow.FollowService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/member")
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiMemberController implements ExceptionRestProcessor {
 
     private final MemberRepository memberRepository;
+    private final FollowService followService;
 
     /**
      * 이메일 중복 여부 체크
@@ -29,5 +28,19 @@ public class ApiMemberController implements ExceptionRestProcessor {
         data.setSuccess(isExists);
 
         return data;
+    }
+
+    @GetMapping("/follow/{userId}")
+    public JSONData<Object> follow(@PathVariable("userId") String userId) {
+        followService.follow(userId);
+
+        return new JSONData<>();
+    }
+
+    @GetMapping("/unfollow/{userId}")
+    public JSONData<Object> unfollow(@PathVariable("userId") String userId) {
+        followService.unfollow(userId);
+
+        return new JSONData<>();
     }
 }

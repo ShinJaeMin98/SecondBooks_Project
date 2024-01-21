@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/myPage}">
+
+<section layout:fragment="content" class="follow_board_page">
+    <ul class="items">
+        <li class="no_data" th:if="${items == null || items.isEmpty()}" th:text="#{조회된_게시글이_없습니다.}"></li>
+        <li class="item" th:unless="${items == null || items.isEmpty()}" th:each="item : ${items}" th:object="${item}">
+            <div class="subject" th:text="*{subject}"></div>
+            <div class="content" th:utext="*{content}"></div>
+            <div class="post_info">
+                <div class="profile">
+                    <div class="profile_image" th:if="*{member.profileImage != null}" th:style="*{@utils.backgroundStyle(member.profileImage, 80, 80)}"></div>
+                    <div>
+                        <div class="user_nm" th:text="*{#strings.concat(member.name, '(', member.userId, ')')}"></div>
+                        <div class="user_email" th:text="*{member.email}"></div>
+                    </div>
+                </div>
+                <div th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm')}"></div>
+            </div>
+        </li>
+    </ul>
+
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+</section>
+</html>

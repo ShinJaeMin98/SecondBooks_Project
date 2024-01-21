@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/myPage}">
+
+<section layout:fragment="content" class="follow_page">
+    <ul class="items">
+        <li class="item" th:unless="${items == null || items.isEmpty()}" th:each="item : ${items}" th:object="${item}">
+            <div class="profile">
+                <div class="profile_image" th:if="*{profileImage != null}" th:style="*{@utils.backgroundStyle(profileImage, 80, 80)}"></div>
+                <a class="user_info" th:href="@{/myPage/follow/{userId}(userId=*{userId}, mode=${mode})}">
+                    <div class="user_nm" th:text="*{#strings.concat(name, '(', userId, ')')}"></div>
+                    <div class="user_email" th:text="*{email}"></div>
+                </a>
+            </div>
+            <th:block sec:authorize="isAuthenticated()">
+                <button type="button" th:if="*{@followService.followed(userId)}" class="follow_action unfollow" th:data-user-id="*{userId}">UnFollow</button>
+                <button type="button" th:unless="*{@followService.followed(userId)}" class="follow_action" th:data-user-id="*{userId}">Follow</button>
+            </th:block>
+        </li>
+    </ul>
+
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+</section>
+</html>

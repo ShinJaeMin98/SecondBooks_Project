@@ -30,9 +30,9 @@ header .site_top a:hover { text-decoration: underline; }
 header .logo_search > div { display: flex; align-items: center; justify-content: space-between; height: 100px; }
 header .logo_search .search { display: flex; }
 
-header nav { background: #596b99 }
+header nav { background: #7DB249 }
 header nav > .inner a { display: inline-block; height: 45px; line-height: 45px; padding: 0 25px; min-width: 120px; text-align: center; color: #fff; font-size: 1.35rem; }
-header nav > .inner a:hover { background: #222; }
+header nav > .inner a:hover { background: #456E2A; }
 /* 헤더 공통 E */
 
 /* 입력 항목 공통 S */
