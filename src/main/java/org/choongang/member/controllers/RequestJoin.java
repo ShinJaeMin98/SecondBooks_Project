@@ -22,6 +22,8 @@ public class RequestJoin {
 
     private School sNum;
 
+    private String univId;
+
     @NotBlank
     @Size(min=6)
     private String userId;
