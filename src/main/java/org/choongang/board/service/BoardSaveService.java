@@ -24,11 +24,11 @@ public class BoardSaveService {
     private final FileUploadService fileUploadService;
     private final MemberUtil memberUtil;
     private final HttpServletRequest request;
-    private final SchoolInfoService schoolSearchService;
 
     private final PasswordEncoder encoder;
 
     public BoardData save(RequestBoard form) {
+
         String mode = form.getMode();
         mode = StringUtils.hasText(mode) ? mode : "write";
 
@@ -42,23 +42,22 @@ public class BoardSaveService {
         BoardData data = null;
         if (seq != null && mode.equals("update")) { // 글 수정
             data = boardDataRepository.findById(seq).orElseThrow(BoardDataNotFoundException::new);
-        } else {    // 글 작성
+        } else { // 글 작성
             data = new BoardData();
             data.setGid(form.getGid());
             data.setIp(request.getRemoteAddr());
             data.setUa(request.getHeader("User-Agent"));
             data.setMember(memberUtil.getMember());
-            data.setNum1(form.getNum1());
-            if (memberUtil.getMember() != null) { // 회원 작성시 학교 정보 추가
-                data.setSchool(memberUtil.getMember().getSchool());
-            }
+
             Board board = boardRepository.findById(form.getBid()).orElse(null);
             data.setBoard(board);
         }
+
         data.setPoster(form.getPoster());
         data.setSubject(form.getSubject());
         data.setContent(form.getContent());
         data.setCategory(form.getCategory());
+        data.setEditorView(data.getBoard().isUseEditor());
 
         // 추가 필드 - 정수
         data.setNum1(form.getNum1());
@@ -70,7 +69,7 @@ public class BoardSaveService {
         data.setText2(form.getText2());
         data.setText3(form.getText3());
 
-        // 추가 필드 -여러줄 텍스트
+        // 추가 필드 - 여러줄 텍스트
         data.setLongText1(form.getLongText1());
         data.setLongText2(form.getLongText2());
         data.setLongText3(form.getLongText3());
@@ -93,6 +92,5 @@ public class BoardSaveService {
         fileUploadService.processDone(data.getGid());
 
         return data;
-
     }
 }

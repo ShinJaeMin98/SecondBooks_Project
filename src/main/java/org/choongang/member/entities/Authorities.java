@@ -1,5 +1,6 @@
 package org.choongang.member.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.choongang.member.Authority;
@@ -12,6 +13,7 @@ public class Authorities {
     @GeneratedValue
     private Long seq;
 
+    @JsonIgnore
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name="member_seq")
     private Member member;
