@@ -6,7 +6,7 @@ import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
 import org.choongang.admin.school.service.SchoolDeleteService;
 import org.choongang.admin.school.service.SchoolSaveService;
-import org.choongang.admin.school.service.SchoolSearchService;
+import org.choongang.admin.school.service.SchoolInfoService;
 import org.choongang.admin.school.service.SchoolVerifyService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.school.SchoolUtil;
@@ -27,7 +27,7 @@ public class SchoolController implements ExceptionProcessor {
 
     private final SchoolUtil schoolUtil;
     private final SchoolSaveService saveService;
-    private final SchoolSearchService searchService;
+    private final SchoolInfoService searchService;
     private final SchoolDeleteService deleteService;
     private final SchoolVerifyService verifyService;
 
@@ -141,7 +141,10 @@ public class SchoolController implements ExceptionProcessor {
         //넘어온 num에 해당하는 school값 가져옴
         School school = searchService.findSchoolByNum(num);
         //수정 form에 넘겨줄 값 세팅
+        String sName = schoolUtil.getSchoolName(school.getDomain());
         RequestSchool requestSchool = new RequestSchool(school);
+        requestSchool.setMode("edit");
+        model.addAttribute("sName" , sName);
         model.addAttribute("requestSchool" , requestSchool);
         model.addAttribute("num" , num);
 

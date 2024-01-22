@@ -13,7 +13,7 @@ public class SchoolSaveService {
 
     private final SchoolUtil util;
     private final SchoolRepository repository;
-    private final SchoolSearchService searchService;
+    private final SchoolInfoService searchService;
 
     public void save(RequestSchool form){
 

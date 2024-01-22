@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class SchoolSearchService {
+public class SchoolInfoService {
 
     private final SchoolUtil util;
     private final SchoolRepository repository;
