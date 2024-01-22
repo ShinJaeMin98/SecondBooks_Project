@@ -1,6 +1,7 @@
 package org.choongang.admin.school.service;
 
 import lombok.RequiredArgsConstructor;
+import org.choongang.admin.school.controllers.SchoolSearch;
 import org.choongang.admin.school.repositories.SchoolRepository;
 import org.choongang.school.SchoolUtil;
 import org.choongang.school.entities.School;
@@ -15,8 +16,8 @@ public class SchoolInfoService {
     private final SchoolUtil util;
     private final SchoolRepository repository;
 
-
-    public List<School> getList(){
+    //////////////////////////////return Type ListData<School> 로 바꿔야 페이징 처리 가능..///////////////////////////////////////////////////
+    public List<School> getList(SchoolSearch search){
         List<School> list = repository.findAll();
         return list;
     }
@@ -25,6 +26,8 @@ public class SchoolInfoService {
         List<School> list = repository.findAll();
         return list;
     }
+
+    /////////////////////////////////////////////////////////////////////////////////
 
     public School findSchoolByNum(Long num) {
 
