@@ -17,17 +17,39 @@ public class SchoolInfoService {
     private final SchoolRepository repository;
 
     //////////////////////////////return Type ListData<School> 로 바꿔야 페이징 처리 가능..///////////////////////////////////////////////////
-    public List<School> getList(SchoolSearch search){
+    public List<School> getList(){
         List<School> list = repository.findAll();
         return list;
     }
 
+
+    public List<School> getList2(SchoolSearch search){
+        List<School> list = repository.findAll();
+        return list;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////
+
+
+    /**
+     *  회원가입시 이메일 선택 목록에서 사용
+     *
+     */
     public List<School> getAllList(){
         List<School> list = repository.findAll();
         return list;
     }
 
-    /////////////////////////////////////////////////////////////////////////////////
 
     public School findSchoolByNum(Long num) {
 
