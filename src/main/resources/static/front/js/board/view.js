@@ -1,17 +1,17 @@
 window.addEventListener("DOMContentLoaded", function() {
     // 댓글 작성 후 URL에 comment_id=댓글 등록번호 -> hash 추가 -> 이동
     if (location.search.indexOf("comment_id=") != -1) {
-    const searchParams = new URLSearchParams(location.search);
+        const searchParams = new URLSearchParams(location.search);
 
-    const seq = searchParams.get("comment_id");
-    //searchParams.delete("comment_id");
+        const seq = searchParams.get("comment_id");
+        //searchParams.delete("comment_id");
 
-    //location.search = searchParams.toString();
+        //location.search = searchParams.toString();
 
-    location.hash = `#comment_${seq}`;
+        location.hash=`#comment_${seq}`;
     }
 
-    /* 댓글 수정 버튼 클릭 처리 S*/
+    /* 댓글 수정 버튼 클릭 처리 S */
     const editComments = document.getElementsByClassName("edit_comment");
     const { ajaxLoad } = commonLib;
     for (const el of editComments) {
@@ -48,17 +48,55 @@ window.addEventListener("DOMContentLoaded", function() {
                 ajaxLoad('GET', `/api/comment/${seq}`, null, 'json')
                     .then(res => {
                         if (res.success && res.data) {
-                            textArea.value = res.data.content;
+                            const data = res.data;
                             targetEl.innerHTML = "";
+                            if (!data.member && !data.editable) {
+                                // 비회원 비밀번호 확인 필요
+                                const passwordBox = document.createElement("input");
+                                passwordBox.type = "password";
+                                passwordBox.placeholder = "비밀번호 입력";
+
+                                const button = document.createElement("button");
+                                button.type = 'button';
+
+                                const buttonTxt = document.createTextNode("확인");
+                                button.appendChild(buttonTxt);
+
+                                targetEl.appendChild(passwordBox);
+                                targetEl.appendChild(button);
+
+                                const guestPw = passwordBox.value.trim();
+                                if (!guestPw) {
+                                    alert("비밀번호를 입력하세요.");
+                                    passwordBox.focus();
+                                    return;
+                                }
+
+                                button.addEventListener("click", function() {
+
+                                    ajaxLoad("GET", `/api/comment/auth_check?seq=${seq}&guestPw=${guestPw}`, null, 'json')
+                                        .then(res => {
+                                            console.log("여기...");
+                                           //targetEl.innerHTML = "";
+                                           //textArea.value = data.content;
+                                           //targetEl.appendChild(textArea);
+                                           el.click();
+                                        })
+                                        .catch(err => console.error(err));
+                                });
+                            }
+
+                            textArea.value = data.content;
                             targetEl.appendChild(textArea);
+
                         }
                     })
                     .catch(err => console.error(err));
 
-                /* 1/19 금요일 기준 내일 다시 한다함
+                /*
                 fetch(`/api/comment/${seq}`)
                     .then(res => {
-                        const dataata = res.json();
+                        const data = res.json();
                         console.log(data);
                         console.log(data.data);
                     })
@@ -68,6 +106,5 @@ window.addEventListener("DOMContentLoaded", function() {
 
         });
     }
-    /* 댓글 수정 버튼 클릭 처리 E*/
-
+    /* 댓글 수정 버튼 클릭 처리 E */
 });

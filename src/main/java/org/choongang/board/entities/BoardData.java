@@ -21,7 +21,7 @@ import java.util.UUID;
 @Table(indexes = {
         @Index(name = "idx_boardData_basic", columnList = "notice DESC, createdAt DESC")
 })
-public class BoardData extends Base {
+public class BoardData extends Base implements AuthCheck {
     @Id @GeneratedValue
     private Long seq;
 
@@ -65,6 +65,7 @@ public class BoardData extends Base {
     @Column(length = 20)
     private String ip;  // IP 주소
 
+    @Column(length=150)
     private String ua;  // User-Agent : 브라우저 정보
 
     private Long num1;   // 추가 필드 : 정수
