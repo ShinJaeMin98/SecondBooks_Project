@@ -53,3 +53,9 @@
 .comment_items .btns { text-align: right; }
 .comment_items button, .comment_items .btns a { border: 1px solid #596b99; background: #fff; height: 35px; padding: 0 15px; color: #596b99; cursor: pointer; transition: all 0.5s; border-radius: 3px; display: inline-block; line-height: 33px; }
 .comment_items button:hover, .comment_items .btns a:hover { background: #596b99; color: #fff; }
+
+/* 찜 버튼 */
+.share_btns button { width: 45px; height: 45px; background: #fff; border: 0px solid #222; cursor: pointer; }
+.share_btns button i { font-size: 2rem; color: #222; }
+
+.share_btns button.on i { color: #ff8989; }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block th:fragment="default" th:object="${boardData}">
     <div class="board_view layout_width">
         <h1 th:replace="~{/front/board/skins/default/_board_title::title}"></h1>
@@ -39,6 +40,12 @@
                 <a th:href="@{/file/download/{seq}(seq=*{seq})}" th:text="*{fileName}"></a>
             </li>
         </ul>
+
+        <div class="share_btns">
+            <button sec:authorize="isAuthenticated()" class="save_post" th:data-seq="*{seq}" th:classappend="*{@saveBoardDataService.saved(seq)} ? 'on'">
+                <i class="xi-heart"></i>
+            </button>
+        </div>
 
         <div class="board_btns">
             <a th:href="@{/board/write/{bid}(bid=${board.bid})}" th:text="#{글쓰기}" class="btn"></a>

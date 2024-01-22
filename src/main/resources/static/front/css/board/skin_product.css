@@ -29,3 +29,8 @@
 
 .board_list .list_search { padding: 10px; border-bottom: 1px solid #d5d5d5;}
 .board_list .total { text-align: right; margin: 10px 10px 5px; }
+
+.share_btns button { width: 45px; height: 45px; background: #fff; border: 0px solid #222; cursor: pointer; }
+.share_btns button i { font-size: 2rem; color: #222; }
+
+.share_btns button.on i { color: #ff8989; }
