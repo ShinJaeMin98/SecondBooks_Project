@@ -49,6 +49,9 @@ public class MemberController implements ExceptionProcessor {
     public String joinPs(@Valid RequestJoin form, Errors errors,Model model, SessionStatus sessionStatus) {
         commonProcess("join", model);
 
+        //회원가입 시 이메일 선택 옵션값
+        List<School> schools = schoolSearchService.getAllList();
+        model.addAttribute("schools", schools);
 
         joinService.process(form, errors);
 
