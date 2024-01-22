@@ -4,10 +4,11 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
-import org.choongang.admin.school.service.SchoolDeleteService;
-import org.choongang.admin.school.service.SchoolSaveService;
-import org.choongang.admin.school.service.SchoolSearchService;
-import org.choongang.admin.school.service.SchoolVerifyService;
+import org.choongang.commons.ListData;
+import org.choongang.school.service.SchoolDeleteService;
+import org.choongang.school.service.SchoolSaveService;
+import org.choongang.school.service.SchoolInfoService;
+import org.choongang.school.service.SchoolVerifyService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.school.SchoolUtil;
 import org.choongang.school.entities.School;
@@ -27,7 +28,7 @@ public class SchoolController implements ExceptionProcessor {
 
     private final SchoolUtil schoolUtil;
     private final SchoolSaveService saveService;
-    private final SchoolSearchService searchService;
+    private final SchoolInfoService searchService;
     private final SchoolDeleteService deleteService;
     private final SchoolVerifyService verifyService;
 
@@ -56,6 +57,7 @@ public class SchoolController implements ExceptionProcessor {
     public String list(@ModelAttribute SchoolSearch search , Model model) {
 
         commonProcess("list", model);
+/*
 
         List<School> items = null;
         if(search.getSkey() == null || search.getSkey().equals("")){//검색어 없을 경우
@@ -63,8 +65,12 @@ public class SchoolController implements ExceptionProcessor {
         } else {//검색어 있을 경우
             items = searchService.getList();
         }
+*/
 
-        model.addAttribute("items", items);
+        ListData<School> data = searchService.getList2(search);
+
+        model.addAttribute("items", data.getItems());
+        model.addAttribute("pagination" , data.getPagination());
         return "admin/school/list";
     }
 
@@ -122,9 +128,6 @@ public class SchoolController implements ExceptionProcessor {
         //해당 학교 삭제
         deleteService.delete(num);
 
-        //삭제 후 학교 목록 수집
-        List<School> items = searchService.getList();
-        model.addAttribute("items", items);
         return "redirect:/admin/school";
     }
 
@@ -141,7 +144,9 @@ public class SchoolController implements ExceptionProcessor {
         //넘어온 num에 해당하는 school값 가져옴
         School school = searchService.findSchoolByNum(num);
         //수정 form에 넘겨줄 값 세팅
+        String sName = schoolUtil.getSchoolName(school.getDomain());
         RequestSchool requestSchool = new RequestSchool(school);
+        model.addAttribute("sName" , sName);
         model.addAttribute("requestSchool" , requestSchool);
         model.addAttribute("num" , num);
 
@@ -160,12 +165,8 @@ public class SchoolController implements ExceptionProcessor {
 
         //수정 정보 저장
         saveService.save(form);
-        //수정
-        // 후 학교 목록 수집
-        List<School> items = searchService.getList();
-        model.addAttribute("items", items);
 
-         return "redirect:/admin/school";
+        return "redirect:/admin/school";
     }
 
     /**
@@ -180,9 +181,6 @@ public class SchoolController implements ExceptionProcessor {
 
         //선택 학교 삭제
         deleteService.deleteChks(chks);
-        //삭제 후 학교 목록 수집
-        List<School> items = searchService.getList();
-        model.addAttribute("items", items);
 
         model.addAttribute("script", "parent.location.reload();");
         return "common/_execute_script";

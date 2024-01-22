@@ -1,7 +1,7 @@
-package org.choongang.admin.school.service;
+package org.choongang.school.service;
 
 import lombok.RequiredArgsConstructor;
-import org.choongang.admin.school.repositories.SchoolRepository;
+import org.choongang.school.repositories.SchoolRepository;
 import org.choongang.school.entities.School;
 import org.springframework.stereotype.Service;
 

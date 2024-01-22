@@ -2,7 +2,7 @@ package org.choongang.board.service;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.choongang.admin.school.service.SchoolSearchService;
+import org.choongang.school.service.SchoolInfoService;
 import org.choongang.board.controllers.RequestBoard;
 import org.choongang.board.entities.Board;
 import org.choongang.board.entities.BoardData;
@@ -24,7 +24,7 @@ public class BoardSaveService {
     private final FileUploadService fileUploadService;
     private final MemberUtil memberUtil;
     private final HttpServletRequest request;
-    private final SchoolSearchService schoolSearchService;
+    private final SchoolInfoService schoolSearchService;
 
     private final PasswordEncoder encoder;
 
