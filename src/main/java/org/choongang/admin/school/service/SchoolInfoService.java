@@ -26,7 +26,7 @@ public class SchoolInfoService {
         return list;
     }
 
-    public School findSchoolByNum(Long num){
+    public School findSchoolByNum(Long num) {
 
         School school = repository.getById(num);
 
