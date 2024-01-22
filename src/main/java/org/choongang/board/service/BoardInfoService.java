@@ -108,10 +108,9 @@ public class BoardInfoService {
         QBoardData boardData = QBoardData.boardData;
         BooleanBuilder andBuilder = new BooleanBuilder();
 
-
+        String skin = board.getSkin();
         andBuilder.and(boardData.board.bid.eq(bid)); // 게시판 ID
-        andBuilder.and(boardData.board.bid.eq(bid)); // 게시판 ID
-        if(memberUtil.isLogin()){ // 로그인 회원의 학교 게시물만 조회
+        if(memberUtil.isLogin() && skin.equals("product")){ // 로그인 회원의 학교 게시물만 조회 + product 스킨에서만
             Long sNum = memberUtil.getMember().getSchool().getNum();
             andBuilder.and(boardData.member.school.num.eq(sNum));
         }
