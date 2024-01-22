@@ -2,7 +2,7 @@ package org.choongang.member.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.choongang.admin.school.service.SchoolInfoService;
+import org.choongang.school.service.SchoolInfoService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
 import org.choongang.member.service.FindPwService;

@@ -31,7 +31,8 @@ public class RequestSchool {
         this.domain = school.getDomain();
         this.gid = school.getGid();;
         this.menuLocation = school.getMenuLocation();
-        this.num = school.getNum();;
+        this.num = school.getNum();
+        this.comment = school.getContent();
     }
 
 

@@ -15,6 +15,7 @@
                         <select name="sopt" >
                             <option value="ALL" th:field="*{sopt}">통합검색</option>
                             <option value="sName" th:field="*{sopt}">학교명</option>
+                            <option value="domain" th:field="*{sopt}">도메인</option>
                         <!--    <option value="domain" th:field="*{sopt}">도메인</option>-->
                         </select>
                         <input type="text" name="skey" th:field="*{skey}">
@@ -65,7 +66,7 @@
                         <i class="xi-pen"></i> 수정하기
                     </a>
                         <a th:href="@{/admin/school/delete/{num}(num=*{num})}" class="sbtn on" target="_blank">
-                            <i class="xi-list"></i> 삭제하기
+                            <i class="xi-list" ></i> 삭제하기
                         </a>
 
                     </td>

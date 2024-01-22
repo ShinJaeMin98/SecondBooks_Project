@@ -1,7 +1,7 @@
 package org.choongang.member.service;
 
 import lombok.RequiredArgsConstructor;
-import org.choongang.admin.school.service.SchoolInfoService;
+import org.choongang.school.service.SchoolInfoService;
 import org.choongang.file.service.FileUploadService;
 import org.choongang.member.Authority;
 import org.choongang.member.controllers.JoinValidator;

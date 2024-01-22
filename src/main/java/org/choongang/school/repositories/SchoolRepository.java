@@ -1,4 +1,4 @@
-package org.choongang.admin.school.repositories;
+package org.choongang.school.repositories;
 
 import org.choongang.school.entities.School;
 import org.springframework.data.jpa.repository.JpaRepository;

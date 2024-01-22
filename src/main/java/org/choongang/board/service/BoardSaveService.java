@@ -2,7 +2,7 @@ package org.choongang.board.service;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.choongang.admin.school.service.SchoolInfoService;
+import org.choongang.school.service.SchoolInfoService;
 import org.choongang.board.controllers.RequestBoard;
 import org.choongang.board.entities.Board;
 import org.choongang.board.entities.BoardData;

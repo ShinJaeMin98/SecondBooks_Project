@@ -4,10 +4,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
-import org.choongang.admin.school.service.SchoolDeleteService;
-import org.choongang.admin.school.service.SchoolSaveService;
-import org.choongang.admin.school.service.SchoolInfoService;
-import org.choongang.admin.school.service.SchoolVerifyService;
+import org.choongang.school.service.SchoolDeleteService;
+import org.choongang.school.service.SchoolSaveService;
+import org.choongang.school.service.SchoolInfoService;
+import org.choongang.school.service.SchoolVerifyService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.school.SchoolUtil;
 import org.choongang.school.entities.School;
@@ -140,7 +140,6 @@ public class SchoolController implements ExceptionProcessor {
         //수정 form에 넘겨줄 값 세팅
         String sName = schoolUtil.getSchoolName(school.getDomain());
         RequestSchool requestSchool = new RequestSchool(school);
-        requestSchool.setMode("edit");
         model.addAttribute("sName" , sName);
         model.addAttribute("requestSchool" , requestSchool);
         model.addAttribute("num" , num);
@@ -160,12 +159,8 @@ public class SchoolController implements ExceptionProcessor {
 
         //수정 정보 저장
         saveService.save(form);
-        //수정
-        // 후 학교 목록 수집
-        List<School> items = searchService.getAllList();
-        model.addAttribute("items", items);
 
-         return "redirect:/admin/school";
+        return "redirect:/admin/school";
     }
 
     /**
@@ -180,9 +175,6 @@ public class SchoolController implements ExceptionProcessor {
 
         //선택 학교 삭제
         deleteService.deleteChks(chks);
-        //삭제 후 학교 목록 수집
-        List<School> items = searchService.getAllList();
-        model.addAttribute("items", items);
 
         model.addAttribute("script", "parent.location.reload();");
         return "common/_execute_script";
