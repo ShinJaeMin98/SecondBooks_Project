@@ -12,7 +12,7 @@ public class SchoolSearch {
     private String sName;
     private boolean active;*/
 
-    private String sopt="ALL"; // 검색옵션
+    private String sopt="sName"; // 검색옵션
     private String skey; // 검색 키워드
 
 }

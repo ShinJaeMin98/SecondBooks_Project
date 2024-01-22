@@ -122,9 +122,6 @@ public class SchoolController implements ExceptionProcessor {
         //해당 학교 삭제
         deleteService.delete(num);
 
-        //삭제 후 학교 목록 수집
-        List<School> items = searchService.getList();
-        model.addAttribute("items", items);
         return "redirect:/admin/school";
     }
 
@@ -165,7 +162,7 @@ public class SchoolController implements ExceptionProcessor {
         saveService.save(form);
         //수정
         // 후 학교 목록 수집
-        List<School> items = searchService.getList();
+        List<School> items = searchService.getAllList();
         model.addAttribute("items", items);
 
          return "redirect:/admin/school";
@@ -184,7 +181,7 @@ public class SchoolController implements ExceptionProcessor {
         //선택 학교 삭제
         deleteService.deleteChks(chks);
         //삭제 후 학교 목록 수집
-        List<School> items = searchService.getList();
+        List<School> items = searchService.getAllList();
         model.addAttribute("items", items);
 
         model.addAttribute("script", "parent.location.reload();");
