@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
+import org.choongang.commons.ListData;
 import org.choongang.school.service.SchoolDeleteService;
 import org.choongang.school.service.SchoolSaveService;
 import org.choongang.school.service.SchoolInfoService;
@@ -56,6 +57,7 @@ public class SchoolController implements ExceptionProcessor {
     public String list(@ModelAttribute SchoolSearch search , Model model) {
 
         commonProcess("list", model);
+/*
 
         List<School> items = null;
         if(search.getSkey() == null || search.getSkey().equals("")){//검색어 없을 경우
@@ -63,8 +65,12 @@ public class SchoolController implements ExceptionProcessor {
         } else {//검색어 있을 경우
             items = searchService.getList();
         }
+*/
 
-        model.addAttribute("items", items);
+        ListData<School> data = searchService.getList2(search);
+
+        model.addAttribute("items", data.getItems());
+        model.addAttribute("pagination" , data.getPagination());
         return "admin/school/list";
     }
 
