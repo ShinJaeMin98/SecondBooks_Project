@@ -35,6 +35,8 @@ public class QBoardData extends EntityPathBase<BoardData> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
+    public final BooleanPath editorView = createBoolean("editorView");
+
     public final StringPath gid = createString("gid");
 
     public final StringPath guestPw = createString("guestPw");
@@ -61,8 +63,6 @@ public class QBoardData extends EntityPathBase<BoardData> {
     public final NumberPath<Long> num3 = createNumber("num3", Long.class);
 
     public final StringPath poster = createString("poster");
-
-    public final org.choongang.school.entities.QSchool school;
 
     public final NumberPath<Long> seq = createNumber("seq", Long.class);
 
@@ -98,7 +98,6 @@ public class QBoardData extends EntityPathBase<BoardData> {
         super(type, metadata, inits);
         this.board = inits.isInitialized("board") ? new QBoard(forProperty("board")) : null;
         this.member = inits.isInitialized("member") ? new org.choongang.member.entities.QMember(forProperty("member"), inits.get("member")) : null;
-        this.school = inits.isInitialized("school") ? new org.choongang.school.entities.QSchool(forProperty("school")) : null;
     }
 
 }

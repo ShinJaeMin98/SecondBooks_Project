@@ -38,10 +38,16 @@ public class ApiCommentController implements ExceptionRestProcessor {
     }
 
     @GetMapping("/auth_check")
-    public JSONData<Object> authCheck(@RequestParam("seq") Long seq,
-                                      @RequestParam("guestPw") String guestPw) {
+    public JSONData<Object> authCheck(@RequestParam("seq") Long seq) {
 
         boardAuthService.check("comment_update", seq);
+
+        return new JSONData<>();
+    }
+
+    @GetMapping("/auth_validate")
+    public JSONData<Object> authValidate(@RequestParam("password") String password) {
+        boardAuthService.validate(password);
 
         return new JSONData<>();
     }
