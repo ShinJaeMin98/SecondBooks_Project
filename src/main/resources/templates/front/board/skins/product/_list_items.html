@@ -25,7 +25,7 @@
                         </span>
                         <span class='category' th:if="*{category}" th:text="*{'[' + category + ']'}"></span>
                         <th:block th:if="*{gid != null}"
-                                  th:utext="*{@utils.printThumb(seq, 80, 80, 'editor_files')}"></th:block>
+                                  th:utext="*{@utils.printThumb(editorFiles.get(0).seq, 80, 80, 'editor_files')}"></th:block>
                         <th:block th:text="*{subject}"></th:block>
                         <th:block th:if="*{num1 != null}" th:text="*{num1 >= 1000 ? #numbers.formatInteger(num1, 3, 'COMMA') + ' 원' : num1 + ' 원'}"></th:block>
                         <!--<th:block th:text="*{seq}"></th:block>-->
