@@ -12,12 +12,10 @@ import org.choongang.board.service.config.BoardConfigInfoService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.ListData;
 import org.choongang.commons.Utils;
-import org.choongang.commons.exceptions.AlertBackException;
 import org.choongang.file.entities.FileInfo;
 import org.choongang.file.service.FileInfoService;
 import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -59,6 +57,15 @@ public class BoardController implements ExceptionProcessor {
         commonProcess(bid, "list", model);
 
         ListData<BoardData> data = boardInfoService.getList(bid, search);
+
+        List<List> files = new ArrayList<>();
+
+        for(BoardData board : data.getItems()){
+            board.setEditorFiles(fileInfoService.getList(board.getGid()));
+        }
+
+
+
         model.addAttribute("items", data.getItems());
         model.addAttribute("pagination", data.getPagination());
 
@@ -74,21 +81,6 @@ public class BoardController implements ExceptionProcessor {
      */
     @GetMapping("/view/{seq}")
     public String view(@PathVariable("seq") Long seq, @ModelAttribute BoardDataSearch search, Model model) {
-        boardData = boardInfoService.get(seq);
-        if(!board.getBid().equals(boardData.getBoard().getBid())) {
-            throw new AlertBackException("잘못된 접근입니다.", HttpStatus.BAD_REQUEST);
-        }
-        if(board.getBid().equals("qna")) {
-            if(!(memberUtil.getMember().getSeq() == boardData.getMember().getSeq())) {
-                throw new AlertBackException("본인이 작성한 글이 아닙니다.", HttpStatus.BAD_REQUEST);
-            }
-        }
-        if(board.getBid().equals("product")) {
-            if(!(memberUtil.getMember().getSchool().getNum() == boardData.getMember().getSchool().getNum())) {
-                throw new AlertBackException("페이지를 찾을 수 없습니다.", HttpStatus.NOT_FOUND);
-            }
-        }
-
         boardInfoService.updateViewCount(seq); // 조회수 업데이트
 
         commonProcess(seq, "view", model);

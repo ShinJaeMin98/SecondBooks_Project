@@ -24,8 +24,8 @@
                             [<th:block th:text="#{공지}"></th:block>]
                         </span>
                         <span class='category' th:if="*{category}" th:text="*{'[' + category + ']'}"></span>
-                        <th:block th:if="*{gid != null}"
-                                  th:utext="*{@utils.printThumb(seq, 80, 80, 'editor_files')}"></th:block>
+                        <th:block th:if="*{editorFiles != null && editorFiles.size() != 0}"
+                                  th:utext="*{@utils.printThumb(editorFiles.get(0).seq, 80, 80, 'editor_files')}"></th:block>
                         <th:block th:text="*{subject}"></th:block>
                         <th:block th:if="*{num1 != null}" th:text="*{num1 >= 1000 ? #numbers.formatInteger(num1, 3, 'COMMA') + ' 원' : num1 + ' 원'}"></th:block>
                         <!--<th:block th:text="*{seq}"></th:block>-->
