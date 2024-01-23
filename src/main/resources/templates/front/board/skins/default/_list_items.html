@@ -2,7 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <th:block th:fragment="default">
         <div class="board_list layout_width">
-            <div class="flex sb aic">
+
+            <th:block th:if="${mode != null || mode == 'search'}">
+                <th:block th:replace="~{front/board/skins/default/_search_top::search}"></th:block>
+            </th:block>
+
+            <div class="flex sb aic" th:if="${mode == null || mode != 'search'}">
                 <h1 th:replace="~{front/board/skins/default/_board_title::title}"></h1>
                 <a th:href="@{/board/write/{bid}(bid=${board.bid})}" th:text="#{글쓰기}" class="write_btn"></a>
             </div>
@@ -45,7 +50,7 @@
                 </li>
             </ul>
 
-            <div class="list_search">
+            <div class="list_search" th:if="${mode == null || mode != 'search'}">
                 <form name="frmSearch" method="get" th:action="@{/board/list/{bid}(bid=${board.bid})}" autocomplete="off" th:object="${boardDataSearch}">
                     <select name="sopt" th:field="*{sopt}">
                         <option value="SUBJECT" th:text="#{제목}"></option>

@@ -59,3 +59,9 @@
 .share_btns button i { font-size: 2rem; color: #222; }
 
 .share_btns button.on i { color: #ff8989; }
+
+/* 게시글 통합 검색 상단 */
+#search_top { width: 450px; display: flex; margin: 30px auto 50px; }
+#search_top select { width: 150px; }
+#search_top button { width: 150px; cursor: pointer; }
+#search_top input[type='text'] { flex-glow: 1; margin: 0 5px; }
