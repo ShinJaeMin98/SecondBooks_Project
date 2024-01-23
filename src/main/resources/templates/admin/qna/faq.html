@@ -3,6 +3,45 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
+    <h1>FAQ 등록 관리 </h1>
+    <h2>FAQ 분류</h2>
+    <form>
+    <table class="table_cols mb30">
+        <tr>
+            <th>분류</th>
+            <td>
+                <input type="radio" name="faq" value="sellFaq" id="faq_sell">
+                <label for="faq_sell">구매 및 판매(sellFaq)</label>
 
+                <input type="radio" name="faq" value="memberFaq" id="faq_member">
+                <label for="faq_member">회원서비스(memberFaq)</label>
+            </td>
+        </tr>
+    </table>
+
+    <h2>FAQ 등록</h2>
+    <table class="table_cols mb30">
+        <tr>
+            <th width="180">FAQ 제목</th>
+            <td>
+                <input type="text" name="faqSubject">
+            </td>
+        </tr>
+
+        <tr>
+            <th>FAQ 내용</th>
+            <td>
+                <textarea name="faqContent"></textarea>
+            </td>
+        </tr>
+
+
+    </table>
+        <div class="submit_btns">
+            <button type="reset" class="btn">다시입력</button>
+            <button type="submit" class="btn">등록하기</button>
+        </div>
+
+    </form>
 </section>
 </html>

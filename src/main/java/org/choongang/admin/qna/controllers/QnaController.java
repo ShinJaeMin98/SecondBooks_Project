@@ -55,7 +55,7 @@ public class QnaController implements ExceptionProcessor {
         mode = StringUtils.hasText(mode) ? mode : "list";
 
         if (mode.equals("faq")) {
-            pageTitle = "FAQ 관리";
+            pageTitle = "FAQ 등록";
         }
         model.addAttribute("pageTitle", pageTitle);
         model.addAttribute("subMenuCode", mode);
