@@ -2,6 +2,7 @@ package org.choongang.school.service;
 
 import lombok.RequiredArgsConstructor;
 import org.choongang.admin.school.controllers.RequestSchool;
+import org.choongang.file.service.FileUploadService;
 import org.choongang.school.repositories.SchoolRepository;
 import org.choongang.school.SchoolUtil;
 import org.choongang.school.entities.School;
@@ -13,7 +14,8 @@ public class SchoolSaveService {
 
     private final SchoolUtil util;
     private final SchoolRepository repository;
-    private final SchoolInfoService searchService;
+    private final SchoolInfoService infoService;
+    private final FileUploadService fileUploadService;
 
     public void save(RequestSchool form){
 
@@ -31,9 +33,12 @@ public class SchoolSaveService {
 
             //System.out.println(school+"=================저장==============");
             repository.saveAndFlush(school);
+
+            fileUploadService.processDone(school.getGid());
+
         }
         else {  //수정일 경우
-            School school = searchService.findSchoolByNum(form.getNum());
+            School school = infoService.findSchoolByNum(form.getNum());
 
             String domain = form.getDomain();
 
@@ -42,7 +47,8 @@ public class SchoolSaveService {
             school.setSchoolName(util.getSchoolName(domain));
             school.setContent(form.getComment());
             repository.saveAndFlush(school);
-            //System.out.println(school+"=================수정==============");
+            System.out.println(school+"=================수정==============");
+            fileUploadService.processDone(school.getGid());
         }
 
     }

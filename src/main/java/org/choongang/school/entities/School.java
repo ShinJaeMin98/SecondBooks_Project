@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 import org.choongang.commons.constants.Location;
 import org.choongang.commons.entities.BaseMember;
+import org.choongang.file.entities.FileInfo;
 import org.choongang.member.entities.Member;
 
 import java.util.ArrayList;
@@ -16,16 +17,27 @@ public class School extends BaseMember {
 
     @Id @GeneratedValue
     private Long num ;
+
     @Column(length = 80 , nullable = false)
     private String gid;
+
     @Column(length = 50 , nullable = false)
     private String schoolName;
+
     @Column(length = 50 , nullable = false)
     private String domain;
+
     @Column(length = 10 , nullable = false)
     private Location menuLocation;
+
     @Lob
     private String content;
+
+    @Transient
+    private FileInfo banner_top; // 상단 배너
+
+    @Transient
+    private FileInfo banner_bottom; // 하단 배너
 
     @ToString.Exclude
     @OneToMany(mappedBy = "school", fetch = FetchType.LAZY)

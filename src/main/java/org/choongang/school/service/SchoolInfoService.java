@@ -9,15 +9,19 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.choongang.admin.school.controllers.RequestSchool;
 import org.choongang.admin.school.controllers.SchoolSearch;
 import org.choongang.board.entities.BoardData;
 import org.choongang.commons.ListData;
 import org.choongang.commons.Pagination;
 import org.choongang.commons.Utils;
+import org.choongang.file.entities.FileInfo;
+import org.choongang.file.service.FileInfoService;
 import org.choongang.school.entities.QSchool;
 import org.choongang.school.repositories.SchoolRepository;
 import org.choongang.school.SchoolUtil;
 import org.choongang.school.entities.School;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -31,6 +35,7 @@ public class SchoolInfoService {
 
     private final SchoolUtil util;
     private final SchoolRepository repository;
+    private final FileInfoService fileInfoService;
 
     //////////////////////////////return Type ListData<School> 로 바꿔야 페이징 처리 가능..///////////////////////////////////////////////////
     public List<School> getList(){
@@ -132,5 +137,44 @@ public class SchoolInfoService {
 
         return school;
     }
+
+    public School get(Long num) {
+        School school = repository.findById(num).orElseThrow(SchoolNotFoundException::new);
+        String gid = school.getGid();
+        addSchoolInfo(school);
+
+        return school;
+    }
+
+    public RequestSchool getForm(Long num) {
+        School school = get(num);
+
+        RequestSchool form = new ModelMapper().map(school, RequestSchool.class);
+        form.setDomain(school.getDomain());
+        form.setGid(school.getGid());
+        form.setMenuLocation(school.getMenuLocation());
+        form.setNum(school.getNum());
+        form.setComment(school.getContent());
+
+        form.setMode("edit");
+
+        return form;
+    }
+
+    public void addSchoolInfo(School school) {
+        String gid = school.getGid();
+
+        List<FileInfo> banner_top = fileInfoService.getListDone(gid, "banner_top");
+        List<FileInfo> banner_bottom = fileInfoService.getListDone(gid, "banner_bottom");
+
+        if (banner_top != null && banner_top.isEmpty()) {
+            school.setBanner_top(banner_top.get(0));
+        }
+
+        if (banner_bottom != null && banner_bottom.isEmpty()) {
+            school.setBanner_bottom(banner_bottom.get(0));
+        }
+    }
+
 
 }
