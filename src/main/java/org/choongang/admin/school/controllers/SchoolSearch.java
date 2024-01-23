@@ -6,7 +6,7 @@ import lombok.Data;
 public class SchoolSearch {
 
     private int page =1;
-    private int limit = 20;
+    private int limit = 5;
 
 /*    private Long num=-1L;
     private String sName;
