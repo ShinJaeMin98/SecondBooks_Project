@@ -21,8 +21,9 @@
     <dl>
         <dt th:text="#{작성자}"></dt>
         <dd>
-            <input type="text" name="poster" th:field="*{poster}">
-            <div class="error" th:each="err : ${#fields.errors('poster')}" th:text="${err}"></div>
+            <input type="hidden" name="poster" th:field="*{poster}">
+            <div  th:text="*{poster}">
+                <div class="error" th:each="err : ${#fields.errors('poster')}" th:text="${err}"></div>
         </dd>
     </dl>
     <dl sec:authorize="isAnonymous()">
