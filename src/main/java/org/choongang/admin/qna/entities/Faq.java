@@ -15,7 +15,7 @@ import org.choongang.commons.entities.BaseMember;
 public class Faq extends BaseMember {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     @Column(length = 60)
