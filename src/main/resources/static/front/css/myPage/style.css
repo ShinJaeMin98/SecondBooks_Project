@@ -15,6 +15,12 @@ main > section h1 { line-height: 1; margin-bottom: 25px; font-size: 1.5rem; }
 .save_post_page .content > div { background: #f8f8f8; padding: 15px; border-radius: 5px; }
 .save_post_page .content.hide { transition: all 0.5s; }
 
+.save_post_page .list_search { padding: 10px; border-bottom: 1px solid #d5d5d5;}
+.save_post_page .list_search > form { display: flex; }
+.save_post_page .list_search > form > * + * { margin-left: 5px; }
+.save_post_page .list_search button { width: 180px; }
+.save_post_page .total { text-align: right; margin: 10px 10px 5px; }
+
 /* 마이페이지 사이드 영역 */
 aside .profile_image { width: 200px; height: 200px; border-radius: 50%; margin: 20px auto;  }
 aside .profile_box .update_profile_btn { border: 1px solid #596b99; height: 35px; text-align: center; background: #fff; color: #596b99; display: block; width: 200px; margin: 0 auto 10px; font-size: 1.15rem; line-height: 33px; border-radius: 3px;}
