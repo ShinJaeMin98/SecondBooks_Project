@@ -35,7 +35,7 @@ public class Menu {
 
         menus.put("qna", Arrays.asList(
                 new MenuDetail("list", "질의응답목록", "/admin/qna"),
-                new MenuDetail("faq", "FAQ관리", "/admin/qna/faq")
+                new MenuDetail("faq", "FAQ등록", "/admin/qna/faq")
         ));
     }
 

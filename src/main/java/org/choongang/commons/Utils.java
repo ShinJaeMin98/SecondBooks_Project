@@ -166,7 +166,20 @@ public class Utils {
         return chars.stream().limit(length).collect(Collectors.joining());
     }
 
-    public String backgroundStyle(FileInfo file, int width, int height) {
+    public String backgroundStyle(FileInfo file) {
+
+        String imageUrl = file.getFileUrl();
+        List<String> thumbsUrl = file.getThumbsUrl();
+        if (thumbsUrl != null && !thumbsUrl.isEmpty()) {
+            imageUrl = thumbsUrl.get(thumbsUrl.size() - 1);
+        }
+
+        String style = String.format("background:url('%s') no-repeat center center; background-size:cover;", imageUrl);
+
+        return style;
+    }
+
+    public String backgroundStyle_myPage(FileInfo file, int width, int height) {
 
         String[] data = fileInfoService.getThumb(file.getSeq(), width, height);
         String imageUrl = data[1];

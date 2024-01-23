@@ -58,12 +58,6 @@ public class BoardController implements ExceptionProcessor {
 
         ListData<BoardData> data = boardInfoService.getList(bid, search);
 
-        List<List> files = new ArrayList<>();
-
-        for(BoardData board : data.getItems()){
-            board.setEditorFiles(fileInfoService.getList(board.getGid()));
-        }
-
         model.addAttribute("items", data.getItems());
         model.addAttribute("pagination", data.getPagination());
 
