@@ -26,14 +26,4 @@ public class RequestSchool {
     private FileInfo banner_bottom;
 
     //private List<String> chk = new ArrayList<>();
-
-    public RequestSchool (School school){
-        this.domain = school.getDomain();
-        this.gid = school.getGid();;
-        this.menuLocation = school.getMenuLocation();
-        this.num = school.getNum();
-        this.comment = school.getContent();
-    }
-
-
 }

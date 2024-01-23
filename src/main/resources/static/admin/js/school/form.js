@@ -10,14 +10,18 @@ function callbackFileUpload(files) {
     if (!files || files.length == 0) {
         return;
     }
-    for (const file of files) {
-           /* 드래그 앤 드롭 파일 처리 S */
-           if (file.location.indexOf("banner") != -1) { // location 값에 logo가 포함되어 있으면
 
-               dragAndDropProcess(file);
+           for (const file of files) {
+               /* 드래그 앤 드롭 파일 처리 S */
+               if (file.location.indexOf("banner") != -1) { // location 값에 banner가 포함되어 있으면
 
-               continue;
+                   dragAndDropProcess(file);
+
+                   continue;
+               }
            }
+           /* 드래그 앤 드롭 파일 처리 E */
+
            function dragAndDropProcess(file) {
                    const logoBox = document.querySelector(`.${file.location}_box`);
 
@@ -41,7 +45,12 @@ function callbackFileUpload(files) {
                    /* 더블 클릭시 파일 삭제 처리 E */
                }
            }
-           }
+
+           /**
+           * 드래그 앤 드롭 이미지 삭제
+           *
+           * @param seq : 파일 등록번호
+           */
 
            function deleteDragDropImage(seq) {
                if (!confirm('정말 삭제하겠습니까?')) {
@@ -53,6 +62,12 @@ function callbackFileUpload(files) {
                fileManager.delete(seq);
 
            }
+
+           /**
+           * 파일 삭제 후 후속 처리
+           *
+           * @param seq : 파일 등록 번호
+           */
 
            function callbackFileDelete(seq) {
                const fileBox = document.getElementById(`file_${seq}`);

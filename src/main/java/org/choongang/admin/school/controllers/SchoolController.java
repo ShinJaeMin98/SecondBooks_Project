@@ -28,7 +28,7 @@ public class SchoolController implements ExceptionProcessor {
 
     private final SchoolUtil schoolUtil;
     private final SchoolSaveService saveService;
-    private final SchoolInfoService searchService;
+    private final SchoolInfoService infoService;
     private final SchoolDeleteService deleteService;
     private final SchoolVerifyService verifyService;
 
@@ -67,7 +67,7 @@ public class SchoolController implements ExceptionProcessor {
         }
 */
 
-        ListData<School> data = searchService.getList2(search);
+        ListData<School> data = infoService.getList2(search);
 
         model.addAttribute("items", data.getItems());
         model.addAttribute("pagination" , data.getPagination());
@@ -76,17 +76,14 @@ public class SchoolController implements ExceptionProcessor {
 
     /**
      * 학교 추가/등록 form으로 이동
-     * @param mode
      * @param model
-     * @param form
      * @return
      */
     @GetMapping("/add")
-    public String add(@ModelAttribute String mode, Model model , RequestSchool form) {
-        mode = form.getMode();
-        commonProcess(mode, model);
+    public String add(@ModelAttribute RequestSchool requestSchool, Model model) {
+        commonProcess("add", model);
 
-        return "admin/school/" + mode;
+        return "admin/school/add";
     }
 
     /**
@@ -138,16 +135,17 @@ public class SchoolController implements ExceptionProcessor {
      * @return
      */
     @GetMapping("/edit/{num}")
-    public String edit(@PathVariable("num") Long num, Model model/*,@ModelAttribute SchoolSearch search*/) {
+    public String edit(@PathVariable("num") Long num, Model model) {
         commonProcess("edit", model);
 
         //넘어온 num에 해당하는 school값 가져옴
-        School school = searchService.findSchoolByNum(num);
+        School school = infoService.findSchoolByNum(num);
         //수정 form에 넘겨줄 값 세팅
         String sName = schoolUtil.getSchoolName(school.getDomain());
-        RequestSchool requestSchool = new RequestSchool(school);
+        RequestSchool form = infoService.getForm(num);
+        System.out.println(form);
+        model.addAttribute("requestSchool", form);
         model.addAttribute("sName" , sName);
-        model.addAttribute("requestSchool" , requestSchool);
         model.addAttribute("num" , num);
 
         return "admin/school/edit";
