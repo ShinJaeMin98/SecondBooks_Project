@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<aside th:fragment="menus">
+    <div class="profile_box" sec:authorize="isAuthenticated()">
+        <div class="profile_image" th:if="${session.member.profileImage != null}" th:style="${@utils.backgroundStyle(session.member.profileImage, 350, 350)}"></div>
+
+        <a class='update_profile_btn' th:href="@{/myPage/profile}" th:text="#{회원정보_수정}"></a>
+
+        <div class="user_email" th:text="${session.member.email}"></div>
+        <div class="user_nm" th:text="${session.member.name}"></div>
+    </div>
+    <!--// profile_box -->
+    <ul class="menus">
+        <li>
+            <a th:href="@{/myPage/save_post}" th:text="#{찜_게시글}"></a>
+        </li>
+    </ul>
+</aside>
+</html>

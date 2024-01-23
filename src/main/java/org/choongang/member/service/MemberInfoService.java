@@ -50,12 +50,8 @@ public class MemberInfoService implements UserDetailsService {
                     .toList();
         }
 
-        /* 프로필 이미지 처리 S */
-        List<FileInfo> files = fileInfoService.getListDone(member.getGid());
-        if (files != null && !files.isEmpty()) {
-            member.setProfileImage(files.get(0));
-        }
-        /* 프로필 이미지 처리 E */
+        // 추가 정보 처리
+        addMemberInfo(member);
 
         return MemberInfo.builder()
                 .email(member.getEmail())
@@ -100,5 +96,19 @@ public class MemberInfoService implements UserDetailsService {
         /* 페이징 처리 E */
 
         return new ListData<>(items, pagination);
+    }
+
+    /**
+     * 회원 추가 정보 처리
+     *
+     * @param member
+     */
+    public void addMemberInfo(Member member) {
+        /* 프로필 이미지 처리 S */
+        List<FileInfo> files = fileInfoService.getListDone(member.getGid());
+        if (files != null && !files.isEmpty()) {
+            member.setProfileImage(files.get(0));
+        }
+        /* 프로필 이미지 처리 E */
     }
 }
