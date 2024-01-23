@@ -97,8 +97,8 @@ public class BoardInfoService {
      * @return
      */
     public ListData<BoardData> getList(String bid, BoardDataSearch search) {
-        
-        Board board = configInfoService.get(bid);
+
+        Board board = StringUtils.hasText(bid) ? configInfoService.get(bid) : new Board();
         
         int page = Utils.onlyPositiveNumber(search.getPage(), 1);
         
@@ -108,8 +108,14 @@ public class BoardInfoService {
         QBoardData boardData = QBoardData.boardData;
         BooleanBuilder andBuilder = new BooleanBuilder();
 
+        if (StringUtils.hasText(bid)) {
+            andBuilder.and(boardData.board.bid.eq(bid)); // 게시판 ID
+        }
+
         String skin = board.getSkin();
-        andBuilder.and(boardData.board.bid.eq(bid)); // 게시판 ID
+        if (StringUtils.hasText(bid)) {
+            andBuilder.and(boardData.board.bid.eq(bid)); // 게시판 ID
+        }
         if(memberUtil.isLogin() && skin.equals("product")){ // 로그인 회원의 학교 게시물만 조회 + product 스킨에서만
             Long sNum = memberUtil.getMember().getSchool().getNum();
             andBuilder.and(boardData.member.school.num.eq(sNum));
@@ -191,6 +197,10 @@ public class BoardInfoService {
         Pagination pagination = new Pagination(page, (int)total, ranges, limit, request);
 
         return new ListData<>(items, pagination);
+    }
+
+    public ListData<BoardData> getList(BoardDataSearch search) {
+        return getList(null, search);
     }
 
     /**
