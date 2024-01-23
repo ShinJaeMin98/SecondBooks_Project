@@ -11,9 +11,10 @@ main > section h1 { line-height: 1; margin-bottom: 25px; font-size: 1.5rem; }
 .save_post_page .items li { border: 1px solid #f8f8f8; border-radius: 5px; }
 .save_post_page .items li + li { margin-top: 10px; }
 .save_post_page .subject { padding: 10px 15px; cursor: pointer; }
-.save_post_page .content { margin-top: 10px; transition: all 0.5s; min-height: 300px;}
+.save_post_page .content { margin-top: 10px; transition: all 0.5s; min-height: 100px;}
 .save_post_page .content > div { background: #f8f8f8; padding: 15px; border-radius: 5px; }
 .save_post_page .content.hide { transition: all 0.5s; }
+.save_post_page .content.hide a:hover, a:active { text-decoration: underline; background-color: #7DB249; }
 
 .save_post_page .list_search { padding: 10px; border-bottom: 1px solid #d5d5d5;}
 .save_post_page .list_search > form { display: flex; }
