@@ -38,7 +38,7 @@
 .commenter_info { margin-bottom: 5px; }
 .commenter_info input { width: 120px; }
 .comment_content { display: flex; height: 100px; }
-.comment_content button { width: 100px; background: #596b99; color: #fff; border: 0; cursor: pointer; font-size: 1.15rem; }
+.comment_content button { width: 100px; background: #456E2A; color: #fff; border: 0; cursor: pointer; font-size: 1.15rem; }
 .comment_content textarea { flex-grow: 1; border: 1px solid #d5d5d5; padding: 10px; resize: none; }
 
 .comment_items { margin-top: 10px; }
