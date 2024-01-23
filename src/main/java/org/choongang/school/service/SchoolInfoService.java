@@ -43,8 +43,8 @@ public class SchoolInfoService {
 
         int page = Utils.onlyPositiveNumber(search.getPage(), 1);
         System.out.println(page+"ddddddddddddddddddddddddddddddddddddddddd");
-                                                        /*한 페이지에 보여줄 학교 수*/
-        int limit = Utils.onlyPositiveNumber(search.getLimit(), 5);
+                                                        /*페이지 블럭 수*/
+        int limit = Utils.onlyPositiveNumber(search.getLimit(), 4);
         int offset = (page - 1) * limit; // 레코드 시작 위치
 
         QSchool school = QSchool.school;
