@@ -33,6 +33,7 @@
 .board_list .list_search button { width: 180px; }
 .board_list .total { text-align: right; margin: 10px 10px 5px; }
 
+
 /* 찜 버튼 */
 .share_btns button { width: 45px; height: 45px; background: #fff; border: 0px solid #222; cursor: pointer; }
 .share_btns button i { font-size: 2rem; color: #222; }
