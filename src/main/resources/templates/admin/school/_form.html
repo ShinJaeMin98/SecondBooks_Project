@@ -13,13 +13,17 @@
     </div>
     <table class="table_cols mb30">
         <tr>
-            <th width="180">학교 선택</th>
+            <th width="180">학교</th>
 
-            <td>
+            <td th:if="*{mode != 'edit'}">
                 <select name="domain" th:field="*{domain}">
                     <option th:each="school : ${schools}" th:value="${school[1]}" th:text="${school[0]}" th:field="*{domain}"></option>
                 </select>
                 <div class="error" th:each="err : ${#fields.errors('domain')}" th:text="${err}"></div>
+            </td>
+            <td th:if="*{mode == 'edit'}">
+                <input type="hidden" name="domain" th:value="*{domain}">
+                <div th:text="${sName}"></div>
             </td>
         </tr>
         <tr>

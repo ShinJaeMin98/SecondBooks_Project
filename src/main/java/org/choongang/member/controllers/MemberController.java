@@ -2,7 +2,7 @@ package org.choongang.member.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.choongang.admin.school.service.SchoolSearchService;
+import org.choongang.school.service.SchoolInfoService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
 import org.choongang.member.service.FindPwService;
@@ -27,14 +27,14 @@ public class MemberController implements ExceptionProcessor {
     private final Utils utils;
     private final JoinService joinService;
     private final FindPwService findPwService;
-    private final SchoolSearchService schoolSearchService;
+    private final SchoolInfoService schoolSearchService;
 
     @GetMapping("/join")
     public String join(@ModelAttribute RequestJoin form, Model model ) {
         commonProcess("join", model);
 
         //회원가입 시 이메일 선택 옵션값
-        List<School> schools = schoolSearchService.getList();
+        List<School> schools = schoolSearchService.getAllList();
         model.addAttribute("schools", schools);
         System.out.println(schools);
 
@@ -49,6 +49,9 @@ public class MemberController implements ExceptionProcessor {
     public String joinPs(@Valid RequestJoin form, Errors errors,Model model, SessionStatus sessionStatus) {
         commonProcess("join", model);
 
+        //회원가입 시 이메일 선택 옵션값
+        List<School> schools = schoolSearchService.getAllList();
+        model.addAttribute("schools", schools);
 
         joinService.process(form, errors);
 

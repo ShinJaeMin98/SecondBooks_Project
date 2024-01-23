@@ -10,12 +10,12 @@ import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Request;
 import org.choongang.board.controllers.BoardDataSearch;
 import org.choongang.board.controllers.RequestBoard;
 import org.choongang.board.entities.*;
 import org.choongang.board.repositories.BoardDataRepository;
 import org.choongang.board.repositories.BoardViewRepository;
+import org.choongang.board.service.comment.CommentInfoService;
 import org.choongang.board.service.config.BoardConfigInfoService;
 import org.choongang.commons.ListData;
 import org.choongang.commons.Pagination;
@@ -28,7 +28,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -47,6 +46,10 @@ public class BoardInfoService {
     private final MemberUtil memberUtil;
     private final Utils utils;
 
+    private final CommentInfoService commentInfoService;
+
+
+
     /**
      * 게시글 조회
      *
@@ -57,6 +60,9 @@ public class BoardInfoService {
         BoardData boardData = boardDataRepository.findById(seq).orElseThrow(BoardDataNotFoundException::new);
 
         addBoardData(boardData);
+
+        List<CommentData> comments = commentInfoService.getList(seq);
+        boardData.setComments(comments);
 
         return boardData;
     }
@@ -102,8 +108,12 @@ public class BoardInfoService {
         QBoardData boardData = QBoardData.boardData;
         BooleanBuilder andBuilder = new BooleanBuilder();
 
-
+        String skin = board.getSkin();
         andBuilder.and(boardData.board.bid.eq(bid)); // 게시판 ID
+        if(memberUtil.isLogin() && skin.equals("product")){ // 로그인 회원의 학교 게시물만 조회 + product 스킨에서만
+            Long sNum = memberUtil.getMember().getSchool().getNum();
+            andBuilder.and(boardData.member.school.num.eq(sNum));
+        }
 
         /* 검색 조건 처리 S */
 
@@ -202,6 +212,7 @@ public class BoardInfoService {
     public List<BoardData> getLatest(String bid) {
         return getLatest(bid, 10);
     }
+
 
     /**
      * 게시글 추가 정보 처리

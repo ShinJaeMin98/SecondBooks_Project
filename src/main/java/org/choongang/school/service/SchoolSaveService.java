@@ -1,8 +1,8 @@
-package org.choongang.admin.school.service;
+package org.choongang.school.service;
 
 import lombok.RequiredArgsConstructor;
 import org.choongang.admin.school.controllers.RequestSchool;
-import org.choongang.admin.school.repositories.SchoolRepository;
+import org.choongang.school.repositories.SchoolRepository;
 import org.choongang.school.SchoolUtil;
 import org.choongang.school.entities.School;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ public class SchoolSaveService {
 
     private final SchoolUtil util;
     private final SchoolRepository repository;
-    private final SchoolSearchService searchService;
+    private final SchoolInfoService searchService;
 
     public void save(RequestSchool form){
 
@@ -26,6 +26,7 @@ public class SchoolSaveService {
             school.setGid(form.getGid());
             school.setSchoolName(schoolName);
             school.setDomain(form.getDomain());
+            school.setContent(form.getComment());
             school.setMenuLocation(form.getMenuLocation());
 
             //System.out.println(school+"=================저장==============");
@@ -39,6 +40,7 @@ public class SchoolSaveService {
             school.setDomain(domain);
             school.setMenuLocation(form.getMenuLocation());
             school.setSchoolName(util.getSchoolName(domain));
+            school.setContent(form.getComment());
             repository.saveAndFlush(school);
             //System.out.println(school+"=================수정==============");
         }

@@ -1,5 +1,6 @@
 package org.choongang.member.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
@@ -31,6 +32,7 @@ public class Member extends Base {
     @Column(length=40, nullable = false)
     private String name;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sNum")
     private School school;
