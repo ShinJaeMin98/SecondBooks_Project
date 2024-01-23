@@ -5,11 +5,11 @@
 
 <section layout:fragment="content" class="save_post_page">
     <h1 th:text="#{찜_게시글}"></h1>
-    <hr>
     <ul class="items">
         <li th:if="${items == null || items.isEmpty()}" class="no_data" th:text="#{찜_게시글이_없습니다.}"></li>
         <li th:unless="${items == null || items.isEmpty()}"
             th:each="item : ${items}" th:object="${item}">
+            <hr>
             <div class="subject" th:text="*{subject}"></div>
             <div class="content hide">
                 <div>
@@ -28,7 +28,6 @@
                         <button class="save_post on" data-refresh="true" th:data-seq="*{seq}" th:text="#{찜_해제}"></button>
                     </div>
                 </div>
-                <hr>
             </div>
         </li>
     </ul>
