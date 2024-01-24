@@ -187,6 +187,7 @@ public class SchoolController implements ExceptionProcessor {
         //선택 학교 삭제
         deleteService.deleteChks(chks);
 
+        System.out.println(chks);
         model.addAttribute("script", "parent.location.reload();");
         return "common/_execute_script";
     }
