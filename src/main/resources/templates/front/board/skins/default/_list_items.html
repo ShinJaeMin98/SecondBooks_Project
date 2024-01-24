@@ -35,8 +35,8 @@
                     <div class="post_info">
                     <span class="poster">
                         <th:block th:text="*{poster}"></th:block>
-                        <th:block th:if="*{member != null}"
-                                  th:text="*{'(' + member.userId + ')'}"></th:block>
+                        <th:block th:if="*{member != null}" th:text="*{'(' + #strings.substring(member.userId, 0, 4) + '****)'}"></th:block>
+
                     </span>
                         <span class="view_count">
                         조회수 :

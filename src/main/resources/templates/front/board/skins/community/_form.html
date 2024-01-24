@@ -23,7 +23,8 @@
         <dd>
             <input type="hidden" name="poster" th:field="*{poster}">
             <div  th:text="*{poster}">
-            <div class="error" th:each="err : ${#fields.errors('poster')}" th:text="${err}"></div>
+                <div class="error" th:each="err : ${#fields.errors('poster')}" th:text="${err}"></div>
+            </div>
         </dd>
     </dl>
     <dl sec:authorize="isAnonymous()">

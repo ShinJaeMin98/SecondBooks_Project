@@ -13,7 +13,7 @@
                 <span>
                     <th:block th:text="#{작성자}"></th:block> :
                     <th:block th:text="*{poster}"></th:block>
-                    <th:block th:if="*{member != null}" th:text="*{'(' + #strings.substring(member.email, 0, 4) + '****)'}"></th:block>
+                    <th:block th:if="*{member != null}" th:text="*{'(' + #strings.substring(member.userId, 0, 4) + '****)'}"></th:block>
                 </span>
                 <span>
                     <th:block th:if="*{num1 != null}" th:text="*{num1 >= 1000 ? #numbers.formatInteger(num1, 3, 'COMMA') + ' 원' : num1 + ' 원'}"></th:block>

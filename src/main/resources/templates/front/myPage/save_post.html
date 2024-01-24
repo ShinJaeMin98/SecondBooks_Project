@@ -17,7 +17,7 @@
                         <div>
                             <th:block th:text="#{작성자}"></th:block> :
                             <th:block th:text="*{poster}"></th:block>
-                            <th:block th:if="*{member != null}" th:text="*{'(' + member.userId + ')'}"></th:block>
+                            <th:block th:if="*{member != null}" th:text="*{'(' + #strings.substring(member.userId, 0, 4) + '****)'}"></th:block>
                         </div>
                         <div th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm')}"></div>
                     </div>
