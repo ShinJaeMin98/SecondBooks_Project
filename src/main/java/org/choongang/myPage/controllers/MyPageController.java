@@ -49,7 +49,18 @@ public class MyPageController implements ExceptionProcessor {
         model.addAttribute("items", data.getItems());
         model.addAttribute("pagination", data.getPagination());
 
-        return utils.tpl("mypage/save_post");
+        return utils.tpl("myPage/save_post");
+    }
+
+    @GetMapping("/my_post")
+    public String myPost(@ModelAttribute BoardDataSearch search, Model model) {
+        commonProcess("my_post", model);
+
+        ListData<BoardData> data = saveBoardDataService.getList(search);
+
+        model.addAttribute("pagination", data.getPagination());
+
+        return utils.tpl("myPage/my_post");
     }
 
     private void commonProcess(String mode, Model model) {
@@ -67,6 +78,13 @@ public class MyPageController implements ExceptionProcessor {
 
             addScript.add("board/common");
             addScript.add("myPage/save_post");
+        }
+
+        if (mode.equals("my_post")) { // 찜한 게시글 페이지
+            pageTitle = Utils.getMessage("내가_쓴_글", "commons");
+
+            addScript.add("board/common");
+            addScript.add("myPage/my_post");
         }
 
         model.addAttribute("pageTitle", pageTitle);
