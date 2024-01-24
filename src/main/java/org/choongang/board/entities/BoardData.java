@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import org.choongang.commons.entities.Base;
 import org.choongang.file.entities.FileInfo;
 import org.choongang.member.entities.Member;
-import org.choongang.school.entities.School;
 
 import java.util.List;
 import java.util.UUID;
@@ -56,6 +55,8 @@ public class BoardData extends Base implements AuthCheck {
     private int viewCount; // 조회수
 
     private int commentCount; // 댓글 수
+    
+    private int saveCount; // 찜 횟수
 
     private boolean editorView; // true : 에디터를 통해서 작성
 

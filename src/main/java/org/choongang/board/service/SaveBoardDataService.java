@@ -177,4 +177,20 @@ public class SaveBoardDataService {
 
         return new ListData<>(items, pagination);
     }
+
+    /**
+     * 게시글 찜 카운트
+     * 
+     * @param bSeq : 게시글 번호
+     * @return
+     */
+    public void getTotalCount(Long bSeq){
+        BoardData data = boardDataRepository.findById(bSeq).orElse(null);
+        if(data == null) {
+            return;
+        }
+        int total = saveBoardDataRepository.getTotal(bSeq);
+        data.setSaveCount(total);
+        saveBoardDataRepository.flush();
+    }
 }

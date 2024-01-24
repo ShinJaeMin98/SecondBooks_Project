@@ -22,6 +22,10 @@
                     <th:block th:text=#{조회수}></th:block> :
                     <th:block th:text="*{viewCount >= 1000 ? #numbers.formatInteger(viewCount, 3, 'COMMA') : viewCount}"></th:block>
                 </span>
+                <span class="save_count">
+                    <th:block th:text="#{관심수}"></th:block> :
+                    <th:block th:text="*{saveCount}"></th:block>
+                </span>
             </div>
 
             <div class="right">
@@ -49,7 +53,6 @@
                 <i class="xi-heart"></i>
             </button>
         </div>
-
         <div class="board_btns">
             <a th:href="@{/board/write/{bid}(bid=${board.bid})}" th:text="#{글쓰기}" class="btn"></a>
 

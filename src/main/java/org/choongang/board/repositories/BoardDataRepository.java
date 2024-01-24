@@ -14,5 +14,4 @@ public interface BoardDataRepository extends JpaRepository<BoardData, Long>,
     List<String> getUserBoards(@Param("userId") String userId);
 
 
-//    List<String> findBoardDataBySNum(Long sNum);
 }
