@@ -5,7 +5,31 @@
 
 <section layout:fragment="content" class="my_post_page">
     <h1 th:text="#{내가_쓴_글}"></h1>
+    <ul class="items">
+        <li th:if="${items == null || items.isEmpty()}" class="no_data" th:text="#{게시글이_없습니다.}"></li>
+        <li th:unless="${items == null || items.isEmpty()}"
+            th:each="item : ${items}" th:object="${item}">
+            <hr>
+            <div class="subject" th:text="*{subject}"></div>
+            <div class="content hide">
+                <div>
+                    <div class="post_info">
+                        <div>
+                            <th:block th:text="#{작성자}"></th:block> :
+                            <th:block th:text="*{poster}"></th:block>
+                            <th:block th:if="*{member != null}" th:text="*{'(' + #strings.substring(member.userId, 0, 4) + '****)'}"></th:block>
+                        </div>
+                        <div th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm')}"></div>
+                    </div>
+                    <th:block th:utext="*{content}"></th:block>
 
+                    <div class="btns">
+                        <a th:href="@{/board/view/{seq}(seq=*{seq})}" th:text="#{게시글로_이동}"></a>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
 
     <div class="list_search">
         <form name="frmSearch" method="get" th:action="@{/myPage/my_post}" autocomplete="off" th:object="${boardDataSearch}">
@@ -14,7 +38,6 @@
                 <option value="SUBJECT" th:text="#{제목}"></option>
                 <option value="CONTENT" th:text="#{내용}"></option>
                 <option value="SUBJECT_CONTENT" th:text="#{제목_내용}"></option>
-                <option value="POSTER" th:text="#{작성자}"></option>
             </select>
             <input type="text" name="skey" th:field="*{skey}">
             <button type="submit" th:text="#{검색하기}"></button>

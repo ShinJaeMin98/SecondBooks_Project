@@ -3,10 +3,12 @@ package org.choongang.myPage.controllers;
 import lombok.RequiredArgsConstructor;
 import org.choongang.board.controllers.BoardDataSearch;
 import org.choongang.board.entities.BoardData;
+import org.choongang.board.service.BoardInfoService;
 import org.choongang.board.service.SaveBoardDataService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.ListData;
 import org.choongang.commons.Utils;
+import org.choongang.member.MemberUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -23,7 +25,8 @@ import java.util.List;
 public class MyPageController implements ExceptionProcessor {
 
     private final SaveBoardDataService saveBoardDataService;
-
+    private final BoardInfoService boardInfoService;
+    private final MemberUtil memberUtil;
     public final Utils utils;
 
     @GetMapping // 마이페이지 메인
@@ -56,8 +59,9 @@ public class MyPageController implements ExceptionProcessor {
     public String myPost(@ModelAttribute BoardDataSearch search, Model model) {
         commonProcess("my_post", model);
 
-        ListData<BoardData> data = saveBoardDataService.getList(search);
-
+        search.setUserId(memberUtil.getMember().getUserId());
+        ListData<BoardData> data = boardInfoService.getList(search);
+        model.addAttribute("items", data.getItems());
         model.addAttribute("pagination", data.getPagination());
 
         return utils.tpl("myPage/my_post");
@@ -76,15 +80,11 @@ public class MyPageController implements ExceptionProcessor {
         if (mode.equals("save_post")) { // 찜한 게시글 페이지
             pageTitle = Utils.getMessage("찜_게시글", "commons");
 
-            addScript.add("board/common");
-            addScript.add("myPage/save_post");
         }
 
         if (mode.equals("my_post")) { // 찜한 게시글 페이지
             pageTitle = Utils.getMessage("내가_쓴_글", "commons");
 
-            addScript.add("board/common");
-            addScript.add("myPage/my_post");
         }
 
         model.addAttribute("pageTitle", pageTitle);

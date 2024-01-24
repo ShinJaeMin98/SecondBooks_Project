@@ -108,9 +108,6 @@ public class BoardInfoService {
         QBoardData boardData = QBoardData.boardData;
         BooleanBuilder andBuilder = new BooleanBuilder();
 
-        if (StringUtils.hasText(bid)) {
-            andBuilder.and(boardData.board.bid.eq(bid)); // 게시판 ID
-        }
 
         String skin = board.getSkin();
         if (StringUtils.hasText(bid)) {
