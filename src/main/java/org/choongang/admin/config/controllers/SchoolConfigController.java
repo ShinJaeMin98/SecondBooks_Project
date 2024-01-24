@@ -83,7 +83,8 @@ public class SchoolConfigController implements ExceptionProcessor {
             for(String[] l : list){
                 //l[0] : 학교명 , l[1] : 도메인
 
-                l[1] = l[1].replace("www.","");
+                l[1] = l[1].replace("www.","")
+                        .replace("https://" , "");
 
                 int v = schools.indexOf(l[0]);
 
@@ -100,7 +101,7 @@ public class SchoolConfigController implements ExceptionProcessor {
                  * ( 고려대 , 고려대 대학원 ) => 고려대 / 같은 취급으로 묶어주려면 좀 귀찮을듯
                  */
                 k++;
-                if(k == 424){
+                if(k == 423){
                     break;
                 }
 
