@@ -82,17 +82,30 @@ public class SchoolConfigController implements ExceptionProcessor {
             int k = 0;
             for(String[] l : list){
                 //l[0] : 학교명 , l[1] : 도메인
-                int i = l[0].indexOf(" ");
-                if(i != -1){
-                    l[0] = l[0].substring(0,i).trim();
-                }
+
                 l[1] = l[1].replace("www.","");
-                l[1] = l[1].replaceAll("/" , "");
-                schools += l[0]+"_"+l[1]+"\n";
+
+                int v = schools.indexOf(l[0]);
+
+                if(!l[1].equals("") && l[1] != null){
+                    if(v == -1){
+                        schools += l[0]+"_"+l[1]+"\n";
+                    }
+                }
+
+                /**
+                 * 400까지가 대학교 이후는 대학원 , 대학원은 도메인이 대학교와 다르고, 같은 대학원이어도 전공마다 도메인이 다름
+                 * ( 고려대 , 고려대 대학원 ) => 고려대 , ( 연세대 연세대 대학원 ) => 연세대 이렇게 같은 학교로 묶을 수 있으면 상관 없는데
+                 * 고려대 korea.ac.kr , 고려대 교육대학원 korea.ac.kr/edu , 고려대 의과대학원 korea.ac.kr/medi 이런식으로 달라서
+                 * ( 고려대 , 고려대 대학원 ) => 고려대 / 같은 취급으로 묶어주려면 좀 귀찮을듯
+                 */
                 k++;
-                if(k == 40){
+                if(k == 424){
                     break;
                 }
+
+
+
             }
             config.setSchools(schools);
         }
