@@ -167,11 +167,12 @@ public class SchoolInfoService {
         List<FileInfo> banner_top = fileInfoService.getListDone(gid, "banner_top");
         List<FileInfo> banner_bottom = fileInfoService.getListDone(gid, "banner_bottom");
 
-        if (banner_top != null && banner_top.isEmpty()) {
+
+        if (banner_top != null && !banner_top.isEmpty()) {
             school.setBanner_top(banner_top.get(0));
         }
 
-        if (banner_bottom != null && banner_bottom.isEmpty()) {
+        if (banner_bottom != null && !banner_bottom.isEmpty()) {
             school.setBanner_bottom(banner_bottom.get(0));
         }
     }
