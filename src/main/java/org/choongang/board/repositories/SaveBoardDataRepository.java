@@ -26,4 +26,8 @@ public interface SaveBoardDataRepository extends JpaRepository<SaveBoardData, Sa
 
         return items.stream().map(SaveBoardData::getBSeq).toList();
     }
+    default int getTotal(Long boardDataSeq) {
+        QSaveBoardData saveBoardData = QSaveBoardData.saveBoardData;
+        return (int)count(saveBoardData.bSeq.eq(boardDataSeq));
+    }
 }

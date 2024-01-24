@@ -15,6 +15,7 @@ public class ApiBoardController {
     @GetMapping("/save_post/{bSeq}")
     public JSONData<Object> savePost(@PathVariable("bSeq") Long bSeq) {
         saveBoardDataService.save(bSeq);
+        saveBoardDataService.getTotalCount(bSeq);
 
         return new JSONData<>();
     }
@@ -22,7 +23,7 @@ public class ApiBoardController {
     @DeleteMapping("/save_post/{bSeq}")
     public JSONData<Object> deleteSavePost(@PathVariable("bSeq") Long bSeq) {
         saveBoardDataService.delete(bSeq);
-
+        saveBoardDataService.getTotalCount(bSeq);
         return new JSONData<>();
     }
 }

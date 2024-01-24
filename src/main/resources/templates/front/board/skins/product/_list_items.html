@@ -32,15 +32,20 @@
                     </a>
 
                     <div class="post_info">
-                    <span class="poster">
-                        <th:block th:text="*{poster}"></th:block>
-                        <th:block th:if="*{member != null}"
-                                  th:text="*{'(' + member.userId + ')'}"></th:block>
-                    </span>
+                        <span class="poster">
+                            <th:block th:text="*{poster}"></th:block>
+                            <th:block th:if="*{member != null}"
+                                      th:text="*{'(' + member.userId + ')'}"></th:block>
+                        </span>
                         <span class="view_count">
-                        조회수 :
-                        <th:block th:text="*{viewCount >= 1000 ? #numbers.formatInteger(viewCount, 3, 'COMMA') : viewCount}"></th:block>
-                    </span>
+                            조회수 :
+                            <th:block th:text="*{viewCount >= 1000 ? #numbers.formatInteger(viewCount, 3, 'COMMA') : viewCount}"></th:block>
+                        </span>
+
+                        <span class="save_count">
+                            관심수 :
+                            <th:block th:text="*{saveCount >= 1000 ? #numbers.formatInteger(saveCount, 3, 'COMMA') : saveCount}"></th:block>
+                        </span>
 
                         <span class="post_date"
                               th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm')}"></span>
