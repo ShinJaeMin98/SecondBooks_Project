@@ -100,7 +100,7 @@ public class SchoolConfigController implements ExceptionProcessor {
                  * ( 고려대 , 고려대 대학원 ) => 고려대 / 같은 취급으로 묶어주려면 좀 귀찮을듯
                  */
                 k++;
-                if(k == 400){
+                if(k == 424){
                     break;
                 }
 
