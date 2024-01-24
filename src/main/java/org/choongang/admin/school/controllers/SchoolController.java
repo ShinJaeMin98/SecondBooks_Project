@@ -158,8 +158,15 @@ public class SchoolController implements ExceptionProcessor {
      * @return
      */
     @PostMapping("/edit")
-    public String edit2(Model model/*,@ModelAttribute SchoolSearch search */, RequestSchool form) {
-        commonProcess("list", model);
+    public String edit2(@Valid RequestSchool form, Errors errors, Model model) {
+        String mode = form.getMode();
+
+        commonProcess(mode, model);
+
+        if (errors.hasErrors()) {
+            errors.getAllErrors().stream().forEach(System.out::println);
+            return "admin/school/" + mode;
+        }
 
         //수정 정보 저장
         saveService.save(form);
