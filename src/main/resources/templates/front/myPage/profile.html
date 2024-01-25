@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/mypage}">
 
-<section layout:fragment="content">
+<section layout:fragment="content" class="profile_page">
     <h1 th:text="#{회원정보_수정}"></h1>
 
     <form name="frmSave" method="post" th:action="@{/myPage/profile}" autocomplete="off" th:object="${requestProfile}">
