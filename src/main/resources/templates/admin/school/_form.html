@@ -27,6 +27,23 @@
             </td>
         </tr>
         <tr>
+            <th>학교 로고</th>
+            <td>
+                <div id="school_logo">
+                    <div th:if="*{logoImage != null}" class="image1_tpl_box" th:id="*{'file_' + logoImage.seq}">
+                        <a th:href="@{/file/delete/{seq}(seq=*{logoImage.seq})}" onclick="return confirm('정말 삭제하시겠습니까?');" class="remove" target="ifrmProcess">
+                            <i class="xi-close"></i>
+                        </a>
+                        <div class="inner" th:style="*{@utils.backgroundStyle(logoImage, 250, 250)}"></div>
+                    </div>
+                </div>
+                <button type="button" class="sbtn upload_files" data-location="logo" data-image-only="true" data-single-file="true">
+                    <i class="xi-image"></i>
+                    이미지 업로드
+                </button>
+            </td>
+        </tr>
+        <tr>
             <th>메뉴 위치</th>
             <td>
                 <input type="radio" name="menuLocation" value="LEFT" id="menuLocation_LEFT" th:field="*{menuLocation}">
@@ -39,14 +56,14 @@
         </tr>
     </table>
     <h2>학교 설명</h2>
-<table class="table_cols mb30">
-    <tr>
-        <th width="180">코멘트</th>
-        <td>
-            <textarea name="comment" placeholder="" th:field="*{comment}"></textarea>
-        </td>
-    </tr>
-</table>
+    <table class="table_cols mb30">
+        <tr>
+            <th width="180">코멘트</th>
+            <td>
+                <textarea name="comment" placeholder="" th:field="*{comment}"></textarea>
+            </td>
+        </tr>
+    </table>
     <h2>배너 설정</h2>
     <table class="table_cols mb30">
         <tr>
@@ -67,5 +84,6 @@
         </tr>
     </table>
     <script th:replace="~{common/_file_tpl::editor_tpl}"></script>
+    <script th:replace="~{common/_file_tpl::image1_tpl}"></script>
 </th:block>
 </html>

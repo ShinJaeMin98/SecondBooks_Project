@@ -39,6 +39,9 @@ public class School extends BaseMember {
     @Transient
     private FileInfo banner_bottom; // 하단 배너
 
+    @Transient
+    private FileInfo logoImage; // 로고 이미지
+
     @ToString.Exclude
     @OneToMany(mappedBy = "school", fetch = FetchType.LAZY)
     List<Member> members = new ArrayList<>();

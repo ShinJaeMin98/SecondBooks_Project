@@ -22,6 +22,7 @@ public class RequestSchool {
 
     private Location menuLocation = Location.LEFT;
 
+    private FileInfo logoImage;
     private FileInfo banner_top;
     private FileInfo banner_bottom;
 

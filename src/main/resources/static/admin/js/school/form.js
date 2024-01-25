@@ -11,6 +11,7 @@ function callbackFileUpload(files) {
         return;
     }
 
+
            for (const file of files) {
                /* 드래그 앤 드롭 파일 처리 S */
                if (file.location.indexOf("banner") != -1) { // location 값에 banner가 포함되어 있으면
@@ -18,8 +19,23 @@ function callbackFileUpload(files) {
                    dragAndDropProcess(file);
 
                    continue;
+               } else if (file.location == 'logo') {
+                    logoImageProcess(file);
                }
            }
+           /* 로고 이미지 처리 S */
+           function logoImageProcess(file) {
+                const schoolLogo = document.getElementById("school_logo");
+                let html = document.getElementById("image1_tpl").innerHTML;
+
+
+                html = html.replace(/\[seq\]/g, file.seq)
+                            .replace(/\[imageUrl\]/g, file.fileUrl);
+
+               schoolLogo.innerHTML = html;
+           }
+            /* 로고 이미지 처리 E */
+
            /* 드래그 앤 드롭 파일 처리 E */
 
            function dragAndDropProcess(file) {
@@ -71,6 +87,12 @@ function callbackFileUpload(files) {
 
            function callbackFileDelete(seq) {
                const fileBox = document.getElementById(`file_${seq}`);
+
+                if (fileBox.classList.contains("image1_tpl_box")) {
+                   fileBox.parentElement.removeChild(fileBox);
+                   return;
+                }
+
                fileBox.classList.remove('uploaded');
                fileBox.style.backgroundImage = fileBox.style.backgroundPosition = fileBox.style.backgroundSize = null;
            }
