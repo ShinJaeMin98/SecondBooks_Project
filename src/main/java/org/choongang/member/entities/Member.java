@@ -44,4 +44,6 @@ public class Member extends Base {
 
     @Transient
     private FileInfo profileImage;
+
+    private boolean enable = true;
 }
