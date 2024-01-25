@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/myPage}">
+
+<section layout:fragment="content">
+    <h1 th:text="#{회원정보_수정}"></h1>
+
+    <form name="frmSave" method="post" th:action="@{/myPage/profile}" autocomplete="off" th:object="${requestProfile}">
+        <input type="hidden" name="gid" th:value="${session.member.gid}">
+        <dl>
+            <dt th:text="#{프로필_이미지}"></dt>
+            <dd>
+                <div class="profile_image" th:if="${session.member.profileImage != null}" th:object="${session.member.profileImage}">
+
+                    <a th:href="@{/file/delete/{seq}(seq=*{seq})}" onclick="return confirm('정말 삭제하겠습니까?');">
+                        <i class="xi-close"></i>
+                    </a>
+                    <th:block th:utext="*{@utils.printThumb(seq, 250, 250, 'image')}"></th:block>
+                </div>
+                <button type="button" class="sbtn upload_files" data-image-only="true" data-single-file="true">
+                    <i class="xi-image"></i>
+                    <th:block th:text="#{이미지_업로드}"></th:block>
+                </button>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{아이디}"></dt>
+            <dd th:text="${session.member.userId}"></dd>
+        </dl>
+        <dl>
+            <dt th:text="#{회원명}"></dt>
+            <dd>
+                <input type="text" name="name" th:field="*{name}">
+                <!--<div class="error" th:each="err : ${#fields.errors('name')}" th:text="${err}"></div>-->
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{비밀번호}"></dt>
+            <dd>
+                <input type="password" name="password" th:field="*{password}">
+                <!--<div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>-->
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{비밀번호_확인}"></dt>
+            <dd>
+                <input type="password" name="confirmPassword" th:field="*{confirmPassword}">
+                <!--<div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>-->
+            </dd>
+        </dl>
+
+        <button type="submit" th:text="#{수정하기}"></button>
+    </form>
+
+</section>
+
+</html>

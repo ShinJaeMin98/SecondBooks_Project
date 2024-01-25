@@ -1,5 +1,6 @@
 package org.choongang.myPage.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.board.controllers.BoardDataSearch;
 import org.choongang.board.entities.BoardData;
@@ -9,11 +10,14 @@ import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.ListData;
 import org.choongang.commons.Utils;
 import org.choongang.member.MemberUtil;
+import org.choongang.member.entities.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -67,6 +71,30 @@ public class MyPageController implements ExceptionProcessor {
         return utils.tpl("myPage/my_post");
     }
 
+    @GetMapping("/profile")
+    public String profile(@ModelAttribute RequestProfile form, Model model) {
+        commonProcess("profile", model);
+
+        Member member = memberUtil.getMember();
+        form.setName(member.getName());
+        form.setProfileImage(member.getProfileImage());
+
+        return utils.tpl("myPage/profile");
+    }
+
+    @PostMapping("/profile")
+    public String updateProfile(@Valid RequestProfile form, Errors errors, Model model) {
+        commonProcess("profile", model);
+
+        if (errors.hasErrors()) {
+            return utils.tpl("myPage/profile");
+        }
+
+
+
+        return "redirect:/myPage";
+    }
+
     private void commonProcess(String mode, Model model) {
         mode = StringUtils.hasText(mode) ? mode : "main";
         String pageTitle = Utils.getMessage("마이페이지", "commons");
@@ -80,10 +108,13 @@ public class MyPageController implements ExceptionProcessor {
         if (mode.equals("save_post")) { // 찜한 게시글 페이지
             pageTitle = Utils.getMessage("찜_게시글", "commons");
 
-        }
-
-        if (mode.equals("my_post")) { // 찜한 게시글 페이지
+        } else if (mode.equals("my_post")) { // 찜한 게시글 페이지
             pageTitle = Utils.getMessage("내가_쓴_글", "commons");
+
+        } else if (mode.equals("profile")) {
+            pageTitle = Utils.getMessage("회원정보_수정", "commons");
+            addCommonScript.add("fileManager");
+            addScript.add("myPage/profile");
 
         }
 
