@@ -13,6 +13,7 @@ import org.choongang.file.entities.FileInfo;
 import org.choongang.file.service.FileInfoService;
 import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
+import org.choongang.member.service.MemberUpdateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -34,7 +35,12 @@ public class MyPageController implements ExceptionProcessor {
 
     private final SaveBoardDataService saveBoardDataService;
     private final BoardInfoService boardInfoService;
+
+    private final MemberUpdateService memberUpdateService;
+    private final ProfileValidator profileValidator;
+
     private final MemberUtil memberUtil;
+
     public final Utils utils;
 
     @GetMapping // 마이페이지 메인
@@ -90,6 +96,8 @@ public class MyPageController implements ExceptionProcessor {
     public String updateProfile(@Valid RequestProfile form, Errors errors, Model model) {
         commonProcess("profile", model);
 
+        profileValidator.validate(form, errors);
+
         if (errors.hasErrors()) {
 
             String gid = memberUtil.getMember().getGid();
@@ -99,6 +107,7 @@ public class MyPageController implements ExceptionProcessor {
             return utils.tpl("myPage/profile");
         }
 
+        memberUpdateService.update(form);
 
 
         return "redirect:/myPage";

@@ -9,7 +9,7 @@ function callbackFileUpload(files) {
 
     const file = files[0];
 
-    const profileImage = document.querySelector(".profile_image");
+    const profileImage = document.querySelector(".profile_page .profile_image");
     profileImage.innerHTML = "";
 
     const deleteLink = document.createElement("a");
