@@ -9,6 +9,8 @@ import org.choongang.board.service.SaveBoardDataService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.ListData;
 import org.choongang.commons.Utils;
+import org.choongang.file.entities.FileInfo;
+import org.choongang.file.service.FileInfoService;
 import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/myPage")
 public class MyPageController implements ExceptionProcessor {
+
+    private final FileInfoService fileInfoService;
 
     private final SaveBoardDataService saveBoardDataService;
     private final BoardInfoService boardInfoService;
@@ -87,6 +91,11 @@ public class MyPageController implements ExceptionProcessor {
         commonProcess("profile", model);
 
         if (errors.hasErrors()) {
+
+            String gid = memberUtil.getMember().getGid();
+
+            List<FileInfo> profileImages = fileInfoService.getList(gid);
+            form.setProfileImage(profileImages.get(0));
             return utils.tpl("myPage/profile");
         }
 
