@@ -11,16 +11,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.choongang.admin.school.controllers.RequestSchool;
 import org.choongang.admin.school.controllers.SchoolSearch;
-import org.choongang.board.entities.BoardData;
 import org.choongang.commons.ListData;
 import org.choongang.commons.Pagination;
 import org.choongang.commons.Utils;
 import org.choongang.file.entities.FileInfo;
 import org.choongang.file.service.FileInfoService;
-import org.choongang.school.entities.QSchool;
-import org.choongang.school.repositories.SchoolRepository;
 import org.choongang.school.SchoolUtil;
+import org.choongang.school.entities.QSchool;
 import org.choongang.school.entities.School;
+import org.choongang.school.repositories.SchoolRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -48,7 +47,7 @@ public class SchoolInfoService {
 
         int page = Utils.onlyPositiveNumber(search.getPage(), 1);
         System.out.println(page+"ddddddddddddddddddddddddddddddddddddddddd");
-                                                        /*페이지 블럭 수*/
+        /*페이지 블럭 수*/
         int limit = Utils.onlyPositiveNumber(search.getLimit(), 4);
         int offset = (page - 1) * limit; // 레코드 시작 위치
 
@@ -83,18 +82,18 @@ public class SchoolInfoService {
         PathBuilder<School> pathBuilder = new PathBuilder<>(School.class, "school");
 
         List<School> items = new JPAQueryFactory(em)
-                    .selectFrom(school)
-                    .offset(offset)
-                    .limit(limit)
-                    .where(andBuilder)
-                    .orderBy(
-                            new OrderSpecifier(Order.DESC, pathBuilder.get("createdAt"))
-                            )
-                    .fetch();
+                .selectFrom(school)
+                .offset(offset)
+                .limit(limit)
+                .where(andBuilder)
+                .orderBy(
+                        new OrderSpecifier(Order.DESC, pathBuilder.get("createdAt"))
+                )
+                .fetch();
 
 
         long total = repository.count(andBuilder);
-                                                                //페이지 구간 개수
+        //페이지 구간 개수
         Pagination pagination = new Pagination(page, (int)total, 5, limit, request);
 
 
@@ -140,7 +139,7 @@ public class SchoolInfoService {
 
     public School get(Long num) {
         School school = repository.findById(num).orElseThrow(SchoolNotFoundException::new);
-        String gid = school.getGid();
+
         addSchoolInfo(school);
 
         return school;
@@ -167,6 +166,11 @@ public class SchoolInfoService {
         List<FileInfo> banner_top = fileInfoService.getListDone(gid, "banner_top");
         List<FileInfo> banner_bottom = fileInfoService.getListDone(gid, "banner_bottom");
 
+        List<FileInfo> logoImage = fileInfoService.getListDone(gid, "logo");
+
+        if (logoImage != null && !logoImage.isEmpty()) {
+            school.setLogoImage(logoImage.get(0));
+        }
 
         if (banner_top != null && !banner_top.isEmpty()) {
             school.setBanner_top(banner_top.get(0));

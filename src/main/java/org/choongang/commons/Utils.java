@@ -168,18 +168,11 @@ public class Utils {
 
     public String backgroundStyle(FileInfo file) {
 
-        String imageUrl = file.getFileUrl();
-        List<String> thumbsUrl = file.getThumbsUrl();
-        if (thumbsUrl != null && !thumbsUrl.isEmpty()) {
-            imageUrl = thumbsUrl.get(thumbsUrl.size() - 1);
-        }
-
-        String style = String.format("background:url('%s') no-repeat center center; background-size:cover;", imageUrl);
-
-        return style;
+       return backgroundStyle(file, 100, 100);
     }
 
-    public String backgroundStyle_myPage(FileInfo file, int width, int height) {
+
+    public String backgroundStyle(FileInfo file, int width, int height) {
         try {
             String[] data = fileInfoService.getThumb(file.getSeq(), width, height);
             String imageUrl = data[1];
@@ -193,6 +186,13 @@ public class Utils {
         }
     }
 
+    public String backgroundStyle_myPage(FileInfo file, int width, int height) {
+       return backgroundStyle(file, width, height);
+    }
+
+    public String backgroundStyle_myPage(FileInfo file) {
+        return backgroundStyle(file);
+    }
 
     /**
      * 요청 데이터 단일 조회 편의 함수

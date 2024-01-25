@@ -40,6 +40,7 @@ function callbackFileUpload(files) {
 *
 */
 function callbackFileDelete(seq) {
-    const profileImage = document.querySelector(".profile_image");
+    const profileImage = document.querySelector(".profile_page .profile_image");
+    console.log(profileImage);
     profileImage.innerHTML = "";
 }
