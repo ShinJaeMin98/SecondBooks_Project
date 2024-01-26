@@ -47,7 +47,21 @@
                 <a th:href="@{/file/download/{seq}(seq=*{seq})}" th:text="*{fileName}"></a>
             </li>
         </ul>
-
+        <div class="frmStatus">
+            <th:block th:if="${boardData.member != null && (boardData.member.seq == session.member.seq)}" >
+                <form method="post" th:action="@{/board/status}">
+                    <input type="hidden" name="seq" th:field="*{seq}">
+                    <input type="hidden" name="mode" value="status">
+                    <input type="hidden" name="bid" th:field="*{board.bid}">
+                    <select name="text1">
+                        <option value="" th:text="#{거래상태}" th:field="*{text1}"></option>
+                        <option value="ing" th:text="#{거래중}" th:field="*{text1}"></option>
+                        <option value="done" th:text="#{거래완료}" th:field="*{text1}"></option>
+                    </select>
+                    <button type="submit" th:text="변경"></button>
+                </form>
+            </th:block>
+        </div>
         <div class="share_btns">
             <button sec:authorize="isAuthenticated()" class="save_post" th:data-seq="*{seq}" th:classappend="*{@saveBoardDataService.saved(seq)} ? 'on'">
                 <i class="xi-heart"></i>
