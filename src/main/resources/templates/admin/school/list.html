@@ -65,7 +65,7 @@
                     <td align="center"><a th:href="@{/admin/school/edit/{num}(num=*{num})}" class="sbtn">
                         <i class="xi-pen"></i> 수정하기
                     </a>
-                        <a th:href="@{/admin/school/delete/{num}(num=*{num})}" class="sbtn on" target="_blank">
+                        <a th:href="@{/admin/school/delete/{num}(num=*{num})}" class="sbtn on" onclick="return confirm('정말 삭제하시겠습니까?');">
                             <i class="xi-list"></i> 삭제하기
                         </a>
 
