@@ -42,6 +42,12 @@ public class BoardSaveService {
         BoardData data = null;
         if (seq != null && mode.equals("update")) { // 글 수정
             data = boardDataRepository.findById(seq).orElseThrow(BoardDataNotFoundException::new);
+        } else if (seq != null && mode.equals("status")) { // 상품 상태 수정
+            data = boardDataRepository.findById(seq).orElseThrow(BoardDataNotFoundException::new);
+            data.setText1(form.getText1());
+            boardDataRepository.saveAndFlush(data);
+
+            return data;
         } else { // 글 작성
             data = new BoardData();
             data.setGid(form.getGid());

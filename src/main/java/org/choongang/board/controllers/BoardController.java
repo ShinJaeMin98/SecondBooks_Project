@@ -181,6 +181,18 @@ public class BoardController implements ExceptionProcessor {
         return redirectURL;
     }
 
+    @PostMapping("/status")
+    public String status(RequestBoard form) {
+        System.out.println(form);
+        // 게시글 저장 처리
+        BoardData boardData = boardSaveService.save(form);
+
+        String redirectURL = "redirect:/board/view/"+form.getSeq();
+
+
+        return redirectURL;
+    }
+
     @GetMapping("delete/{seq}")
     public String delete(@PathVariable("seq") Long seq, Model model) {
         commonProcess(seq, "delete", model);
