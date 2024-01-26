@@ -3,15 +3,18 @@ package org.choongang.admin.member.controllers;
 import lombok.RequiredArgsConstructor;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
+import org.choongang.admin.school.controllers.RequestSchool;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.ListData;
 import org.choongang.member.controllers.MemberSearch;
 import org.choongang.member.entities.Member;
 import org.choongang.member.service.MemberInfoService;
+import org.choongang.school.entities.School;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -41,7 +44,6 @@ public class MemberController implements ExceptionProcessor {
 
         ListData<Member> data = infoService.getList(search);
 
-        ListData<Member> items = infoService.getList(search);
 
         model.addAttribute("items", data.getItems()); // 목록
         model.addAttribute("pagination", data.getPagination()); // 페이징
@@ -54,6 +56,21 @@ public class MemberController implements ExceptionProcessor {
         commonProcess("authority", model);
 
         return "admin/member/authority";
+    }
+
+    /**
+     * 학교 수정form으로 이동
+     * @param seq
+     * @param model
+     * @return
+     */
+    @GetMapping("/edit/{seq}")
+    public String edit(@PathVariable("seq") Long seq, Model model) {
+        commonProcess("edit", model);
+
+
+
+        return "admin/member/edit";
     }
 
     private void commonProcess(String mode, Model model) {

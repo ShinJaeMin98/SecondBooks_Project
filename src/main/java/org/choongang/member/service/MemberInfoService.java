@@ -3,6 +3,7 @@ package org.choongang.member.service;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
@@ -23,6 +24,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -77,6 +79,38 @@ public class MemberInfoService implements UserDetailsService {
 
         BooleanBuilder andBuilder = new BooleanBuilder();
         QMember member = QMember.member;
+
+        /* 검색 조건 처리 S */
+
+        String sopt = search.getSopt();
+        sopt = StringUtils.hasText(sopt) ? sopt.trim() : "ALL";
+        String skey = search.getSkey(); // 키워드
+
+        // 조건별 키워드 검색
+        if (StringUtils.hasText(skey)) {
+            skey = skey.trim();
+
+            BooleanExpression UserIdcond = member.userId.contains(skey);
+            BooleanExpression Namecond = member.name.contains(skey);
+            BooleanExpression SchoolNamecond = member.school.schoolName.contains(skey);
+            //BooleanExpression authority = member.authority.contains(skey);
+
+            if (sopt.equals("userId")) {
+                andBuilder.and(UserIdcond);
+            } else if (sopt.equals("name")) {
+                andBuilder.and(Namecond);
+            } else if (sopt.equals("schoolName")) {
+                andBuilder.and(SchoolNamecond);
+            } else { // 통합검색 : userId + name
+                BooleanBuilder orBuilder = new BooleanBuilder();
+                orBuilder.or(UserIdcond)
+                        .or(Namecond)
+                        .or(SchoolNamecond);
+                andBuilder.and(orBuilder);
+            }
+        }
+
+        /* 검색 조건 처리 E */
 
         PathBuilder<Member> pathBuilder = new PathBuilder<>(Member.class, "member");
 

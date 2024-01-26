@@ -15,6 +15,7 @@
                 <div>
                     <input type="hidden" name="email" th:field="*{email}" th:readonly="${session.EmailAuthVerified != null && session.EmailAuthVerified}">
                 </div>
+                <br>
                 <div>
                     <input type="text" name="univId" id="univId" th:field="*{univId}">@
                     <select name="domain" id="domain">
@@ -24,7 +25,7 @@
                     <button th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}" type="button" id="email_verify" th:text="#{인증코드전송}"></button>
                 </div>
 
-
+                <br>
                 <div class="auth_box">
                     <th:block th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}">
                         <input type="text" id="auth_num" th:placeholder="#{인증코드_입력}">
@@ -40,6 +41,7 @@
 
             </dd>
         </dl>
+        <br>
 
         <dl>
             <dt th:text="#{아이디}"></dt>
@@ -48,6 +50,7 @@
                 <div class="error" th:each="err : ${#fields.errors('userId')}" th:text="${err}"></div>
             </dd>
         </dl>
+        <br>
 
         <dl>
             <dt th:text="#{비밀번호}"></dt>
@@ -56,6 +59,7 @@
                 <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
             </dd>
         </dl>
+        <br>
 
         <dl>
             <dt th:text="#{비밀번호_확인}"></dt>
@@ -64,6 +68,7 @@
                 <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
             </dd>
         </dl>
+        <br>
 
         <dl>
             <dt th:text="#{회원명}"></dt>
@@ -72,6 +77,7 @@
                 <div class="error" th:each="err : ${#fields.errors('name')}" th:text="${err}"></div>
             </dd>
         </dl>
+        <br>
 
 
         <dl>
@@ -82,15 +88,20 @@
                         th:text="#{이미지_업로드}" data-image-only="true" data-single-file="true"></button>
             </dd>
         </dl>
+        <br>
 
         <div th:text="#{회원가입_약관}"></div>
         <div class="terms" th:utext="${@utils.nl2br(siteConfig.joinTerms)}"></div>
+        <br>
+
         <div class="terms_agree">
             <input type="checkbox" name="agree" value="true" id="agree" th:field="*{agree}">
             <label for="agree" th:text="#{회원가입_약관에_동의합니다.}"></label>
 
             <div class="error" th:each="err : ${#fields.errors('agree')}" th:text="${err}"></div>
         </div>
+        <br>
+
         <button type="submit" th:text="#{가입하기}"></button>
     </form>
 
