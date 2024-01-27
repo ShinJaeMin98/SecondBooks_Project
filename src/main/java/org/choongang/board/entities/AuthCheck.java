@@ -1,11 +1,11 @@
-package org.choongang.board.entities;
+    package org.choongang.board.entities;
 
-import org.choongang.member.entities.Member;
+    import org.choongang.member.entities.Member;
 
-public interface AuthCheck {
-    boolean isEditable();
-    boolean isDeletable();
-    boolean isMine();
+    public interface AuthCheck {
+        boolean isEditable();
+        boolean isDeletable();
+        boolean isMine();
 
-    Member getMember();
-}
+        Member getMember();
+    }

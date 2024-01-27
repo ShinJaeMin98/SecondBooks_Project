@@ -1,8 +1,8 @@
-package org.choongang.admin.qna.controllers;
+    package org.choongang.admin.qna.controllers;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+    import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping
-public class FaqController {
+    @RequestMapping
+    public class FaqController {
 
-}
+    }

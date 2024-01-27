@@ -1,44 +1,44 @@
-package org.choongang.member.controllers;
+    package org.choongang.member.controllers;
 
-import jakarta.validation.constraints.AssertTrue;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import lombok.Data;
-import org.choongang.school.entities.School;
+    import jakarta.validation.constraints.AssertTrue;
+    import jakarta.validation.constraints.Email;
+    import jakarta.validation.constraints.NotBlank;
+    import jakarta.validation.constraints.Size;
+    import lombok.Data;
+    import org.choongang.school.entities.School;
 
-import java.util.UUID;
+    import java.util.UUID;
 
-@Data
-public class RequestJoin {
+    @Data
+    public class RequestJoin {
 
-    private String gid = UUID.randomUUID().toString();
+        private String gid = UUID.randomUUID().toString();
 
-    @NotBlank @Email
-    private String email;
+        @NotBlank @Email
+        private String email;
 
-    @NotBlank
-    private String domain;
+        @NotBlank
+        private String domain;
 
-    private School sNum;
+        private School sNum;
 
-    private String univId;
+        private String univId;
 
-    @NotBlank
-    @Size(min=6)
-    private String userId;
+        @NotBlank
+        @Size(min=6)
+        private String userId;
 
-    @NotBlank
-    @Size(min=8)
-    private String password;
+        @NotBlank
+        @Size(min=8)
+        private String password;
 
-    @NotBlank
-    private String confirmPassword;
+        @NotBlank
+        private String confirmPassword;
 
-    @NotBlank
-    private String name;
+        @NotBlank
+        private String name;
 
-    @AssertTrue
-    private boolean agree;
+        @AssertTrue
+        private boolean agree;
 
-}
+    }

@@ -1,10 +1,10 @@
-package org.choongang.admin.qna.service;
+    package org.choongang.admin.qna.service;
 
-import lombok.Data;
+    import lombok.Data;
 
-@Data
-public class RequestFaq {
+    @Data
+    public class RequestFaq {
 
-    private String subject;
-    private String content;
-}
+        private String subject;
+        private String content;
+    }

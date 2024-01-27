@@ -1,12 +1,12 @@
-package org.choongang.member.controllers;
+    package org.choongang.member.controllers;
 
-import lombok.Data;
+    import lombok.Data;
 
-@Data
-public class MemberSearch {
-    private int page = 1;
-    private int limit = 20;
+    @Data
+    public class MemberSearch {
+        private int page = 1;
+        private int limit = 20;
 
-    private String sopt="ALL";
-    private String skey="";
-}
+        private String sopt="ALL";
+        private String skey="";
+    }
