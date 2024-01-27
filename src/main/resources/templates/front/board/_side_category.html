@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<aside th:fragment="categories" class="side_categories" th:object="${board}"
+     th:if="${board.getCategories() != null && !board.getCategories().isEmpty() && board.menuLocation != null && (board.menuLocation.name() == 'LEFT' || board.menuLocation.name() == 'RIGHT')}">
+    <ul>
+        <li><a th:href="@{/board/list/{bid}(bid=*{bid})}" th:text="#{전체}"></a></li>
+        <li><a th:each="category : ${board.getCategories()}" th:href="@{/board/list/{bid}(bid=*{bid}, category=${category})}" th:text="${category}"></a></li>
+    </ul>
+</aside>
+</html>

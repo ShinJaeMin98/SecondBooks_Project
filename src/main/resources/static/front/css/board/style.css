@@ -1,0 +1,6 @@
+.board_content { display: flex; }
+.board_content > section { flex-grow: 1; }
+.board_content > aside { width: 200px; margin-right: 20px; background: #d5d5d5; }
+.board_content.right { flex-direction: row-reverse; }
+.board_content.left > aside { margin-right: 20px; }
+.board_content.right > aside { margin-left: 20px; }
