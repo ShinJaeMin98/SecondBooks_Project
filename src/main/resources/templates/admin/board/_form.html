@@ -38,6 +38,16 @@
             </td>
         </tr>
         <tr>
+            <th>학교 전용</th>
+            <td>
+                <input type="radio" name="schoolOnly" value="true" id="schoolOnly_true" th:field="*{schoolOnly}">
+                <label for="schoolOnly_true">사용</label>
+
+                <input type="radio" name="schoolOnly" value="false" id="schoolOnly_false" th:field="*{schoolOnly}">
+                <label for="schoolOnly_false">미사용</label>
+            </td>
+        </tr>
+        <tr>
             <th>진열가중치</th>
             <td>
                 <input type="number" name="listOrder" th:field="*{listOrder}">
