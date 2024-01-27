@@ -8,6 +8,7 @@ import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.choongang.commons.ListData;
 import org.choongang.commons.Pagination;
@@ -19,6 +20,8 @@ import org.choongang.member.entities.Authorities;
 import org.choongang.member.entities.Member;
 import org.choongang.member.entities.QMember;
 import org.choongang.member.repositories.MemberRepository;
+import org.choongang.school.entities.School;
+import org.choongang.school.service.SchoolInfoService;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -30,10 +33,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class MemberInfoService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
     private final FileInfoService fileInfoService;
+    private final SchoolInfoService schoolInfoService;
     private final HttpServletRequest request;
     private final EntityManager em;
 
@@ -143,6 +148,11 @@ public class MemberInfoService implements UserDetailsService {
         List<FileInfo> files = fileInfoService.getListDone(member.getGid());
         if (files != null && !files.isEmpty()) {
             member.setProfileImage(files.get(0));
+        } else {
+            School school = member.getSchool();
+            schoolInfoService.addSchoolInfo(school);
+
+            member.setProfileImage(school.getLogoImage());
         }
         /* 프로필 이미지 처리 E */
     }

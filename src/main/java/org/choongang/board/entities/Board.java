@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.choongang.commons.constants.Location;
 import org.choongang.commons.entities.BaseMember;
 import org.choongang.file.entities.FileInfo;
 import org.choongang.member.Authority;
@@ -81,6 +82,8 @@ public class Board extends BaseMember {
     @Column(length=20, nullable = false)
     private Authority commentAccessType = Authority.ALL; // 권한 설정 - 댓글
 
+    private boolean schoolOnly;
+
     @Lob
     private String htmlTop; // 게시판 상단 HTML
 
@@ -101,6 +104,9 @@ public class Board extends BaseMember {
 
     @Transient
     private FileInfo logo3; // 로고 이미지 3
+
+    @Transient
+    private Location menuLocation;
 
     /**
      * 분류 List 형태로 변환

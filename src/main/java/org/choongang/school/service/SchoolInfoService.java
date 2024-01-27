@@ -36,6 +36,14 @@ public class SchoolInfoService {
     private final SchoolRepository repository;
     private final FileInfoService fileInfoService;
 
+    public School get(String domain) {
+        School school = repository.getByDomain(domain).orElseThrow(SchoolNotFoundException::new);
+
+        addSchoolInfo(school);
+
+        return school;
+    }
+
     //////////////////////////////return Type ListData<School> 로 바꿔야 페이징 처리 가능..///////////////////////////////////////////////////
     public List<School> getList(){
         List<School> list = repository.findAll();

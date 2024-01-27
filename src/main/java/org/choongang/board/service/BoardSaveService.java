@@ -2,7 +2,6 @@ package org.choongang.board.service;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.choongang.school.service.SchoolInfoService;
 import org.choongang.board.controllers.RequestBoard;
 import org.choongang.board.entities.Board;
 import org.choongang.board.entities.BoardData;
@@ -55,6 +54,11 @@ public class BoardSaveService {
             data.setUa(request.getHeader("User-Agent"));
             data.setMember(memberUtil.getMember());
 
+            // 학교 등록번호 기록
+            if (memberUtil.isLogin()) {
+                data.setText2(memberUtil.getMember().getSchool().getDomain());
+            }
+
             Board board = boardRepository.findById(form.getBid()).orElse(null);
             data.setBoard(board);
         }
@@ -71,8 +75,8 @@ public class BoardSaveService {
         data.setNum3(form.getNum3());
 
         // 추가 필드 - 한줄 텍스트
-        data.setText1(form.getText1());
-        data.setText2(form.getText2());
+        data.setText1(form.getText1());  // 거래상태
+        //data.setText2(form.getText2());  // 학교 도메인
         data.setText3(form.getText3());
 
         // 추가 필드 - 여러줄 텍스트
