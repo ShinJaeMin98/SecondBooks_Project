@@ -199,6 +199,8 @@ public class BoardInfoService {
         int ranges = utils.isMobile() ? board.getPageCountMobile() : board.getPageCountPc();
         Pagination pagination = new Pagination(page, (int)total, ranges, limit, request);
 
+        items.forEach(this::addBoardData);
+
         return new ListData<>(items, pagination);
     }
 
