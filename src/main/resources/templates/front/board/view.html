@@ -2,27 +2,39 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
-<main layout:fragment="content">
+<main layout:fragment="content" class="layout_width">
+    <nav th:replace="~{front/board/_top_category::categories}"></nav>
+    <section class="board_content" th:classappend="${board.menuLocation != null ? board.menuLocation.name().toLowerCase() : ''}">
+        <aside th:replace="~{front/board/_side_category::categories}"></aside>
+        <section>
+            <div th:if="${board.schoolOnly && board.htmlTopImages != null && !board.htmlTopImages.isEmpty()}" class="layout_width banner_top">
+                <img th:each="image : ${board.htmlTopImages}" th:src="${image.fileUrl}">
+            </div>
 
-    <th:block th:if="${board.skin == null || board.skin == 'default'}">
-        <th:block th:replace="~{front/board/skins/default/view::default}"></th:block>
-    </th:block>
+            <th:block th:if="${board.skin == null || board.skin == 'default'}">
+                <th:block th:replace="~{front/board/skins/default/view::default}"></th:block>
+            </th:block>
 
-    <th:block th:if="${board.skin == 'product'}">
-        <th:block th:replace="~{front/board/skins/product/view::product}"></th:block>
-    </th:block>
+            <th:block th:if="${board.skin == 'product'}">
+                <th:block th:replace="~{front/board/skins/product/view::product}"></th:block>
+            </th:block>
 
-    <th:block th:if="${board.skin == 'community'}">
-        <th:block th:replace="~{front/board/skins/community/view::community}"></th:block>
-    </th:block>
+            <th:block th:if="${board.skin == 'community'}">
+                <th:block th:replace="~{front/board/skins/community/view::community}"></th:block>
+            </th:block>
 
-    <th:block th:if="${board.skin == 'qna'}">
-        <th:block th:replace="~{front/board/skins/qna/view::qna}"></th:block>
-    </th:block>
+            <th:block th:if="${board.skin == 'qna'}">
+                <th:block th:replace="~{front/board/skins/qna/view::qna}"></th:block>
+            </th:block>
 
-    <th:block th:if="${board.showListBelowView}">
-        <th:block th:replace="~{front/board/_list_items::items}"></th:block>
-    </th:block>
+            <th:block th:if="${board.showListBelowView}">
+                <th:block th:replace="~{front/board/_list_items::items}"></th:block>
+            </th:block>
 
+            <div th:if="${board.schoolOnly && board.htmlBottomImages != null && !board.htmlBottomImages.isEmpty()}" class="layout_width banner_top">
+                <img th:each="image : ${board.htmlBottomImages}" th:src="${image.fileUrl}">
+            </div>
+        </section>
+    </section>
 </main>
 </html>

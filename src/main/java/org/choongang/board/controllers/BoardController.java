@@ -236,6 +236,8 @@ public class BoardController implements ExceptionProcessor {
         List<String> addCommonCss = new ArrayList<>();
         List<String> addCss = new ArrayList<>();
 
+        addCss.add("board/style");
+
         /* 게시판 설정 처리 S */
         board = configInfoService.get(bid);
 
