@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <th:block th:fragment="faq">
+        <div class="board_list layout_width">
+
+            <th:block th:if="${mode != null || mode == 'search'}">
+                <th:block th:replace="~{front/board/skins/faq/_search_top::search}"></th:block>
+            </th:block>
+
+            <div class="flex sb aic" th:if="${mode == null || mode != 'search'}">
+                <h1 th:replace="~{front/board/skins/faq/_board_title::title}"></h1>
+            </div>
+
+            <th:block th:if="${boardData == null && !#strings.isEmpty(board.htmlTop)}" th:utext="${board.htmlTop}"></th:block>
+
+            <div class="total">
+                Total : <th:block th:text="${pagination.total >= 1000 ? #numbers.formatInteger(pagination.total, 3, 'COMMA') : pagination.total}"></th:block>
+            </div>
+
+            <ul class="items">
+                <li th:if="${items == null || items.isEmpty()}" class="no_data"
+                    th:text="#{조회된_게시글이_없습니다.}"></li>
+
+                <li th:unless="${items == null || items.isEmpty()}"
+                    th:each="item : ${items}" th:object="${item}" class="item">
+                    <div class="subject">
+                        <span class='category' th:if="*{category}" th:text="*{'[' + category + ']'}"></span>
+                        <th:block th:text="*{subject}"></th:block>
+                    </div>
+                    <div class="content" th:if="${board.useEditor}" th:utext="*{content}"></div>
+                    <div class="content dn" th:unless="${board.useEditor}"
+                    th:utext="*{@utils.nl2br(content)}"></div>
+                </li>
+            </ul>
+
+            <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+
+            <th:block th:if="${boardData == null && !#strings.isEmpty(board.htmlBottom)}" th:utext="${board.htmlBottom}"></th:block>
+
+        </div>
+        <!--// board_list -->
+    </th:block>
+</html>

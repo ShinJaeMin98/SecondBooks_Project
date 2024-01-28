@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<form th:fragment="form" id="frmComment" name="frmComment" method="post" th:action="@{/comment/save}" target="ifrmProcess" autocomplete="off" th:object="${requestComment}">
+    <input type="hidden" name="mode" th:field="*{mode}">
+    <input th:if="${boardData != null}" type="hidden" name="boardDataSeq" th:value="${boardData.seq}">
+    <input th:if="*{mode == 'edit' && seq != null}" type="hidden" name="seq" th:field="*{seq}">
+
+    <div class="commenter_info">
+        <input type="text" name="commenter" th:placeholder="#{작성자}" th:field="*{commenter}">
+
+        <input sec:authorize="isAnonymous()" type="password" name="guestPw" th:placeholder="#{비밀번호}" th:field="*{guestPw}">
+    </div>
+    <!--// commenter_info -->
+
+    <div class="comment_content">
+        <textarea name="content" th:placeholder="#{댓글을_입력하세요.}" th:field="*{content}"></textarea>
+        <button type="submit" th:text="#{작성하기}"></button>
+    </div>
+    <!--// comment_content -->
+</form>
+</html>
