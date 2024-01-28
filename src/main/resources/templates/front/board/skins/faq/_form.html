@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block th:fragment="form" th:object="${requestBoard}">
+    <input th:if="*{mode == 'update' && seq != null}" type="hidden" name="seq" th:field="*{seq}">
+    <input type="hidden" name="bid" th:field="*{bid}">
+    <input type="hidden" name="gid" th:field="*{gid}">
+
+    <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+
+    <dl th:if="${!#strings.isEmpty(board.category)}">
+        <dt th:text="#{분류}"></dt>
+        <dd>
+            <th:block th:each="c, status : ${board.categories}">
+                <input type="radio" name="category" th:value="${c}" th:id="${'category_' + status.index}" th:field="*{category}">
+                <label th:for="${'category_' + status.index}" th:text="${c}" onclick="checkSell()"></label>
+            </th:block>
+        </dd>
+    </dl>
+    <dl>
+        <dt th:text="#{작성자}"></dt>
+        <dd>
+            <input type="hidden" name="poster" th:field="*{poster}">
+            <div  th:text="*{poster}">
+                <div class="error" th:each="err : ${#fields.errors('poster')}" th:text="${err}"></div>
+            </div>
+        </dd>
+    </dl>
+    <dl sec:authorize="isAnonymous()">
+        <dt th:text="#{비밀번호}"></dt>
+        <dd>
+            <input type="password" name="guestPw" th:placeholder="#{글수정_삭제_비밀번호_입력}" th:field="*{guestPw}">
+            <div class="error" th:each="err : ${#fields.errors('guestPw')}" th:text="${err}"></div>
+        </dd>
+    </dl>
+    <dl>
+        <dt th:text="#{제목}"></dt>
+        <dd>
+            <th:block sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">
+                <input type="checkbox" name="notice" id="notice">
+                <label for="notice" th:text="#{공지글}"></label>
+            </th:block>
+            <input type="text" name="subject" th:field="*{subject}">
+
+            <div class="error" th:each="err : ${#fields.errors('subject')}" th:text="${err}"></div>
+        </dd>
+    </dl>
+
+    <dl>
+        <dt th:text="#{내용}"></dt>
+        <dd>
+            <textarea name="content" id="content" th:field="*{content}"></textarea>
+
+            <div class="error" th:each="err : ${#fields.errors('content')}" th:text="${err}"></div>
+
+            <th:block th:if="${board.useEditor && board.useUploadImage}">
+                <button type="button" class="upload_files" data-location="editor" data-image-only="true" th:text="#{이미지_추가}"></button>
+                <div class="uploaded_files" id="editor_files">
+                    <th:block th:if="*{editorFiles != null && !editorFiles.isEmpty()}"
+                              th:each="item : *{editorFiles}">
+                        <th:block th:replace="~{common/_editor_file::item}"></th:block>
+                    </th:block>
+                </div>
+            </th:block>
+        </dd>
+    </dl>
+    <dl th:if="${board.useUploadFile}">
+        <dt th:text="#{파일첨부}"></dt>
+        <dd>
+            <button type="button" class="upload_files" data-location="attach" th:text="#{파일선택}"></button>
+            <div class="uploaded_files" id="attach_files">
+                <th:block th:if="*{attachFiles != null && !attachFiles.isEmpty()}"
+                          th:each="item : *{attachFiles}">
+                    <th:block th:replace="~{common/_attach_file::item}"></th:block>
+                </th:block>
+            </div>
+        </dd>
+    </dl>
+    <script th:replace="~{common/_file_tpl::attach_tpl}"></script>
+    <script th:replace="~{common/_file_tpl::editor_tpl}"></script>
+</th:block>
+</html>

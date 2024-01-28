@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block th:fragment="faq" th:object="${boardData}">
+    <div class="board_view layout_width">
+
+        <h1 th:replace="~{front/board/skins/faq/_board_title::title}"></h1>
+
+        <div class="subject">
+           <span th:if="*{!#strings.isEmpty(category)}" class="category"
+                 th:text="*{'[' + category + ']'}"></span>
+            <th:block th:text="*{subject}"></th:block>
+        </div>
+        <div class="post_info">
+            <div class="left">
+               <span>
+                   <th:block th:text="#{작성자}"></th:block> :
+                   <th:block th:text="*{poster}"></th:block>
+                    <th:block th:if="*{member != null}" th:text="*{'(' + #strings.substring(member.userId, 0, 4) + '****)'}"></th:block>
+               </span>
+
+                <span>
+                   <th:block th:text="#{조회수}"></th:block> :
+                   <th:block th:text="*{viewCount >= 1000 ? #numbers.formatInteger(viewCount, 3, 'COMMA') : viewCount}"></th:block>
+               </span>
+            </div>
+
+            <div class="right">
+                <span>
+                    IP : <th:block th:text="*{ip}"></th:block>
+                </span>
+                <span>
+                    <th:block th:text="#{작성일시}"></th:block> :
+                    <th:block th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm')}"></th:block>
+                </span>
+            </div>
+        </div>
+        <!--// post_info -->
+
+        <div th:if="*{editorView}" class="content" th:utext="*{content}"></div>
+        <div th:if="*{!editorView}" class="content" th:utext="*{@utils.nl2br(content)}"></div>
+
+        <ul th:if="*{attachFiles != null && !attachFiles.isEmpty()}" class="downloads">
+            <li th:each="file : *{attachFiles}" th:object="${file}">
+                <i class="xi-download"></i>
+                <a th:href="@{/file/download/{seq}(seq=*{seq})}" th:text="*{fileName}"></a>
+            </li>
+        </ul>
+
+        <div class="share_btns">
+            <button sec:authorize="isAuthenticated()" class="save_post" th:data-seq="*{seq}" th:classappend="*{@saveBoardDataService.saved(seq)} ? 'on'">
+                <i class="xi-star"></i>
+            </button>
+        </div>
+
+        <div class="board_btns">
+            <a th:href="@{/board/write/{bid}(bid=${board.bid})}" th:text="#{글쓰기}" class="btn"></a>
+
+            <a th:if="*{showEditButton}" th:href="@{/board/update/{seq}(seq=*{seq})}" th:text="#{글수정}" class="btn"></a>
+
+            <a th:if="*{showDeleteButton}" th:href="@{/board/delete/{seq}(seq=*{seq})}" th:text="#{글삭제}" class="btn" onclick="return confirm('정말 삭제하겠습니까?');"></a>
+            <a th:if="${board.useReply}" th:href="@{/board/reply/{seq}(seq=*{seq})}" th:text="#{답글}" class="btn"></a>
+            <a th:href="@{/board/list/{bid}(bid=${board.bid})}" th:text="#{글목록}" class="btn"></a>
+        </div>
+        <!--// btns -->
+
+        <!-- 댓글 -->
+        <th:block th:replace="~{front/board/skins/default/_comment::comment}"></th:block>
+
+    </div>
+    <!--// board_view -->
+</th:block>
+</html>
