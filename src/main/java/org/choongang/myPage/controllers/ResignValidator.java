@@ -1,6 +1,7 @@
 package org.choongang.myPage.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.choongang.email.service.EmailVerifyService;
 import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +19,7 @@ public class ResignValidator implements Validator {
     private final MemberUtil memberUtil;
     private final PasswordEncoder encoder;
 
+    private final EmailVerifyService emailVerifyService;
 
 
     @Override
@@ -81,7 +83,16 @@ public class ResignValidator implements Validator {
      */
     private void validateStep2(RequestResign form, Errors errors){
 
+        Integer authCode = form.getAuthCode();
 
+        if(authCode == null){
+            errors.rejectValue("authCode" , "NotNull");
+        }
+
+        boolean result = emailVerifyService.check(authCode);
+        if(!result){
+            errors.rejectValue("authCode" , "Mismatch");
+        }
     }
 
 }

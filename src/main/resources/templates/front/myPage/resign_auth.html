@@ -10,7 +10,7 @@
         <dl>
             <dt th:text="#{인증코드}"></dt>
             <dd>
-                <input type="text" name="authCode" th:field="*{authCode}">
+                <input type="number" name="authCode" th:field="*{authCode}">
                 <div class="error" th:each="err : {#fields.errors('authCode')}"
                      th:text="${err}"></div>
             </dd>

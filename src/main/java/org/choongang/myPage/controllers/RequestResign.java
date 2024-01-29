@@ -15,7 +15,7 @@ public class RequestResign {    //탈퇴 시 입력받은 정보 커멘드 객�
     private String confirmPassword;
 
     //이메일 인증 코드
-    private String authCode;
+    private Integer authCode;
 
 
 
