@@ -46,4 +46,11 @@ public class Member extends Base {
     private FileInfo profileImage;
 
     private boolean enable = true;
+
+
+    @Column(name="_lock")
+    //계정 잠금 여부
+    private boolean lock = false;
+
+
 }

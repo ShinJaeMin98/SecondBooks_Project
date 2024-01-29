@@ -14,14 +14,12 @@ import org.choongang.file.service.FileInfoService;
 import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
 import org.choongang.member.service.MemberUpdateService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,6 +111,50 @@ public class MyPageController implements ExceptionProcessor {
         return "redirect:/myPage";
     }
 
+    /**
+     * 탈퇴페이지 -> 비밀번호 확인
+     *          -> 이메일 인증 코드
+     * @param model
+     * @return
+     */
+    @GetMapping("/resign")
+    public String resignStep1(@ModelAttribute RequestResign form ,  Model model){
+        commonProcess("resign" , model);
+
+
+        return utils.tpl("myPage/resign");
+    }
+
+    @PostMapping("/resign")
+    public String resignStep2(RequestResign form , Errors errors , Model model){
+        commonProcess("resign" , model);
+
+        if(errors.hasErrors()){ //비밀버호 확인 실패시 step1으로
+            return utils.tpl("myPage/resign");
+        }
+
+        return utils.tpl("myPage/resign_auth"); //이메일 코드 검증 페이지
+    }
+
+    /**
+     * enable -> false, 로그아웃 처리
+     * @param model
+     * @return
+     */
+    @PostMapping("/resign_done")
+    @PreAuthorize("isAnonymous()")//비회원도 접근 가능하도록 권한 수정
+    public String resignDone(RequestResign form , Errors errors , Model model){
+        commonProcess("resign" , model);
+
+        if (errors.hasErrors()){
+            return utils.tpl("myPage/resign_auth");//이메일 인증 실패시 step2로
+        }
+
+        return utils.tpl("myPage/resign_done"); //탈퇴 완료
+    }
+
+
+
     private void commonProcess(String mode, Model model) {
         mode = StringUtils.hasText(mode) ? mode : "main";
         String pageTitle = Utils.getMessage("마이페이지", "commons");
@@ -134,6 +176,8 @@ public class MyPageController implements ExceptionProcessor {
             addCommonScript.add("fileManager");
             addScript.add("myPage/profile");
 
+        } else if(mode.equals("resign")){
+            pageTitle = Utils.getMessage("회원_탈퇴", "commons");
         }
 
         model.addAttribute("pageTitle", pageTitle);
@@ -141,4 +185,9 @@ public class MyPageController implements ExceptionProcessor {
         model.addAttribute("addScript", addScript);
         model.addAttribute("addCommonScript", addCommonScript);
     }
+
+
+
+
+
 }
