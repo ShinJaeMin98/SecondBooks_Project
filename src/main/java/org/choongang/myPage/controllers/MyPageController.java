@@ -37,9 +37,15 @@ public class MyPageController implements ExceptionProcessor {
     private final MemberUpdateService memberUpdateService;
     private final ProfileValidator profileValidator;
 
+    public final ResignValidator resignValidator;
+
     private final MemberUtil memberUtil;
 
     public final Utils utils;
+
+
+
+
 
     @GetMapping // 마이페이지 메인
     public String index(Model model) {
@@ -129,9 +135,13 @@ public class MyPageController implements ExceptionProcessor {
     public String resignStep2(RequestResign form , Errors errors , Model model){
         commonProcess("resign" , model);
 
+        resignValidator.validate(form , errors);
+
         if(errors.hasErrors()){ //비밀버호 확인 실패시 step1으로
             return utils.tpl("myPage/resign");
         }
+
+        //메일 인증 코드 발송
 
         return utils.tpl("myPage/resign_auth"); //이메일 코드 검증 페이지
     }
