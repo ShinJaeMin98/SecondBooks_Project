@@ -7,7 +7,7 @@
     <section class="board_content" th:classappend="${board.menuLocation != null ? board.menuLocation.name().toLowerCase() : ''}">
         <aside th:replace="~{front/board/_side_category::categories}"></aside>
         <section>
-            <div th:if="${board.schoolOnly && board.htmlTopImages != null && !board.htmlTopImages.isEmpty()}" class="layout_width banner_top">
+            <div th:if="${board.schoolOnly && board.htmlTopImages != null && !#strings.isEmpty(board.htmlTopImages[0])}" class="layout_width banner_top">
                 <img th:each="image : ${board.htmlTopImages}" th:src="${image.fileUrl}">
             </div>
 
@@ -31,7 +31,7 @@
                 <th:block th:replace="~{front/board/skins/faq/update::faq}"></th:block>
             </th:block>
 
-            <div th:if="${board.schoolOnly && board.htmlBottomImages != null && !board.htmlBottomImages.isEmpty()}" class="layout_width banner_top">
+            <div th:if="${board.schoolOnly && board.htmlBottomImages != null && !#strings.isEmpty(board.htmlBottomImages[0])}" class="layout_width banner_top">
                 <img th:each="image : ${board.htmlBottomImages}" th:src="${image.fileUrl}">
             </div>
         </section>
