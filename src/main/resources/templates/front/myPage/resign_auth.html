@@ -11,8 +11,7 @@
             <dt th:text="#{인증코드}"></dt>
             <dd>
                 <input type="number" name="authCode" th:field="*{authCode}">
-            <!--    <div class="error" th:each="err : {#fields.errors('authCode')}"
-                     th:text="${err}"></div>-->
+                <div class="error" th:each="err : ${#fields.errors('authCode')}" th:text="${err}"></div>
             </dd>
         </dl>
         <button type="submit" th:text="#{탈퇴하기}" onclick="return confirm('정말 탈퇴하시겠습니까');"></button>

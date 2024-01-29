@@ -26,7 +26,6 @@ public class ResignService {
         //회원 개인정보 삭제
         member.setName("****");
 
-
         String gid = member.getGid();
 
         //프로필 이미지 삭제
