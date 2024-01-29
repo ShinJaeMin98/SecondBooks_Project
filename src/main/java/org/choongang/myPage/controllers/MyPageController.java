@@ -15,6 +15,7 @@ import org.choongang.file.service.FileInfoService;
 import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
 import org.choongang.member.service.MemberUpdateService;
+import org.choongang.myPage.service.ResignService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,13 +39,15 @@ public class MyPageController implements ExceptionProcessor {
     private final MemberUpdateService memberUpdateService;
     private final ProfileValidator profileValidator;
 
-    public final ResignValidator resignValidator;
+    private final ResignValidator resignValidator;
 
     private final MemberUtil memberUtil;
 
-    public final Utils utils;
+    private final Utils utils;
 
-    public final EmailVerifyService emailVerifyService;
+    private final EmailVerifyService emailVerifyService;
+
+    private final ResignService resignService;
 
 
 
@@ -135,7 +138,7 @@ public class MyPageController implements ExceptionProcessor {
     @PostMapping("/resign")
     public String resignStep2(RequestResign form , Errors errors , Model model){
         commonProcess("resign" , model);
-
+        form.setMode("step1");
         resignValidator.validate(form , errors);
 
         if(errors.hasErrors()){ //비밀번호 확인 실패시 step1으로
@@ -154,15 +157,29 @@ public class MyPageController implements ExceptionProcessor {
      * @return
      */
     @PostMapping("/resign_done")
-    @PreAuthorize("isAnonymous()")//비회원도 접근 가능하도록 권한 수정
-    public String resignDone(RequestResign form , Errors errors , Model model){
+    @PreAuthorize("permitAll()")//비회원도 접근 가능하도록 권한 수정
+    public String resignProcess(RequestResign form , Errors errors , Model model){
         commonProcess("resign" , model);
+        form.setMode("step2");
+        resignValidator.validate(form, errors);
 
         if (errors.hasErrors()){
             return utils.tpl("myPage/resign_auth");//이메일 인증 실패시 step2로
         }
 
-        return utils.tpl("myPage/resign_done"); //탈퇴 완료
+        //현재 세션에 있는 회원(로그인 되어 있는) 탈퇴처리
+        resignService.resign();
+
+
+        return "redirect:/myPage/resign_done"; //탈퇴 완료
+    }
+
+    @GetMapping("/resign_done")
+    @PreAuthorize("permitAll()")//비회원도 접근 가능하도록 권한 수정
+    public String resignDone(Model model){
+        commonProcess("resign" , model);
+
+        return utils.tpl("/myPage/resign_done");
     }
 
 

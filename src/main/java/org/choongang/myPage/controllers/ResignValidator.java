@@ -89,10 +89,10 @@ public class ResignValidator implements Validator {
             errors.rejectValue("authCode" , "NotNull");
         }
 
-        boolean result = emailVerifyService.check(authCode);
-        if(!result){
-            errors.rejectValue("authCode" , "Mismatch");
+        if(authCode != null && !emailVerifyService.check(authCode)){
+                errors.rejectValue("authCode" , "Mismatch");
         }
+
     }
 
 }
