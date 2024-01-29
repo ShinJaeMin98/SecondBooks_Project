@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/mypage}">
+
+<section layout:fragment="content" >
+
+    <h1 th:text="#{회원탈퇴}"></h1>
+    <form name="frmResign" method="post" th:action="@{/myPage/resign}"
+    autocomplete="off" th:object="${requestResign}">
+
+        <dl>
+            <dt th:text="#{비밀번호}">  </dt>
+            <dd>
+                <input type="password" name="password" th:field="*{password}">
+                <div class="errors" th:each="err : ${#fields.errors('password')}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{비밀번호_확인}">  </dt>
+            <dd>
+                <input type="password" name="confirmPassword" th:field="*{confirmPassword}">
+                <div class="errors" th:each="err : ${#fields.errors('confirmPassword')}"></div>
+            </dd>
+        </dl>
+        <button type="submit" th:text="#{확인하기}"></button>
+
+    </form>
+
+
+</section>
+</html>

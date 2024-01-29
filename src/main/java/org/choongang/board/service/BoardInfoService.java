@@ -119,6 +119,12 @@ public class BoardInfoService {
         if (StringUtils.hasText(bid)) {
             andBuilder.and(boardData.board.bid.eq(bid)); // 게시판 ID
         }
+
+        List<String> bids = search.getBid();
+        if(bids != null && !bids.isEmpty()){
+            andBuilder.and(boardData.board.bid.in(bids));
+        }
+
         if(memberUtil.isLogin() && board.isSchoolOnly()){ // 로그인 회원의 학교 게시물만 조회
             String domain = memberUtil.getMember().getSchool().getDomain();
             andBuilder.and(boardData.member.school.domain.eq(domain));

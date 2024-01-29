@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="search">
+    <h1 th:text="#{게시글_통합검색}"></h1>
+    <form id="search_top" name="frmSearch" method="get" th:action="@{/board/search}" autocomplete="off" th:object="${boardDataSearch}">
+        <select name="sopt" th:field="*{sopt}">
+            <option value="SUBJECT" th:text="#{제목}"></option>
+            <option value="CONTENT" th:text="#{내용}"></option>
+            <option value="SUBJECT_CONTENT" th:text="#{제목_내용}"></option>
+            <option value="POSTER" th:text="#{작성자}"></option>
+        </select>
+        <input type="text" name="skey" th:field="*{skey}" th:placeholder="#{검색어를_입력하세요.}">
+        <button type="submit" th:text="#{검색하기}"></button>
+    </form>
+</th:block>
+</html>
+

@@ -26,6 +26,10 @@
                 <th:block th:replace="~{front/board/skins/qna/list::qna}"></th:block>
             </th:block>
 
+            <th:block th:if="${board.skin == 'faq'}">
+                <th:block th:replace="~{front/board/skins/faq/list::faq}"></th:block>
+            </th:block>
+
             <div th:if="${board.schoolOnly && board.htmlBottomImages[0] != null && !#strings.isEmpty(board.htmlBottomImages)}" class="layout_width banner_top">
                 <img th:each="image : ${board.htmlBottomImages}" th:src="${image.fileUrl}">
             </div>

@@ -67,6 +67,7 @@ public class MemberInfoService implements UserDetailsService {
                 .member(member)
                 .authorities(authorities)
                 .enable(member.isEnable())
+                .lock(member.isLock())
                 .build();
     }
 
