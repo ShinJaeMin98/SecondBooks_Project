@@ -9,6 +9,7 @@ import org.choongang.board.service.SaveBoardDataService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.ListData;
 import org.choongang.commons.Utils;
+import org.choongang.email.service.EmailVerifyService;
 import org.choongang.file.entities.FileInfo;
 import org.choongang.file.service.FileInfoService;
 import org.choongang.member.MemberUtil;
@@ -43,7 +44,7 @@ public class MyPageController implements ExceptionProcessor {
 
     public final Utils utils;
 
-
+    public final EmailVerifyService emailVerifyService;
 
 
 
@@ -137,11 +138,12 @@ public class MyPageController implements ExceptionProcessor {
 
         resignValidator.validate(form , errors);
 
-        if(errors.hasErrors()){ //비밀버호 확인 실패시 step1으로
+        if(errors.hasErrors()){ //비밀번호 확인 실패시 step1으로
             return utils.tpl("myPage/resign");
         }
 
         //메일 인증 코드 발송
+        emailVerifyService.sendCode(memberUtil.getMember().getEmail());
 
         return utils.tpl("myPage/resign_auth"); //이메일 코드 검증 페이지
     }
