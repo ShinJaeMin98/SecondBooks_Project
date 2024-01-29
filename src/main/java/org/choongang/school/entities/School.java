@@ -46,6 +46,8 @@ public class School extends BaseMember {
     @OneToMany(mappedBy = "school", fetch = FetchType.LAZY)
     List<Member> members = new ArrayList<>();
 
+    @OneToOne(fetch = FetchType.EAGER)
+    private Member member;
 
 
 
