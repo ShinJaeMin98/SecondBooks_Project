@@ -78,7 +78,7 @@ public class SchoolConfigController implements ExceptionProcessor {
     public void insertSchool(SchoolConfig config){
         if(config.getSchools() == null || config.getSchools().equals("")){
             List<String[]> list = excelUtils.getData("data/schools.xlsx", new int[] {0, 1}, 0);
-            String schools = "";
+            String schools = "naver_naver.com"+"\n"+"google_gmail.com"+"\n";
             int k = 0;
             for(String[] l : list){
                 //l[0] : 학교명 , l[1] : 도메인
