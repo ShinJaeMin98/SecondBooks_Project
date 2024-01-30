@@ -224,12 +224,21 @@ public class BoardInfoService {
      * @return
      */
     public List<BoardData> getLatest(String bid, int limit) {
+        QBoardData boardData = QBoardData.boardData;
+        BooleanBuilder builder = new BooleanBuilder();
+        builder.and(boardData.board.bid.eq(bid));
+        boardDataRepository.findAll(builder);
+
+        /*
         BoardDataSearch search = new BoardDataSearch();
         search.setLimit(limit);
 
         ListData<BoardData> data = getList(bid, search);
 
         return data.getItems();
+
+         */
+        return null;
     }
 
     public List<BoardData> getLatest(String bid) {
