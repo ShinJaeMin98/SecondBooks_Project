@@ -206,7 +206,7 @@ public class MyPageController implements ExceptionProcessor {
             addScript.add("myPage/profile");
 
         } else if(mode.equals("resign")){
-            pageTitle = Utils.getMessage("회원_탈퇴", "commons");
+            pageTitle = Utils.getMessage("회원탈퇴", "commons");
         }
 
         model.addAttribute("pageTitle", pageTitle);
