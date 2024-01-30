@@ -53,7 +53,12 @@ public class CommentController implements ExceptionProcessor {
 
         String url = form.isAdmin()? "/admin/board/posts/" : "/board/view/";
 
-        String script = String.format("parent.location.replace('%s%d?comment_id=%d');", commentData.getBoardData().getSeq(), commentData.getSeq());
+        String script = "";
+        if(form.getSeq() == null){
+            script = String.format("parent.location.replace('/admin/board/posts/%d');", commentData.getBoardData().getSeq());
+        } else {
+            script = String.format("parent.location.replace('/board/view/%d');", commentData.getBoardData().getSeq());
+        }
 
         model.addAttribute("script", script);
 
@@ -66,7 +71,6 @@ public class CommentController implements ExceptionProcessor {
         boardAuthService.check("comment_delete", seq);
 
         Long boardDataSeq = commentDeleteService.delete(seq);
-
         return "redirect:/board/view/" + boardDataSeq;
     }
 
