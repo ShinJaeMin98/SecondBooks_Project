@@ -26,12 +26,14 @@ import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class BoardInfoService {
 
     private final EntityManager em;

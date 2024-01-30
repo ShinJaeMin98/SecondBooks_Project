@@ -22,12 +22,14 @@ import org.choongang.school.entities.School;
 import org.choongang.school.repositories.SchoolRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class SchoolInfoService {
     private final EntityManager em;
     private final HttpServletRequest request;
@@ -169,6 +171,9 @@ public class SchoolInfoService {
     }
 
     public void addSchoolInfo(School school) {
+        if (school == null) {
+            return;
+        }
         String gid = school.getGid();
 
         List<FileInfo> banner_top = fileInfoService.getListDone(gid, "banner_top");
