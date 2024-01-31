@@ -43,7 +43,6 @@
                 <th width="150">학교명</th>
                 <th width="250">학교번호</th>
                 <th width="250">도메인</th>
-                <th width="250">로고위치</th>
                 <th width="250">학교별 회원수</th>
                 <th width="250">수정/삭제</th>
             </tr>
@@ -60,7 +59,6 @@
                     <td th:text="*{schoolName}" align="center"></td>
                     <td align="center" th:text="*{num}"></td>
                     <td th:text="*{domain}" align="center"></td>
-                    <td th:text="*{menuLocation}" align="center"></td>
                     <td align="center" th:text="*{members.size()}"></td>
                     <td align="center"><a th:href="@{/admin/school/edit/{num}(num=*{num})}" class="sbtn">
                         <i class="xi-pen"></i> 수정하기

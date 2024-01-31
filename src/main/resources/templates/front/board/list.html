@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content" class="layout_width">
-    <nav th:replace="~{front/board/_top_category::categories}"></nav>
+    <nav th:if="${!#strings.isEmpty(board)}" th:replace="~{front/board/_top_category::categories}"></nav>
     <section class="board_content" th:classappend="${board.menuLocation != null ? board.menuLocation.name().toLowerCase() : ''}">
         <aside th:replace="~{front/board/_side_category::categories}"></aside>
         <section>

@@ -33,7 +33,7 @@ public class Member extends Base {
     private String name;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sNum")
     private School school;
 

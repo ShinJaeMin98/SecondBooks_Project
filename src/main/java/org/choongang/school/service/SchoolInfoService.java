@@ -22,12 +22,14 @@ import org.choongang.school.entities.School;
 import org.choongang.school.repositories.SchoolRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class SchoolInfoService {
     private final EntityManager em;
     private final HttpServletRequest request;
@@ -159,7 +161,6 @@ public class SchoolInfoService {
         RequestSchool form = new ModelMapper().map(school, RequestSchool.class);
         form.setDomain(school.getDomain());
         form.setGid(school.getGid());
-        form.setMenuLocation(school.getMenuLocation());
         form.setNum(school.getNum());
         form.setComment(school.getContent());
 

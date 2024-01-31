@@ -31,10 +31,18 @@ header .site_top a:hover { text-decoration: underline; }
 header .logo_search > div { display: flex; align-items: center; justify-content: space-between; height: 100px; }
 header .logo_search .search { display: flex; }
 
-header nav { background: #7DB249 }
+header nav { background: #7DB249; }
 header nav > .inner a { display: inline-block; height: 45px; line-height: 45px; padding: 0 25px; min-width: 120px; text-align: center; color: #fff; font-size: 1.35rem; }
 header nav > .inner a:hover { background: #456E2A; }
 /* 헤더 공통 E */
+
+/* 상단 카테고리 S */
+.top_categories { background: #fff; width: fit-content }
+.top_categories li { display: inline-block; height: 40px; line-height: 40px; padding: 0 25px; min-width: 120px; text-align: center; color: #222; font-size: 1rem; }
+.top_categories li.on { background: #7DB249; border-radius: 0% 0% 50% 50%; }
+.top_categories li.on > a { color: #fff; }
+
+/* 상단 카테고리 E */
 
 /* 입력 항목 공통 S */
 input[type='text'],
