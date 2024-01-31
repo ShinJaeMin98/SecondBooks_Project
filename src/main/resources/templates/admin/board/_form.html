@@ -38,6 +38,27 @@
             </td>
         </tr>
         <tr>
+            <th>학교 전용</th>
+            <td>
+                <input type="radio" name="schoolOnly" value="true" id="schoolOnly_true" th:field="*{schoolOnly}">
+                <label for="schoolOnly_true">사용</label>
+
+                <input type="radio" name="schoolOnly" value="false" id="schoolOnly_false" th:field="*{schoolOnly}">
+                <label for="schoolOnly_false">미사용</label>
+            </td>
+        </tr>
+        <tr>
+            <th>메뉴 위치</th>
+            <td>
+                <input type="radio" name="menuLocation" value="TOP" id="menuLocation_TOP" th:field="*{menuLocation}">
+                <label for="menuLocation_TOP">상단</label>
+                <input type="radio" name="menuLocation" value="RIGHT" id="menuLocation_RIGHT" th:field="*{menuLocation}">
+                <label for="menuLocation_RIGHT">오른쪽</label>
+                <input type="radio" name="menuLocation" value="LEFT" id="menuLocation_LEFT" th:field="*{menuLocation}">
+                <label for="menuLocation_LEFT">왼쪽</label>
+            </td>
+        </tr>
+        <tr>
             <th>진열가중치</th>
             <td>
                 <input type="number" name="listOrder" th:field="*{listOrder}">
@@ -152,6 +173,9 @@
 
                 <input type="radio" name="skin" value="qna" id="skin_qna" th:field="*{skin}">
                 <label for="skin_qna">질문과 답변(QnA)</label>
+
+                <input type="radio" name="skin" value="faq" id="skin_faq" th:field="*{skin}">
+                <label for="skin_faq">질문과 답변(FAQ)</label>
 
             </td>
         </tr>

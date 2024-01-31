@@ -3,6 +3,91 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
+    <h1>게시글 관리</h1>
+    <form name="frmSearch" method="get" th:action="@{/admin/board/posts}" th:object="${boardDataSearch}"
+          autocapitalize="off">
+        <table class="table_cols">
+            <tr>
+                <th width="180">게시판</th>
+                <td width="250">
+                    <select name="bid" th:field="*{bid}">
+                        <option value="">전체 게시판</option>
+                        <option th:each="item: ${boards}" th:value="${item.bid}"
+                                th:text="${item.bName}"></option>
+                    </select>
+                </td>
+                <th width="180">검색어</th>
+                <td>
+                    <div class="input_grp">
+                        <select name="sopt" th:field="*{sopt}">
+                            <option value="ALL">통합 검색</option>
+                            <option value="SUBJECT">제목</option>
+                            <option value="CONTENT">내용</option>
+                            <option value="SUBJECT_CONTENT">제목+내용</option>
+                            <option value="POSTER">작성자</option>
+                        </select>
+                        <input type="text" name="skey" th:field="*{skey}" placeholder="검색어 입력">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="search_btn">
+            <button type="submit" class="btn">검색하기</button>
+        </div>
+    </form>
 
+    <h2>게시글 목록</h2>
+    <form name="frmList" method="post" th:action="@{/admin/board/posts}" target="ifrmProcess" autocapitalize="off">
+        <input type="hidden" name="_method" value="PATCH">
+        <table class="table_rows">
+            <thead>
+                <tr>
+                    <th width="40">
+                        <input type="checkbox" class="checkall" id="checkall" data-target-name="chk">
+                        <label for="checkall"></label>
+                    </th>
+                    <th width="120">게시판</th>
+                    <th width="300">게시글 제목</th>
+                    <th width="120">작성자</th>
+                    <th width="120">작성일시</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${items == null || items.isEmpty()}" class="no_data">
+                    조회된 게시글이 없습니다.
+                </tr>
+                <tr th:unless="${items == null || items.isEmpty()}" th:each="item, status: ${items}"
+                th:object="${item}">
+                    <td>
+                        <input type="hidden" th:name="${'seq_' + status.index}" th:value="*{seq}">
+                        <input type="checkbox" name="chk" th:value="${status.index}" th:id="${'chk_' + status.index}">
+                        <label th:for="${'chk_' + status.index}"></label>
+                    </td>
+                    <td>
+                        <th:block th:text="*{board.bName}"></th:block>
+                        <div th:text="*{'(' + board.bid + ')'}"></div>
+                    </td>
+                    <td th:text="*{subject}"></td>
+                    <td>
+                        <th:block th:text="*{poster}"></th:block>
+                        <th:block th:if="*{member != null}" th:text="*{'(' + member.userId + ')'}"></th:block>
+                    </td>
+                    <td th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm:ss')}"></td>
+                    <td>
+                        <a th:href="@{/admin/board/posts/{seq}(seq=*{seq})}" class="sbtnon">게시글 관리</a>
+                        <a th:href="@{/board/view/{seq}(seq=*{seq})}" class="sbtn" target="_blank">게시글 보기</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="table_actions">
+            <button type="button" class="form_action sbtn on" data-mode="delete" data-form-name="frmList">
+                선택 게시글 삭제
+            </button>
+        </div>
+    </form>
+
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
 </section>
 </html>

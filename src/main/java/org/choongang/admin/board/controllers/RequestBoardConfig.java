@@ -63,6 +63,10 @@ public class RequestBoardConfig {
     private String htmlTop; // 게시판 상단 HTML
     private String htmlBottom; // 게시판 하단 HTML
 
+    private boolean schoolOnly;
+
+    private String menuLocation = "TOP";
+
     private List<FileInfo> htmlTopImages; // 게시판 상단 Top 이미지
 
     private List<FileInfo> htmlBottomImages; // 게시판 하단 Bottom 이미지

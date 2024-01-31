@@ -9,19 +9,19 @@ import org.choongang.board.service.SaveBoardDataService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.ListData;
 import org.choongang.commons.Utils;
+import org.choongang.email.service.EmailVerifyService;
 import org.choongang.file.entities.FileInfo;
 import org.choongang.file.service.FileInfoService;
 import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
 import org.choongang.member.service.MemberUpdateService;
+import org.choongang.myPage.service.ResignService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +39,17 @@ public class MyPageController implements ExceptionProcessor {
     private final MemberUpdateService memberUpdateService;
     private final ProfileValidator profileValidator;
 
+    private final ResignValidator resignValidator;
+
     private final MemberUtil memberUtil;
 
-    public final Utils utils;
+    private final Utils utils;
+
+    private final EmailVerifyService emailVerifyService;
+
+    private final ResignService resignService;
+
+
 
     @GetMapping // 마이페이지 메인
     public String index(Model model) {
@@ -113,6 +121,69 @@ public class MyPageController implements ExceptionProcessor {
         return "redirect:/myPage";
     }
 
+    /**
+     * 탈퇴페이지 -> 비밀번호 확인
+     *          -> 이메일 인증 코드
+     * @param model
+     * @return
+     */
+    @GetMapping("/resign")
+    public String resignStep1(@ModelAttribute RequestResign form ,  Model model){
+        commonProcess("resign" , model);
+
+
+        return utils.tpl("myPage/resign");
+    }
+
+    @PostMapping("/resign")
+    public String resignStep2(RequestResign form , Errors errors , Model model){
+        commonProcess("resign" , model);
+        form.setMode("step1");
+        resignValidator.validate(form , errors);
+
+        if(errors.hasErrors()){ //비밀번호 확인 실패시 step1으로
+            return utils.tpl("myPage/resign");
+        }
+
+        //메일 인증 코드 발송
+        emailVerifyService.sendCode(memberUtil.getMember().getEmail());
+
+        return utils.tpl("myPage/resign_auth"); //이메일 코드 검증 페이지
+    }
+
+    /**
+     * enable -> false, 로그아웃 처리
+     * @param model
+     * @return
+     */
+    @PostMapping("/resign_done")
+    @PreAuthorize("permitAll()")//비회원도 접근 가능하도록 권한 수정
+    public String resignProcess(RequestResign form , Errors errors , Model model){
+        commonProcess("resign" , model);
+        form.setMode("step2");
+        resignValidator.validate(form, errors);
+
+        if (errors.hasErrors()){
+            return utils.tpl("myPage/resign_auth");//이메일 인증 실패시 step2로
+        }
+
+        //현재 세션에 있는 회원(로그인 되어 있는) 탈퇴처리
+        resignService.resign();
+
+
+        return "redirect:/myPage/resign_done"; //탈퇴 완료
+    }
+
+    @GetMapping("/resign_done")
+    @PreAuthorize("permitAll()")//비회원도 접근 가능하도록 권한 수정
+    public String resignDone(Model model){
+        commonProcess("resign" , model);
+
+        return utils.tpl("/myPage/resign_done");
+    }
+
+
+
     private void commonProcess(String mode, Model model) {
         mode = StringUtils.hasText(mode) ? mode : "main";
         String pageTitle = Utils.getMessage("마이페이지", "commons");
@@ -134,6 +205,8 @@ public class MyPageController implements ExceptionProcessor {
             addCommonScript.add("fileManager");
             addScript.add("myPage/profile");
 
+        } else if(mode.equals("resign")){
+            pageTitle = Utils.getMessage("회원탈퇴", "commons");
         }
 
         model.addAttribute("pageTitle", pageTitle);
@@ -141,4 +214,9 @@ public class MyPageController implements ExceptionProcessor {
         model.addAttribute("addScript", addScript);
         model.addAttribute("addCommonScript", addCommonScript);
     }
+
+
+
+
+
 }

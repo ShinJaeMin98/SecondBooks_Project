@@ -1,0 +1,60 @@
+.board_view .subject { border: 1px solid #222; padding: 10px 15px; border-radius: 3px; font-size: 1.35rem; font-weight: 500; margin-bottom: 10px; }
+.board_view .content { border: 1px solid #222; padding: 15px; border-radius: 3px; margin-bottom: 10px; min-height: 350px; }
+
+.board_view .post_info { display: flex; justify-content: space-between; align-items: center; border: 1px solid #222; padding: 7px 15px; border-radius: 3px; margin-bottom: 10px; }
+.board_view .post_info .left span { margin-right: 20px; }
+.board_view .post_info .right span { margin-left: 20px; }
+
+.board_view .downloads { margin-bottom: 10px; }
+.board_view .downloads li { border-bottom: 1px solid #222; background: #f8f8f8; padding: 7px 15px; }
+.board_view .downloads li a:hover { text-decoration: underline; }
+.board_view .downloads li:first-of-type { border-top: 1px solid #222; }
+
+/* 게시판 버튼 공통 */
+.board_btns { text-align: right; }
+.board_btns .btn { display: inline-block; border: 1px solid #222; height: 27px; line-height: 25px; padding: 0 20px; border-radius: 3px; cursor: pointer; transition: all 0.5s; margin-left: 3px; }
+.board_btns .btn:hover { background: #222; color: #fff; }
+
+/* 게시판 목록 */
+.board_list .items > .item { border-bottom: 1px solid #d5d5d5; display: flex; align-items: center; }
+.board_list .items > .item:first-of-type { border-top: 1px solid #d5d5d5; }
+
+.board_list .items > .item:nth-of-type(2n) { background: #f8f8f8; }
+
+.board_list .items .post_info { width: 360px; text-align: right; padding: 10px; }
+.board_list .items .post_info span + span { margin-left: 15px;}
+.board_list .items .subject { flex-grow: 1; padding: 10px; }
+.board_list .write_btn { background: #456E2A; color: #fff; height: 35px; line-height: 35px; cursor: pointer; padding: 0 30px; border-radius: 3px; }
+.board_list .no_data { padding: 50px 0; text-align: center; border-top: 1px solid #d5d5d5; border-bottom: 1px solid #d5d5d5}
+
+.board_list .list_search { padding: 10px; border-bottom: 1px solid #d5d5d5;}
+.board_list .list_search > form { display: flex; }
+.board_list .list_search > form > * + * { margin-left: 5px; }
+.board_list .list_search button { width: 180px; }
+.board_list .total { text-align: right; margin: 10px 10px 5px; }
+
+/* 댓글 */
+#frmComment { margin: 20px 0 30px; }
+.commenter_info { margin-bottom: 5px; }
+.commenter_info input { width: 120px; }
+.comment_content { display: flex; height: 100px; }
+.comment_content button { width: 100px; background: #456E2A; color: #fff; border: 0; cursor: pointer; font-size: 1.15rem; }
+.comment_content textarea { flex-grow: 1; border: 1px solid #d5d5d5; padding: 10px; resize: none; }
+
+.comment_items { margin-top: 10px; }
+.comment_items > li { border: 1px solid #d5d5d5; padding: 10px; border-radius: 3px; }
+.comment_items > li + li { margin-top: 10px; }
+.comment_items .comment_top { display: flex; justify-content: space-between; height: 35px; align-items: center; border-bottom: 1px solid #222; margin-bottom: 10px; padding: 0 10px; }
+.comment_items .comment { padding: 10px; background: #f8f8f8; border-radius: 3px; margin-bottom: 10px; }
+.comment_items .comment textarea { width: 100%; height: 150px; border: 1px solid #d5d5d5; padding: 10px; border-radius: 3px; resize: none; }
+
+.comment_items .btns { text-align: right; }
+.comment_items button, .comment_items .btns a { border: 1px solid #596b99; background: #fff; height: 35px; padding: 0 15px; color: #596b99; cursor: pointer; transition: all 0.5s; border-radius: 3px; display: inline-block; line-height: 33px; }
+.comment_items button:hover, .comment_items .btns a:hover { background: #596b99; color: #fff; }
+
+
+/* 찜 버튼 */
+.share_btns button { width: 45px; height: 45px; background: #fff; border: 0px solid #222; cursor: pointer; }
+.share_btns button i { font-size: 2rem; color: #222; }
+
+.share_btns button.on i { color: #ff8989; }

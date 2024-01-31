@@ -20,5 +20,7 @@ public class RequestComment {
 
     private String guestPw; //비회원 비번
 
+    private boolean admin; // 관리자페이지 여부
+
 
 }

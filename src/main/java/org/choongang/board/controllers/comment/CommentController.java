@@ -51,7 +51,9 @@ public class CommentController implements ExceptionProcessor {
 
         CommentData commentData = commentSaveService.save(form); // 댓글 저장, 수정
 
-        String script = String.format("parent.location.replace('/board/view/%d?comment_id=%d');", commentData.getBoardData().getSeq(), commentData.getSeq());
+        String url = form.isAdmin()? "/admin/board/posts/" : "/board/view/";
+
+        String script = String.format("parent.location.replace('%s%d?comment_id=%d');", url, commentData.getBoardData().getSeq(), commentData.getSeq());
 
         model.addAttribute("script", script);
 

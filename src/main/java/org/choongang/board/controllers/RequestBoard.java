@@ -15,7 +15,7 @@ public class RequestBoard {
     private String bid; // 게시판 ID
     private String gid = UUID.randomUUID().toString();
     
-    private String category; // 게시판 분류
+    private String category = "팔아요"; // 게시판 분류
 
     @NotBlank
     private String poster; // 글 작성자
@@ -35,8 +35,8 @@ public class RequestBoard {
     private Long num3;
 
     // 추가필드 - 한줄 텍스트
-    private String text1;
-    private String text2;
+    private String text1;  // 거래 상태
+    private String text2;  // 학교 도메인
     private String text3;
 
     // 추가필드 - 여러줄 텍스트

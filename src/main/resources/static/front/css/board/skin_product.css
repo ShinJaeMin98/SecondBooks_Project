@@ -16,6 +16,25 @@
 .board_btns .btn:hover { background: #222; color: #fff; }
 
 /* 게시판 목록 */
+.board_list .items { display: flex; flex-wrap: wrap; }
+.board_list .items > .item { width: calc(100% / 4 - 23px); margin-left: 30px; margin-bottom: 30px; }
+.board_list .items > .item:nth-of-type(4n + 1) { margin-left: 0; }
+.board_list .items > .item .product_image { height: 250px; border-radius: 30px; margin-bottom: 15px; }
+.board_list .items .subject { font-size: 1.3rem; }
+.board_list .items .sale_price { font-weight: 700; font-size: 1.1rem; margin: 2px 0; }
+.board_list .items .count_box { color: #868e96; }
+
+.board_list .items .subject { flex-grow: 1; padding: 10px; }
+.board_list .write_btn { background: #456E2A; color: #fff; height: 35px; line-height: 35px; cursor: pointer; padding: 0 30px; border-radius: 3px; }
+.board_list .no_data { padding: 50px 0; text-align: center; border-top: 1px solid #d5d5d5; border-bottom: 1px solid #d5d5d5; align-items: center; }
+
+.board_list .list_search { padding: 10px; border-bottom: 1px solid #d5d5d5;}
+.board_list .list_search > form { display: flex; }
+.board_list .list_search > form > * + * { margin-left: 5px; }
+.board_list .list_search button { width: 180px; }
+.board_list .total { text-align: right; margin: 10px 10px 5px; }
+
+/*
 .board_list .items > .item { border-bottom: 1px solid #d5d5d5; display: flex; align-items: center; }
 .board_list .items > .item:first-of-type { border-top: 1px solid #d5d5d5; }
 
@@ -27,12 +46,8 @@
 .board_list .write_btn { background: #456E2A; color: #fff; height: 35px; line-height: 35px; cursor: pointer; padding: 0 30px; border-radius: 3px; }
 .board_list .no_data { padding: 50px 0; text-align: center; border-top: 1px solid #d5d5d5; border-bottom: 1px solid #d5d5d5}
 
-.board_list .list_search { padding: 10px; border-bottom: 1px solid #d5d5d5;}
-.board_list .list_search > form { display: flex; }
-.board_list .list_search > form > * + * { margin-left: 5px; }
-.board_list .list_search button { width: 180px; }
-.board_list .total { text-align: right; margin: 10px 10px 5px; }
 
+*/
 
 /* 찜 버튼 */
 .share_btns button { width: 45px; height: 45px; background: #fff; border: 0px solid #222; cursor: pointer; }

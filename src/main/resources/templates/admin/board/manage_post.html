@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layouts/main}">
+<section layout:fragment="content" th:object="${boardData}">
+    <h1>게시글 관리</h1>
+
+    <div class="subject">
+           <span th:if="*{!#strings.isEmpty(category)}" class="category"
+                 th:text="*{'[' + category + ']'}"></span>
+        <th:block th:text="*{subject}"></th:block>
+    </div>
+    <div class="post_info">
+        <div class="left">
+               <span>
+                   <th:block th:text="#{작성자}"></th:block> :
+                   <th:block th:text="*{poster}"></th:block>
+                    <th:block th:if="*{member != null}" th:text="*{'(' + #strings.substring(member.userId, 0, 4) + '****)'}"></th:block>
+               </span>
+
+            <span>
+                   <th:block th:text="#{조회수}"></th:block> :
+                   <th:block th:text="*{viewCount >= 1000 ? #numbers.formatInteger(viewCount, 3, 'COMMA') : viewCount}"></th:block>
+               </span>
+        </div>
+
+        <div class="right">
+                <span>
+                    IP : <th:block th:text="*{ip}"></th:block>
+                </span>
+            <span>
+                    <th:block th:text="#{작성일시}"></th:block> :
+                    <th:block th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm')}"></th:block>
+                </span>
+        </div>
+    </div>
+    <!--// post_info -->
+
+    <div th:if="*{editorView}" class="content" th:utext="*{content}"></div>
+    <div th:if="*{!editorView}" class="content" th:utext="*{@utils.nl2br(content)}"></div>
+
+    <ul th:if="*{attachFiles != null && !attachFiles.isEmpty()}" class="downloads">
+        <li th:each="file : *{attachFiles}" th:object="${file}">
+            <i class="xi-download"></i>
+            <a th:href="@{/file/download/{seq}(seq=*{seq})}" th:text="*{fileName}"></a>
+        </li>
+    </ul>
+
+    <form th:fragment="form" id="frmComment" name="frmComment" method="post" th:action="@{/comment/save}" target="ifrmProcess" autocomplete="off" th:object="${requestComment}">
+        <input type="hidden" name="mode" value="add">
+        <input type="hidden" name="admin" value="true">
+        <input type="hidden" name="boardDataSeq" th:value="${boardData.seq}">
+
+        <div class="commenter_info">
+            <input type="text" name="commenter" th:placeholder="#{작성자}" value="관리자">
+        </div>
+        <!--// commenter_info -->
+
+        <div class="comment_content">
+            <textarea name="content" th:placeholder="#{댓글을_입력하세요.}" th:field="*{content}"></textarea>
+            <button type="submit" th:text="#{작성하기}"></button>
+        </div>
+        <!--// comment_content -->
+    </form>
+
+    <th:block th:object="${boardData}" th:if="*{comments != null && !comments.isEmpty()}">
+        <div class="total">
+            Total : <th:block th:text="*{commentCount >= 1000 ? #numbers.formatInteger(commentCount, 3, 'COMMA') : commentCount}"></th:block>
+        </div>
+
+        <ul class="comment_items">
+            <li class="item" th:each="comment : *{comments}" th:object="${comment}" th:id="*{'comment_' + seq}">
+                <div class="comment_top">
+                    <div>
+                        <th:block th:text="*{commenter}"></th:block>
+                        <th:block th:if="*{member != null}" th:text="*{'(' + member.email + ')'}"></th:block>
+                    </div>
+                    <div th:text="*{#temporals.format(createdAt, 'yyyy.MM.dd HH:mm')}"></div>
+                </div>
+                <!--// comment_top -->
+                <div class="comment" th:utext="*{@utils.nl2br(content)}"></div>
+                <div class="btns" th:if="*{showEditButton || showDeleteButton}">
+                    <a th:if="*{showDeleteButton}" th:href="@{/comment/delete/{seq}(seq=*{seq})}" th:data-deletable="*{deletable}" class="delete_comment" th:text="#{삭제}" onclick="return confirm('정말 삭제하겠습니까?');"></a>
+
+                </div>
+            </li>
+        </ul>
+    </th:block>
+
+</section>
+</html>

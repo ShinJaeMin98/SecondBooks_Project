@@ -25,6 +25,7 @@ public class Pagination {
 
     private int totalPages; // 전체 페이지 갯수
     private String baseURL; // 페이징 쿼리스트링 기본 URL
+    private String category;
 
     /**
      *

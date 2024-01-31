@@ -4,7 +4,11 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
+import org.choongang.board.controllers.BoardDataSearch;
+import org.choongang.board.controllers.comment.RequestComment;
 import org.choongang.board.entities.Board;
+import org.choongang.board.entities.BoardData;
+import org.choongang.board.service.BoardInfoService;
 import org.choongang.board.service.config.BoardConfigDeleteService;
 import org.choongang.board.service.config.BoardConfigInfoService;
 import org.choongang.board.service.config.BoardConfigSaveService;
@@ -30,6 +34,8 @@ public class BoardController implements ExceptionProcessor {
     private final BoardConfigDeleteService configDeleteService;
 
     private final BoardConfigValidator configValidator;
+
+    private final BoardInfoService boardInfoService;
 
     @ModelAttribute("menuCode")
     public String getMenuCode() { // 주 메뉴 코드
@@ -140,10 +146,34 @@ public class BoardController implements ExceptionProcessor {
      * @return
      */
     @GetMapping("/posts")
-    public String posts(Model model) {
+    public String posts(@ModelAttribute BoardDataSearch search ,Model model) {
         commonProcess("posts", model);
 
+        ListData<BoardData> data = boardInfoService.getList(search);
+
+
+
+        model.addAttribute("items", data.getItems());
+        model.addAttribute("pagination", data.getPagination());
+
+        BoardSearch boardSearch = new BoardSearch();
+        boardSearch.setLimit(10000);
+        ListData<Board> boards = configInfoService.getList(boardSearch, true);
+        model.addAttribute("board", boards.getItems());
+
         return "admin/board/posts";
+    }
+
+    @GetMapping("/posts/{seq}")
+    public String managePosts(@PathVariable("seq") Long seq, Model model){
+        commonProcess("posts", model);
+
+        BoardData boardData = boardInfoService.get(seq);
+        model.addAttribute("boardData", boardData);
+        model.addAttribute("board", boardData.getBoard());
+        model.addAttribute("requestComment", new RequestComment());
+
+        return "admin/board/manage_post";
     }
 
     /**

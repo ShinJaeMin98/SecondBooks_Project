@@ -59,6 +59,12 @@ public class BoardInfoService {
     public BoardData get(Long seq) {
         BoardData boardData = boardDataRepository.findById(seq).orElseThrow(BoardDataNotFoundException::new);
 
+        if(memberUtil.isLogin() && boardData.getBoard().isSchoolOnly()) { // 로그인 회원의 학교 게시물
+            Member member = memberUtil.getMember();
+            if (!member.getSchool().getDomain().equals(boardData.getText2())) {
+                throw new BoardDataNotFoundException();
+            }
+        }
         addBoardData(boardData);
 
         List<CommentData> comments = commentInfoService.getList(seq);
@@ -108,14 +114,18 @@ public class BoardInfoService {
         QBoardData boardData = QBoardData.boardData;
         BooleanBuilder andBuilder = new BooleanBuilder();
 
-
-        String skin = board.getSkin();
         if (StringUtils.hasText(bid)) {
             andBuilder.and(boardData.board.bid.eq(bid)); // 게시판 ID
         }
-        if(memberUtil.isLogin() && skin.equals("product")){ // 로그인 회원의 학교 게시물만 조회 + product 스킨에서만
-            Long sNum = memberUtil.getMember().getSchool().getNum();
-            andBuilder.and(boardData.member.school.num.eq(sNum));
+
+        List<String> bids = search.getBid();
+        if(bids != null && !bids.isEmpty()){
+            andBuilder.and(boardData.board.bid.in(bids));
+        }
+
+        if(memberUtil.isLogin() && board.isSchoolOnly()){ // 로그인 회원의 학교 게시물만 조회
+            String domain = memberUtil.getMember().getSchool().getDomain();
+            andBuilder.and(boardData.member.school.domain.eq(domain));
         }
 
         /* 검색 조건 처리 S */
@@ -192,6 +202,8 @@ public class BoardInfoService {
         long total = boardDataRepository.count(andBuilder);
         int ranges = utils.isMobile() ? board.getPageCountMobile() : board.getPageCountPc();
         Pagination pagination = new Pagination(page, (int)total, ranges, limit, request);
+
+        items.forEach(this::addBoardData);
 
         return new ListData<>(items, pagination);
     }

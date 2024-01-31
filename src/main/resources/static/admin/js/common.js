@@ -22,7 +22,8 @@ window.addEventListener("DOMContentLoaded", function() {
                 return;
            }
 
-            if (confirm(`정말 ${modeTitle} 하겠습니까?`)) {
+            if (
+            confirm(`정말 ${modeTitle} 하겠습니까?`)) {
                 formEl.submit();
             }
 

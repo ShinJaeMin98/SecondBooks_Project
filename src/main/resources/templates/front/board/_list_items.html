@@ -18,6 +18,10 @@
             <th:block th:replace="~{front/board/skins/qna/_list_items::qna}"></th:block>
         </th:block>
 
+        <th:block th:if="${board.skin == 'faq'}">
+            <th:block th:replace="~{front/board/skins/faq/_list_items::faq}"></th:block>
+        </th:block>
+
     </th:block>
 </main>
 </html>

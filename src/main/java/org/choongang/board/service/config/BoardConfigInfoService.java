@@ -15,6 +15,10 @@ import org.choongang.commons.Pagination;
 import org.choongang.commons.Utils;
 import org.choongang.file.entities.FileInfo;
 import org.choongang.file.service.FileInfoService;
+import org.choongang.member.MemberUtil;
+import org.choongang.member.entities.Member;
+import org.choongang.school.entities.School;
+import org.choongang.school.service.SchoolInfoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +27,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.data.domain.Sort.Order.desc;
@@ -34,6 +39,9 @@ public class BoardConfigInfoService {
     private final BoardDataRepository boardDataRepository;
     private final FileInfoService fileInfoService;
     private final HttpServletRequest request;
+
+    private final SchoolInfoService schoolInfoService;
+    private final MemberUtil memberUtil;
 
     /**
      * 게시판 설정 조회
@@ -59,7 +67,7 @@ public class BoardConfigInfoService {
         form.setWriteAccessType(board.getWriteAccessType().name());
         form.setReplyAccessType(board.getReplyAccessType().name());
         form.setCommentAccessType(board.getCommentAccessType().name());
-
+        form.setMenuLocation(board.getMenuLocation().name());
         form.setMode("edit");
 
         return form;
@@ -77,9 +85,23 @@ public class BoardConfigInfoService {
 
         List<FileInfo> htmlBottomImages = fileInfoService.getListDone(gid, "html_bottom");
 
-        board.setHtmlTopImages(htmlTopImages);
-        board.setHtmlBottomImages(htmlBottomImages);
+        if (board.isSchoolOnly()) { // 학교 전용 게시판
+            if (memberUtil.isLogin()) {
+                Member member = memberUtil.getMember();
+                School school = member.getSchool();
+                schoolInfoService.addSchoolInfo(school);
 
+                board.setHtmlTopImages(Arrays.asList(school.getBanner_top()));
+                board.setHtmlBottomImages(Arrays.asList(school.getBanner_bottom()));
+                board.setHtmlBottom("");
+                board.setHtmlTop("");
+            }
+
+
+        } else { // 일반 게시판
+            board.setHtmlTopImages(htmlTopImages);
+            board.setHtmlBottomImages(htmlBottomImages);
+        }
 
         List<FileInfo> logo1 = fileInfoService.getListDone(gid, "logo1");
         List<FileInfo> logo2 = fileInfoService.getListDone(gid, "logo2");

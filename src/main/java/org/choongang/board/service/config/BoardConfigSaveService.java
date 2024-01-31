@@ -59,7 +59,7 @@ public class BoardConfigSaveService {
         board.setHtmlBottom(form.getHtmlBottom());
 
         board.setListOrder(form.getListOrder());
-
+        board.setSchoolOnly(form.isSchoolOnly());
         boardRepository.saveAndFlush(board);
 
         // 파일 업로드 완료 처리
