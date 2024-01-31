@@ -5,7 +5,7 @@
 <main layout:fragment="content" class="layout_width_m">
     <h1 th:text="#{로그인}"></h1>
 
-    <div class="login-page">
+    <div class="login-page w_full">
         <div class="form">
             <form class="login-form" method="post" th:action="@{/member/login}" autocomplete="off">
                 <input type="text" placeholder="userId" name="username" th:value="${session.username}"/>
