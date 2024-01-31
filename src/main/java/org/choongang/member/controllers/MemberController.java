@@ -130,7 +130,7 @@ public class MemberController implements ExceptionProcessor {
 
         if (mode.equals("login")) { // 로그인
             pageTitle = Utils.getMessage("로그인", "commons");
-
+            addCss.add("member/login");
         } else if (mode.equals("join")) {   // 회원가입
             addCommonScript.add("fileManager");
             addScript.add("member/form");
