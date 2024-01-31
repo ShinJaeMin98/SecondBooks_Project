@@ -13,9 +13,11 @@
             Total : <th:block th:text="${pagination.total >= 1000 ? #numbers.formatInteger(pagination.total, 3, 'COMMA') : pagination.total}"></th:block>
         </div>
 
+        <div>
+            <h4 th:if="${items == null || items.isEmpty()}" class="no_data"
+                      th:text="#{조회된_게시글이_없습니다.}"></h4>
+        </div>
         <ul class="items">
-            <li th:if="${items == null || items.isEmpty()}" class="no_data"
-                th:text="#{조회된_게시글이_없습니다.}"></li>
 
             <li th:unless="${items == null || items.isEmpty()}"
                 th:each="item : ${items}" th:object="${item}" class="item">

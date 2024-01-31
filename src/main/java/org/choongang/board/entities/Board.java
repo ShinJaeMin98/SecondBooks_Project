@@ -105,8 +105,8 @@ public class Board extends BaseMember {
     @Transient
     private FileInfo logo3; // 로고 이미지 3
 
-    @Transient
-    private Location menuLocation;
+    @Column(length = 10 , nullable = false)
+    private Location menuLocation = Location.TOP;
 
     /**
      * 분류 List 형태로 변환

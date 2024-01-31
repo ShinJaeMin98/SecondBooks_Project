@@ -27,8 +27,6 @@ public class School extends BaseMember {
     @Column(length = 50 , nullable = false)
     private String domain;
 
-    @Column(length = 10 , nullable = false)
-    private Location menuLocation;
 
     @Lob
     private String content;
@@ -46,8 +44,7 @@ public class School extends BaseMember {
     @OneToMany(mappedBy = "school", fetch = FetchType.LAZY)
     List<Member> members = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.EAGER)
-    private Member member;
+
 
 
 
