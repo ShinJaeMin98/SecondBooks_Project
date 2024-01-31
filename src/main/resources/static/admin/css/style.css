@@ -11,25 +11,25 @@ img { border: 0; }
 header { display: flex; justify-content: space-between; height: 80px; align-items: center; background: #fff; }
 header > section:first-of-type { width: 208px; text-align: center; }
 header > section:last-of-type { flex-grow: 1; padding-right: 20px; text-align: right; }
-header .btn_area a { display: inline-block; width: 90px; height: 28px; border: 1px solid #596b99; color: #596b99; border-radius: 5px; line-height: 26px; text-align: center; font-weight: 500; }
-header .btn_area a:last-of-type { background: #596b99; color: #fff; }
+header .btn_area a { display: inline-block; width: 90px; height: 28px; border: 1px solid #456E2A; color: #456E2A; border-radius: 5px; line-height: 26px; text-align: center; font-weight: 500; }
+header .btn_area a:last-of-type { background: #456E2A; color: #fff; }
 
 /* 헤더 영역 E */
 
 /* 내용 영역  S */
-main { background: #f1f3fa; min-height: 1000px; display: flex; }
-main > aside { width: 208px; background: #596b99; }
+main { background: #E4F0D5; min-height: 1000px; display: flex; }
+main > aside { width: 208px; background: #7DB249; }
 main > section { flex-grow: 1; padding: 50px; }
 
 main > aside > a { display: block; height: 71px; color: #dddee4; font-size: 1.385rem; text-align: center; line-height: 70px; position: relative; }
-main > aside > a + a { border-top: 1px solid #61729e; }
+main > aside > a + a { border-top: 1px solid #456E2A; }
 main > aside > a i { color: #dddee4; font-size: 1.385rem; }
-main > aside > a.on, main > aside > a:hover { background: #3c4e7a; font-weight: 500; }
-main > aside > a.on:after, main > aside > a:hover:after { content: ''; display: block; width: 8px; height: 100%; right: 0; top: 0; background: #00d0d7; position: absolute; }
+main > aside > a.on, main > aside > a:hover { background: #456E2A; font-weight: 500; }
+main > aside > a.on:after, main > aside > a:hover:after { content: ''; display: block; width: 8px; height: 100%; right: 0; top: 0; background: #ffb3da; position: absolute; }
 
 nav.submenus { box-shadow: 1px 1px 5px #cdced5; height: 60px; background: #fff; border-radius: 5px; margin-bottom: 50px; display: flex; align-items: center; }
 nav.submenus a { height: 60px; line-height: 60px; padding: 0 40px; font-size: 1.385rem; color: #222; }
-nav.submenus a.on { background: #596b99; color: #fff; font-weight: 500; }
+nav.submenus a.on { background: #456E2A; color: #fff; font-weight: 500; }
 
 /* 내용 영역 E */
 
@@ -44,7 +44,7 @@ h2 { margin: 0 0 10px 0; font-size: 1.385rem; line-height: 1; }
 .table_cols th { background: #ccc; font-weight: normal; }
 
 .table_rows { border-spacing: 0; width: 100%; background: #fff; }
-.table_rows thead th { background: #596b99; color: #fff; font-weight: normal; padding: 7px 10px; }
+.table_rows thead th { background: #456E2A; color: #fff; font-weight: normal; padding: 7px 10px; }
 .table_rows thead th + th { border-left: 1px solid #fff; }
 
 .table_rows tbody td { border-bottom: 1px solid #ccc; padding: 7px 10px; }
@@ -67,10 +67,10 @@ select { border: 1px solid #d5d5d5; height: 35px; }
 .submit_btns .btn:last-of-type { background: #222; color: #fff; }
 
 .search_btn { text-align: center; margin: 20px 0 30px; }
-.search_btn .btn { display: inline-block; min-width: 200px; text-align: center; font-size:1.4rem; font-weight: 500; height: 45px; line-height: 45px; background: #596b99; color: #fff; cursor: pointer; border-radius: 3px; border: 0; }
+.search_btn .btn { display: inline-block; min-width: 200px; text-align: center; font-size:1.4rem; font-weight: 500; height: 45px; line-height: 45px; background: #456E2A; color: #fff; cursor: pointer; border-radius: 3px; border: 0; }
 
 .sbtn { border: 1px solid #222; color: #222; background: #fff; display: inline-block; padding: 7px 20px; border-radius: 3px; cursor: pointer; line-height: 1; }
-.sbtn:hover, .sbtn.on { background: #596b99; color: #fff; border-color: #596b99; }
+.sbtn:hover, .sbtn.on { background: #456E2A; color: #fff; border-color: #456E2A; }
 .sbtn i { color: #222; font-size: 1.1rem; vertical-align: middle; line-height: 1; }
 .sbtn:hover i, .sbtn.on i { color: #fff; }
 
@@ -80,16 +80,16 @@ select { border: 1px solid #d5d5d5; height: 35px; }
 /* 버튼 공통 E */
 
 /* 메세지 공통 S */
-.message_box { box-shadow: 1px 1px 5px #596b99; padding: 15px; border-radius: 5px; font-size: 1.385rem; font-weight: 500; text-align: center; background: #fff; margin-bottom: 30px; color: #596b99; }
+.message_box { box-shadow: 1px 1px 5px #456E2A; padding: 15px; border-radius: 5px; font-size: 1.385rem; font-weight: 500; text-align: center; background: #fff; margin-bottom: 30px; color: #456E2A; }
 
-.error { box-shadow: 1px 1px 5px #596b99; padding: 7px 15px; border-radius: 5px; font-size: 0.95rem; color: #596b99; font-weight: 500; margin: 5px 0; }
+.error { box-shadow: 1px 1px 5px #596b99; padding: 7px 15px; border-radius: 5px; font-size: 0.95rem; color: #456E2A; font-weight: 500; margin: 5px 0; }
 .error.global { padding: 10px 15px; font-size: 1.15rem; margin: 0 0 5px; }
 /* 메세지 공통 E */
 
 /* 페이징 공통 S */
 .pagination { text-align: center; margin: 30px 0; }
-.pagination .page { border: 1px solid #596b99; color: #596b99; display: inline-block; padding: 5px 10px; border-radius: 3px; background: #fff; }
-.pagination .page.on { background: #596b99; color: #fff; }
+.pagination .page { border: 1px solid #456E2A; color: #456E2A; display: inline-block; padding: 5px 10px; border-radius: 3px; background: #fff; }
+.pagination .page.on { background: #456E2A; color: #fff; }
 .pagination .page + .page { margin-left: 3px; }
 /* 페이징 공통 E */
 
@@ -99,8 +99,8 @@ select { border: 1px solid #d5d5d5; height: 35px; }
 .file_tpl_box a:not(.remove) { text-decoration: underline; }
 .file_tpl_box i { padding: 0 5px; cursor: pointer; }
 
-.dragndrop_box { width: 300px; min-height: 300px; border: 2px solid #596b99; cursor: pointer; position: relative; }
-.dragndrop_box:not(.uploaded):after { content: '업로드할 파일을 드래그 하세요.'; display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; line-height: 300px; text-align: center; text-shadow: 2px 2px 5px #555; color: #596b99; font-weight: 500; font-size: 1.15rem; }
+.dragndrop_box { width: 300px; min-height: 300px; border: 2px solid #456E2A; cursor: pointer; position: relative; }
+.dragndrop_box:not(.uploaded):after { content: '업로드할 파일을 드래그 하세요.'; display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; line-height: 300px; text-align: center; text-shadow: 2px 2px 5px #555; color: #456E2A; font-weight: 500; font-size: 1.15rem; }
 /* 파일 공통 E */
 
 /* 입력 항목 그룹화 */

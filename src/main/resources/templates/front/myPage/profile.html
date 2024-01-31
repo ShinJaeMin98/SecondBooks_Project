@@ -15,15 +15,12 @@
                     <th:block
                          th:if="*{profileImage != null}">
 
-                        <a th:href="@{/file/delete/{seq}(seq=*{profileImage.seq})}" onclick="return confirm('정말 삭제하겠습니까?');" target="ifrmProcess">
-                            <i class="xi-close"></i>
-                        </a>
                         <th:block th:utext="*{@utils.printThumb(profileImage.seq, 250, 250, 'image')}"></th:block>
                     </th:block>
                 </div>
                 <button type="button" class="sbtn upload_files" data-image-only="true" data-single-file="true">
                     <i class="xi-image"></i>
-                    <th:block th:text="#{이미지_업로드}"></th:block>
+                    <th:block th:text="#{이미지_변경}"></th:block>
                 </button>
             </dd>
         </dl>

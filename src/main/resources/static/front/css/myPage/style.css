@@ -1,8 +1,8 @@
 main { display: flex; }
-main > aside { width: 250px; background: #f8f8f8; min-height: 700px; }
+main > aside { width: 250px; background: #E4F0D5; min-height: 700px; }
 main > aside > ul { margin-top: 20px;  }
-main > aside > ul a { height: 50px; display: block;  line-height: 50px; padding: 0 30px; font-size: 1.1rem; font-weight: 500; background: #d5d5d5; }
-main > aside > ul a:hover, main > aside > ul li.on a { background: #222; color: #fff; }
+main > aside > ul a { height: 50px; display: block;  line-height: 50px; padding: 0 30px; font-size: 1.1rem; font-weight: 500; background: #7DB249; }
+main > aside > ul a:hover, main > aside > ul li.on a { background: #456E2A; color: #fff; }
 main > aside > ul li { border-top: 1px solid #222; }
 main > section { flex-grow: 1; padding: 45px; }
 main > section h1 { line-height: 1; margin-bottom: 25px; font-size: 1.5rem; }
@@ -23,14 +23,23 @@ main > section h1 { line-height: 1; margin-bottom: 25px; font-size: 1.5rem; }
 .save_post_page .total { text-align: right; margin: 10px 10px 5px; }
 
 /* 내가 쓴 글 */
+.my_post_page .list_search { padding: 10px; border-bottom: 1px solid #d5d5d5;}
 .my_post_page .list_search > form { display: flex; }
 .my_post_page .list_search > form > * + * { margin-left: 5px; }
 .my_post_page .list_search button { width: 180px; }
 .my_post_page .total { text-align: right; margin: 10px 10px 5px; }
 
+.my_post_page .items li { border: 1px solid #f8f8f8; border-radius: 5px; }
+.my_post_page .items li + li { margin-top: 10px; }
+.my_post_page .subject { padding: 10px 15px; cursor: pointer; }
+.my_post_page .content { margin-top: 10px; transition: all 0.5s; min-height: 100px;}
+.my_post_page .content > div { background: #f8f8f8; padding: 15px; border-radius: 5px; }
+.my_post_page .content.hide { transition: all 0.5s; }
+.my_post_page .content.hide a:hover, a:active { text-decoration: underline; background-color: #7DB249; }
+
+
 /* 마이페이지 사이드 영역 */
 aside .profile_image { width: 200px; height: 200px; border-radius: 50%; margin: 20px auto;  }
-aside .profile_box .update_profile_btn { border: 1px solid #596b99; height: 35px; text-align: center; background: #fff; color: #596b99; display: block; width: 200px; margin: 0 auto 10px; font-size: 1.15rem; line-height: 33px; border-radius: 3px;}
+aside .profile_box .update_profile_btn { border: 1px solid #456E2A; height: 35px; text-align: center; background: #fff; color: #456E2A; display: block; width: 200px; margin: 0 auto 10px; font-size: 1.15rem; line-height: 33px; border-radius: 3px;}
 aside .user_email { font-size: 1.2rem; font-weight: 500; padding: 0 25px; }
 aside .user_nm { padding: 0 25px; margin-bottom: 10px; }
-aside .follow_info { text-align: center; }
