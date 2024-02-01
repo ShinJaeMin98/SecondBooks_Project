@@ -14,6 +14,7 @@ import org.choongang.board.controllers.BoardDataSearch;
 import org.choongang.board.controllers.RequestBoard;
 import org.choongang.board.entities.*;
 import org.choongang.board.repositories.BoardDataRepository;
+import org.choongang.board.repositories.BoardRepository;
 import org.choongang.board.repositories.BoardViewRepository;
 import org.choongang.board.service.comment.CommentInfoService;
 import org.choongang.board.service.config.BoardConfigInfoService;
@@ -25,16 +26,22 @@ import org.choongang.file.service.FileInfoService;
 import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class BoardInfoService {
 
     private final EntityManager em;
+    private final BoardRepository boardRepository;
     private final BoardDataRepository boardDataRepository;
     private final BoardViewRepository boardViewRepository;
 
@@ -124,9 +131,11 @@ public class BoardInfoService {
         }
 
         if(memberUtil.isLogin() && board.isSchoolOnly()){ // 로그인 회원의 학교 게시물만 조회
-            String domain = memberUtil.getMember().getSchool().getDomain();
-            andBuilder.and(boardData.member.school.domain.eq(domain));
+
+           String domain = memberUtil.getMember().getSchool().getDomain();
+           andBuilder.and(boardData.text2.eq(domain));
         }
+
 
         /* 검색 조건 처리 S */
 
@@ -220,6 +229,7 @@ public class BoardInfoService {
      * @return
      */
     public List<BoardData> getLatest(String bid, int limit) {
+
         BoardDataSearch search = new BoardDataSearch();
         search.setLimit(limit);
 

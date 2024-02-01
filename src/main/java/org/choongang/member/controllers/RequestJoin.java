@@ -14,8 +14,8 @@ public class RequestJoin {
 
     private String gid = UUID.randomUUID().toString();
 
-    @NotBlank @Email
-    private String email;
+   // @NotBlank @Email
+    //private String email;
 
     @NotBlank
     private String domain;
@@ -40,5 +40,10 @@ public class RequestJoin {
 
     @AssertTrue
     private boolean agree;
+
+    public String getEmail() {
+        return String.format("%s@%s", univId, domain);
+    }
+
 
 }

@@ -170,6 +170,9 @@ public class SchoolInfoService {
     }
 
     public void addSchoolInfo(School school) {
+        if (school == null) {
+            return;
+        }
         String gid = school.getGid();
 
         List<FileInfo> banner_top = fileInfoService.getListDone(gid, "banner_top");

@@ -24,11 +24,11 @@ public class BoardData extends Base implements AuthCheck {
     @Id @GeneratedValue
     private Long seq;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="bid")
     private Board board;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="memberSeq")
     private Member member;
 
