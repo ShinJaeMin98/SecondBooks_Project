@@ -45,4 +45,5 @@ public class RequestJoin {
         return String.format("%s@%s", univId, domain);
     }
 
+
 }

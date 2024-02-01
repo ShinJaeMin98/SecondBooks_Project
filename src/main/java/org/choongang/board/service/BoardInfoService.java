@@ -136,6 +136,7 @@ public class BoardInfoService {
            andBuilder.and(boardData.text2.eq(domain));
         }
 
+
         /* 검색 조건 처리 S */
 
         String sopt = search.getSopt();
