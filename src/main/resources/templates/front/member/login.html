@@ -4,35 +4,25 @@
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content" class="layout_width_m">
     <h1 th:text="#{로그인}"></h1>
-    <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off">
-        <input type="hidden" name="redirectURL"
-               th:if="${param.redirectURL != null}" th:value="${param.redirectURL}">
-        <dl>
-            <dt th:text="#{아이디}"></dt>
-            <dd>
-                <input type="text" name="username" th:value="${session.username}">
+
+    <div class="login-page w_full">
+        <div class="form">
+            <form class="login-form" method="post" th:action="@{/member/login}" autocomplete="off">
+                <input type="text" placeholder="userId" name="username" th:value="${session.username}"/>
                 <div class="error" th:if="${session.NotBlank_username != null}" th:text="${session.NotBlank_username}"></div>
-            </dd>
-        </dl>
-        <br>
-        <dl>
-            <dt th:text="#{비밀번호}"></dt>
-            <dd>
-                <input type="password" name="password">
+
+                <input type="password" name="password" placeholder="password"/>
                 <div class="error" th:if="${session.NotBlank_password != null}" th:text="${session.NotBlank_password}"></div>
-            </dd>
-        </dl>
-        <br>
-        <div>
-            <input type="checkbox" name="autoLogin" value="true" id="autoLogin">
-            <label for="autoLogin" th:text="#{자동_로그인}"></label>
+
+                <button type="submit" th:text="#{로그인}"></button>
+                <div class="error" th:if="${session.Global_error != null}" th:text="${session.Global_error}"></div>
+
+                <p class="message" th:text ="#{계정이_없으신가요?}"> </p>
+                <a style="color : green" th:href="@{/member/join}" th:text="#{회원가입}"></a>
+
+            </form>
         </div>
-        <br>
-        <button type="submit" th:text="#{로그인}"></button>
-        <div class="error" th:if="${session.Global_error != null}" th:text="${session.Global_error}"></div>
+    </div>
 
-        <a th:href="@{/member/find_pw}" th:text="#{비밀번호_찾기}"></a>
-
-    </form>
 </main>
 </html>

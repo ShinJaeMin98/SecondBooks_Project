@@ -161,7 +161,6 @@ public class SchoolInfoService {
         RequestSchool form = new ModelMapper().map(school, RequestSchool.class);
         form.setDomain(school.getDomain());
         form.setGid(school.getGid());
-        form.setMenuLocation(school.getMenuLocation());
         form.setNum(school.getNum());
         form.setComment(school.getContent());
 

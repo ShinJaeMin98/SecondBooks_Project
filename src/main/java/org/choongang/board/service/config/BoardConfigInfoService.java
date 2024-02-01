@@ -67,7 +67,7 @@ public class BoardConfigInfoService {
         form.setWriteAccessType(board.getWriteAccessType().name());
         form.setReplyAccessType(board.getReplyAccessType().name());
         form.setCommentAccessType(board.getCommentAccessType().name());
-
+        form.setMenuLocation(board.getMenuLocation().name());
         form.setMode("edit");
 
         return form;
@@ -95,7 +95,6 @@ public class BoardConfigInfoService {
                 board.setHtmlBottomImages(Arrays.asList(school.getBanner_bottom()));
                 board.setHtmlBottom("");
                 board.setHtmlTop("");
-                board.setMenuLocation(school.getMenuLocation());
             }
 
 

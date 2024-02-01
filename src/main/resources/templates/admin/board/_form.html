@@ -48,6 +48,17 @@
             </td>
         </tr>
         <tr>
+            <th>메뉴 위치</th>
+            <td>
+                <input type="radio" name="menuLocation" value="TOP" id="menuLocation_TOP" th:field="*{menuLocation}">
+                <label for="menuLocation_TOP">상단</label>
+                <input type="radio" name="menuLocation" value="RIGHT" id="menuLocation_RIGHT" th:field="*{menuLocation}">
+                <label for="menuLocation_RIGHT">오른쪽</label>
+                <input type="radio" name="menuLocation" value="LEFT" id="menuLocation_LEFT" th:field="*{menuLocation}">
+                <label for="menuLocation_LEFT">왼쪽</label>
+            </td>
+        </tr>
+        <tr>
             <th>진열가중치</th>
             <td>
                 <input type="number" name="listOrder" th:field="*{listOrder}">

@@ -68,6 +68,7 @@ public class BoardController implements ExceptionProcessor {
 
         model.addAttribute("items", data.getItems());
         model.addAttribute("pagination", data.getPagination());
+        model.addAttribute("category", search.getCategory());
 
         return utils.tpl("board/list");
     }

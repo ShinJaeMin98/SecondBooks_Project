@@ -9,6 +9,7 @@
 
             <div class="flex sb aic" th:if="${mode == null || mode != 'search'}">
                 <h1 th:replace="~{front/board/skins/faq/_board_title::title}"></h1>
+                <a th:href="@{/board/write/{bid}(bid=${board.bid})}" th:text="#{글쓰기}" class="write_btn"></a>
             </div>
 
             <th:block th:if="${boardData == null && !#strings.isEmpty(board.htmlTop)}" th:utext="${board.htmlTop}"></th:block>

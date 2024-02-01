@@ -2,7 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <nav th:fragment="categories" class="top_categories" th:object="${board}"
      th:if="${board.getCategories() != null && !board.getCategories().isEmpty() && board.menuLocation != null && board.menuLocation.name() == 'TOP'}">
-    <a th:href="@{/board/list/{bid}(bid=*{bid})}" th:text="#{전체}"></a>
-    <a th:each="category : ${board.getCategories()}" th:href="@{/board/list/{bid}(bid=*{bid}, category=${category})}" th:text="${category}"></a>
+    <ul>
+        <li th:classappend="${category==null} ? 'on'">
+            <a th:href="@{/board/list/{bid}(bid=*{bid})}" th:text="#{전체}"></a>
+        </li>
+        <li th:each="_category : ${board.getCategories()}" th:classappend="${category==_category} ? 'on'">
+            <a th:href="@{/board/list/{bid}(bid=*{bid}, category=${_category})}" th:text="${_category}"></a>
+        </li>
+    </ul>
 </nav>
 </html>
