@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/popup}">
+<main layout:fragment="content">
+    <h1 th:text="#{채팅방_생성}"></h1>
+    <form name="frmSave" method="post" th:action="@{/chatting/create}" autocomplete="off" th:object="${requestChatRoom}">
+        <dl>
+            <dt th:text="#{방_아이디}"></dt>
+            <dd>
+                <input type="text" name="roomId" th:field="*{roomId}">
+                <div class="error" th:each="err : ${#fields.errors('roomId')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{방이름}"></dt>
+            <dd>
+                <input type="text" name="roomNm" th:field="*{roomNm}">
+                <div class="error" th:each="err : ${#fields.errors('roomNm')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{인원수}"></dt>
+            <dd>
+                <input type="number" name="capacity" th:field="*{capacity}" min="2">
+                <div class="error" th:each="err : ${#fields.errors('capacity')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <button type="submit" th:text="#{생성하기}"></button>
+    </form>
+</main>
+</html>

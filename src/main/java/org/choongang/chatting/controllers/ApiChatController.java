@@ -1,5 +1,6 @@
 package org.choongang.chatting.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.chatting.entities.ChatHistory;
 import org.choongang.chatting.entities.ChatRoom;
@@ -9,9 +10,11 @@ import org.choongang.chatting.service.ChatRoomInfoService;
 import org.choongang.chatting.service.ChatRoomSaveService;
 import org.choongang.commons.ExceptionRestProcessor;
 import org.choongang.commons.ListData;
+import org.choongang.commons.exceptions.CommonRestException;
 import org.choongang.commons.rests.JSONData;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,7 +48,12 @@ public class ApiChatController implements ExceptionRestProcessor {
      * @return
      */
     @PostMapping("/room")
-    public ResponseEntity saveRoom(@RequestBody RequestChatRoom form) {
+    public ResponseEntity saveRoom(@RequestBody @Valid RequestChatRoom form, Errors errors) {
+
+        if (errors.hasErrors()) {
+            throw new CommonRestException(errors, HttpStatus.BAD_REQUEST);
+        }
+
         chatRoomSaveService.save(form);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -64,7 +72,12 @@ public class ApiChatController implements ExceptionRestProcessor {
      * @return
      */
     @PostMapping
-    public ResponseEntity messageSave(@RequestBody RequestChatHistory form) {
+    public ResponseEntity messageSave(@RequestBody @Valid RequestChatHistory form, Errors errors) {
+
+        if (errors.hasErrors()) {
+            throw new CommonRestException(errors, HttpStatus.BAD_REQUEST);
+        }
+
         chatHistorySaveService.save(form);
         
         return ResponseEntity.status(HttpStatus.CREATED).build();

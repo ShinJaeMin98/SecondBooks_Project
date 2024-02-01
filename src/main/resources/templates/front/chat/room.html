@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/popup}">
+<main layout:fragment="content" class="chat_room" th:object="${chatRoom}">
+  <div class="room_nm" th:text="${roomNm}" ></div>
+  <ul id="messages">
+    <li th:each="item : ${items}" th:object="${item}">
+      [<th:block th:text="*{nickName}"></th:block>]
+      <th:block th:text="*{message}"></th:block>
+    </li>
+  </ul>
+  <form name="frmChat" class="input_box">
+    <input type="hidden" name="roomId" th:value="*{roomId}">
+    <input type="text" name="nickName" th:value="${session.member != null ? session.member.name : ''}" th:placeholder="#{닉네임}">
+    <input type="text" name="message" th:placeholder="#{메시지_입력...}">
+    <button type="submit" th:text="전송"></button>
+  </form>
+</main>
+</html>

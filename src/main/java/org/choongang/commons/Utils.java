@@ -54,18 +54,23 @@ public class Utils {
     }
 
     public static String getMessage(String code, String type) {
-        type = StringUtils.hasText(type) ? type : "validations";
+        try {
+            type = StringUtils.hasText(type) ? type : "validations";
 
-        ResourceBundle bundle = null;
-        if (type.equals("commons")) {
-            bundle = commonsBundle;
-        } else if (type.equals("errors")) {
-            bundle = errorsBundle;
-        } else {
-            bundle = validationsBundle;
+            ResourceBundle bundle = null;
+            if (type.equals("commons")) {
+                bundle = commonsBundle;
+            } else if (type.equals("errors")) {
+                bundle = errorsBundle;
+            } else {
+                bundle = validationsBundle;
+            }
+
+            return bundle.getString(code);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
         }
-
-        return bundle.getString(code);
     }
 
     public static String getMessage(String code) {

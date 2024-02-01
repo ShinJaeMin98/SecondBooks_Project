@@ -8,7 +8,7 @@ var commonLib = commonLib || {};
 * @param params : 요청 데이터(POST, PUT, PATCH ... )
 * @param responseType :  json : javascript 객체로 변환
 */
-commonLib.ajaxLoad = function(method, url, params, responseType) {
+commonLib.ajaxLoad = function(method, url, params, responseType, headers) {
     method = !method || !method.trim()? "GET" : method.toUpperCase();
     params = params || null;
 
@@ -21,6 +21,12 @@ commonLib.ajaxLoad = function(method, url, params, responseType) {
         xhr.open(method, url);
         xhr.setRequestHeader(header, token);
 
+        if (headers) {
+            for (const key in headers){
+                xhr.setRequestHeader(key, headers[key]);
+            }
+        }
+
         xhr.send(params); // 요청 body에 실릴 데이터 키=값&키=값& .... FormData 객체 (POST, PATCH, PUT)
 
         responseType = responseType?responseType.toLowerCase():undefined;
@@ -29,12 +35,25 @@ commonLib.ajaxLoad = function(method, url, params, responseType) {
         }
 
         xhr.onreadystatechange = function() {
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                const resultData = (xhr.responseText.trim() && responseType && responseType.toLowerCase() == 'json') ? JSON.parse(xhr.responseText) : xhr.responseText;
+
+                if (xhr.status == 200 || xhr.status == 201) {
+
+                    resolve(resultData); // 성공시 응답 데이터
+                } else {
+                    reject(resultData);
+                }
+            }
+        };
+
+/*        xhr.onreadystatechange = function() {
             if (xhr.status == 200 && xhr.readyState == XMLHttpRequest.DONE) {
                 const resultData = responseType == 'json' ? xhr.response : xhr.responseText;
 
                 resolve(resultData);
             }
-        };
+        };*/
 
         xhr.onabort = function(err) {
             reject(err); // 중단 시
