@@ -26,12 +26,14 @@ import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class BoardInfoService {
 
     private final EntityManager em;
@@ -220,12 +222,21 @@ public class BoardInfoService {
      * @return
      */
     public List<BoardData> getLatest(String bid, int limit) {
+        QBoardData boardData = QBoardData.boardData;
+        BooleanBuilder builder = new BooleanBuilder();
+        builder.and(boardData.board.bid.eq(bid));
+        boardDataRepository.findAll(builder);
+
+        /*
         BoardDataSearch search = new BoardDataSearch();
         search.setLimit(limit);
 
         ListData<BoardData> data = getList(bid, search);
 
         return data.getItems();
+
+         */
+        return null;
     }
 
     public List<BoardData> getLatest(String bid) {

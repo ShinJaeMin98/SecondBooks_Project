@@ -11,6 +11,7 @@ import org.choongang.file.repositories.FileInfoRepository;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.io.File;
@@ -23,6 +24,7 @@ import static org.springframework.data.domain.Sort.Order.asc;
 @Service
 @RequiredArgsConstructor
 @EnableConfigurationProperties(FileProperties.class)
+@Transactional
 public class FileInfoService {
 
     private final FileProperties fileProperties;
