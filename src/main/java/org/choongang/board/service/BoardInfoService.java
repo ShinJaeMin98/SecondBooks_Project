@@ -236,9 +236,6 @@ public class BoardInfoService {
         ListData<BoardData> data = getList(bid, search);
 
         return data.getItems();
-
-         */
-        return null;
     }
 
     public List<BoardData> getLatest(String bid) {
