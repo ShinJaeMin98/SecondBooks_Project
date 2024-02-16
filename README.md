@@ -63,19 +63,21 @@ flow 사진 넣기
 ___
 |로그인(소셜 로그인)|회원가입|회원정보 수정|
 |:-:|:-:|:-:|
-|![로그인 화면](https://github.com/ShinJaeMin98/SecondBooks_Project/assets/124487601/8fdca634-ca56-433d-bf9b-dae3cdabf543)|사진2|사진3|
+|![로그인 화면](https://github.com/ShinJaeMin98/SecondBooks_Project/assets/124487601/8fdca634-ca56-433d-bf9b-dae3cdabf543)|![회원가입](https://github.com/ShinJaeMin98/SecondBooks_Project/assets/124487601/3985f2f7-b4f4-4795-8b72-7958291abbb9)|![회원정보 수정](https://github.com/ShinJaeMin98/SecondBooks_Project/assets/124487601/b61fc1ba-b259-4f00-adbc-02a40c297a6a)|
 
 <br><br>
+
+
     
-|게시글 쓰기|댓글 수정|게시글 검색|
+|게시판|게시글|게시글 검색|
 |:-:|:-:|:-:|
-|사진4|사진5|사진6|
+|![책방](https://github.com/ShinJaeMin98/SecondBooks_Project/assets/124487601/96bd5d90-55d7-4871-84c9-7bd7a2e14e3b)|![게시글](https://github.com/ShinJaeMin98/SecondBooks_Project/assets/124487601/84c79c78-992b-4115-995c-282a9bf3259f)|![게시글 검색](https://github.com/ShinJaeMin98/SecondBooks_Project/assets/124487601/74429513-7aa0-4a5e-b0e0-2e11c133f652)|
     
 <br><br>
 
-|아이디 팝업|파일 업로드|게시글 구분별 정렬|
+|찜 게시글|최신 게시글|관리자 페이지|
 |:-:|:-:|:-:|
-|사진7|사진8|사진9|
+|![찜 게시글](https://github.com/ShinJaeMin98/SecondBooks_Project/assets/124487601/075cf14a-fe49-4276-9dfe-8fc42bd410ca)|![최근 게시글](https://github.com/ShinJaeMin98/SecondBooks_Project/assets/124487601/f366aeea-50e7-4378-811c-bb26394e3bd5)|![관리자 페이지](https://github.com/ShinJaeMin98/SecondBooks_Project/assets/124487601/84c23fb3-18e9-4325-b0d5-e854f57c8d33)|
 
 </details>
 
