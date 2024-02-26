@@ -21,36 +21,15 @@
 
 ## 2. 개발 환경
 
-![개발환경](https://github.com/ShinJaeMin98/SecondBooks_Project/assets/124487601/9f7937f5-f526-4d63-b333-7fa7a6b6f6f1)
+<img width="950" alt="개발환경" src="https://github.com/ShinJaeMin98/SecondBooks_Project/assets/124487601/47bdfdce-8a53-431b-b22b-1f972fcd4fa4">
 
-<div align=center>     
-  <img src="https://img.shields.io/badge/java16-007396?style=flat&logo=java&logoColor=white"> 
-  <img src="https://img.shields.io/badge/jsp4.0-007396?style=flat&logo=jsp&logoColor=white"> 
-  <img src="https://img.shields.io/badge/html5-E34F26?style=flat&logo=html5&logoColor=white"> 
-  <img src="https://img.shields.io/badge/css-1572B6?style=flat&logo=css3&logoColor=white"> 
-  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=flat&logo=javascript&logoColor=black"> 
-  <img src="https://img.shields.io/badge/Ajax-0769AD?style=flat&logo=Ajax&logoColor=white">
-  <img src="https://img.shields.io/badge/mysql8.0-4479A1?style=flat&logo=mysql&logoColor=white"> 
-  <img src="https://img.shields.io/badge/apache tomcat9.0-F8DC75?style=flat&logo=apachetomcat&logoColor=black">
-</div>
-
-- Intelli J
-- Spring Boot framework 3.1.3 ver.
-- Spring-Security
-- Gradle
-- Java
-- html, css, js, bootStrap
-- ThymeLeaf
-- Spring Data JPA
-- GitHub
-- MySQL
-- Apache Tomcat
 
 # 3. UserFlow 작성
 
 - Client 가 웹 사이트 방문 시 flow chart 작성
 
-flow 사진 넣기
+![Flowchart](https://github.com/ShinJaeMin98/SecondBooks_Project/assets/124487601/047428a8-f28d-4b5f-85ac-b69bb1afedf2)
+
 
 # 4. 기능 명세서
 
@@ -172,8 +151,17 @@ ___
 
 # 5. ERD 작성
 
+![erd](https://github.com/ShinJaeMin98/SecondBooks_Project/assets/124487601/742c8d8b-e365-474d-853f-11dbfbf0b695)
+
 # 6. 역할 분담
+
+![역할](https://github.com/ShinJaeMin98/SecondBooks_Project/assets/124487601/b046e1f3-ec87-4e44-ace2-9cbd5af2cc18)
 
 # 7. 일정표
 
+![계획서](https://github.com/ShinJaeMin98/SecondBooks_Project/assets/124487601/83035d4a-27c9-4efc-bf9b-f01fa4d3b364)
+
 # 8. 프로젝트 회고
+
+![회고](https://github.com/ShinJaeMin98/SecondBooks_Project/assets/124487601/06f318ce-3964-4676-b33f-174dec44a9fb)
+
